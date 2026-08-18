@@ -1,0 +1,101 @@
+// Esecuzione paper trading: unico punto che modifica cash/posizioni/trade del conto demo.
+window.Aurora = window.Aurora || {};
+Aurora.Engine = Aurora.Engine || {};
+
+Aurora.Engine.registerOutcome = function registerOutcome(realizedPnl) {
+  const demoAccount = Aurora.Models.demoAccount;
+  if (!Number.isFinite(realizedPnl)) return;
+  demoAccount.model.outcomes += 1;
+  if (realizedPnl > 0) demoAccount.model.wins += 1;
+  const hitRate = demoAccount.model.wins / demoAccount.model.outcomes;
+  demoAccount.model.calibration = Math.round(Aurora.Utils.clamp(50 + (hitRate - 0.5) * 32 + Math.min(demoAccount.model.outcomes, 30) * 0.35, 35, 70));
+};
+
+Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, quantity, origin = 'Supervisor', stopLoss = null, takeProfit = null, strategyKey = null, decisionSnapshot = null }) {
+  const { demoAccount } = Aurora.Models;
+  const { formatMoney } = Aurora.Utils;
+  const price = Aurora.Engine.getDemoPrice(symbol);
+  const notional = quantity * price;
+  let realizedPnl = 0;
+  let closedSnapshot = null;
+  if (side === 'buy') {
+    if (notional > demoAccount.cash + 0.0000001) return false;
+    const current = demoAccount.positions[symbol] || { quantity: 0, averagePrice: 0, stopLoss: null, takeProfit: null, strategyKey: null, decisionSnapshot: null };
+    const nextQuantity = current.quantity + quantity;
+    demoAccount.positions[symbol] = {
+      quantity: nextQuantity,
+      averagePrice: (current.quantity * current.averagePrice + quantity * price) / nextQuantity,
+      stopLoss: stopLoss !== null ? stopLoss : (current.stopLoss ?? null),
+      takeProfit: takeProfit !== null ? takeProfit : (current.takeProfit ?? null),
+      strategyKey: strategyKey || current.strategyKey || null,
+      // Decisione presa all'apertura (confidenza, score, regime di volatilita', validato/esplorativo)
+      // — il Trade Critic la userà alla chiusura per la Failure Attribution, senza rileggerla postuma.
+      decisionSnapshot: decisionSnapshot || current.decisionSnapshot || null
+    };
+    demoAccount.cash -= notional;
+  } else {
+    const current = demoAccount.positions[symbol];
+    if (!current || quantity > current.quantity + 0.0000001) return false;
+    realizedPnl = (price - current.averagePrice) * quantity;
+    const returnPct = ((price - current.averagePrice) / current.averagePrice) * 100;
+    if (current.strategyKey) Aurora.Engine.recordStrategyOutcome(symbol, current.strategyKey, returnPct);
+    closedSnapshot = current.decisionSnapshot || null;
+    current.quantity -= quantity;
+    demoAccount.cash += notional;
+    if (current.quantity < 0.0000001) delete demoAccount.positions[symbol];
+    else demoAccount.positions[symbol] = current;
+    Aurora.Engine.registerOutcome(realizedPnl);
+  }
+  Aurora.Models.orderCount += 1;
+  const record = {
+    id: `SIM-${Date.now().toString().slice(-7)}`,
+    symbol, side, quantity, price, notional, realizedPnl, origin, at: new Date().toISOString(), stopLoss, takeProfit
+  };
+  demoAccount.trades.unshift(record);
+
+  // Trade Critic + Failure Attribution + Lesson Extraction (solo alla chiusura, solo se sappiamo
+  // quale strategia ha generato l'ingresso).
+  if (side === 'sell' && closedSnapshot?.strategyKey) {
+    const entryPrice = closedSnapshot.entryPrice || (price - realizedPnl / quantity);
+    const returnPct = ((price - entryPrice) / entryPrice) * 100;
+    const outcomeTag = Aurora.Engine.classifyTradeOutcome(record, closedSnapshot);
+    Aurora.Engine.recordTradeEpisode({
+      strategyKey: closedSnapshot.strategyKey, tradeId: record.id, symbol,
+      returnPct, outcomeTag, snapshot: closedSnapshot, at: record.at
+    });
+  }
+  Aurora.Models.activity.unshift({
+    title: `${origin}: ${side === 'buy' ? 'acquisto' : 'vendita'} demo ${quantity.toFixed(6)} ${symbol}`,
+    detail: `${formatMoney(notional)} · fill simulato ${formatMoney(price)} · ${record.id}`,
+    tag: 'PAPER'
+  });
+  if (side === 'sell') {
+    Aurora.Models.activity.unshift({
+      title: 'Feedback salvato nel calibratore',
+      detail: `P&L realizzato ${formatMoney(realizedPnl)}. Il modello adatta solo il peso di confidenza locale.`,
+      tag: 'LEARN'
+    });
+  }
+  Aurora.Models.persistDemoAccount();
+  Aurora.Views.renderDemoAccount();
+  Aurora.Views.renderWalletOverview();
+  Aurora.Views.updateQuoteUI();
+  Aurora.Views.renderWatchlist();
+  Aurora.Views.renderActivity();
+  Aurora.Views.updateOrderEstimate();
+  Aurora.Views.renderChartLevelsOverlay();
+  return true;
+};
+
+Aurora.Engine.checkStopsAndTargets = function checkStopsAndTargets() {
+  const demoAccount = Aurora.Models.demoAccount;
+  Object.entries(demoAccount.positions).forEach(([symbol, position]) => {
+    if (!position.stopLoss && !position.takeProfit) return;
+    const price = Aurora.Engine.getDemoPrice(symbol);
+    if (position.stopLoss && price <= position.stopLoss) {
+      Aurora.Engine.executePaperTrade({ symbol, side: 'sell', quantity: position.quantity, origin: 'Stop Loss' });
+    } else if (position.takeProfit && price >= position.takeProfit) {
+      Aurora.Engine.executePaperTrade({ symbol, side: 'sell', quantity: position.quantity, origin: 'Take Profit' });
+    }
+  });
+};

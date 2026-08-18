@@ -1,0 +1,12 @@
+{
+  "name": "aurora-markets",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aurora Markets — dashboard statica di paper trading assistita da AI, con backend locale opzionale (server/) per l'orchestrazione MCP degli agenti + provider AI. Il frontend resta statico: apri index.html direttamente. Il backend serve solo per la modalità AI (Gemini).",
+  "scripts": {
+    "start": "echo \"Frontend: apri index.html direttamente. Per la modalita AI: npm run server\"",
+    "server": "npm --prefix server start",
+    "server:dev": "npm --prefix server run dev",
+    "server:install": "npm --prefix server install"
+  }
+}

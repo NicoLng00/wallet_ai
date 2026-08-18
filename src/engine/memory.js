@@ -1,0 +1,130 @@
+// Learning Loop: Trade Critic -> Failure Attribution -> Similar Trade Retrieval -> Lesson
+// Extraction -> Memory -> Evidence Retrieval nelle decisioni future.
+//
+// Deliberatamente deterministico (classificazione a regole sui dati REALI del trade, non
+// un'altra chiamata a un modello per ogni trade chiuso): resta evidence-based, tracciabile,
+// riproducibile e funziona anche senza Gemini/backend. Il modello principale RICEVE queste
+// lezioni come contesto nelle decisioni future (services/aiProviders.js) — non le genera.
+//
+// Nessun fine-tuning: qui non si tocca mai il modello Gemini. "Imparare" significa che le
+// decisioni future vedono le evidenze delle passate, non che i pesi di un modello cambiano.
+window.Aurora = window.Aurora || {};
+Aurora.Engine = Aurora.Engine || {};
+
+const RECENT_WINDOW = 8; // ampiezza della finestra su cui si cerca un pattern ricorrente
+const MIN_PATTERN_OCCURRENCES = 3;
+const MIN_PATTERN_SHARE = 0.5;
+
+// --- Trade Critic + Failure Attribution -------------------------------------------------
+// Classifica in modo deterministico l'esito di un trade chiuso, usando SOLO dati registrati
+// al momento dell'apertura (decisionSnapshot) e l'esito reale — mai un giudizio postumo inventato.
+Aurora.Engine.classifyTradeOutcome = function classifyTradeOutcome(trade, snapshot) {
+  const win = trade.realizedPnl > 0;
+  if (snapshot?.tier === 'exploratory') return win ? 'exploratory_win' : 'exploratory_loss';
+  if (trade.origin?.includes('Take Profit')) return 'take_profit_hit';
+  if (trade.origin?.includes('Stop Loss')) {
+    const badRegime = snapshot?.volatilityRegime === 'elevated' || snapshot?.volatilityRegime === 'extreme';
+    return badRegime ? 'stop_loss_hit_elevated_regime' : 'stop_loss_hit_normal_regime';
+  }
+  return win ? 'signal_flip_profit' : 'signal_flip_loss';
+};
+
+const FAILURE_MODES = new Set([
+  'stop_loss_hit_normal_regime', 'stop_loss_hit_elevated_regime', 'signal_flip_loss', 'exploratory_loss'
+]);
+Aurora.Engine.isFailureOutcome = function isFailureOutcome(outcomeTag) { return FAILURE_MODES.has(outcomeTag); };
+
+// --- Memory: episodi di trade -------------------------------------------------------------
+function ensureEpisodeList(strategyKey) {
+  const tradeEpisodes = Aurora.Models.researchData.tradeEpisodes;
+  tradeEpisodes[strategyKey] = tradeEpisodes[strategyKey] || [];
+  return tradeEpisodes[strategyKey];
+}
+
+// Registra l'episodio (Outcome reale) e fa girare il resto del loop: Failure Attribution gia'
+// fatta dal chiamante (outcomeTag), poi Lesson Extraction su questo strategyKey.
+Aurora.Engine.recordTradeEpisode = function recordTradeEpisode({ strategyKey, tradeId, symbol, returnPct, outcomeTag, snapshot, at }) {
+  if (!strategyKey) return;
+  const episodes = ensureEpisodeList(strategyKey);
+  episodes.push({ tradeId, symbol, returnPct, outcomeTag, snapshot: snapshot || null, at: at || new Date().toISOString() });
+  Aurora.Engine.extractLessons(strategyKey);
+  Aurora.Models.persistResearchData();
+};
+
+// --- Similar Trade Retrieval ---------------------------------------------------------------
+// Cerca episodi passati per la stessa strategia (stesso "grain" della validazione walk-forward),
+// piu' recenti prima. Nessuna ricerca semantica: il match e' sulla chiave che ha generato la
+// decisione, il criterio piu' onesto disponibile senza un database vettoriale.
+Aurora.Engine.findSimilarTrades = function findSimilarTrades(strategyKey, limit = RECENT_WINDOW) {
+  const episodes = Aurora.Models.researchData.tradeEpisodes[strategyKey] || [];
+  return episodes.slice(-limit).reverse();
+};
+
+// --- Lesson Extraction -----------------------------------------------------------------------
+// Se un modo di fallimento ricorre abbastanza spesso nella finestra recente, genera (o aggiorna,
+// come nuova versione) una lezione. Puramente statistico sui dati registrati — "evidence-based"
+// per costruzione, non un'interpretazione del modello.
+Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
+  const episodes = Aurora.Models.researchData.tradeEpisodes[strategyKey] || [];
+  const recent = episodes.slice(-RECENT_WINDOW);
+  if (recent.length < MIN_PATTERN_OCCURRENCES) return;
+
+  const counts = {};
+  recent.forEach((episode) => { counts[episode.outcomeTag] = (counts[episode.outcomeTag] || 0) + 1; });
+
+  Aurora.Models.researchData.lessons[strategyKey] = Aurora.Models.researchData.lessons[strategyKey] || [];
+  const lessons = Aurora.Models.researchData.lessons[strategyKey];
+
+  Object.entries(counts).forEach(([outcomeTag, occurrences]) => {
+    if (!Aurora.Engine.isFailureOutcome(outcomeTag)) return;
+    const share = occurrences / recent.length;
+    if (occurrences < MIN_PATTERN_OCCURRENCES || share < MIN_PATTERN_SHARE) return;
+
+    const supportingTradeIds = recent.filter((e) => e.outcomeTag === outcomeTag).map((e) => e.tradeId);
+    const avgReturn = recent.filter((e) => e.outcomeTag === outcomeTag).reduce((sum, e) => sum + e.returnPct, 0) / occurrences;
+    const statement = describeFailureMode(outcomeTag, strategyKey, occurrences, recent.length, avgReturn);
+
+    const existingActive = lessons.find((lesson) => lesson.active && lesson.failureMode === outcomeTag);
+    if (existingActive && existingActive.statement === statement) return; // nessuna novita' reale, non versionare a vuoto
+
+    if (existingActive) existingActive.active = false; // superseded, mai cancellata: reversibilita' e tracciabilita'
+    const version = (existingActive?.version || 0) + 1;
+    lessons.push({
+      id: `${strategyKey}::${outcomeTag}::v${version}`,
+      version,
+      strategyKey,
+      failureMode: outcomeTag,
+      statement,
+      sampleSize: recent.length,
+      occurrences,
+      avgReturn: Number(avgReturn.toFixed(3)),
+      supportingTradeIds,
+      createdAt: new Date().toISOString(),
+      supersedes: existingActive?.id || null,
+      active: true
+    });
+  });
+};
+
+function describeFailureMode(outcomeTag, strategyKey, occurrences, sampleSize, avgReturn) {
+  const pct = Math.round((occurrences / sampleSize) * 100);
+  const labels = {
+    stop_loss_hit_normal_regime: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in stop loss in condizioni di volatilità normale — il segnale d'ingresso, non la volatilità, sembra la causa.`,
+    stop_loss_hit_elevated_regime: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in stop loss durante volatilità elevata/anomala — valutare un filtro più severo per questa strategia.`,
+    signal_flip_loss: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) sono usciti in perdita per segnale non più favorevole prima di raggiungere lo stop — possibile uscita tardiva o soglia di conferma debole.`,
+    exploratory_loss: `Negli ultimi ${sampleSize} trade esplorativi di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — campione ancora piccolo, da tenere d'occhio prima di una eventuale validazione.`
+  };
+  return labels[outcomeTag] || `Pattern ricorrente (${outcomeTag}) su ${strategyKey}: ${occurrences}/${sampleSize} trade recenti.`;
+}
+
+// --- Evidence Retrieval nelle decisioni future -----------------------------------------------
+Aurora.Engine.getActiveLessons = function getActiveLessons(strategyKey) {
+  return (Aurora.Models.researchData.lessons[strategyKey] || []).filter((lesson) => lesson.active);
+};
+
+// Reversibilità esplicita: disattiva una lezione senza cancellarla (resta nello storico/versioni).
+Aurora.Engine.deactivateLesson = function deactivateLesson(strategyKey, lessonId) {
+  const lessons = Aurora.Models.researchData.lessons[strategyKey] || [];
+  const lesson = lessons.find((entry) => entry.id === lessonId);
+  if (lesson) { lesson.active = false; Aurora.Models.persistResearchData(); }
+};

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Aurora Markets — AI trading workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigazione principale">
+        <a class="brand" href="#dashboard" aria-label="Aurora Markets dashboard">
+          <span class="brand-mark">A</span>
+          <span>Aurora<span class="brand-muted">/Markets</span></span>
+        </a>
+
+        <nav class="main-nav">
+          <button class="nav-item active" data-section="dashboard"><span>⌁</span>Mercati</button>
+          <button class="nav-item" data-section="research"><span>◌</span>Research</button>
+          <button class="nav-item" data-section="portfolio"><span>◫</span>Portafoglio</button>
+          <button class="nav-item" data-section="agents"><span>✦</span>AI Desk</button>
+        </nav>
+
+        <div class="watchlist-head">
+          <span>WATCHLIST</span>
+          <button id="add-symbol" class="icon-button" title="Aggiungi titolo" aria-label="Aggiungi titolo">+</button>
+        </div>
+        <div id="watchlist" class="watchlist" aria-label="Watchlist titoli"></div>
+
+        <div class="sidebar-bottom">
+          <div class="mode-card">
+            <div class="mode-icon">◇</div>
+            <div>
+              <strong>PAPER MODE</strong>
+              <span>Nessun ordine reale</span>
+            </div>
+          </div>
+          <div id="data-settings" class="data-settings hidden">
+            <div class="data-settings-head"><span>DATI DI MERCATO</span><span id="live-data-badge" class="status-pill idle">Simulati</span></div>
+            <div class="data-toggle-row">
+              <span>Prezzi reali (sola lettura)</span>
+              <button id="live-data-toggle" class="autopilot-toggle">Attiva Live</button>
+            </div>
+            <label class="field-group">Finnhub API key <div class="input-wrap"><input id="finnhub-key-input" type="password" autocomplete="off" placeholder="Incolla la tua chiave gratuita" /></div></label>
+            <button id="save-live-key" class="outline-button">Salva chiave</button>
+            <div id="live-data-status" class="live-data-status">Modalità simulata attiva.</div>
+            <label class="field-group">Alpha Vantage API key <div class="input-wrap"><input id="alphavantage-key-input" type="password" autocomplete="off" placeholder="Per lo storico/backtest" /></div></label>
+            <button id="save-alphavantage-key" class="outline-button">Salva chiave storico</button>
+            <div class="data-settings-head"><span>MOTORE SEGNALE</span></div>
+            <div class="data-toggle-row">
+              <span>AI (Gemini) al posto della regola tecnica</span>
+              <button id="ai-engine-toggle" class="autopilot-toggle">Attiva AI (Gemini)</button>
+            </div>
+            <label class="field-group">Gemini API key <div class="input-wrap"><input id="gemini-key-input" type="password" autocomplete="off" placeholder="Chiave gratuita Google AI Studio" /></div></label>
+            <button id="save-gemini-key" class="outline-button">Salva chiave Gemini</button>
+            <p class="ai-disclaimer">Solo lettura prezzi (Finnhub + CoinGecko + Alpha Vantage). Il giudizio Gemini è sperimentale e non validato da backtest, a differenza della regola tecnica. Nessun ordine reale, nessuna chiave broker, nessuna promessa di rendimento.</p>
+          </div>
+          <button class="profile"><span class="avatar">NL</span><span>Nicola L.<small>Workspace personale</small></span><span>⌄</span></button>
+        </div>
+      </aside>
+
+      <main class="workspace" id="dashboard">
+        <header class="topbar">
+          <button class="mobile-menu" aria-label="Apri menu">☰</button>
+          <label class="search-box"><span>⌕</span><input id="symbol-search" autocomplete="off" placeholder="Cerca ticker, ETF o crypto…" /><kbd>⌘ K</kbd></label>
+          <div class="topbar-actions">
+            <span class="market-status"><i></i>NYSE <strong id="market-clock">APERTO</strong></span>
+            <button class="icon-button" aria-label="Notifiche">♧</button>
+            <button id="open-settings" class="outline-button">Impostazioni</button>
+          </div>
+        </header>
+
+        <section class="instrument-bar" aria-label="Titolo selezionato">
+          <div class="instrument-name">
+            <div id="symbol-logo" class="symbol-logo">A</div>
+            <div><h1 id="symbol-name">Apple Inc. <span id="symbol-ticker">AAPL</span></h1><p id="symbol-exchange">NASDAQ · USD</p></div>
+            <button class="star-button" aria-label="Rimuovi dai preferiti">★</button>
+          </div>
+          <div class="quote-block"><strong id="quote-price">214,38 €</strong><span id="quote-change" class="positive">+1,40% simulato</span><small>Ultimo aggiornamento <span id="quote-time">15:42:08</span></small></div>
+          <div class="order-actions">
+            <button id="sell-button" class="trade-button sell">Vendi</button>
+            <button id="buy-button" class="trade-button buy">Acquista</button>
+          </div>
+        </section>
+
+        <section class="market-grid">
+          <article class="panel chart-panel">
+            <div class="chart-head">
+              <div class="chart-controls">
+                <button class="control-button active">Candele</button>
+                <button class="control-button">Indicatori <span>+</span></button>
+                <span class="divider"></span>
+                <button class="time-button" data-timeframe="1m">1m</button>
+                <button class="time-button" data-timeframe="5m">5m</button>
+                <button class="time-button active" data-timeframe="15m">15m</button>
+                <button class="time-button" data-timeframe="1h">1h</button>
+                <button class="time-button" data-timeframe="1D">1D</button>
+              </div>
+              <div class="chart-actions"><button class="icon-button">↶</button><button class="icon-button">⛶</button><button class="icon-button">⋯</button></div>
+            </div>
+            <div class="indicator-row"><span class="source-dot"></span><span class="indicator-label">TRADINGVIEW WIDGET</span><span id="chart-live-status" class="indicator-value">Connessione al grafico…</span><span class="chart-source-note">I dati possono essere live o ritardati in base alla borsa.</span></div>
+            <div id="chart-wrap" class="chart-wrap"><div id="tradingview-chart" class="tradingview-chart" aria-label="Grafico TradingView del titolo selezionato"><div class="chart-loader">Caricamento grafico TradingView…</div></div><div id="chart-levels-overlay" class="chart-levels-overlay" aria-hidden="true"></div></div>
+            <div class="chart-footer"><span id="timeframe-label">15 minuti</span><span id="chart-symbol-label">NASDAQ:AAPL</span><span>Il motore demo non legge l’iframe: per il live serve un data feed autorizzato.</span></div>
+          </article>
+
+          <aside class="panel ai-panel" id="agents">
+            <div class="panel-title"><div><p class="eyebrow">ORCHESTRA / v0.1</p><h2>AI Decision Desk</h2></div><span id="desk-status" class="status-pill idle">In attesa</span></div>
+            <div class="signal-card">
+              <div class="signal-head"><span>SEGNALA</span><button id="run-analysis" class="run-button">Analizza <span>↗</span></button></div>
+              <div class="signal-content"><div id="signal-score" class="signal-score neutral">—</div><div><strong id="signal-title">Analisi non eseguita</strong><p id="signal-copy">Avvia il desk per una tesi simulata.</p></div></div>
+              <div class="confidence"><div><span>Confidenza modello</span><strong id="confidence-value">—</strong></div><div class="confidence-track"><i id="confidence-bar" style="width: 0%"></i></div></div>
+            </div>
+            <div class="data-toggle-row"><span id="gemini-status">Motore: regola tecnica.</span><button id="refresh-gemini" class="icon-button" title="Aggiorna giudizio AI (Gemini)" aria-label="Aggiorna giudizio AI">↻</button></div>
+            <div class="agent-header"><span>TEAM DI ANALISI</span><span id="agent-progress">0 / 7</span></div>
+            <div id="agent-list" class="agent-list" aria-label="Stato agenti di analisi"></div>
+            <div class="ai-disclaimer">Le analisi sono simulazioni educative, non consulenza finanziaria.</div>
+          </aside>
+        </section>
+
+        <section class="execution-grid">
+          <article class="panel execution-panel">
+            <div class="panel-title compact"><div><p class="eyebrow">SUPERVISOR</p><h2>Order gateway</h2></div><span class="paper-badge">PAPER</span></div>
+            <div class="order-form">
+              <div class="field-group"><label>Lato</label><div class="segmented"><button class="side-option active buy-side" data-side="buy">Acquista</button><button class="side-option sell-side" data-side="sell">Vendi</button></div></div>
+              <label class="field-group">Quantità <div class="input-wrap"><input id="order-quantity" type="number" min="0.000001" step="0.000001" value="0.001" /><span>quote fraz.</span></div></label>
+              <label class="field-group">Tipo <select id="order-type"><option>Market</option><option>Limit</option><option>Stop limit</option></select></label>
+              <div class="order-summary"><span>Valore stimato</span><strong id="order-value">0,21 €</strong><small id="order-risk-summary">In attesa del Risk Manager</small></div>
+              <div class="sltp-row">
+                <label class="field-group">Stop Loss <div class="input-wrap"><input id="order-stop-loss" type="number" min="0" step="0.01" placeholder="Facoltativo" /><span>prezzo</span></div></label>
+                <label class="field-group">Take Profit <div class="input-wrap"><input id="order-take-profit" type="number" min="0" step="0.01" placeholder="Facoltativo" /><span>prezzo</span></div></label>
+              </div>
+              <button id="submit-order" class="submit-order" disabled>Esegui nel conto demo <span>→</span></button>
+            </div>
+          </article>
+
+          <article class="panel risk-panel">
+            <div class="panel-title compact"><div><p class="eyebrow">GUARDRAIL</p><h2>Risk Manager</h2></div><span id="risk-status" class="status-pill idle">In attesa</span></div>
+            <div class="risk-meters">
+              <div class="risk-meter"><div><span>Esposizione per titolo</span><strong id="exposure-value">0.0% <small>/ 18%</small></strong></div><div class="meter"><i id="exposure-meter" style="width:0%"></i></div></div>
+              <div class="risk-meter"><div><span>Drawdown del conto</span><strong id="drawdown-value">0.0% <small>/ 20%</small></strong></div><div class="meter warning"><i id="drawdown-meter" style="width:0%"></i></div></div>
+              <div class="risk-meter"><div><span>Limite per ordine</span><strong id="order-limit">0,00 € <small>/ 2,50 €</small></strong></div><div class="meter"><i id="order-meter" style="width:0%"></i></div></div>
+            </div>
+            <div id="risk-verdict" class="risk-verdict neutral"><span>◇</span><p><strong>Gate chiuso</strong> — esegui l’analisi per valutare l’ordine.</p></div>
+          </article>
+
+          <article class="panel portfolio-panel">
+            <div class="panel-title compact"><div><p class="eyebrow">CONTO AGENTE / SANDBOX</p><h2>Demo €10</h2></div><button id="reset-demo" class="icon-button" title="Reimposta il conto demo" aria-label="Reimposta il conto demo">↺</button></div>
+            <div class="equity-row"><strong id="demo-equity">10,00 €</strong><span id="demo-equity-change" class="positive">0,00 € simulato</span></div>
+            <div class="allocation"><span>Cash <strong id="demo-cash">10,00 €</strong></span><span>Esposizione <strong id="demo-exposure">0.0%</strong></span></div>
+            <div class="allocation-bar"><i id="demo-allocation" style="width:0%"></i></div>
+            <div class="autopilot-card"><div><span>AI AUTOPILOT</span><strong id="autopilot-status">Pausato</strong></div><button id="autopilot-toggle" class="autopilot-toggle">Avvia</button><p id="autopilot-copy">Paper only · ciclo ogni 20 s · max 2,50 € per trade.</p></div>
+            <div class="model-strip"><span>Calibrazione <strong id="model-calibration">50%</strong></span><span id="model-observations">0 esiti</span></div>
+            <div class="portfolio-foot"><span id="positions-summary">0 posizioni aperte</span><button id="view-positions">Vedi posizioni →</button></div>
+          </article>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="activity-tabs" role="tablist"><button class="tab active" data-tab="activity">Activity & audit <span id="audit-count">0</span></button><button class="tab" data-tab="positions">Posizioni <span id="position-count">0</span></button><button class="tab" data-tab="notes">Note di ricerca</button></div>
+          <div id="activity-content" class="activity-content"></div>
+        </section>
+
+        <section class="panel wallet-panel" id="portfolio">
+          <div class="panel-title compact"><div><p class="eyebrow">WALLET</p><h2>Panoramica portafoglio</h2></div><span class="paper-badge">PAPER</span></div>
+          <div id="wallet-stats" class="wallet-stats"></div>
+          <div class="wallet-history-head">
+            <span>Storico ordini</span>
+            <span id="history-count">0 ordini</span>
+          </div>
+          <div class="history-table">
+            <div class="history-row history-head">
+              <span>Orario</span><span>Simbolo</span><span>Lato</span><span>Quantità</span><span>Prezzo</span><span>Controvalore</span><span>P&amp;L</span><span>Origine</span>
+            </div>
+            <div id="order-history" aria-label="Storico ordini completo"></div>
+          </div>
+        </section>
+
+        <section class="panel research-panel" id="research">
+          <div class="panel-title compact"><div><p class="eyebrow">RESEARCH</p><h2>Backtest &amp; validazione segnali</h2></div><span id="research-status" class="status-pill idle">Nessun backtest</span></div>
+          <div class="research-controls">
+            <select id="research-symbol"></select>
+            <button id="run-backtest" class="outline-button">Scarica storico + backtest</button>
+          </div>
+          <div id="research-results" class="research-results"></div>
+          <p class="ai-disclaimer">Regola in validazione: prezzo sopra SMA(50) con RSI(14) tra 40 e 70, su storico giornaliero reale (Alpha Vantage/CoinGecko). Validazione walk-forward: lo storico è diviso in una finestra di selezione (in-sample) e una mai vista prima (out-of-sample) confrontate con una baseline a ingressi casuali — "Validato" richiede di battere il caso in ENTRAMBE le finestre, non solo sull'intera serie. Solo i simboli "Validato" alimentano il segnale dell'Autopilot — gli altri restano neutri. XAUUSD non ha una fonte storica gratuita disponibile e resta sempre neutro. Un risultato positivo sul passato non garantisce risultati futuri.</p>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./src/utils.js"></script>
+    <script src="./src/config.js"></script>
+    <script src="./src/models/state.js"></script>
+    <script src="./src/engine/indicators.js"></script>
+    <script src="./src/engine/rules.js"></script>
+    <script src="./src/engine/backtest.js"></script>
+    <script src="./src/engine/market.js"></script>
+    <script src="./src/engine/riskGate.js"></script>
+    <script src="./src/engine/execution.js"></script>
+    <script src="./src/engine/strategies.js"></script>
+    <script src="./src/engine/learning.js"></script>
+    <script src="./src/engine/memory.js"></script>
+    <script src="./src/agents/supervisor.js"></script>
+    <script src="./src/engine/autopilot.js"></script>
+    <script src="./src/services/dataProviders.js"></script>
+    <script src="./src/services/aiProviders.js"></script>
+    <script src="./src/views/views.js"></script>
+    <script src="./src/controllers/wireEvents.js"></script>
+    <script src="./src/main.js"></script>
+  </body>
+</html>

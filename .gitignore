@@ -1,0 +1,15 @@
+# Segreti locali — mai committare una vera chiave
+.env
+.env.local
+
+# Strumenti di sviluppo futuri (Node/Vite), se/quando disponibili su questa macchina
+node_modules/
+dist/
+*.log
+
+# File di test temporanei creati durante lo sviluppo (sempre rimossi manualmente,
+# ignorati anche qui per sicurezza se uno restasse per errore)
+_*.html
+
+# Configurazione locale dello strumento (permessi Claude Code), non del progetto
+.claude/settings.local.json
