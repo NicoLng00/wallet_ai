@@ -46,9 +46,18 @@ async function main() {
     const tailScript = `
 (async function () {
   const Models = Aurora.Models;
-  Aurora.Views = Aurora.Views || {};
-  ['renderResearchResults','renderMemoryHistory','renderMemoryLessons','showToast'].forEach((fn) => { Aurora.Views[fn] = function () {}; });
-  Aurora.Utils.$ = function () { return { textContent: '', value: '', className: '' }; };
+  // Proxy catch-all invece di una lista esplicita (bug reale trovato in tradingCycle.js: una
+  // funzione Views mancante dalla lista faceva fallire una chiamata reale a meta' — vedi li' per
+  // il dettaglio). Qualunque funzione Views chiamata e' un no-op sicuro.
+  Aurora.Views = new Proxy({}, { get: () => function () {} });
+  Aurora.Utils.$ = function () {
+    return {
+      textContent: '', value: '', className: '', style: {},
+      classList: { toggle() {}, add() {}, remove() {}, contains: () => false },
+      closest: () => ({ classList: { toggle() {} } }),
+      addEventListener() {}
+    };
+  };
 
   const symbols = Object.keys(Models.instruments);
   const results = {};

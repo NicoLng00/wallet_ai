@@ -27,9 +27,21 @@ async function main() {
   const tailScript = `
 (async function () {
   const Models = Aurora.Models;
-  Aurora.Views = Aurora.Views || {};
-  ['renderDemoAccount','renderWalletOverview','updateQuoteUI','renderWatchlist','renderActivity','updateOrderEstimate','renderChartLevelsOverlay','showAnalysis','showToast','renderMemoryHistory','renderMemoryLessons'].forEach((fn) => { Aurora.Views[fn] = function () {}; });
-  Aurora.Utils.$ = function (id) { return document.getElementById(id) || { textContent: '', value: '', className: '', closest: () => ({ classList: { toggle() {} } }) }; };
+  // Proxy catch-all invece di una lista esplicita di funzioni Views da stubbare: una lista
+  // esplicita e' fragile, un bug reale trovato in produzione — Aurora.Views.renderLiveDataStatus
+  // non era nella lista, refreshLiveQuotes() lanciava un errore alla sua ultima riga (dopo aver
+  // gia' scritto i prezzi live reali in memoria) e finiva loggato come "prezzi live non
+  // disponibili" anche quando in realta' avevano funzionato. Con il proxy, qualunque funzione
+  // Views chiamata (presente o futura) e' semplicemente un no-op sicuro.
+  Aurora.Views = new Proxy({}, { get: () => function () {} });
+  Aurora.Utils.$ = function (id) {
+    return document.getElementById(id) || {
+      textContent: '', value: '', className: '', style: {},
+      classList: { toggle() {}, add() {}, remove() {}, contains: () => false },
+      closest: () => ({ classList: { toggle() {} } }),
+      addEventListener() {}
+    };
+  };
   Models.autopilotRunning = true;
 
   try { if (Models.liveData.enabled) await Aurora.Services.refreshLiveQuotes(); }
