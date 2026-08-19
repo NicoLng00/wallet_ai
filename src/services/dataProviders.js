@@ -3,13 +3,14 @@
 window.Aurora = window.Aurora || {};
 Aurora.Services = Aurora.Services || {};
 
-// Alpha Vantage free tier rifiuta piu' di 1 richiesta/secondo (verificato in sessione con un
-// errore reale). Throttle minimo prima di ogni chiamata AV, cosi' testare piu' simboli in
-// sequenza (es. dalla Research) non incappa mai nel rate limit per un semplice timing.
+// Alpha Vantage free tier: limite reale verificato in sessione e' AL MINUTO (5 richieste/min),
+// non al secondo — un throttle da 1,1s bastava per due chiamate isolate ma falliva testando piu'
+// simboli in sequenza (verificato: QQQ/AAPL/NVDA/TSLA/WTI rifiutati in un ciclo di validazione
+// multi-mercato). 13s di distanza tiene un margine di sicurezza sotto le 5/min.
 let lastAlphaVantageCallAt = 0;
 async function throttleAlphaVantage() {
   const elapsed = Date.now() - lastAlphaVantageCallAt;
-  if (elapsed < 1100) await new Promise((resolve) => setTimeout(resolve, 1100 - elapsed));
+  if (elapsed < 13000) await new Promise((resolve) => setTimeout(resolve, 13000 - elapsed));
   lastAlphaVantageCallAt = Date.now();
 }
 
@@ -132,8 +133,8 @@ Aurora.Services.fetchAlphaVantageWTI = async function fetchAlphaVantageWTI() {
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   if (!data.data) throw new Error(data.Note || data.Information || 'Dati non disponibili');
-  const closes = data.data.slice().reverse().filter((point) => point.value !== '.').map((point) => Number(point.value));
-  return { closes, candles: null, dates: null };
+  const points = data.data.slice().reverse().filter((point) => point.value !== '.');
+  return { closes: points.map((point) => Number(point.value)), candles: null, dates: points.map((point) => point.date) };
 };
 
 // Storico giornaliero fino a 365 giorni (il massimo gratuito su CoinGecko), non piu' limitato a 200.
@@ -171,11 +172,36 @@ Aurora.Services.fetchCoinGeckoOHLC = async function fetchCoinGeckoOHLC(symbol, d
   return (data || []).map(([time, open, high, low, close]) => ({ time, open, high, low, close }));
 };
 
+// Storico reale piu' lungo (~2 anni contro le ~100 barre "compact" gratuite di Alpha Vantage),
+// via il backend locale (server/marketData.js) che fa da proxy a Yahoo Finance — nessuna chiave
+// utente richiesta, ma serve il backend in esecuzione (CORS blocca Yahoo dal browser). XAUUSD usa
+// GC=F (futures oro) come proxy dichiarato: prima di questo restava sempre neutro per mancanza di
+// una fonte storica gratuita.
+Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range = '2y') {
+  const res = await fetch(`${Aurora.Config.backendUrl}/api/history?symbol=${encodeURIComponent(symbol)}&range=${encodeURIComponent(range)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || `http-${res.status}`);
+  }
+  const data = await res.json();
+  return { closes: data.closes, candles: data.candles, dates: data.dates };
+};
+
 Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(symbol) {
   const Models = Aurora.Models;
   if (Models.COINGECKO_IDS[symbol]) return Aurora.Services.fetchCoinGeckoHistory(symbol);
-  if (symbol === 'WTI') return Aurora.Services.fetchAlphaVantageWTI();
-  if (Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) return Aurora.Services.fetchAlphaVantageDaily(symbol);
+  if (symbol === 'WTI' || symbol === 'XAUUSD' || Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) {
+    try {
+      return await Aurora.Services.fetchYahooDaily(symbol);
+    } catch (backendError) {
+      // Ripiego su Alpha Vantage (richiede la chiave dell'utente) solo se il backend locale non
+      // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend. XAUUSD
+      // non ha un ripiego: senza backend resta onestamente senza fonte storica, come sempre stato.
+      if (symbol === 'XAUUSD') throw backendError;
+      if (symbol === 'WTI') return Aurora.Services.fetchAlphaVantageWTI();
+      return Aurora.Services.fetchAlphaVantageDaily(symbol);
+    }
+  }
   throw new Error('Nessuna fonte storica gratuita disponibile per questo simbolo.');
 };
 
@@ -185,7 +211,7 @@ Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(sym
 async function buildCandidateJobs(symbol) {
   const Models = Aurora.Models;
   const jobs = [];
-  const CLOSES_STRATEGIES = ['sma_rsi', 'macd_cross', 'bollinger_reversion'];
+  const CLOSES_STRATEGIES = ['sma_rsi', 'macd_cross', 'bollinger_reversion', 'donchian_breakout'];
 
   if (Models.COINGECKO_IDS[symbol]) {
     const daily = await Aurora.Services.fetchCoinGeckoHistory(symbol);
@@ -209,11 +235,52 @@ async function buildCandidateJobs(symbol) {
       jobs.push({ candidateKey: `${strategyId}@1D`, strategyId, timeframe: '1D', closes: daily.closes, candles: null, historyEntry: { closes: daily.closes, dates: daily.dates } });
     });
     if (daily.candles) {
-      jobs.push({ candidateKey: 'engulfing@1D', strategyId: 'engulfing', timeframe: '1D', closes: daily.closes, candles: daily.candles, historyEntry: { closes: daily.closes, candles: daily.candles } });
+      // Stesso timeframe '1D' delle strategie su chiusura sopra: l'historyEntry deve portarsi
+      // dietro anche "dates", altrimenti questo job (processato per ultimo) sovrascrive la cache
+      // perdendo le date gia' scritte — bug reale trovato testando il cammino multi-mercato.
+      jobs.push({ candidateKey: 'engulfing@1D', strategyId: 'engulfing', timeframe: '1D', closes: daily.closes, candles: daily.candles, historyEntry: { closes: daily.closes, candles: daily.candles, dates: daily.dates } });
     }
   }
   return jobs;
 }
+
+// Sul sito pubblicato (GitHub Pages) lo stato non e' piu' locale al browser di chi visita: e' il
+// conto del bot autonomo che gira via job schedulati (server/jobs/, GitHub Actions), che
+// committano data/account.json e data/research.json nel repo. Qui il frontend li legge e sostituisce
+// lo stato locale — il sito diventa una dashboard di sola lettura sul bot, non un secondo conto
+// indipendente. In sviluppo locale (file://) il fetch fallisce silenziosamente (bloccato dal
+// browser) e l'app si comporta esattamente come sempre: nessun ramo speciale da mantenere a parte.
+Aurora.Services.hydrateFromSharedState = async function hydrateFromSharedState() {
+  try {
+    const [accountRes, researchRes] = await Promise.all([fetch('./data/account.json'), fetch('./data/research.json')]);
+    if (!accountRes.ok || !researchRes.ok) return false;
+    const account = await accountRes.json();
+    const research = await researchRes.json();
+    const Models = Aurora.Models;
+
+    if (account.demoAccount) Models.demoAccount = { ...Models.makeDemoAccount(), ...account.demoAccount };
+    if (Array.isArray(account.activity)) Models.activity = account.activity;
+    if (account.autopilotMode === 'quality' || account.autopilotMode === 'coverage') Models.autopilotMode = account.autopilotMode;
+    if (research.researchData) {
+      Models.researchData = {
+        alphaVantageKey: null,
+        validated: research.researchData.validated || {},
+        trackRecord: research.researchData.trackRecord || {},
+        tradeEpisodes: research.researchData.tradeEpisodes || {},
+        lessons: research.researchData.lessons || {},
+        seeded: false
+      };
+    }
+    if (research.historyCache) Models.historyCache = research.historyCache;
+
+    Models.persistDemoAccount();
+    Models.persistResearchData();
+    Models.persistHistoryCache();
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 // Backtest walk-forward multi-strategia: ogni candidato (strategia x timeframe) e' validato
 // indipendentemente, in-sample E out-of-sample contro una baseline casuale. Il pool di candidati

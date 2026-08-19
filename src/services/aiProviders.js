@@ -18,7 +18,7 @@ function buildMarketContext() {
     // anche se la strategia scelta non le richiede direttamente.
     const ohlcHistory = Models.historyCache[symbol]?.[rule.timeframe]?.candles ? history
       : Object.values(Models.historyCache[symbol] || {}).find((entry) => entry.candles?.length);
-    const hasTechnicalOpinion = rule.validated || rule.exploratory;
+    const hasTechnicalOpinion = rule.validated || rule.exploratory || rule.tier === 'probe';
     // Evidence Retrieval: le lezioni attive del Learning Loop per la strategia scelta (se ce n'è
     // una) diventano contesto per il modello — mai un fine-tuning, solo memoria consultabile.
     const lessons = rule.candidateKey ? Aurora.Engine.getActiveLessons(rule.candidateKey).map((lesson) => lesson.statement) : [];

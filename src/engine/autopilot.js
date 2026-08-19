@@ -8,7 +8,10 @@ Aurora.Engine = Aurora.Engine || {};
 
 function autopilotOrigin(signal) {
   const base = Aurora.Models.aiEngine.mode === 'gemini' ? 'Autopilot (Gemini)' : 'Autopilot';
-  return signal?.tier === 'exploratory' ? `${base} esplorativo` : base;
+  if (signal?.tier === 'exploratory') return `${base} esplorativo`;
+  if (signal?.tier === 'probe') return `${base} sonda`;
+  if (signal?.tier === 'forced') return `${base} sonda forzata (giornaliera)`;
+  return base;
 }
 
 // SL/TP adattivi: quando il candidato scelto ha candele OHLC reali disponibili, lo stop/target
@@ -42,9 +45,24 @@ function isExtremeVolatility(symbol) {
 
 Aurora.Engine.scanOpportunities = function scanOpportunities() {
   const { instruments, SIMULATION } = Aurora.Models;
+  // Interruttore copertura/qualita' (vedi models/state.js autopilotMode): in "qualita'" la sonda
+  // non si propone affatto — solo validato/esplorativo, gli unici livelli con un edge misurato o
+  // almeno promettente. Meno trade, ma nessuno di loro e' un colpo alla cieca.
+  const qualityMode = Aurora.Models.autopilotMode === 'quality';
   return Object.keys(instruments)
     .map((symbol) => ({ symbol, signal: Aurora.Agents.supervisor.signalFor(symbol) }))
-    .filter(({ signal }) => signal.bullish && signal.confidence >= SIMULATION.minimumConfidence)
+    .filter(({ signal }) => {
+      if (!signal.bullish) return false;
+      if (qualityMode) return signal.tier === 'validated' || signal.tier === 'exploratory';
+      // Sonda ED esplorativo sono per definizione a confidenza ridotta (scoreCandidate in
+      // engine/rules.js applica una penalita' esplicita a entrambi, -10pp per l'esplorativo) — la
+      // soglia minima di confidenza non si applica a nessuno dei due, altrimenti l'esplorativo
+      // potrebbe non proporsi mai nonostante abbia gia' il proprio controllo di rischio dedicato
+      // (taglia ridotta via exploratorySizeFactor). Bug reale trovato analizzando il codice: prima
+      // solo la sonda era esentata, un candidato esplorativo con confidenza sotto soglia restava
+      // silenziosamente escluso pur avendo un edge in-sample reale.
+      return signal.tier === 'probe' || signal.tier === 'exploratory' || signal.confidence >= SIMULATION.minimumConfidence;
+    })
     .sort((a, b) => b.signal.score - a.signal.score);
 };
 
@@ -59,21 +77,44 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
 
   const actions = [];
 
-  // Uscite difensive su ogni posizione aperta, indipendentemente da quante ce ne siano.
+  // Uscite difensive su ogni posizione aperta, indipendentemente da quante ce ne siano — piu' un
+  // time-stop, ma SOLO su posizioni esplorative/sonda/forzate: una strategia validata ha un edge
+  // misurato e si e' guadagnata il diritto di aspettare il proprio SL/TP reale, quanto ci mette;
+  // una posizione senza edge misurato no, e non deve occupare uno slot concorrente a tempo
+  // indeterminato impedendo sia nuovi ingressi sia il fallback "sonda forzata" giornaliero (vedi
+  // SIMULATION.maxHoldingDays in models/state.js per il perche').
   Object.keys(demoAccount.positions).forEach((symbol) => {
     const position = demoAccount.positions[symbol];
     if (!position) return;
     const currentSignal = Aurora.Agents.supervisor.signalFor(symbol);
+    const isValidatedPosition = position.decisionSnapshot?.tier === 'validated';
+    // Una posizione senza openedAt (salvata prima che questo campo esistesse) va trattata come
+    // "eta' sconosciuta = vecchia", non come "appena aperta": altrimenti il time-stop non
+    // scatterebbe mai per lei, restando aperta a tempo indeterminato — lo stesso bug che il
+    // time-stop dovrebbe risolvere.
+    const heldDays = position.openedAt ? (Date.now() - new Date(position.openedAt).getTime()) / 86400000 : Infinity;
+    const staleExit = !isValidatedPosition && heldDays >= SIMULATION.maxHoldingDays;
     if (currentSignal.defensive) {
       Aurora.Engine.executePaperTrade({ symbol, side: 'sell', quantity: position.quantity, origin: autopilotOrigin(currentSignal) });
       actions.push(`chiude ${symbol} per segnale difensivo`);
+    } else if (staleExit) {
+      Aurora.Engine.executePaperTrade({ symbol, side: 'sell', quantity: position.quantity, origin: 'Autopilot chiusura per limite di tempo' });
+      actions.push(`chiude ${symbol} per limite di detenzione (${SIMULATION.maxHoldingDays}g)`);
     }
   });
+
+  // Kill switch sul drawdown: prima valeva solo per l'ordine manuale (engine/riskGate.js
+  // orderRisk) — l'Autopilot apriva comunque nuove posizioni anche oltre la soglia di drawdown
+  // massimo, un bug reale rispetto alla garanzia documentata in README. Blocca solo NUOVI
+  // ingressi (normali E fallback forzato): le uscite (difensive, time-stop, SL/TP) restano
+  // sempre attive, servono proprio a far rientrare il drawdown.
+  const killSwitchActive = Aurora.Engine.getMetrics().drawdown >= SIMULATION.maximumDrawdownPercent;
+  if (killSwitchActive) actions.push(`kill switch drawdown attivo, nessun nuovo ingresso`);
 
   // Nuovi ingressi fino al numero di posizioni concorrenti consentite.
   const openCount = Object.keys(demoAccount.positions).length;
   const freeSlots = SIMULATION.maxConcurrentPositions - openCount;
-  if (freeSlots > 0) {
+  if (!killSwitchActive && freeSlots > 0) {
     const heldSymbols = new Set(Object.keys(demoAccount.positions));
     const opportunities = Aurora.Engine.scanOpportunities().filter((o) => !heldSymbols.has(o.symbol));
     let opened = 0;
@@ -85,11 +126,19 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
       }
       const price = Aurora.Engine.getDemoPrice(opportunity.symbol);
       const metrics = Aurora.Engine.getMetrics();
-      const confidenceFactor = clamp((opportunity.signal.confidence - SIMULATION.minimumConfidence) / (100 - SIMULATION.minimumConfidence), 0.4, 1);
-      // Taglia ridotta per i candidati esplorativi: si prende il rischio, ma in proporzione a
-      // quanto e' ancora incerto — non e' un ingresso a piena taglia su un edge non confermato.
-      const tierFactor = opportunity.signal.tier === 'exploratory' ? SIMULATION.exploratorySizeFactor : 1;
-      const notional = Math.min(SIMULATION.maximumOrder, demoAccount.cash * 0.25, metrics.equity * 0.25) * confidenceFactor * tierFactor;
+      const isProbe = opportunity.signal.tier === 'probe';
+      // Le sonde non passano dal fattore-confidenza normale (la loro confidenza e' bassa per
+      // definizione, non misura un edge): restano comunque al minimo del fattore per non sparire.
+      const confidenceFactor = isProbe ? 0.4 : clamp((opportunity.signal.confidence - SIMULATION.minimumConfidence) / (100 - SIMULATION.minimumConfidence), 0.4, 1);
+      // Taglia ridotta per i candidati esplorativi/sonda: si prende il rischio, ma in proporzione
+      // a quanto e' ancora incerto — mai un ingresso a piena taglia su un edge non confermato.
+      const tierFactor = opportunity.signal.tier === 'exploratory' ? SIMULATION.exploratorySizeFactor
+        : isProbe ? SIMULATION.probeSizeFactor : 1;
+      // Decadimento sui risultati live REALI di questa strategia su questo simbolo (vedi
+      // engine/rules.js liveConfidenceFactor): riduce ulteriormente la taglia se il track record
+      // recente e' gia' negativo, prima ancora del taglio netto a 10 trade.
+      const liveFactor = Aurora.Engine.liveConfidenceFactor(opportunity.symbol, opportunity.signal.candidateKey);
+      const notional = Math.min(SIMULATION.maximumOrder, demoAccount.cash * 0.25, metrics.equity * 0.25) * confidenceFactor * tierFactor * liveFactor;
       if (notional < 0.01) continue;
       const { stopLoss, takeProfit } = computeStopTarget(opportunity.symbol, price, opportunity.signal);
       const decisionSnapshot = {
@@ -108,8 +157,52 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
       });
       if (executed) {
         opened += 1;
-        actions.push(`apre ${opportunity.symbol} (score ${opportunity.signal.score}${opportunity.signal.tier === 'exploratory' ? ', esplorativo' : ''})`);
+        const tierLabel = opportunity.signal.tier === 'exploratory' ? ', esplorativo' : isProbe ? ', sonda' : '';
+        actions.push(`apre ${opportunity.symbol} (score ${opportunity.signal.score}${tierLabel})`);
         Aurora.Views.showToast(`Autopilot: aperta posizione su ${opportunity.symbol} (score ${opportunity.signal.score}).`, 'success');
+      }
+    }
+  }
+
+  // Fallback "forzato": se entro oggi (data reale) nessun livello ha ancora aperto nulla su nessun
+  // simbolo del watchlist, forza un ingresso a taglia minima sul candidato con lo score piu' alto
+  // sull'intero watchlist, a prescindere dalla direzione — mai spacciato per un segnale, sempre
+  // etichettato "sonda forzata" e distinto dal livello sonda ordinario nel Trade Critic (vedi
+  // engine/memory.js) proprio perche' qui manca anche il minimo requisito che la sonda mantiene
+  // (una direzione tecnica letta oggi). Un solo trade forzato al giorno, mai piu' di uno. In
+  // modalita' "qualita'" (vedi models/state.js autopilotMode) questo fallback non scatta affatto:
+  // zero trade quel giorno e' un esito accettato, non un difetto, quando non c'e' nulla di
+  // validato o esplorativo — coerente con lo scopo dichiarato della modalita'.
+  const qualityMode = Aurora.Models.autopilotMode === 'quality';
+  const openCountAfterEntries = Object.keys(demoAccount.positions).length;
+  const remainingSlots = SIMULATION.maxConcurrentPositions - openCountAfterEntries;
+  const today = new Date().toISOString().slice(0, 10);
+  const tradedToday = demoAccount.trades.some((trade) => trade.side === 'buy' && trade.at.slice(0, 10) === today);
+  if (!qualityMode && !killSwitchActive && !tradedToday && remainingSlots > 0) {
+    const heldSymbols = new Set(Object.keys(demoAccount.positions));
+    const candidateSymbols = Object.keys(instruments).filter((symbol) => !heldSymbols.has(symbol));
+    const forced = Aurora.Engine.pickForcedDailyCandidate(candidateSymbols);
+    if (forced && !isExtremeVolatility(forced.symbol)) {
+      const { symbol, signal } = forced;
+      const price = Aurora.Engine.getDemoPrice(symbol);
+      const metrics = Aurora.Engine.getMetrics();
+      const liveFactor = Aurora.Engine.liveConfidenceFactor(symbol, signal.candidateKey);
+      const notional = Math.min(SIMULATION.maximumOrder, demoAccount.cash * 0.25, metrics.equity * 0.25) * 0.3 * SIMULATION.forcedSizeFactor * liveFactor;
+      if (notional >= 0.01) {
+        const { stopLoss, takeProfit } = computeStopTarget(symbol, price, signal);
+        const decisionSnapshot = {
+          strategyKey: signal.candidateKey || null, entryPrice: price, confidence: signal.confidence,
+          score: signal.score, tier: 'forced', volatilityRegime: signal.volatilityRegime, aiEngine: Models.aiEngine.mode
+        };
+        const executed = Aurora.Engine.executePaperTrade({
+          symbol, side: 'buy', quantity: notional / price,
+          origin: autopilotOrigin({ tier: 'forced' }), stopLoss, takeProfit,
+          strategyKey: signal.candidateKey || null, decisionSnapshot
+        });
+        if (executed) {
+          actions.push(`apre ${symbol} forzato (nessun trade ancora oggi, score ${signal.score})`);
+          Aurora.Views.showToast(`Autopilot: trade forzato del giorno su ${symbol} — nessun segnale valido oggi, apertura minima per garantire l'attività giornaliera.`, '');
+        }
       }
     }
   }

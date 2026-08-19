@@ -1,0 +1,59 @@
+name: Setup giornaliero
+
+# Ri-scarica lo storico reale (Yahoo Finance via server/marketData.js) e rigira il backtest
+# walk-forward per tutti i simboli — aggiorna data/research.json (validated + historyCache).
+# Non tocca trackRecord/tradeEpisodes/lessons: quelli sono la memoria del Learning Loop,
+# di proprieta' del job "ciclo di trading" (trading-cycle.yml).
+on:
+  schedule:
+    # 06:00 UTC, lun-ven — prima dell'apertura del mercato USA (9:30 ET) con margine per l'ora legale.
+    - cron: '0 6 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aurora-markets-jobs
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze backend
+        working-directory: server
+        run: npm install --omit=dev
+
+      - name: Installa Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Esegui setup giornaliero (backtest reale su storico reale)
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: node server/jobs/dailySetup.js
+
+      - name: Salva lo stato aggiornato nel repo
+        run: |
+          git config user.name "aurora-markets-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/research.json
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare."
+            exit 0
+          fi
+          git commit -m "Setup giornaliero: backtest aggiornato $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            echo "Push fallito (tentativo $attempt), riprovo dopo un pull --rebase"
+            git pull --rebase origin main
+          done
+          git push origin HEAD:main

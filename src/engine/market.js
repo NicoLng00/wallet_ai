@@ -44,6 +44,22 @@ Aurora.Engine.widgetInterval = function widgetInterval() {
   return { '1m': '1', '5m': '5', '15m': '15', '1h': '60', '1D': 'D' }[Aurora.Models.activeTimeframe];
 };
 
+// Win rate segmentata per livello: la win rate aggregata mescola trade validati/esplorativi
+// (che possono avere un edge reale) con sonda/forzati (per design senza edge misurato, esistono
+// solo per generare dati per il Learning Loop) — una singola percentuale sull'insieme nasconde
+// quale parte del sistema sta davvero funzionando. Calcolata solo sui trade chiusi (side 'sell').
+Aurora.Engine.getWinRateByTier = function getWinRateByTier() {
+  const sells = Aurora.Models.demoAccount.trades.filter((trade) => trade.side === 'sell');
+  const byTier = {};
+  sells.forEach((trade) => {
+    const tier = trade.tier || 'manuale';
+    byTier[tier] = byTier[tier] || { count: 0, wins: 0 };
+    byTier[tier].count += 1;
+    if (trade.realizedPnl > 0) byTier[tier].wins += 1;
+  });
+  return Object.fromEntries(Object.entries(byTier).map(([tier, { count, wins }]) => [tier, { count, wins, winRate: (wins / count) * 100 }]));
+};
+
 Aurora.Engine.computeWalletStats = function computeWalletStats() {
   const demoAccount = Aurora.Models.demoAccount;
   const metrics = Aurora.Engine.getMetrics();

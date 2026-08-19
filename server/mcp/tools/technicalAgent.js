@@ -34,8 +34,10 @@ export const technicalAgentTool = {
     }
   },
   async handler({ symbol, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons }) {
-    if (!strategyLabel) return unavailable(`Nessuna strategia validata né esplorativa per ${symbol}: nessuna tesi tecnica disponibile.`);
-    const tierLabel = tier === 'exploratory' ? 'ESPLORATIVA (non ancora confermata fuori campione)' : 'validata (in-sample e out-of-sample)';
+    if (!strategyLabel) return unavailable(`Nessuna strategia validata, esplorativa né sonda per ${symbol}: nessuna tesi tecnica disponibile.`);
+    const tierLabel = tier === 'exploratory' ? 'ESPLORATIVA (non ancora confermata fuori campione)'
+      : tier === 'probe' ? 'SONDA (nessun edge misurato, la meno peggio tra le strategie scartate, taglia minima)'
+      : 'validata (in-sample e out-of-sample)';
     const lessonsText = lessons?.length ? ` Lezioni da trade passati con questa strategia: ${lessons.join(' | ')}` : '';
     return {
       available: true,
@@ -44,7 +46,7 @@ export const technicalAgentTool = {
         : `${strategyLabel} (${timeframe}), strategia ${tierLabel}: condizioni non allineate per un ingresso long in questo momento.`) + lessonsText,
       confidence: Number.isFinite(confidenceHint) ? confidenceHint : 50,
       evidence: [`strategy=${strategyLabel}`, `timeframe=${timeframe}`, `tier=${tier}`, `bullish=${bullish}`, ...(lessons || [])],
-      risk_flags: tier === 'exploratory' ? ['exploratory-tier'] : [],
+      risk_flags: tier === 'exploratory' ? ['exploratory-tier'] : tier === 'probe' ? ['probe-tier-no-measured-edge'] : [],
       model_version: strategyLabel || null
     };
   }

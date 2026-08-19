@@ -20,6 +20,8 @@ const MIN_PATTERN_SHARE = 0.5;
 // al momento dell'apertura (decisionSnapshot) e l'esito reale — mai un giudizio postumo inventato.
 Aurora.Engine.classifyTradeOutcome = function classifyTradeOutcome(trade, snapshot) {
   const win = trade.realizedPnl > 0;
+  if (snapshot?.tier === 'forced') return win ? 'forced_win' : 'forced_loss';
+  if (snapshot?.tier === 'probe') return win ? 'probe_win' : 'probe_loss';
   if (snapshot?.tier === 'exploratory') return win ? 'exploratory_win' : 'exploratory_loss';
   if (trade.origin?.includes('Take Profit')) return 'take_profit_hit';
   if (trade.origin?.includes('Stop Loss')) {
@@ -30,7 +32,7 @@ Aurora.Engine.classifyTradeOutcome = function classifyTradeOutcome(trade, snapsh
 };
 
 const FAILURE_MODES = new Set([
-  'stop_loss_hit_normal_regime', 'stop_loss_hit_elevated_regime', 'signal_flip_loss', 'exploratory_loss'
+  'stop_loss_hit_normal_regime', 'stop_loss_hit_elevated_regime', 'signal_flip_loss', 'exploratory_loss', 'probe_loss', 'forced_loss'
 ]);
 Aurora.Engine.isFailureOutcome = function isFailureOutcome(outcomeTag) { return FAILURE_MODES.has(outcomeTag); };
 
@@ -84,11 +86,24 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
     const avgReturn = recent.filter((e) => e.outcomeTag === outcomeTag).reduce((sum, e) => sum + e.returnPct, 0) / occurrences;
     const statement = describeFailureMode(outcomeTag, strategyKey, occurrences, recent.length, avgReturn);
 
+    // Aggiorna in place la lezione gia' attiva invece di versionare a ogni singolo trade: la
+    // finestra recente scorre di continuo, quindi occurrences/avgReturn cambiano leggermente
+    // quasi a ogni episodio anche quando il pattern non e' cambiato qualitativamente — versionare
+    // comunque gonfia la cronologia senza aggiungere informazione reale (bug trovato analizzando
+    // il seed di sessione: 149 episodi avevano generato 70 versioni, quasi una a trade). Una nuova
+    // versione nasce solo quando la lezione era stata disattivata (reversibile) e si ripresenta.
     const existingActive = lessons.find((lesson) => lesson.active && lesson.failureMode === outcomeTag);
-    if (existingActive && existingActive.statement === statement) return; // nessuna novita' reale, non versionare a vuoto
+    if (existingActive) {
+      existingActive.occurrences = occurrences;
+      existingActive.sampleSize = recent.length;
+      existingActive.avgReturn = Number(avgReturn.toFixed(3));
+      existingActive.statement = statement;
+      existingActive.supportingTradeIds = supportingTradeIds;
+      existingActive.updatedAt = new Date().toISOString();
+      return;
+    }
 
-    if (existingActive) existingActive.active = false; // superseded, mai cancellata: reversibilita' e tracciabilita'
-    const version = (existingActive?.version || 0) + 1;
+    const version = lessons.filter((lesson) => lesson.failureMode === outcomeTag).length + 1;
     lessons.push({
       id: `${strategyKey}::${outcomeTag}::v${version}`,
       version,
@@ -100,7 +115,7 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
       avgReturn: Number(avgReturn.toFixed(3)),
       supportingTradeIds,
       createdAt: new Date().toISOString(),
-      supersedes: existingActive?.id || null,
+      supersedes: null,
       active: true
     });
   });
@@ -112,7 +127,9 @@ function describeFailureMode(outcomeTag, strategyKey, occurrences, sampleSize, a
     stop_loss_hit_normal_regime: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in stop loss in condizioni di volatilità normale — il segnale d'ingresso, non la volatilità, sembra la causa.`,
     stop_loss_hit_elevated_regime: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in stop loss durante volatilità elevata/anomala — valutare un filtro più severo per questa strategia.`,
     signal_flip_loss: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) sono usciti in perdita per segnale non più favorevole prima di raggiungere lo stop — possibile uscita tardiva o soglia di conferma debole.`,
-    exploratory_loss: `Negli ultimi ${sampleSize} trade esplorativi di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — campione ancora piccolo, da tenere d'occhio prima di una eventuale validazione.`
+    exploratory_loss: `Negli ultimi ${sampleSize} trade esplorativi di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — campione ancora piccolo, da tenere d'occhio prima di una eventuale validazione.`,
+    probe_loss: `Negli ultimi ${sampleSize} trade sonda di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — coerente con l'assenza di un edge misurato: la sonda sta facendo il suo lavoro, non è un errore da correggere.`,
+    forced_loss: `Negli ultimi ${sampleSize} trade forzati (fallback giornaliero) di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.`
   };
   return labels[outcomeTag] || `Pattern ricorrente (${outcomeTag}) su ${strategyKey}: ${occurrences}/${sampleSize} trade recenti.`;
 }

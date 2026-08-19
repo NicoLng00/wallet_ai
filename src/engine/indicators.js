@@ -93,6 +93,16 @@ Aurora.Engine.computeVolatilityRegime = function computeVolatilityRegime(candles
   return { ratio, regime, recentATR, baselineATR };
 };
 
+// Massimo Donchian: il piu' alto valore di chiusura nelle `period` barre PRIMA di quella corrente
+// (esclusa, per evitare look-ahead). Base per la strategia breakout — logica di continuazione del
+// trend, diversa sia da SMA/RSI (trend ma filtrato da RSI in banda media, puo' perdere breakout
+// forti con RSI gia' alto) sia da Bollinger (mean-reversion, ipotesi opposta).
+Aurora.Engine.computeDonchianHigh = function computeDonchianHigh(closes, period = 20) {
+  if (closes.length < period + 1) return null;
+  const windowSlice = closes.slice(-(period + 1), -1);
+  return Math.max(...windowSlice);
+};
+
 // Pattern a candela: engulfing rialzista/ribassista sulle ultime due candele OHLC.
 Aurora.Engine.detectEngulfing = function detectEngulfing(candles) {
   if (!candles || candles.length < 2) return 'none';

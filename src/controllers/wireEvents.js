@@ -82,6 +82,22 @@ Aurora.Controllers.wireEvents = function wireEvents() {
   $('order-take-profit').addEventListener('input', Aurora.Views.updateOrderEstimate);
   $('submit-order').addEventListener('click', Controllers.submitOrder);
   $('autopilot-toggle').addEventListener('click', () => Aurora.Engine.setAutopilot(!Models.autopilotRunning));
+  const AUTOPILOT_MODE_COPY = {
+    coverage: 'Copertura: almeno un trade al giorno anche senza edge misurato (sonda/forzata).',
+    quality: 'Qualità: solo validato/esplorativo — zero trade in un giorno senza edge è un esito accettato.'
+  };
+  document.querySelectorAll('.mode-option').forEach((button) => button.addEventListener('click', () => {
+    Models.autopilotMode = button.dataset.mode;
+    Models.persistAutopilotMode();
+    document.querySelectorAll('.mode-option').forEach((mode) => mode.classList.toggle('active', mode === button));
+    $('autopilot-mode-copy').textContent = AUTOPILOT_MODE_COPY[Models.autopilotMode];
+    Aurora.Views.showToast(Models.autopilotMode === 'quality'
+      ? 'Modalità Qualità: l\'Autopilot ora tratta le sole opportunità validate/esplorative.'
+      : 'Modalità Copertura: l\'Autopilot userà anche sonda e fallback forzato per garantire attività giornaliera.', 'success');
+  }));
+  document.querySelector(`.mode-option[data-mode="${Models.autopilotMode}"]`)?.classList.add('active');
+  document.querySelectorAll('.mode-option').forEach((mode) => { if (mode.dataset.mode !== Models.autopilotMode) mode.classList.remove('active'); });
+  $('autopilot-mode-copy').textContent = AUTOPILOT_MODE_COPY[Models.autopilotMode];
   $('reset-demo').addEventListener('click', Controllers.resetDemoAccount);
   document.querySelectorAll('.side-option').forEach((button) => button.addEventListener('click', () => Controllers.setSide(button.dataset.side)));
   document.querySelectorAll('.tab').forEach((button) => button.addEventListener('click', () => {
@@ -150,15 +166,17 @@ Aurora.Controllers.wireEvents = function wireEvents() {
     if (!Models.aiEngine.geminiKey) { Aurora.Views.showToast('Inserisci prima una API key Gemini gratuita.', 'error'); return; }
     Aurora.Services.fetchGeminiSignals();
   });
+  // XAUUSD ora ha una fonte storica reale (Yahoo Finance via backend, proxy GC=F) — non piu'
+  // esclusa a priori. Nessun pre-check bloccante sulla chiave Alpha Vantage: il backend locale
+  // (se in esecuzione) da' storico piu' lungo senza alcuna chiave; se il backend non e'
+  // raggiungibile e manca la chiave, l'errore reale del backtest lo spiega comunque nello status.
   $('research-symbol').innerHTML = Object.keys(Models.instruments)
-    .filter((symbol) => symbol !== 'XAUUSD')
     .map((symbol) => `<option value="${symbol}">${symbol}</option>`).join('');
   $('run-backtest').addEventListener('click', () => {
-    if (!Models.researchData.alphaVantageKey && !Models.COINGECKO_IDS[$('research-symbol').value]) {
-      Aurora.Views.showToast('Inserisci prima una API key Alpha Vantage gratuita.', 'error');
-      return;
-    }
     Aurora.Services.runResearchBacktest($('research-symbol').value);
+  });
+  ['memory-filter-account', 'memory-filter-symbol', 'memory-filter-tier', 'memory-filter-outcome'].forEach((id) => {
+    $(id).addEventListener('change', Aurora.Views.renderMemoryHistory);
   });
   $('view-positions').addEventListener('click', () => {
     Models.selectedTab = 'positions';

@@ -23,6 +23,7 @@
           <button class="nav-item" data-section="research"><span>◌</span>Research</button>
           <button class="nav-item" data-section="portfolio"><span>◫</span>Portafoglio</button>
           <button class="nav-item" data-section="agents"><span>✦</span>AI Desk</button>
+          <button class="nav-item" data-section="memory"><span>◈</span>Storico &amp; Memoria</button>
         </nav>
 
         <div class="watchlist-head">
@@ -153,6 +154,14 @@
             <div class="allocation"><span>Cash <strong id="demo-cash">10,00 €</strong></span><span>Esposizione <strong id="demo-exposure">0.0%</strong></span></div>
             <div class="allocation-bar"><i id="demo-allocation" style="width:0%"></i></div>
             <div class="autopilot-card"><div><span>AI AUTOPILOT</span><strong id="autopilot-status">Pausato</strong></div><button id="autopilot-toggle" class="autopilot-toggle">Avvia</button><p id="autopilot-copy">Paper only · ciclo ogni 20 s · max 2,50 € per trade.</p></div>
+            <div class="autopilot-mode-row">
+              <span>Modalità</span>
+              <div class="segmented autopilot-mode-segmented">
+                <button class="mode-option active" data-mode="coverage" id="autopilot-mode-coverage" title="Almeno un trade al giorno: usa anche sonda e fallback forzato quando non c'è nulla di validato/esplorativo.">Copertura</button>
+                <button class="mode-option" data-mode="quality" id="autopilot-mode-quality" title="Solo validato/esplorativo: nessuna sonda, nessun fallback forzato — giornate a zero trade sono un esito accettato.">Qualità</button>
+              </div>
+              <small id="autopilot-mode-copy">Copertura: almeno un trade al giorno anche senza edge misurato (sonda/forzata).</small>
+            </div>
             <div class="model-strip"><span>Calibrazione <strong id="model-calibration">50%</strong></span><span id="model-observations">0 esiti</span></div>
             <div class="portfolio-foot"><span id="positions-summary">0 posizioni aperte</span><button id="view-positions">Vedi posizioni →</button></div>
           </article>
@@ -185,7 +194,52 @@
             <button id="run-backtest" class="outline-button">Scarica storico + backtest</button>
           </div>
           <div id="research-results" class="research-results"></div>
-          <p class="ai-disclaimer">Regola in validazione: prezzo sopra SMA(50) con RSI(14) tra 40 e 70, su storico giornaliero reale (Alpha Vantage/CoinGecko). Validazione walk-forward: lo storico è diviso in una finestra di selezione (in-sample) e una mai vista prima (out-of-sample) confrontate con una baseline a ingressi casuali — "Validato" richiede di battere il caso in ENTRAMBE le finestre, non solo sull'intera serie. Solo i simboli "Validato" alimentano il segnale dell'Autopilot — gli altri restano neutri. XAUUSD non ha una fonte storica gratuita disponibile e resta sempre neutro. Un risultato positivo sul passato non garantisce risultati futuri.</p>
+          <p class="ai-disclaimer">Regola in validazione: prezzo sopra SMA(50) con RSI(14) tra 40 e 70, su storico giornaliero reale (Yahoo Finance via backend locale — circa 2 anni di storico, nessuna chiave richiesta; ripiega su Alpha Vantage/CoinGecko se il backend non è in esecuzione). Validazione walk-forward: lo storico è diviso in una finestra di selezione (in-sample) e una mai vista prima (out-of-sample) confrontate con una baseline a ingressi casuali — "Validato" richiede di battere il caso in ENTRAMBE le finestre, non solo sull'intera serie. Solo i simboli "Validato" alimentano il segnale dell'Autopilot — gli altri restano neutri. XAUUSD usa il future sull'oro (GC=F) come proxy dichiarato dello spot — senza backend in esecuzione resta senza fonte storica, come sempre. Un risultato positivo sul passato non garantisce risultati futuri.</p>
+        </section>
+
+        <section class="panel memory-panel" id="memory">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Storico &amp; Learning Loop</h2></div><span id="memory-status" class="status-pill idle">0 trade</span></div>
+          <div class="memory-filters">
+            <select id="memory-filter-account" aria-label="Filtra per conto">
+              <option value="all">Tutti i conti</option>
+              <option value="demo">Paper demo</option>
+              <option value="live">Conto reale</option>
+              <option value="backtest">Casi storici (backtest)</option>
+            </select>
+            <select id="memory-filter-symbol" aria-label="Filtra per simbolo"><option value="all">Tutti i simboli</option></select>
+            <select id="memory-filter-tier" aria-label="Filtra per livello">
+              <option value="all">Tutti i livelli</option>
+              <option value="validated">Validato</option>
+              <option value="exploratory">Esplorativo</option>
+              <option value="probe">Sonda</option>
+              <option value="forced">Sonda forzata</option>
+            </select>
+            <select id="memory-filter-outcome" aria-label="Filtra per esito">
+              <option value="all">Tutti gli esiti</option>
+              <option value="win">Vinti</option>
+              <option value="loss">Persi</option>
+            </select>
+          </div>
+          <div class="memory-history-head">
+            <span>Win rate per livello</span>
+          </div>
+          <div id="memory-tier-stats" class="memory-tier-stats" aria-label="Win rate segmentata per livello"></div>
+          <div class="memory-history-head">
+            <span>Storico filtrato</span>
+            <span id="memory-count">0 trade</span>
+          </div>
+          <div class="memory-table">
+            <div class="memory-row memory-head">
+              <span>Orario</span><span>Conto</span><span>Simbolo</span><span>Lato</span><span>Livello</span><span>Strategia</span><span>P&amp;L</span><span>Esito</span><span>Origine</span>
+            </div>
+            <div id="memory-history" aria-label="Storico trade filtrato per memoria"></div>
+          </div>
+          <div class="memory-lessons-head">
+            <span>Lezioni apprese (Learning Loop)</span>
+            <span id="memory-lessons-count">0 lezioni</span>
+          </div>
+          <div id="memory-lessons" class="memory-lessons-grid" aria-label="Lezioni attive per strategia"></div>
+          <p class="ai-disclaimer">"Conto reale" non è ancora collegato ad alcun broker: oggi esiste solo il conto paper demo (vedi ARCHITECTURE.md) — il filtro resta predisposto per quando/se un conto reale verrà aggiunto. Le lezioni sono generate deterministicamente dal Trade Critic (nessuna chiamata AI per trade, nessun fine-tuning di Gemini): quando un pattern di fallimento ricorre almeno 3 volte su almeno metà dei trade recenti di una strategia, viene versionata una lezione attiva finché non la disattivi o non viene superata da una più recente. Livello "Sonda forzata": se entro la giornata (Autopilot attivo) nessun livello ha aperto nulla su nessun simbolo, l'ultimo ciclo del giorno forza un ingresso a taglia minima sul candidato con lo score più alto sull'intero watchlist, a prescindere dalla direzione — l'unico livello senza nemmeno una lettura tecnica direzionale a supporto, mai spacciato per un segnale. "Casi storici (backtest)": alla primissima apertura dell'app, prima di qualunque trade tuo, Storico & Lezioni parte già popolato con un backtest walk-forward reale (stesso motore, stesso storico Alpha Vantage/CoinGecko scaricato in fase di sviluppo, nessuna soglia abbassata) — righe e lezioni etichettate "Backtest" così non si confondono mai con il tuo conto demo. Basta una tua prima azione reale perché il tuo storico prenda il sopravvento.</p>
         </section>
       </main>
     </div>
@@ -193,6 +247,7 @@
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="./src/utils.js"></script>
     <script src="./src/config.js"></script>
+    <script src="./src/models/seedData.js"></script>
     <script src="./src/models/state.js"></script>
     <script src="./src/engine/indicators.js"></script>
     <script src="./src/engine/rules.js"></script>

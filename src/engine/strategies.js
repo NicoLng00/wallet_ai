@@ -40,6 +40,17 @@ Aurora.Engine.STRATEGIES = {
       return price < bands.lower ? 'bullish' : 'neutral';
     }
   },
+  donchian_breakout: {
+    id: 'donchian_breakout',
+    label: 'Donchian breakout (20)',
+    requiresOhlc: false,
+    signal({ closes }) {
+      const donchianHigh = Aurora.Engine.computeDonchianHigh(closes, 20);
+      if (donchianHigh === null) return 'neutral';
+      const price = closes[closes.length - 1];
+      return price > donchianHigh ? 'bullish' : 'neutral';
+    }
+  },
   engulfing: {
     id: 'engulfing',
     label: 'Pattern Engulfing (candela)',

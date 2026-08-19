@@ -20,7 +20,7 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
   let closedSnapshot = null;
   if (side === 'buy') {
     if (notional > demoAccount.cash + 0.0000001) return false;
-    const current = demoAccount.positions[symbol] || { quantity: 0, averagePrice: 0, stopLoss: null, takeProfit: null, strategyKey: null, decisionSnapshot: null };
+    const current = demoAccount.positions[symbol] || { quantity: 0, averagePrice: 0, stopLoss: null, takeProfit: null, strategyKey: null, decisionSnapshot: null, openedAt: null };
     const nextQuantity = current.quantity + quantity;
     demoAccount.positions[symbol] = {
       quantity: nextQuantity,
@@ -30,7 +30,12 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
       strategyKey: strategyKey || current.strategyKey || null,
       // Decisione presa all'apertura (confidenza, score, regime di volatilita', validato/esplorativo)
       // — il Trade Critic la userà alla chiusura per la Failure Attribution, senza rileggerla postuma.
-      decisionSnapshot: decisionSnapshot || current.decisionSnapshot || null
+      decisionSnapshot: decisionSnapshot || current.decisionSnapshot || null,
+      // Data di apertura (prima entrata, mai aggiornata su un rialzo di posizione successivo): base
+      // per il limite massimo di detenzione in engine/autopilot.js — senza un time-stop una
+      // posizione senza SL/TP toccati resta aperta indefinitamente e blocca uno slot concorrente,
+      // impedendo sia nuovi ingressi normali sia il fallback "sonda forzata" giornaliero.
+      openedAt: current.openedAt || new Date().toISOString()
     };
     demoAccount.cash -= notional;
   } else {
@@ -47,9 +52,21 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
     Aurora.Engine.registerOutcome(realizedPnl);
   }
   Aurora.Models.orderCount += 1;
+  // Esito classificato PRIMA di costruire il record, cosi' tier/strategia/esito viaggiano con lo
+  // storico stesso (non solo dentro il testo di "origin") — serve alla pagina Storico & Memoria.
+  const outcomeTag = side === 'sell' && closedSnapshot?.strategyKey
+    ? Aurora.Engine.classifyTradeOutcome({ origin, realizedPnl }, closedSnapshot)
+    : null;
   const record = {
     id: `SIM-${Date.now().toString().slice(-7)}`,
-    symbol, side, quantity, price, notional, realizedPnl, origin, at: new Date().toISOString(), stopLoss, takeProfit
+    symbol, side, quantity, price, notional, realizedPnl, origin, at: new Date().toISOString(), stopLoss, takeProfit,
+    // Unico conto disponibile oggi: nessun broker reale collegato (vedi ARCHITECTURE.md). Il campo
+    // esiste gia' per quando/se un conto reale verra' aggiunto, cosi' lo storico e i filtri non
+    // cambiano forma — oggi vale sempre 'demo'.
+    accountMode: 'demo',
+    tier: (side === 'buy' ? decisionSnapshot?.tier : closedSnapshot?.tier) || null,
+    strategyKey: (side === 'buy' ? (strategyKey || decisionSnapshot?.strategyKey) : closedSnapshot?.strategyKey) || null,
+    outcomeTag
   };
   demoAccount.trades.unshift(record);
 
@@ -58,7 +75,6 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
   if (side === 'sell' && closedSnapshot?.strategyKey) {
     const entryPrice = closedSnapshot.entryPrice || (price - realizedPnl / quantity);
     const returnPct = ((price - entryPrice) / entryPrice) * 100;
-    const outcomeTag = Aurora.Engine.classifyTradeOutcome(record, closedSnapshot);
     Aurora.Engine.recordTradeEpisode({
       strategyKey: closedSnapshot.strategyKey, tradeId: record.id, symbol,
       returnPct, outcomeTag, snapshot: closedSnapshot, at: record.at
@@ -84,6 +100,8 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
   Aurora.Views.renderActivity();
   Aurora.Views.updateOrderEstimate();
   Aurora.Views.renderChartLevelsOverlay();
+  Aurora.Views.renderMemoryHistory();
+  Aurora.Views.renderMemoryLessons();
   return true;
 };
 
