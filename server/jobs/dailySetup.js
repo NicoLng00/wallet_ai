@@ -83,8 +83,10 @@ async function main() {
     const driverPath = writeTempDriverFile(html, 'daily-setup.html');
     let output;
     try {
-      // Budget alto: 8 simboli, ciascuno con piu' fetch reali (storico + eventuale orario/OHLC).
-      output = runDriverAndGetOutput(driverPath, { virtualTimeBudgetMs: 120000, timeoutMs: 180000 });
+      // 9 simboli, ciascuno con piu' fetch reali (storico + eventuale orario/OHLC) — su un runner
+      // GitHub Actions la latenza reale verso Yahoo Finance/CoinGecko e' risultata piu' alta che
+      // in locale: il primo run reale e' fallito con ETIMEDOUT a 180s. Budget alzato con margine.
+      output = runDriverAndGetOutput(driverPath, { virtualTimeBudgetMs: 240000, timeoutMs: 480000 });
     } finally {
       removeDriverFile(driverPath);
     }

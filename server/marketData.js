@@ -21,7 +21,10 @@ export async function fetchYahooDailyHistory(symbol, range = '2y') {
   const ticker = yahooTickerFor(symbol);
   if (!ticker) throw new Error(`Nessun ticker Yahoo mappato per il simbolo "${symbol}".`);
   const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=${encodeURIComponent(range)}&interval=1d`;
-  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' } });
+  // Timeout esplicito per richiesta: senza, una singola risposta lenta/appesa di Yahoo (piu'
+  // probabile dagli IP condivisi di un runner CI, osservato in sessione) consuma da sola l'intero
+  // budget del job che chiama questa funzione una volta per simbolo, di seguito.
+  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(20000) });
   if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
   const payload = await res.json();
   const result = payload?.chart?.result?.[0];
