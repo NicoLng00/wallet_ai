@@ -1,7 +1,81 @@
 {
-  "demoAccount": null,
-  "activity": [],
+  "demoAccount": {
+    "version": 2,
+    "cash": 9.925,
+    "highWater": 10,
+    "positions": {
+      "NVDA": {
+        "quantity": 0.00034131246018021303,
+        "averagePrice": 219.74,
+        "stopLoss": 213.15857256208147,
+        "takeProfit": 231.25749801635743,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 219.74,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-08-19T08:55:53.032Z"
+      }
+    },
+    "market": {
+      "AAPL": 310.03,
+      "NVDA": 219.74,
+      "SPY": 767.45,
+      "QQQ": 717.51,
+      "BTCUSD": 64408,
+      "TSLA": 336.87,
+      "XAUUSD": 2612.4,
+      "ETHUSD": 1922.27,
+      "WTI": 72.8
+    },
+    "model": {
+      "calibration": 50,
+      "outcomes": 0,
+      "wins": 0
+    },
+    "trades": [
+      {
+        "id": "SIM-9753032",
+        "symbol": "NVDA",
+        "side": "buy",
+        "quantity": 0.00034131246018021303,
+        "price": 219.74,
+        "notional": 0.07500000000000001,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-08-19T08:55:53.032Z",
+        "stopLoss": 213.15857256208147,
+        "takeProfit": 231.25749801635743,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      }
+    ]
+  },
+  "activity": [
+    {
+      "title": "Autopilot: apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000341 NVDA",
+      "detail": "0,08 € · fill simulato 219,74 € · SIM-9753032",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Prezzi live non disponibili",
+      "detail": "Aurora.Views.renderLiveDataStatus is not a function",
+      "tag": "JOB"
+    }
+  ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": null
+  "updatedAt": "2026-08-19T08:55:53.214Z"
 }
