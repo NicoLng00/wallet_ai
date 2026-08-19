@@ -7,6 +7,16 @@ Aurora.Services = Aurora.Services || {};
 // non al secondo — un throttle da 1,1s bastava per due chiamate isolate ma falliva testando piu'
 // simboli in sequenza (verificato: QQQ/AAPL/NVDA/TSLA/WTI rifiutati in un ciclo di validazione
 // multi-mercato). 13s di distanza tiene un margine di sicurezza sotto le 5/min.
+// Timeout esplicito per OGNI fetch verso provider esterni: senza, una singola richiesta appesa
+// (osservato in sessione — CoinGecko/Yahoo da un runner CI, IP condivisi piu' soggetti a rate
+// limiting silenzioso che da una rete residenziale) blocca l'intero job di setup giornaliero fino
+// al timeout esterno di spawnSync, invece di fallire in fretta e lasciare che il resto dei
+// simboli/strategie prosegua (ogni chiamata e' gia' avvolta in un try/catch dal chiamante).
+const FETCH_TIMEOUT_MS = 15000;
+function fetchWithTimeout(url, options = {}) {
+  return fetch(url, { ...options, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+}
+
 let lastAlphaVantageCallAt = 0;
 async function throttleAlphaVantage() {
   const elapsed = Date.now() - lastAlphaVantageCallAt;
@@ -15,7 +25,7 @@ async function throttleAlphaVantage() {
 }
 
 Aurora.Services.fetchFinnhubQuote = async function fetchFinnhubQuote(apiSymbol) {
-  const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(apiSymbol)}&token=${encodeURIComponent(Aurora.Models.liveData.finnhubKey)}`);
+  const res = await fetchWithTimeout(`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(apiSymbol)}&token=${encodeURIComponent(Aurora.Models.liveData.finnhubKey)}`);
   if (res.status === 429) throw new Error('rate-limit');
   if (res.status === 401 || res.status === 403) throw new Error('unauthorized');
   if (!res.ok) throw new Error(`http-${res.status}`);
@@ -28,7 +38,7 @@ Aurora.Services.fetchFinnhubQuote = async function fetchFinnhubQuote(apiSymbol) 
 
 Aurora.Services.fetchCoinGeckoPrices = async function fetchCoinGeckoPrices() {
   const ids = Object.values(Aurora.Models.COINGECKO_IDS).join(',');
-  const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
   if (!res.ok) throw new Error(`http-${res.status}`);
   return res.json();
 };
@@ -109,7 +119,7 @@ Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
 Aurora.Services.fetchAlphaVantageDaily = async function fetchAlphaVantageDaily(symbol) {
   await throttleAlphaVantage();
   const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(symbol)}&outputsize=compact&apikey=${encodeURIComponent(Aurora.Models.researchData.alphaVantageKey)}`;
-  const res = await fetch(url);
+  const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   const series = data['Time Series (Daily)'];
@@ -129,7 +139,7 @@ Aurora.Services.fetchAlphaVantageDaily = async function fetchAlphaVantageDaily(s
 Aurora.Services.fetchAlphaVantageWTI = async function fetchAlphaVantageWTI() {
   await throttleAlphaVantage();
   const url = `https://www.alphavantage.co/query?function=WTI&interval=daily&apikey=${encodeURIComponent(Aurora.Models.researchData.alphaVantageKey)}`;
-  const res = await fetch(url);
+  const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   if (!data.data) throw new Error(data.Note || data.Information || 'Dati non disponibili');
@@ -142,7 +152,7 @@ Aurora.Services.fetchCoinGeckoHistory = async function fetchCoinGeckoHistory(sym
   const id = Aurora.Models.COINGECKO_IDS[symbol];
   const to = Math.floor(Date.now() / 1000);
   const from = to - 365 * 86400;
-  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
+  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   const points = data.prices || [];
@@ -156,7 +166,7 @@ Aurora.Services.fetchCoinGeckoHourly = async function fetchCoinGeckoHourly(symbo
   const id = Aurora.Models.COINGECKO_IDS[symbol];
   const to = Math.floor(Date.now() / 1000);
   const from = to - 90 * 86400;
-  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
+  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   const points = data.prices || [];
@@ -166,7 +176,7 @@ Aurora.Services.fetchCoinGeckoHourly = async function fetchCoinGeckoHourly(symbo
 // OHLC reale (candele vere, non solo chiusura) — usato per il pattern Engulfing e per l'ATR.
 Aurora.Services.fetchCoinGeckoOHLC = async function fetchCoinGeckoOHLC(symbol, days = 180) {
   const id = Aurora.Models.COINGECKO_IDS[symbol];
-  const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}/ohlc?vs_currency=usd&days=${days}`);
+  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/ohlc?vs_currency=usd&days=${days}`);
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   return (data || []).map(([time, open, high, low, close]) => ({ time, open, high, low, close }));
@@ -178,7 +188,7 @@ Aurora.Services.fetchCoinGeckoOHLC = async function fetchCoinGeckoOHLC(symbol, d
 // GC=F (futures oro) come proxy dichiarato: prima di questo restava sempre neutro per mancanza di
 // una fonte storica gratuita.
 Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range = '2y') {
-  const res = await fetch(`${Aurora.Config.backendUrl}/api/history?symbol=${encodeURIComponent(symbol)}&range=${encodeURIComponent(range)}`);
+  const res = await fetchWithTimeout(`${Aurora.Config.backendUrl}/api/history?symbol=${encodeURIComponent(symbol)}&range=${encodeURIComponent(range)}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.error || `http-${res.status}`);

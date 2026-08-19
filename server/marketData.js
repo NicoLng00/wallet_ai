@@ -23,8 +23,11 @@ export async function fetchYahooDailyHistory(symbol, range = '2y') {
   const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=${encodeURIComponent(range)}&interval=1d`;
   // Timeout esplicito per richiesta: senza, una singola risposta lenta/appesa di Yahoo (piu'
   // probabile dagli IP condivisi di un runner CI, osservato in sessione) consuma da sola l'intero
-  // budget del job che chiama questa funzione una volta per simbolo, di seguito.
-  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(20000) });
+  // budget del job che chiama questa funzione una volta per simbolo, di seguito. Deve restare PIU'
+  // CORTO del timeout lato frontend (FETCH_TIMEOUT_MS in dataProviders.js, 15s) — altrimenti il
+  // frontend rinuncia sulla propria chiamata al backend prima che il backend stesso abbia potuto
+  // fallire in modo pulito e restituire un errore leggibile invece di un timeout generico.
+  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
   if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
   const payload = await res.json();
   const result = payload?.chart?.result?.[0];
