@@ -1,8 +1,8 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 9.105639243,
-    "highWater": 10.001916980150794,
+    "cash": 9.327063128452664,
+    "highWater": 10.008647685452665,
     "positions": {
       "WTI": {
         "quantity": 0.005494505494505495,
@@ -21,23 +21,6 @@
         },
         "openedAt": "2026-08-19T12:12:06.542Z"
       },
-      "BTCUSD": {
-        "quantity": 0.0000011169717654359291,
-        "averagePrice": 64460,
-        "stopLoss": 63428.64,
-        "takeProfit": 66264.88,
-        "strategyKey": "macd_cross@1D",
-        "decisionSnapshot": {
-          "strategyKey": "macd_cross@1D",
-          "entryPrice": 64460,
-          "confidence": 38,
-          "score": 55,
-          "tier": "probe",
-          "volatilityRegime": null,
-          "aiEngine": "rule"
-        },
-        "openedAt": "2026-08-19T12:12:06.543Z"
-      },
       "XAUUSD": {
         "quantity": 0.00005470831419384475,
         "averagePrice": 2612.4,
@@ -51,23 +34,6 @@
           "score": 55,
           "tier": "probe",
           "volatilityRegime": "normal",
-          "aiEngine": "rule"
-        },
-        "openedAt": "2026-08-19T12:12:06.543Z"
-      },
-      "ETHUSD": {
-        "quantity": 0.00007326408152007037,
-        "averagePrice": 1921.4900000000002,
-        "stopLoss": 1890.74616,
-        "takeProfit": 1975.2917200000002,
-        "strategyKey": "sma_rsi@1D",
-        "decisionSnapshot": {
-          "strategyKey": "sma_rsi@1D",
-          "entryPrice": 1921.49,
-          "confidence": 33,
-          "score": 52,
-          "tier": "probe",
-          "volatilityRegime": null,
           "aiEngine": "rule"
         },
         "openedAt": "2026-08-19T12:12:06.543Z"
@@ -91,24 +57,59 @@
       }
     },
     "market": {
-      "AAPL": 316.39,
-      "NVDA": 218.93,
-      "SPY": 770.56,
-      "QQQ": 716.11,
-      "BTCUSD": 65336,
-      "TSLA": 343.51,
+      "AAPL": 318.52,
+      "NVDA": 219.47,
+      "SPY": 771.92,
+      "QQQ": 718.43,
+      "BTCUSD": 66451,
+      "TSLA": 346.9,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1934.3,
+      "ETHUSD": 2009.17,
       "WTI": 72.8,
-      "TLT": 83.02,
-      "EURUSD": 1.1609
+      "TLT": 82.96,
+      "EURUSD": 1.1609,
+      "ES": 7730
     },
     "model": {
-      "calibration": 35,
-      "outcomes": 1,
-      "wins": 0
+      "calibration": 56,
+      "outcomes": 3,
+      "wins": 2
     },
     "trades": [
+      {
+        "id": "SIM-2427089",
+        "symbol": "ETHUSD",
+        "side": "sell",
+        "quantity": 0.00007326408152007037,
+        "price": 2009.17,
+        "notional": 0.14719999466767977,
+        "realizedPnl": 0.006423794667679758,
+        "origin": "Take Profit",
+        "at": "2026-08-19T15:13:47.090Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": "probe_win"
+      },
+      {
+        "id": "SIM-2427071",
+        "symbol": "BTCUSD",
+        "side": "sell",
+        "quantity": 0.0000011169717654359291,
+        "price": 66451,
+        "notional": 0.07422389078498293,
+        "realizedPnl": 0.002223890784982935,
+        "origin": "Take Profit",
+        "at": "2026-08-19T15:13:47.071Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "macd_cross@1D",
+        "outcomeTag": "probe_win"
+      },
       {
         "id": "SIM-1526543",
         "symbol": "EURUSD",
@@ -233,11 +234,31 @@
   "activity": [
     {
       "title": "Autopilot: monitora",
-      "detail": "11 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "detail": "12 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Take Profit: vendita demo 0.000073 ETHUSD",
+      "detail": "0,15 € · fill simulato 2009 € · SIM-2427089",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Take Profit: vendita demo 0.000001 BTCUSD",
+      "detail": "0,07 € · fill simulato 66.451 € · SIM-2427071",
+      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-19T14:37:44.564Z"
+  "updatedAt": "2026-08-19T15:13:47.321Z"
 }
