@@ -18,7 +18,7 @@ router.get('/history', async (req, res) => {
       res.status(404).json({ error: `Nessuna fonte storica configurata per "${symbol}".` });
       return;
     }
-    const range = ['1y', '2y', '5y'].includes(req.query.range) ? req.query.range : '2y';
+    const range = ['1y', '2y', '5y', '10y'].includes(req.query.range) ? req.query.range : '2y';
     const history = await fetchYahooDailyHistory(symbol, range);
     res.json(history);
   } catch (error) {

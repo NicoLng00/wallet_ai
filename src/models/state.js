@@ -41,8 +41,11 @@ window.Aurora = window.Aurora || {};
   // stesso trattamento gia' dichiarato per XAUUSD.
   const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT'];
   // Simboli su cui gira orb_breakout (apertura NY, primi 30 minuti) — scope deciso esplicitamente
-  // con l'utente: ES=F insieme a SPY/QQQ fin da subito, non solo il future puro.
-  const ORB_SYMBOLS = ['ES', 'SPY', 'QQQ'];
+  // con l'utente: ES=F insieme a SPY/QQQ fin da subito, non solo il future puro. EURUSD aggiunto
+  // come test esplicito su un mercato strutturalmente diverso: forex tratta 24/5, la barra 09:30 NY
+  // non e' una vera apertura di sessione (nessun gap, nessuna asta) come per azioni/future indice —
+  // limite concettuale dichiarato in README.md, non solo tecnico.
+  const ORB_SYMBOLS = ['ES', 'SPY', 'QQQ', 'EURUSD'];
 
   // Elenco decorativo mostrato nel pannello "AI Decision Desk" — la lista dei 7 agenti reali
   // (che producono evidenze vere per il modello principale) vive in Aurora.Agents.

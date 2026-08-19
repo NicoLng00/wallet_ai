@@ -18,7 +18,7 @@ import { readAccountState, writeAccountState, readResearchState, writeResearchSt
 // vera proprieta' di questo job, validated/il resto di historyCache restano di dailySetup.js.
 // Deve restare identico a Aurora.Models.ORB_SYMBOLS (src/models/state.js) — duplicato qui solo
 // perche' questo file gira in Node puro, fuori dal motore browser iniettato nella pagina driver.
-const ORB_SYMBOLS = ['ES', 'SPY', 'QQQ'];
+const ORB_SYMBOLS = ['ES', 'SPY', 'QQQ', 'EURUSD'];
 
 async function main() {
   const account = readAccountState();
