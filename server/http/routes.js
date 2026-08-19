@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { generateDecision } from '../supervisor.js';
 import { AGENT_TOOL_NAMES } from '../mcp/server.js';
-import { fetchYahooDailyHistory, yahooTickerFor } from '../marketData.js';
+import { fetchYahooDailyHistory, fetchYahooIntradayHistory, yahooTickerFor } from '../marketData.js';
 
 export const router = Router();
 
@@ -23,6 +23,24 @@ router.get('/history', async (req, res) => {
     res.json(history);
   } catch (error) {
     res.status(502).json({ error: error.message || 'Errore nel recupero dello storico.' });
+  }
+});
+
+// Storico intraday (30 minuti), unico consumatore la strategia orb_breakout — vedi marketData.js
+// per il perche' del limite di lookback (~60 giorni, molto piu' corto dello storico giornaliero).
+router.get('/intraday', async (req, res) => {
+  try {
+    const symbol = String(req.query.symbol || '').toUpperCase();
+    if (!yahooTickerFor(symbol)) {
+      res.status(404).json({ error: `Nessuna fonte storica configurata per "${symbol}".` });
+      return;
+    }
+    const interval = ['30m', '15m', '5m'].includes(req.query.interval) ? req.query.interval : '30m';
+    const range = ['5d', '30d', '60d'].includes(req.query.range) ? req.query.range : '60d';
+    const history = await fetchYahooIntradayHistory(symbol, interval, range);
+    res.json(history);
+  } catch (error) {
+    res.status(502).json({ error: error.message || 'Errore nel recupero dello storico intraday.' });
   }
 });
 

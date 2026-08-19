@@ -19,7 +19,18 @@ window.Aurora = window.Aurora || {};
     // diverse da azioni/crypto/materie prime — piu' probabilita' che un edge reale esista da
     // qualche parte, stesso principio "piu' fonti indipendenti" gia' usato per le strategie.
     TLT: { name: 'iShares 20+ Year Treasury Bond ETF', exchange: 'NASDAQ · USD', price: 81.66, change: 0, color: '#5ec9a8', tv: 'NASDAQ:TLT' },
-    EURUSD: { name: 'Euro / Dollaro USA', exchange: 'FOREX · USD', price: 1.1609, change: 0, color: '#8fa8d6', tv: 'OANDA:EURUSD' }
+    EURUSD: { name: 'Euro / Dollaro USA', exchange: 'FOREX · USD', price: 1.1609, change: 0, color: '#8fa8d6', tv: 'OANDA:EURUSD' },
+    // Aggiunto solo per la strategia orb_breakout (apertura NY, primi 30 minuti) — vedi
+    // engine/strategies.js. Nessuna mappatura Finnhub: i future indice non sono coperti dal piano
+    // gratuito usato da questo progetto (a differenza del proxy forex usato per XAUUSD/WTI), quindi
+    // A DIFFERENZA di ogni altro simbolo, ES non ha NESSUNA correzione live: il prezzo demo qui
+    // sotto e' un seed iniziale (verificato contro lo storico Yahoo reale al momento
+    // dell'integrazione), poi segue solo il proprio random walk locale (tickDemoMarket) — destinato
+    // a divergere nel tempo dal prezzo reale. Limite dichiarato, non nascosto: computeStopTarget
+    // (engine/autopilot.js) per questo si rifiuta di usare lo stop/target specifico ORB quando il
+    // minimo del range risulta sopra il prezzo demo corrente (range e prezzo troppo divergenti),
+    // ripiegando sul fallback ATR/percentuale generico invece di aprire con uno stop invalido.
+    ES: { name: 'E-mini S&P 500 Future', exchange: 'CME · USD', price: 7730, change: 0, color: '#5c9ee0', tv: 'CME_MINI:ES1!' }
   };
 
   const FINNHUB_SYMBOLS = { AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', XAUUSD: 'OANDA:XAU_USD', WTI: 'OANDA:WTICO_USD', TLT: 'TLT', EURUSD: 'OANDA:EUR_USD' };
@@ -29,6 +40,9 @@ window.Aurora = window.Aurora || {};
   // questo progetto) — senza backend raggiungibile EURUSD resta onestamente senza fonte storica,
   // stesso trattamento gia' dichiarato per XAUUSD.
   const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT'];
+  // Simboli su cui gira orb_breakout (apertura NY, primi 30 minuti) — scope deciso esplicitamente
+  // con l'utente: ES=F insieme a SPY/QQQ fin da subito, non solo il future puro.
+  const ORB_SYMBOLS = ['ES', 'SPY', 'QQQ'];
 
   // Elenco decorativo mostrato nel pannello "AI Decision Desk" — la lista dei 7 agenti reali
   // (che producono evidenze vere per il modello principale) vive in Aurora.Agents.
@@ -53,14 +67,14 @@ window.Aurora = window.Aurora || {};
     autopilotTargetPercent: 2.8,
     // Più posizioni concorrenti = più trade/giorno quando più simboli qualificano lo stesso ciclo,
     // senza abbassare la soglia di qualità di un singolo segnale (vedi engine/autopilot.js). Pari
-    // al numero di simboli in watchlist (11, da quando TLT ed EURUSD si sono aggiunti per
-    // diversificare le classi di attivo): con meno slot che simboli, posizioni che non toccano ne'
+    // al numero di simboli in watchlist (12, da quando ES si e' aggiunto per la strategia
+    // orb_breakout): con meno slot che simboli, posizioni che non toccano ne'
     // SL ne' TP restano aperte e bloccano sia nuovi ingressi sia il fallback "sonda forzata" su
     // ALTRI simboli — verificato con un test giorno-per-giorno su 60 giorni di storico reale (con
     // solo 3 slot: 19/60 giornate a zero trade nonostante il fallback attivo; con uno slot per
     // simbolo + maxHoldingDays: 0/60). Il rischio reale non cresce con gli slot: ogni ordine resta
     // comunque capato da maximumOrder/maximumPositionPercent e dai fattori di taglia per livello.
-    maxConcurrentPositions: 11,
+    maxConcurrentPositions: 12,
     // Taglia ridotta per i candidati "esplorativi" (edge promettente ma non ancora confermato
     // fuori campione per carenza di dati, non perché smentito) — vedi engine/rules.js.
     exploratorySizeFactor: 0.4,
@@ -214,7 +228,7 @@ window.Aurora = window.Aurora || {};
 
   Aurora.Models = {
     // Configurazione statica
-    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, GEMINI_MODEL,
+    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, ORB_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, GEMINI_MODEL,
 
     // Stato UI
     activeSymbol: 'AAPL',

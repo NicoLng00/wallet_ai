@@ -10,7 +10,7 @@
 // (futures oro) e' un proxy dichiarato, non lo spot esatto, ma e' storico reale e correlato.
 const SYMBOL_TO_YAHOO = {
   AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', TLT: 'TLT',
-  WTI: 'CL=F', XAUUSD: 'GC=F', EURUSD: 'EURUSD=X'
+  WTI: 'CL=F', XAUUSD: 'GC=F', EURUSD: 'EURUSD=X', ES: 'ES=F'
 };
 
 export function yahooTickerFor(symbol) {
@@ -56,4 +56,37 @@ export async function fetchYahooDailyHistory(symbol, range = '2y') {
     candles.push({ date, open, high, low, close, volume: Number.isFinite(volume) ? volume : null });
   });
   return { symbol, yahooTicker: ticker, closes, dates, candles, source: 'yahoo-finance-chart-api' };
+}
+
+// Storico intraday (30 minuti), unico consumatore: la strategia orb_breakout (src/engine/strategies.js),
+// che deve identificare la barra delle 09:30 locale New York (l'"opening range") per ES=F/SPY/QQQ.
+// A differenza di fetchYahooDailyHistory, qui il timestamp completo (non solo la data) e' essenziale:
+// e' l'unico modo per sapere QUALE barra del giorno sia le 09:30. Yahoo espone barre a 30 minuti solo
+// per un lookback breve (~60 giorni) — limite dichiarato, non aggirabile gratuitamente: la validazione
+// walk-forward di ORB partira' quindi con molto meno storico delle strategie giornaliere.
+export async function fetchYahooIntradayHistory(symbol, interval = '30m', range = '60d') {
+  const ticker = yahooTickerFor(symbol);
+  if (!ticker) throw new Error(`Nessun ticker Yahoo mappato per il simbolo "${symbol}".`);
+  const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=${encodeURIComponent(range)}&interval=${encodeURIComponent(interval)}`;
+  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
+  if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
+  const payload = await res.json();
+  const result = payload?.chart?.result?.[0];
+  if (!result || payload?.chart?.error) {
+    throw new Error(payload?.chart?.error?.description || `Nessun dato intraday Yahoo Finance per ${ticker}.`);
+  }
+  const timestamps = result.timestamp || [];
+  const quote = result.indicators?.quote?.[0] || {};
+  const timeZone = result.meta?.exchangeTimezoneName || 'America/New_York';
+  const candles = [];
+  timestamps.forEach((ts, i) => {
+    const close = quote.close?.[i];
+    const open = quote.open?.[i];
+    const high = quote.high?.[i];
+    const low = quote.low?.[i];
+    const volume = quote.volume?.[i];
+    if (![close, open, high, low].every((v) => Number.isFinite(v))) return;
+    candles.push({ time: ts * 1000, open, high, low, close, volume: Number.isFinite(volume) ? volume : null });
+  });
+  return { symbol, yahooTicker: ticker, candles, timeZone, source: 'yahoo-finance-chart-api-intraday' };
 }

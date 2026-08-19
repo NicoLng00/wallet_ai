@@ -114,6 +114,38 @@ Aurora.Engine.computeDonchianHigh = function computeDonchianHigh(closes, period 
   return Math.max(...windowSlice);
 };
 
+// Raggruppa candele intraday (con .time in epoch ms) per giorno di calendario LOCALE al fuso
+// indicato — necessario per ORB: "oggi" e "le 09:30" sono concetti di calendario di New York, non
+// di UTC (il fuso del runner CI e' quasi sempre diverso). Ritorna un array ordinato di gruppi
+// { dateKey, bars }, dateKey formato YYYY-MM-DD nel fuso richiesto.
+Aurora.Engine.groupCandlesByLocalDay = function groupCandlesByLocalDay(candles, timeZone = 'America/New_York') {
+  if (!candles || !candles.length) return [];
+  const dayFormatter = new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' });
+  const groups = new Map();
+  candles.forEach((candle) => {
+    if (!Number.isFinite(candle.time)) return;
+    const dateKey = dayFormatter.format(new Date(candle.time));
+    if (!groups.has(dateKey)) groups.set(dateKey, []);
+    groups.get(dateKey).push(candle);
+  });
+  return [...groups.entries()].sort(([a], [b]) => (a < b ? -1 : 1)).map(([dateKey, bars]) => ({ dateKey, bars }));
+};
+
+// Trova, tra le barre di un giorno, quella dell'apertura NY (09:30 locale) — l'opening range vero
+// e proprio per ORB. Tollerante a piccoli buchi dati: accetta anche 09:31-09:34 (prima barra
+// disponibile entro i primi 5 minuti), mai una barra successiva spacciata per l'apertura.
+Aurora.Engine.findOpeningRangeBar = function findOpeningRangeBar(dayBars, timeZone = 'America/New_York') {
+  if (!dayBars || !dayBars.length) return null;
+  const timeFormatter = new Intl.DateTimeFormat('en-GB', { timeZone, hour: '2-digit', minute: '2-digit', hour12: false });
+  for (let i = 0; i < dayBars.length; i += 1) {
+    const [hh, mm] = timeFormatter.format(new Date(dayBars[i].time)).split(':').map(Number);
+    const minutesSinceOpen = (hh * 60 + mm) - (9 * 60 + 30);
+    if (minutesSinceOpen >= 0 && minutesSinceOpen <= 4) return { bar: dayBars[i], index: i };
+    if (minutesSinceOpen > 4) return null; // nessuna barra vicina alle 09:30: giorno inutilizzabile
+  }
+  return null;
+};
+
 // Pattern a candela: engulfing rialzista/ribassista sulle ultime due candele OHLC.
 Aurora.Engine.detectEngulfing = function detectEngulfing(candles) {
   if (!candles || candles.length < 2) return 'none';

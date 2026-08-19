@@ -69,6 +69,67 @@ Aurora.Engine.STRATEGIES = {
       return price > donchianHigh && todayVolume > avgVolume ? 'bullish' : 'neutral';
     }
   },
+  orb_breakout: {
+    id: 'orb_breakout',
+    label: 'ORB — Opening Range Breakout (30min, apertura NY)',
+    requiresOhlc: true,
+    requiresIntraday: true,
+    // Eccezione dichiarata alla convenzione "un'ipotesi pulita per strategia" seguita dal resto di
+    // questo file: qui l'utente ha chiesto esplicitamente di combinare quattro condizioni in
+    // un'unica regola, non separarle. (1) rottura del massimo dei primi 30 minuti (barra 09:30 NY),
+    // (2) conferma: la barra SUCCESSIVA deve chiudere ancora sopra il livello (non solo un'ombra),
+    // (3) ritest: solo dopo la conferma, una barra deve tornare a toccare il livello (minimo <=
+    // livello) senza chiudervi sotto — evita di inseguire il primo strappo, aspetta il pullback,
+    // (4) filtro sull'ampiezza: il range di oggi deve stare tra 0.5x e 2x la media delle ampiezze
+    // dei giorni precedenti — scarta aperture anomale (troppo piatte = rumore, troppo ampie = mossa
+    // gia' esaurita). Se la prima rottura non si conferma subito, il setup e' scartato per la
+    // giornata (nessun tentativo di inseguire rotture successive — disciplina intenzionale, non un
+    // limite tecnico). Target/stop NON sono l'ATR generico delle altre strategie: sono un multiplo
+    // dell'ampiezza dell'opening range stesso, gestiti a parte in engine/autopilot.js
+    // (computeStopTarget) perche' qui il contratto signal() resta 'bullish'|'neutral'.
+    signal({ candles }) {
+      if (!candles || candles.length < 20) return 'neutral';
+      const timeZone = 'America/New_York';
+      const days = Aurora.Engine.groupCandlesByLocalDay(candles, timeZone);
+      if (days.length < 6) return 'neutral';
+      const today = days[days.length - 1];
+      const opening = Aurora.Engine.findOpeningRangeBar(today.bars, timeZone);
+      if (!opening) return 'neutral';
+      const rangeHigh = opening.bar.high;
+      const rangeLow = opening.bar.low;
+      const rangeWidth = rangeHigh - rangeLow;
+      if (!(rangeWidth > 0)) return 'neutral';
+
+      const priorDays = days.slice(Math.max(0, days.length - 11), days.length - 1);
+      const priorWidths = priorDays
+        .map((day) => Aurora.Engine.findOpeningRangeBar(day.bars, timeZone))
+        .filter(Boolean)
+        .map((o) => o.bar.high - o.bar.low)
+        .filter((w) => w > 0);
+      if (priorWidths.length < 4) return 'neutral';
+      const avgWidth = priorWidths.reduce((sum, w) => sum + w, 0) / priorWidths.length;
+      if (rangeWidth < avgWidth * 0.5 || rangeWidth > avgWidth * 2) return 'neutral';
+
+      const afterOpening = today.bars.slice(opening.index + 1);
+      let breakoutSeen = false;
+      let confirmed = false;
+      for (let i = 0; i < afterOpening.length; i += 1) {
+        const bar = afterOpening[i];
+        if (!breakoutSeen) {
+          if (bar.close > rangeHigh) breakoutSeen = true;
+          continue;
+        }
+        if (!confirmed) {
+          if (bar.close > rangeHigh) confirmed = true;
+          else return 'neutral'; // rottura non confermata subito: scartata per oggi
+          continue;
+        }
+        if (bar.low <= rangeHigh && bar.close >= rangeHigh) return 'bullish'; // ritest riuscito
+        if (bar.close < rangeHigh) return 'neutral'; // richiuso sotto prima del ritest: invalidato
+      }
+      return 'neutral'; // sequenza non ancora completata su questa barra
+    }
+  },
   engulfing: {
     id: 'engulfing',
     label: 'Pattern Engulfing (candela)',

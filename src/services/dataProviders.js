@@ -209,18 +209,31 @@ Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range =
   return { closes: data.closes, candles: data.candles, dates: data.dates };
 };
 
+// Storico intraday (30 minuti, ~60 giorni), unico consumatore la strategia orb_breakout — vedi
+// server/marketData.js per il motivo del lookback breve (limite gratuito Yahoo). candles porta
+// .time (epoch ms), non .date: necessario per identificare la barra delle 09:30 NY.
+Aurora.Services.fetchYahooIntraday = async function fetchYahooIntraday(symbol, interval = '30m', range = '60d') {
+  const res = await fetchWithTimeout(`${Aurora.Config.backendUrl}/api/intraday?symbol=${encodeURIComponent(symbol)}&interval=${encodeURIComponent(interval)}&range=${encodeURIComponent(range)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || `http-${res.status}`);
+  }
+  const data = await res.json();
+  return { candles: data.candles || [] };
+};
+
 Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(symbol) {
   const Models = Aurora.Models;
   if (Models.COINGECKO_IDS[symbol]) return Aurora.Services.fetchCoinGeckoHistory(symbol);
-  if (symbol === 'WTI' || symbol === 'XAUUSD' || symbol === 'EURUSD' || Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) {
+  if (symbol === 'WTI' || symbol === 'XAUUSD' || symbol === 'EURUSD' || symbol === 'ES' || Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) {
     try {
       return await Aurora.Services.fetchYahooDaily(symbol);
     } catch (backendError) {
       // Ripiego su Alpha Vantage (richiede la chiave dell'utente) solo se il backend locale non
-      // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend. XAUUSD
-      // ed EURUSD non hanno un ripiego (forex/futures, mai integrati con l'endpoint Alpha Vantage
+      // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend. XAUUSD,
+      // EURUSD ed ES non hanno un ripiego (forex/futures, mai integrati con l'endpoint Alpha Vantage
       // dedicato): senza backend restano onestamente senza fonte storica, come sempre stato.
-      if (symbol === 'XAUUSD' || symbol === 'EURUSD') throw backendError;
+      if (symbol === 'XAUUSD' || symbol === 'EURUSD' || symbol === 'ES') throw backendError;
       if (symbol === 'WTI') return Aurora.Services.fetchAlphaVantageWTI();
       return Aurora.Services.fetchAlphaVantageDaily(symbol);
     }
@@ -278,6 +291,21 @@ async function buildCandidateJobs(symbol) {
     // sia engulfing possono girare sullo stesso historyEntry condiviso, nessun fetch aggiuntivo.
     const daily = await Aurora.Services.fetchHistoricalCloses(symbol);
     pushGroup('1D', daily.closes, daily.dates, daily.candles, ['volume_breakout', 'engulfing']);
+  }
+
+  // orb_breakout: unica strategia del progetto che serve dati intraday con timestamp completo
+  // (identifica la barra 09:30 NY) invece di chiusure giornaliere — vedi engine/strategies.js.
+  // Scope deciso esplicitamente: ES=F, SPY, QQQ. Fonte opzionale come l'orario/OHLC crypto sopra:
+  // se Yahoo non risponde, il simbolo resta comunque coperto dai candidati giornalieri.
+  if (Models.ORB_SYMBOLS?.includes(symbol)) {
+    try {
+      const intraday = await Aurora.Services.fetchYahooIntraday(symbol, '30m', '60d');
+      if (intraday.candles.length) {
+        const orbCloses = intraday.candles.map((c) => c.close);
+        const historyEntry = { closes: orbCloses, dates: null, candles: intraday.candles };
+        jobs.push({ candidateKey: 'orb_breakout@30m', strategyId: 'orb_breakout', timeframe: '30m', closes: orbCloses, candles: intraday.candles, historyEntry });
+      }
+    } catch { /* intraday opzionale: ORB salta, il resto della copertura resta intatto */ }
   }
   return jobs;
 }

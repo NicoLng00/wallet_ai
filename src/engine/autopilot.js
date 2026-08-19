@@ -20,6 +20,25 @@ function autopilotOrigin(signal) {
 function computeStopTarget(symbol, price, signal) {
   const SIMULATION = Aurora.Models.SIMULATION;
   const history = signal.timeframe ? Aurora.Models.historyCache[symbol]?.[signal.timeframe] : null;
+  // orb_breakout non usa l'ATR generico: l'utente ha chiesto esplicitamente stop/target ancorati
+  // all'ampiezza dell'opening range del giorno stesso (stop = minimo del range, invalida l'intera
+  // premessa se sfondato; target = 2x l'ampiezza del range, convenzione ORB standard) invece di una
+  // misura di volatilita' generica. Ricalcola l'opening range di oggi dallo stesso historyCache
+  // gia' usato dal segnale (engine/strategies.js) invece di propagare dati extra nel contratto
+  // signal(), che per ogni altra strategia resta un semplice 'bullish'/'neutral'.
+  if (signal.candidateKey?.startsWith('orb_breakout') && history?.candles?.length) {
+    const days = Aurora.Engine.groupCandlesByLocalDay(history.candles, 'America/New_York');
+    const today = days[days.length - 1];
+    const opening = today ? Aurora.Engine.findOpeningRangeBar(today.bars, 'America/New_York') : null;
+    if (opening) {
+      const rangeHigh = opening.bar.high;
+      const rangeLow = opening.bar.low;
+      const rangeWidth = rangeHigh - rangeLow;
+      if (rangeWidth > 0 && rangeLow > 0 && rangeLow < price) {
+        return { stopLoss: rangeLow, takeProfit: price + rangeWidth * 2 };
+      }
+    }
+  }
   const atr = history?.candles ? Aurora.Engine.computeATR(history.candles, 14) : null;
   if (atr && atr > 0 && atr < price) {
     return { stopLoss: price - atr, takeProfit: price + atr * 1.75 };
