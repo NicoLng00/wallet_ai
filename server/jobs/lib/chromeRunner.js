@@ -2,10 +2,17 @@
 // stessa tecnica usata per tutto lo sviluppo di questa sessione (verificare il motore reale via
 // un vero browser, mai un mock del DOM). Qui la riusiamo per far girare il motore client-side
 // (src/) senza un browser interattivo, dentro un job schedulato (GitHub Actions).
-import { spawnSync } from 'node:child_process';
+//
+// Usa Puppeteer (solo controllo, mai download di un browser: executablePath punta sempre a un
+// Chrome gia' installato) invece di spawnSync + `--dump-dom` + `--virtual-time-budget`: quella
+// combinazione, verificata in sessione, si e' bloccata in modo ripetibile su GitHub Actions fino
+// al timeout esterno di spawnSync (ETIMEDOUT), identico prima e dopo aver aggiunto timeout a ogni
+// singola fetch — segno che il blocco non era di rete ma nel meccanismo stesso di completamento di
+// --dump-dom sotto --headless=new su quel runner. page.waitForFunction ha un'attesa reale ed
+// esplicita sul segnale di completamento della pagina, non un'ipotesi sul comportamento di Chrome.
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
+import puppeteer from 'puppeteer-core';
 import { REPO_ROOT } from './driverTemplate.js';
 
 function resolveChromePath() {
@@ -15,68 +22,39 @@ function resolveChromePath() {
   return 'google-chrome'; // Linux (runner GitHub Actions, installato via browser-actions/setup-chrome)
 }
 
-// Il percorso del repo su questa macchina contiene spazi ("OneDrive - alpitronic GmbH") — encodeURI
-// li trasforma in %20 (come fa .NET [System.Uri], gia' verificato affidabile in sessione per l'URL
-// del DOCUMENTO principale; il problema separato degli spazi negli <script src=...> e' risolto
-// scrivendo il driver nella root del repo e usando percorsi relativi, vedi driverTemplate.js).
 function toFileUrl(absolutePath) {
   const normalized = absolutePath.replace(/\\/g, '/');
   const withLeadingSlash = normalized.startsWith('/') ? normalized : `/${normalized}`;
   return `file://${encodeURI(withLeadingSlash)}`;
 }
 
-function decodeHtmlEntities(text) {
-  // --dump-dom serializza il DOM come sorgente HTML: < > & dentro il testo del <pre> tornano
-  // come entità. Il resto del JSON (virgolette, parentesi) non viene toccato dalla serializzazione.
-  return text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
-}
-
 // Esegue driverHtmlPath in Chrome headless e restituisce il JSON.parse del contenuto testuale di
-// <pre id="output">…</pre> che la pagina deve scrivere prima di terminare.
-export function runDriverAndGetOutput(driverHtmlPath, { virtualTimeBudgetMs = 25000, timeoutMs = 90000 } = {}) {
-  const chrome = resolveChromePath();
-  const url = toFileUrl(driverHtmlPath);
-  // Profilo isolato ed effimero per ogni invocazione: SENZA --user-data-dir Chrome punta al
-  // profilo di default, che su questa macchina e' gia' occupato dal Chrome interattivo
-  // dell'utente — una nuova istanza headless collide con quella in esecuzione (singleton per
-  // profilo) e puo' uscire subito senza completare il caricamento. Bug reale trovato debuggando:
-  // stessa pagina, stesso comando, falliva solo quando lanciata senza un profilo dedicato.
-  const profileDir = fs.mkdtempSync(path.join(os.tmpdir(), 'aurora-chrome-profile-'));
-  const args = [
-    '--headless=new', '--disable-gpu', '--no-sandbox',
-    `--user-data-dir=${profileDir}`,
-    // Il documento driver vive in una directory temporanea diversa da quella dei <script src=...>
-    // (che puntano al repo): senza questo flag Chrome blocca il caricamento cross-directory da file://.
-    '--allow-file-access-from-files',
-    `--virtual-time-budget=${virtualTimeBudgetMs}`,
-    '--dump-dom', url
-  ];
-  let result;
+// <pre id="output">…</pre> che la pagina scrive al termine del proprio lavoro.
+export async function runDriverAndGetOutput(driverHtmlPath, { timeoutMs = 120000 } = {}) {
+  const profileDir = fs.mkdtempSync(path.join(REPO_ROOT, '.aurora-chrome-profile-'));
+  const browser = await puppeteer.launch({
+    executablePath: resolveChromePath(),
+    headless: true,
+    userDataDir: profileDir,
+    // Profilo isolato ed effimero: senza, Chrome punta al profilo di default, gia' occupato da un
+    // Chrome interattivo eventualmente in esecuzione sulla stessa macchina (bug reale trovato in
+    // sessione: collideva col Chrome dell'utente in locale).
+    args: ['--no-sandbox', '--disable-gpu', '--allow-file-access-from-files']
+  });
   try {
-    result = spawnSync(chrome, args, { timeout: timeoutMs, maxBuffer: 128 * 1024 * 1024, encoding: 'utf8' });
-  } finally {
-    fs.rmSync(profileDir, { recursive: true, force: true });
-  }
-  if (result.error) throw result.error;
-  if (result.status !== 0) throw new Error(`Chrome headless uscito con codice ${result.status}: ${(result.stderr || '').slice(0, 2000)}`);
-  const html = result.stdout || '';
-  // Cerca l'ULTIMA occorrenza, non la prima: la stringa 'id="output"' compare gia' prima, come
-  // testo sorgente dentro il tag <script> stesso (il tail script scrive letteralmente quella
-  // stringa per creare l'elemento) — la prima occorrenza trovata con indexOf() era quella, non
-  // il <pre> reale renderizzato dopo </script>. Bug reale trovato debuggando: l'estrazione
-  // prendeva sempre il contenuto (vuoto) tra quella stringa sorgente e il successivo '</pre>'
-  // nel testo dello script, non il payload JSON vero.
-  const marker = 'id="output"';
-  const markerIndex = html.lastIndexOf(marker);
-  if (markerIndex === -1) throw new Error('Nessun elemento #output trovato nella pagina driver: la pagina non ha completato correttamente.');
-  const tagEnd = html.indexOf('>', markerIndex);
-  const contentEnd = html.indexOf('</pre>', tagEnd);
-  if (tagEnd === -1 || contentEnd === -1) throw new Error('Formato inatteso della pagina driver: impossibile isolare il contenuto di #output.');
-  const raw = decodeHtmlEntities(html.slice(tagEnd + 1, contentEnd));
-  try {
+    const page = await browser.newPage();
+    page.setDefaultTimeout(timeoutMs);
+    page.setDefaultNavigationTimeout(timeoutMs);
+    page.on('pageerror', (err) => { throw new Error(`Errore JS non gestito nella pagina driver: ${err.message}`); });
+
+    const url = toFileUrl(driverHtmlPath);
+    await page.goto(url, { waitUntil: 'load' });
+    await page.waitForFunction(() => !!document.getElementById('output'), { timeout: timeoutMs, polling: 250 });
+    const raw = await page.$eval('#output', (el) => el.textContent);
     return JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`Output della pagina driver non è JSON valido: ${error.message}. Prime 500 char: ${raw.slice(0, 500)}`);
+  } finally {
+    await browser.close();
+    fs.rmSync(profileDir, { recursive: true, force: true });
   }
 }
 

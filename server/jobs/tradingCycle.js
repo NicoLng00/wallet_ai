@@ -61,9 +61,7 @@ async function main() {
   const driverPath = writeTempDriverFile(html, 'trading-cycle.html');
   let output;
   try {
-    // Budget alzato dopo che il job "setup giornaliero" ha mostrato ETIMEDOUT su GitHub Actions:
-    // la latenza reale verso i provider di mercato da un runner CI e' piu' alta che in locale.
-    output = runDriverAndGetOutput(driverPath, { virtualTimeBudgetMs: 90000, timeoutMs: 240000 });
+    output = await runDriverAndGetOutput(driverPath, { timeoutMs: 120000 });
   } finally {
     removeDriverFile(driverPath);
   }

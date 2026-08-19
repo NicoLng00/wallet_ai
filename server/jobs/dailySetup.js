@@ -83,10 +83,10 @@ async function main() {
     const driverPath = writeTempDriverFile(html, 'daily-setup.html');
     let output;
     try {
-      // 9 simboli, ciascuno con piu' fetch reali (storico + eventuale orario/OHLC) — su un runner
-      // GitHub Actions la latenza reale verso Yahoo Finance/CoinGecko e' risultata piu' alta che
-      // in locale: il primo run reale e' fallito con ETIMEDOUT a 180s. Budget alzato con margine.
-      output = runDriverAndGetOutput(driverPath, { virtualTimeBudgetMs: 240000, timeoutMs: 480000 });
+      // 9 simboli, ciascuno con piu' fetch reali (storico + eventuale orario/OHLC), ognuna con un
+      // proprio timeout di 15s (dataProviders.js) — 5 minuti restano ampio margine anche nel
+      // caso peggiore in cui ogni singola fetch vada in timeout.
+      output = await runDriverAndGetOutput(driverPath, { timeoutMs: 300000 });
     } finally {
       removeDriverFile(driverPath);
     }

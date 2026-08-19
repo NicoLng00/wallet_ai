@@ -11,5 +11,9 @@ dist/
 # ignorati anche qui per sicurezza se uno restasse per errore)
 _*.html
 
+# Profilo Chrome effimero dei job (server/jobs/lib/chromeRunner.js) — rimosso a ogni run,
+# ignorato anche qui per sicurezza se un run interrotto ne lasciasse uno indietro.
+.aurora-chrome-profile-*/
+
 # Configurazione locale dello strumento (permessi Claude Code), non del progetto
 .claude/settings.local.json
