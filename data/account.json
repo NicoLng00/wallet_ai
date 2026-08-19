@@ -1,25 +1,93 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 9.925,
+    "cash": 9.105639243,
     "highWater": 10,
     "positions": {
-      "NVDA": {
-        "quantity": 0.00034131246018021303,
-        "averagePrice": 219.74,
-        "stopLoss": 213.15857256208147,
-        "takeProfit": 231.25749801635743,
+      "WTI": {
+        "quantity": 0.005494505494505495,
+        "averagePrice": 72.8,
+        "stopLoss": 69.26785681588309,
+        "takeProfit": 78.98125057220459,
         "strategyKey": "bollinger_reversion@1D",
         "decisionSnapshot": {
           "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 219.74,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
+          "entryPrice": 72.8,
+          "confidence": 75,
+          "score": 82,
+          "tier": "exploratory",
           "volatilityRegime": "normal",
-          "aiEngine": "gemini"
+          "aiEngine": "rule"
         },
-        "openedAt": "2026-08-19T08:55:53.032Z"
+        "openedAt": "2026-08-19T12:12:06.542Z"
+      },
+      "BTCUSD": {
+        "quantity": 0.0000011169717654359291,
+        "averagePrice": 64460,
+        "stopLoss": 63428.64,
+        "takeProfit": 66264.88,
+        "strategyKey": "macd_cross@1D",
+        "decisionSnapshot": {
+          "strategyKey": "macd_cross@1D",
+          "entryPrice": 64460,
+          "confidence": 38,
+          "score": 55,
+          "tier": "probe",
+          "volatilityRegime": null,
+          "aiEngine": "rule"
+        },
+        "openedAt": "2026-08-19T12:12:06.543Z"
+      },
+      "XAUUSD": {
+        "quantity": 0.00005470831419384475,
+        "averagePrice": 2612.4,
+        "stopLoss": 2533.292804827009,
+        "takeProfit": 2750.8375915527345,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 2612.4,
+          "confidence": 38,
+          "score": 55,
+          "tier": "probe",
+          "volatilityRegime": "normal",
+          "aiEngine": "rule"
+        },
+        "openedAt": "2026-08-19T12:12:06.543Z"
+      },
+      "ETHUSD": {
+        "quantity": 0.00007326408152007037,
+        "averagePrice": 1921.4900000000002,
+        "stopLoss": 1890.74616,
+        "takeProfit": 1975.2917200000002,
+        "strategyKey": "sma_rsi@1D",
+        "decisionSnapshot": {
+          "strategyKey": "sma_rsi@1D",
+          "entryPrice": 1921.49,
+          "confidence": 33,
+          "score": 52,
+          "tier": "probe",
+          "volatilityRegime": null,
+          "aiEngine": "rule"
+        },
+        "openedAt": "2026-08-19T12:12:06.543Z"
+      },
+      "EURUSD": {
+        "quantity": 0.11944573778964598,
+        "averagePrice": 1.1609,
+        "stopLoss": 1.1563087563923427,
+        "takeProfit": 1.1689346763134003,
+        "strategyKey": "sma_rsi@1D",
+        "decisionSnapshot": {
+          "strategyKey": "sma_rsi@1D",
+          "entryPrice": 1.1609,
+          "confidence": 31,
+          "score": 38,
+          "tier": "probe",
+          "volatilityRegime": "normal",
+          "aiEngine": "rule"
+        },
+        "openedAt": "2026-08-19T12:12:06.543Z"
       }
     },
     "market": {
@@ -31,14 +99,118 @@
       "TSLA": 336.87,
       "XAUUSD": 2612.4,
       "ETHUSD": 1921.49,
-      "WTI": 72.8
+      "WTI": 72.8,
+      "TLT": 81.66,
+      "EURUSD": 1.1609
     },
     "model": {
-      "calibration": 50,
-      "outcomes": 0,
+      "calibration": 35,
+      "outcomes": 1,
       "wins": 0
     },
     "trades": [
+      {
+        "id": "SIM-1526543",
+        "symbol": "EURUSD",
+        "side": "buy",
+        "quantity": 0.11944573778964598,
+        "price": 1.1609,
+        "notional": 0.13866455700000002,
+        "realizedPnl": 0,
+        "origin": "Autopilot sonda",
+        "at": "2026-08-19T12:12:06.543Z",
+        "stopLoss": 1.1563087563923427,
+        "takeProfit": 1.1689346763134003,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-1526543",
+        "symbol": "ETHUSD",
+        "side": "buy",
+        "quantity": 0.00007326408152007037,
+        "price": 1921.49,
+        "notional": 0.14077620000000002,
+        "realizedPnl": 0,
+        "origin": "Autopilot sonda",
+        "at": "2026-08-19T12:12:06.543Z",
+        "stopLoss": 1890.74616,
+        "takeProfit": 1975.2917200000002,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-1526543",
+        "symbol": "XAUUSD",
+        "side": "buy",
+        "quantity": 0.00005470831419384475,
+        "price": 2612.4,
+        "notional": 0.14292000000000002,
+        "realizedPnl": 0,
+        "origin": "Autopilot sonda",
+        "at": "2026-08-19T12:12:06.543Z",
+        "stopLoss": 2533.292804827009,
+        "takeProfit": 2750.8375915527345,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-1526543",
+        "symbol": "BTCUSD",
+        "side": "buy",
+        "quantity": 0.0000011169717654359291,
+        "price": 64460,
+        "notional": 0.072,
+        "realizedPnl": 0,
+        "origin": "Autopilot sonda",
+        "at": "2026-08-19T12:12:06.543Z",
+        "stopLoss": 63428.64,
+        "takeProfit": 66264.88,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "macd_cross@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-1526542",
+        "symbol": "WTI",
+        "side": "buy",
+        "quantity": 0.005494505494505495,
+        "price": 72.8,
+        "notional": 0.4,
+        "realizedPnl": 0,
+        "origin": "Autopilot esplorativo",
+        "at": "2026-08-19T12:12:06.542Z",
+        "stopLoss": 69.26785681588309,
+        "takeProfit": 78.98125057220459,
+        "accountMode": "demo",
+        "tier": "exploratory",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-1526529",
+        "symbol": "NVDA",
+        "side": "sell",
+        "quantity": 0.00034131246018021303,
+        "price": 219.74,
+        "notional": 0.07500000000000001,
+        "realizedPnl": 0,
+        "origin": "Autopilot",
+        "at": "2026-08-19T12:12:06.529Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-9753032",
         "symbol": "NVDA",
@@ -60,12 +232,47 @@
   },
   "activity": [
     {
-      "title": "Autopilot: monitora",
-      "detail": "9 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
+      "title": "Autopilot: chiude NVDA per segnale difensivo · apre WTI (score 82, esplorativo) · apre BTCUSD (score 55, sonda) · apre XAUUSD (score 55, sonda) · apre ETHUSD (score 52, sonda) · apre EURUSD (score 38, sonda)",
+      "detail": "chiude NVDA per segnale difensivo; apre WTI (score 82, esplorativo); apre BTCUSD (score 55, sonda); apre XAUUSD (score 55, sonda); apre ETHUSD (score 52, sonda); apre EURUSD (score 38, sonda)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot sonda: acquisto demo 0.119446 EURUSD",
+      "detail": "0,14 € · fill simulato 1,16 € · SIM-1526543",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot sonda: acquisto demo 0.000073 ETHUSD",
+      "detail": "0,14 € · fill simulato 1921 € · SIM-1526543",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot sonda: acquisto demo 0.000055 XAUUSD",
+      "detail": "0,14 € · fill simulato 2612 € · SIM-1526543",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot sonda: acquisto demo 0.000001 BTCUSD",
+      "detail": "0,07 € · fill simulato 64.460 € · SIM-1526543",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot esplorativo: acquisto demo 0.005495 WTI",
+      "detail": "0,40 € · fill simulato 72,80 € · SIM-1526542",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot: vendita demo 0.000341 NVDA",
+      "detail": "0,08 € · fill simulato 219,74 € · SIM-1526529",
+      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-19T11:54:11.491Z"
+  "updatedAt": "2026-08-19T12:12:06.884Z"
 }

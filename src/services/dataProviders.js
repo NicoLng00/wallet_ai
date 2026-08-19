@@ -131,7 +131,8 @@ Aurora.Services.fetchAlphaVantageDaily = async function fetchAlphaVantageDaily(s
     open: Number(series[date]['1. open']),
     high: Number(series[date]['2. high']),
     low: Number(series[date]['3. low']),
-    close: Number(series[date]['4. close'])
+    close: Number(series[date]['4. close']),
+    volume: Number(series[date]['5. volume'])
   }));
   return { closes, candles, dates };
 };
@@ -156,7 +157,18 @@ Aurora.Services.fetchCoinGeckoHistory = async function fetchCoinGeckoHistory(sym
   if (!res.ok) throw new Error(`http-${res.status}`);
   const data = await res.json();
   const points = data.prices || [];
-  return { closes: points.map(([, price]) => price), candles: null, dates: points.map(([ts]) => new Date(ts).toISOString().slice(0, 10)) };
+  const volumePoints = data.total_volumes || [];
+  // total_volumes arriva gia' gratis nella stessa risposta di prices, allineato per indice (stessi
+  // timestamp) — prima veniva scartato del tutto. Nessuna vera candela OHLC qui (CoinGecko
+  // market_chart da' solo un prezzo per punto, non open/high/low), ma volume_breakout in
+  // engine/strategies.js ha bisogno solo di closes + volume, non di OHLC completo.
+  const hasAlignedVolume = volumePoints.length === points.length;
+  const candles = points.map(([ts, price], i) => ({
+    date: new Date(ts).toISOString().slice(0, 10),
+    close: price,
+    volume: hasAlignedVolume ? volumePoints[i][1] : null
+  }));
+  return { closes: points.map(([, price]) => price), candles, dates: points.map(([ts]) => new Date(ts).toISOString().slice(0, 10)) };
 };
 
 // Storico a granularita' oraria (CoinGecko la assegna automaticamente per range <=90 giorni,
@@ -200,14 +212,15 @@ Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range =
 Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(symbol) {
   const Models = Aurora.Models;
   if (Models.COINGECKO_IDS[symbol]) return Aurora.Services.fetchCoinGeckoHistory(symbol);
-  if (symbol === 'WTI' || symbol === 'XAUUSD' || Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) {
+  if (symbol === 'WTI' || symbol === 'XAUUSD' || symbol === 'EURUSD' || Models.ALPHA_VANTAGE_STOCK_SYMBOLS.includes(symbol)) {
     try {
       return await Aurora.Services.fetchYahooDaily(symbol);
     } catch (backendError) {
       // Ripiego su Alpha Vantage (richiede la chiave dell'utente) solo se il backend locale non
       // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend. XAUUSD
-      // non ha un ripiego: senza backend resta onestamente senza fonte storica, come sempre stato.
-      if (symbol === 'XAUUSD') throw backendError;
+      // ed EURUSD non hanno un ripiego (forex/futures, mai integrati con l'endpoint Alpha Vantage
+      // dedicato): senza backend restano onestamente senza fonte storica, come sempre stato.
+      if (symbol === 'XAUUSD' || symbol === 'EURUSD') throw backendError;
       if (symbol === 'WTI') return Aurora.Services.fetchAlphaVantageWTI();
       return Aurora.Services.fetchAlphaVantageDaily(symbol);
     }
@@ -223,33 +236,48 @@ async function buildCandidateJobs(symbol) {
   const jobs = [];
   const CLOSES_STRATEGIES = ['sma_rsi', 'macd_cross', 'bollinger_reversion', 'donchian_breakout'];
 
+  // Tutte le strategie sullo STESSO (simbolo, timeframe) condividono ora un unico historyEntry
+  // completo (closes + dates + candles, quando disponibili) invece di ricostruirne uno ciascuna:
+  // prima, essendo scritte tutte sulla stessa chiave in researchData/historyCache, l'ultima
+  // processata sovrascriveva le altre — bug reale gia' trovato una volta per le date mancanti
+  // sull'engulfing, la stessa fragilita' si sarebbe ripresentata aggiungendo il volume.
+  // ohlcStrategies e' esplicito per chiamata: CoinGecko market_chart da' solo close+volume per
+  // barra (mai open/high/low), quindi li' puo' girare volume_breakout ma MAI engulfing (che
+  // confronta open/close — su candele senza open resterebbe sempre neutro, un candidato morto).
+  function pushGroup(timeframe, closes, dates, candles, ohlcStrategies = []) {
+    const historyEntry = { closes, dates, candles: candles || null };
+    CLOSES_STRATEGIES.forEach((strategyId) => {
+      jobs.push({ candidateKey: `${strategyId}@${timeframe}`, strategyId, timeframe, closes, candles: candles || null, historyEntry });
+    });
+    if (candles?.length) {
+      ohlcStrategies.forEach((strategyId) => {
+        jobs.push({ candidateKey: `${strategyId}@${timeframe}`, strategyId, timeframe, closes, candles, historyEntry });
+      });
+    }
+  }
+
   if (Models.COINGECKO_IDS[symbol]) {
     const daily = await Aurora.Services.fetchCoinGeckoHistory(symbol);
-    CLOSES_STRATEGIES.forEach((strategyId) => {
-      jobs.push({ candidateKey: `${strategyId}@1D`, strategyId, timeframe: '1D', closes: daily.closes, candles: null, historyEntry: { closes: daily.closes, dates: daily.dates } });
-    });
+    pushGroup('1D', daily.closes, daily.dates, daily.candles, ['volume_breakout']);
     try {
       const hourly = await Aurora.Services.fetchCoinGeckoHourly(symbol);
+      const hourlyEntry = { closes: hourly.closes, dates: hourly.dates, candles: null };
       ['sma_rsi', 'macd_cross'].forEach((strategyId) => {
-        jobs.push({ candidateKey: `${strategyId}@1h`, strategyId, timeframe: '1h', closes: hourly.closes, candles: null, historyEntry: { closes: hourly.closes, dates: hourly.dates } });
+        jobs.push({ candidateKey: `${strategyId}@1h`, strategyId, timeframe: '1h', closes: hourly.closes, candles: null, historyEntry: hourlyEntry });
       });
     } catch { /* orario opzionale */ }
     try {
+      // OHLC vera (open/high/low, non solo close+volume come in market_chart) — serve solo al
+      // pattern Engulfing, che guarda open/close, non al volume_breakout (gia' coperto sopra).
       const ohlc = await Aurora.Services.fetchCoinGeckoOHLC(symbol);
       const ohlcCloses = ohlc.map((candle) => candle.close);
-      jobs.push({ candidateKey: 'engulfing@1D', strategyId: 'engulfing', timeframe: 'ohlc_1D', closes: ohlcCloses, candles: ohlc, historyEntry: { closes: ohlcCloses, candles: ohlc } });
+      jobs.push({ candidateKey: 'engulfing@ohlc_1D', strategyId: 'engulfing', timeframe: 'ohlc_1D', closes: ohlcCloses, candles: ohlc, historyEntry: { closes: ohlcCloses, candles: ohlc } });
     } catch { /* pattern a candela opzionale */ }
   } else {
+    // Yahoo/Alpha Vantage danno OHLC reale + volume nella stessa risposta: qui sia volume_breakout
+    // sia engulfing possono girare sullo stesso historyEntry condiviso, nessun fetch aggiuntivo.
     const daily = await Aurora.Services.fetchHistoricalCloses(symbol);
-    CLOSES_STRATEGIES.forEach((strategyId) => {
-      jobs.push({ candidateKey: `${strategyId}@1D`, strategyId, timeframe: '1D', closes: daily.closes, candles: null, historyEntry: { closes: daily.closes, dates: daily.dates } });
-    });
-    if (daily.candles) {
-      // Stesso timeframe '1D' delle strategie su chiusura sopra: l'historyEntry deve portarsi
-      // dietro anche "dates", altrimenti questo job (processato per ultimo) sovrascrive la cache
-      // perdendo le date gia' scritte — bug reale trovato testando il cammino multi-mercato.
-      jobs.push({ candidateKey: 'engulfing@1D', strategyId: 'engulfing', timeframe: '1D', closes: daily.closes, candles: daily.candles, historyEntry: { closes: daily.closes, candles: daily.candles, dates: daily.dates } });
-    }
+    pushGroup('1D', daily.closes, daily.dates, daily.candles, ['volume_breakout', 'engulfing']);
   }
   return jobs;
 }

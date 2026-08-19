@@ -9,8 +9,8 @@
 // XAUUSD non ha mai avuto una fonte storica gratuita in questo progetto (vedi README) — GC=F
 // (futures oro) e' un proxy dichiarato, non lo spot esatto, ma e' storico reale e correlato.
 const SYMBOL_TO_YAHOO = {
-  AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA',
-  WTI: 'CL=F', XAUUSD: 'GC=F'
+  AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', TLT: 'TLT',
+  WTI: 'CL=F', XAUUSD: 'GC=F', EURUSD: 'EURUSD=X'
 };
 
 export function yahooTickerFor(symbol) {
@@ -44,13 +44,16 @@ export async function fetchYahooDailyHistory(symbol, range = '2y') {
     const open = quote.open?.[i];
     const high = quote.high?.[i];
     const low = quote.low?.[i];
+    const volume = quote.volume?.[i];
     // Yahoo puo' avere buchi (giorni festivi/dati mancanti): scartiamo solo la barra incompleta,
-    // non l'intera serie.
+    // non l'intera serie. Il volume manca piu' spesso di OHLC (es. sui future del proxy oro/WTI) —
+    // non e' un motivo per scartare la barra, solo per lasciare quel volume assente (Number.isFinite
+    // lo fa risultare "non disponibile" ovunque venga letto, mai un valore inventato).
     if (![close, open, high, low].every((v) => Number.isFinite(v))) return;
     const date = new Date(ts * 1000).toISOString().slice(0, 10);
     dates.push(date);
     closes.push(close);
-    candles.push({ date, open, high, low, close });
+    candles.push({ date, open, high, low, close, volume: Number.isFinite(volume) ? volume : null });
   });
   return { symbol, yahooTicker: ticker, closes, dates, candles, source: 'yahoo-finance-chart-api' };
 }

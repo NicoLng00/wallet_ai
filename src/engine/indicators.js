@@ -93,6 +93,17 @@ Aurora.Engine.computeVolatilityRegime = function computeVolatilityRegime(candles
   return { ratio, regime, recentATR, baselineATR };
 };
 
+// Volume medio sulle `period` candele PRIMA di quella corrente (esclusa, stessa logica di
+// computeDonchianHigh — mai guardare il volume di oggi contro se stesso). Il volume arriva gia'
+// gratis in ogni fonte dati usata dal progetto (Yahoo Finance, CoinGecko) — semplicemente non
+// veniva mai estratto ne' usato, un dato reale scartato senza motivo.
+Aurora.Engine.computeAverageVolume = function computeAverageVolume(candles, period = 20) {
+  if (!candles || candles.length < period + 1) return null;
+  const windowSlice = candles.slice(-(period + 1), -1).map((c) => c.volume);
+  if (windowSlice.some((v) => !Number.isFinite(v))) return null;
+  return windowSlice.reduce((sum, v) => sum + v, 0) / period;
+};
+
 // Massimo Donchian: il piu' alto valore di chiusura nelle `period` barre PRIMA di quella corrente
 // (esclusa, per evitare look-ahead). Base per la strategia breakout — logica di continuazione del
 // trend, diversa sia da SMA/RSI (trend ma filtrato da RSI in banda media, puo' perdere breakout

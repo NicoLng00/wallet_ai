@@ -7,7 +7,7 @@
 import { buildDriverHtml } from './lib/driverTemplate.js';
 import { runDriverAndGetOutput, writeTempDriverFile, removeDriverFile } from './lib/chromeRunner.js';
 import { startBackend, stopBackend } from './lib/backendProcess.js';
-import { readResearchState, writeResearchState } from './lib/stateStore.js';
+import { readResearchState, writeResearchState, appendValidationHistory, computeValidationStreak } from './lib/stateStore.js';
 
 // Il backtest walk-forward ha bisogno dello storico intero (fino a 2 anni) per validare, ma la
 // SOLA generazione del segnale in tempo reale (evaluateCandidates in engine/rules.js) ha bisogno
@@ -100,13 +100,37 @@ async function main() {
       removeDriverFile(driverPath);
     }
 
+    // Storia longitudinale delle validazioni: senza questo, ogni run sovrascrive la precedente e
+    // non c'e' modo di sapere se un edge e' persistente o e' rumore statistico di un solo giorno.
+    // Un record al giorno (idempotente: piu' run nello stesso giorno solare sostituiscono, non
+    // duplicano), poi lo streak di giorni consecutivi validati va nel candidato stesso in
+    // research.json, cosi' la UI esistente (Research) lo mostra senza dover leggere un file in piu'.
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const todaySnapshot = {};
+    Object.entries(output.researchData.validated).forEach(([symbol, entry]) => {
+      todaySnapshot[symbol] = Object.entries(entry.candidates)
+        .filter(([, candidate]) => candidate.validated)
+        .map(([key]) => key);
+    });
+    const validationDays = appendValidationHistory(todayStr, todaySnapshot);
+    const validatedWithStreak = {};
+    Object.entries(output.researchData.validated).forEach(([symbol, entry]) => {
+      const candidates = {};
+      Object.entries(entry.candidates).forEach(([key, candidate]) => {
+        candidates[key] = candidate.validated
+          ? { ...candidate, validatedStreakDays: computeValidationStreak(validationDays, symbol, key) }
+          : candidate;
+      });
+      validatedWithStreak[symbol] = { candidates };
+    });
+
     // Ri-legge trackRecord/tradeEpisodes/lessons appena prima di scrivere: questo job non li
     // genera mai (il backtest walk-forward non chiude trade reali), quindi non deve rischiare di
     // sovrascrivere con una copia più vecchia ciò che tradingCycle.js ha aggiornato nel frattempo.
     const freshResearch = readResearchState();
     writeResearchState({
       researchData: {
-        validated: output.researchData.validated,
+        validated: validatedWithStreak,
         trackRecord: freshResearch.researchData.trackRecord,
         tradeEpisodes: freshResearch.researchData.tradeEpisodes,
         lessons: freshResearch.researchData.lessons

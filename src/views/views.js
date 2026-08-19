@@ -281,6 +281,11 @@ Aurora.Views.renderResearchResults = function renderResearchResults() {
       const verdict = result.validated ? 'Validato' : result.exploratory ? 'Esplorativo' : 'Nessun edge';
       const verdictClass = result.validated ? 'ok' : result.exploratory ? 'running' : 'blocked';
       const lessons = Aurora.Engine.getActiveLessons(candidateKey);
+      // Giorni consecutivi validato (server/jobs/dailySetup.js appendValidationHistory): distingue
+      // un edge persistente da uno che e' un artefatto statistico di un solo giorno — senza questo
+      // ogni run del setup giornaliero mostra solo lo snapshot di oggi, senza storia.
+      const streakDays = result.validatedStreakDays;
+      const streakLabel = result.validated && streakDays > 1 ? ` <small>· ${streakDays}g consecutivi</small>` : '';
       return `
       <div class="research-row">
         <span>${symbol}</span>
@@ -290,7 +295,7 @@ Aurora.Views.renderResearchResults = function renderResearchResults() {
         <span>${baselineLabel}</span>
         <span class="${avgReturnValue >= 0 ? 'positive' : 'negative'}">${avgReturnValue >= 0 ? '+' : ''}${avgReturnValue.toFixed(2)}%</span>
         <span>${liveLabel}</span>
-        <span><span class="status-pill ${verdictClass}">${verdict}</span>${lessons.length ? ` <small>${lessons.length} lezione/i</small>` : ''}</span>
+        <span><span class="status-pill ${verdictClass}">${verdict}</span>${streakLabel}${lessons.length ? ` <small>${lessons.length} lezione/i</small>` : ''}</span>
       </div>`;
     }).join('')
     + renderLessonsPanel(rows);

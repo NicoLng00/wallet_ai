@@ -9,6 +9,11 @@ window.Aurora = window.Aurora || {};
 Aurora.Engine = Aurora.Engine || {};
 
 const LIVE_TRACK_RECORD_MIN_TRADES = 10;
+// Finestra mobile, non l'intero storico live: prima survivesLiveTrackRecord valutava TUTTI i
+// trade mai eseguiti per quel candidato — una strategia con 40 trade buoni in passato poteva
+// mascherare 10 trade recenti gia' in peggioramento, perche' la media cumulativa restava ancora
+// sopra soglia. Con una finestra recente, un cambio di regime si vede in settimane, non in mesi.
+const LIVE_TRACK_RECORD_WINDOW = 15;
 
 function scoreCandidate(candidate, tier) {
   const ref = candidate.outOfSample.count ? candidate.outOfSample : candidate.inSample;
@@ -39,7 +44,8 @@ function scoreCandidate(candidate, tier) {
 function survivesLiveTrackRecord(symbol, candidateKey, candidate) {
   const track = Aurora.Models.researchData.trackRecord?.[symbol]?.[candidateKey];
   if (!track || track.trades.length < LIVE_TRACK_RECORD_MIN_TRADES) return true;
-  const liveSummary = Aurora.Engine.summarizeTrades(track.trades);
+  const recentTrades = track.trades.slice(-LIVE_TRACK_RECORD_WINDOW);
+  const liveSummary = Aurora.Engine.summarizeTrades(recentTrades);
   return Aurora.Engine.passesEdgeGate(liveSummary, candidate.outOfSampleBaseline);
 }
 

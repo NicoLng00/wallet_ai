@@ -51,6 +51,24 @@ Aurora.Engine.STRATEGIES = {
       return price > donchianHigh ? 'bullish' : 'neutral';
     }
   },
+  volume_breakout: {
+    id: 'volume_breakout',
+    label: 'Breakout confermato da volume (20)',
+    requiresOhlc: true,
+    // Ipotesi diversa dal semplice donchian_breakout: un nuovo massimo su volume DEBOLE e' spesso
+    // un falso breakout (pochi partecipanti reali) — qui serve anche un volume sopra la propria
+    // media recente, a conferma che il movimento e' sostenuto. Dato (volume) gia' incluso gratis
+    // in ogni fonte usata dal progetto, prima semplicemente scartato senza motivo.
+    signal({ closes, candles }) {
+      const donchianHigh = Aurora.Engine.computeDonchianHigh(closes, 20);
+      const avgVolume = Aurora.Engine.computeAverageVolume(candles, 20);
+      if (donchianHigh === null || avgVolume === null) return 'neutral';
+      const price = closes[closes.length - 1];
+      const todayVolume = candles[candles.length - 1]?.volume;
+      if (!Number.isFinite(todayVolume)) return 'neutral';
+      return price > donchianHigh && todayVolume > avgVolume ? 'bullish' : 'neutral';
+    }
+  },
   engulfing: {
     id: 'engulfing',
     label: 'Pattern Engulfing (candela)',

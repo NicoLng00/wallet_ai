@@ -13,12 +13,22 @@ window.Aurora = window.Aurora || {};
     TSLA: { name: 'Tesla Inc.', exchange: 'NASDAQ · USD', price: 331.8, change: -0.92, color: '#e56363', tv: 'NASDAQ:TSLA' },
     XAUUSD: { name: 'Oro (Spot)', exchange: 'FOREX · USD', price: 2612.4, change: 0.32, color: '#e0b45c', tv: 'OANDA:XAUUSD' },
     ETHUSD: { name: 'Ethereum', exchange: 'CRYPTO · USD', price: 3184.5, change: 1.05, color: '#7b8bdb', tv: 'BITSTAMP:ETHUSD' },
-    WTI: { name: 'WTI Crude Oil', exchange: 'NYMEX · USD', price: 72.8, change: -0.54, color: '#c97b4a', tv: 'TVC:USOIL' }
+    WTI: { name: 'WTI Crude Oil', exchange: 'NYMEX · USD', price: 72.8, change: -0.54, color: '#c97b4a', tv: 'TVC:USOIL' },
+    // Aggiunti per diversificare le classi di attivo, non solo altri titoli tech: prima il
+    // watchlist non copriva ne' obbligazioni ne' forex, due classi con dinamiche strutturalmente
+    // diverse da azioni/crypto/materie prime — piu' probabilita' che un edge reale esista da
+    // qualche parte, stesso principio "piu' fonti indipendenti" gia' usato per le strategie.
+    TLT: { name: 'iShares 20+ Year Treasury Bond ETF', exchange: 'NASDAQ · USD', price: 81.66, change: 0, color: '#5ec9a8', tv: 'NASDAQ:TLT' },
+    EURUSD: { name: 'Euro / Dollaro USA', exchange: 'FOREX · USD', price: 1.1609, change: 0, color: '#8fa8d6', tv: 'OANDA:EURUSD' }
   };
 
-  const FINNHUB_SYMBOLS = { AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', XAUUSD: 'OANDA:XAU_USD', WTI: 'OANDA:WTICO_USD' };
+  const FINNHUB_SYMBOLS = { AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', XAUUSD: 'OANDA:XAU_USD', WTI: 'OANDA:WTICO_USD', TLT: 'TLT', EURUSD: 'OANDA:EUR_USD' };
   const COINGECKO_IDS = { BTCUSD: 'bitcoin', ETHUSD: 'ethereum' };
-  const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA'];
+  // TLT e' un ETF come gli altri: Alpha Vantage TIME_SERIES_DAILY funziona identico. EURUSD resta
+  // fuori: e' forex, Alpha Vantage lo servirebbe solo dall'endpoint FX_DAILY (mai integrato in
+  // questo progetto) — senza backend raggiungibile EURUSD resta onestamente senza fonte storica,
+  // stesso trattamento gia' dichiarato per XAUUSD.
+  const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT'];
 
   // Elenco decorativo mostrato nel pannello "AI Decision Desk" — la lista dei 7 agenti reali
   // (che producono evidenze vere per il modello principale) vive in Aurora.Agents.
@@ -43,14 +53,14 @@ window.Aurora = window.Aurora || {};
     autopilotTargetPercent: 2.8,
     // Più posizioni concorrenti = più trade/giorno quando più simboli qualificano lo stesso ciclo,
     // senza abbassare la soglia di qualità di un singolo segnale (vedi engine/autopilot.js). Pari
-    // al numero di simboli in watchlist (9, da quando XAUUSD ha una fonte storica reale via
-    // backend/Yahoo): con meno slot che simboli, posizioni che non toccano ne' SL ne' TP restano
-    // aperte e bloccano sia nuovi ingressi sia il fallback "sonda forzata" su ALTRI simboli —
-    // verificato con un test giorno-per-giorno su 60 giorni di storico reale (con solo 3 slot:
-    // 19/60 giornate a zero trade nonostante il fallback attivo; con uno slot per simbolo +
-    // maxHoldingDays: 0/60). Il rischio reale non cresce con gli slot: ogni ordine resta comunque
-    // capato da maximumOrder/maximumPositionPercent e dai fattori di taglia per livello.
-    maxConcurrentPositions: 9,
+    // al numero di simboli in watchlist (11, da quando TLT ed EURUSD si sono aggiunti per
+    // diversificare le classi di attivo): con meno slot che simboli, posizioni che non toccano ne'
+    // SL ne' TP restano aperte e bloccano sia nuovi ingressi sia il fallback "sonda forzata" su
+    // ALTRI simboli — verificato con un test giorno-per-giorno su 60 giorni di storico reale (con
+    // solo 3 slot: 19/60 giornate a zero trade nonostante il fallback attivo; con uno slot per
+    // simbolo + maxHoldingDays: 0/60). Il rischio reale non cresce con gli slot: ogni ordine resta
+    // comunque capato da maximumOrder/maximumPositionPercent e dai fattori di taglia per livello.
+    maxConcurrentPositions: 11,
     // Taglia ridotta per i candidati "esplorativi" (edge promettente ma non ancora confermato
     // fuori campione per carenza di dati, non perché smentito) — vedi engine/rules.js.
     exploratorySizeFactor: 0.4,

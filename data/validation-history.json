@@ -1,0 +1,47 @@
+{
+  "days": [
+    {
+      "date": "2026-08-18",
+      "validated": {
+        "SPY": [
+          "bollinger_reversion@1D"
+        ],
+        "NVDA": [
+          "bollinger_reversion@1D"
+        ],
+        "TSLA": [],
+        "AAPL": [],
+        "BTCUSD": [],
+        "ETHUSD": [],
+        "QQQ": [],
+        "WTI": [],
+        "XAUUSD": []
+      }
+    },
+    {
+      "date": "2026-08-19",
+      "validated": {
+        "BTCUSD": [],
+        "ETHUSD": [],
+        "SPY": [
+          "bollinger_reversion@1D"
+        ],
+        "QQQ": [],
+        "AAPL": [],
+        "NVDA": [
+          "bollinger_reversion@1D"
+        ],
+        "TSLA": [
+          "bollinger_reversion@1D",
+          "engulfing@1D"
+        ],
+        "WTI": [],
+        "XAUUSD": [],
+        "TLT": [
+          "bollinger_reversion@1D"
+        ],
+        "EURUSD": []
+      }
+    }
+  ]
+}

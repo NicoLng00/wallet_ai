@@ -82,9 +82,15 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
     const share = occurrences / recent.length;
     if (occurrences < MIN_PATTERN_OCCURRENCES || share < MIN_PATTERN_SHARE) return;
 
-    const supportingTradeIds = recent.filter((e) => e.outcomeTag === outcomeTag).map((e) => e.tradeId);
-    const avgReturn = recent.filter((e) => e.outcomeTag === outcomeTag).reduce((sum, e) => sum + e.returnPct, 0) / occurrences;
-    const statement = describeFailureMode(outcomeTag, strategyKey, occurrences, recent.length, avgReturn);
+    const matching = recent.filter((e) => e.outcomeTag === outcomeTag);
+    const supportingTradeIds = matching.map((e) => e.tradeId);
+    const avgReturn = matching.reduce((sum, e) => sum + e.returnPct, 0) / occurrences;
+    // Regime di volatilita' dominante tra i trade di supporto: prima le lezioni non dicevano MAI
+    // "quando" un pattern si manifesta, solo "che" si manifesta — un dato (snapshot.volatilityRegime)
+    // gia' registrato a ogni trade ma mai usato per il Learning Loop. Soglia al 70%: sotto, il
+    // pattern non e' abbastanza legato al regime da poterlo affermare onestamente, resta "mixed".
+    const dominantRegime = computeDominantRegime(matching);
+    const statement = describeFailureMode(outcomeTag, strategyKey, occurrences, recent.length, avgReturn, dominantRegime);
 
     // Aggiorna in place la lezione gia' attiva invece di versionare a ogni singolo trade: la
     // finestra recente scorre di continuo, quindi occurrences/avgReturn cambiano leggermente
@@ -99,6 +105,7 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
       existingActive.avgReturn = Number(avgReturn.toFixed(3));
       existingActive.statement = statement;
       existingActive.supportingTradeIds = supportingTradeIds;
+      existingActive.dominantRegime = dominantRegime;
       existingActive.updatedAt = new Date().toISOString();
       return;
     }
@@ -110,6 +117,7 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
       strategyKey,
       failureMode: outcomeTag,
       statement,
+      dominantRegime,
       sampleSize: recent.length,
       occurrences,
       avgReturn: Number(avgReturn.toFixed(3)),
@@ -121,7 +129,28 @@ Aurora.Engine.extractLessons = function extractLessons(strategyKey) {
   });
 };
 
-function describeFailureMode(outcomeTag, strategyKey, occurrences, sampleSize, avgReturn) {
+// Regime dominante tra i trade di supporto di una lezione — 'mixed' se nessun regime raggiunge
+// il 70% (sotto quella soglia il pattern non e' abbastanza legato al regime da poterlo affermare
+// onestamente). Il dato (snapshot.volatilityRegime) e' gia' registrato a ogni episodio ma prima
+// non veniva mai riletto per il Learning Loop — le lezioni non dicevano mai "quando", solo "che".
+const REGIME_DOMINANCE_THRESHOLD = 0.7;
+function computeDominantRegime(episodes) {
+  const counts = {};
+  let known = 0;
+  episodes.forEach((e) => {
+    const regime = e.snapshot?.volatilityRegime;
+    if (!regime) return;
+    counts[regime] = (counts[regime] || 0) + 1;
+    known += 1;
+  });
+  if (!known) return null;
+  const [topRegime, topCount] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+  return topCount / known >= REGIME_DOMINANCE_THRESHOLD ? topRegime : 'mixed';
+}
+
+const REGIME_LABELS_IT = { normal: 'volatilità normale', elevated: 'volatilità elevata', extreme: 'volatilità estrema' };
+
+function describeFailureMode(outcomeTag, strategyKey, occurrences, sampleSize, avgReturn, dominantRegime) {
   const pct = Math.round((occurrences / sampleSize) * 100);
   const labels = {
     stop_loss_hit_normal_regime: `Negli ultimi ${sampleSize} trade di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in stop loss in condizioni di volatilità normale — il segnale d'ingresso, non la volatilità, sembra la causa.`,
@@ -131,7 +160,14 @@ function describeFailureMode(outcomeTag, strategyKey, occurrences, sampleSize, a
     probe_loss: `Negli ultimi ${sampleSize} trade sonda di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — coerente con l'assenza di un edge misurato: la sonda sta facendo il suo lavoro, non è un errore da correggere.`,
     forced_loss: `Negli ultimi ${sampleSize} trade forzati (fallback giornaliero) di ${strategyKey}, ${occurrences} (${pct}%) hanno chiuso in perdita (rendimento medio ${avgReturn.toFixed(2)}%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.`
   };
-  return labels[outcomeTag] || `Pattern ricorrente (${outcomeTag}) su ${strategyKey}: ${occurrences}/${sampleSize} trade recenti.`;
+  const base = labels[outcomeTag] || `Pattern ricorrente (${outcomeTag}) su ${strategyKey}: ${occurrences}/${sampleSize} trade recenti.`;
+  // Il regime e' gia' nel nome per i due tag stop_loss_hit_*_regime — aggiungerlo di nuovo sarebbe
+  // ridondante. Per tutti gli altri, se dominante (non 'mixed'), e' informazione nuova reale.
+  const alreadyMentionsRegime = outcomeTag.startsWith('stop_loss_hit_');
+  if (!alreadyMentionsRegime && dominantRegime && dominantRegime !== 'mixed') {
+    return `${base} Concentrato in ${REGIME_LABELS_IT[dominantRegime] || dominantRegime}.`;
+  }
+  return base;
 }
 
 // --- Evidence Retrieval nelle decisioni future -----------------------------------------------
