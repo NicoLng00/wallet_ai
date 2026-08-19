@@ -2,7 +2,7 @@
   "demoAccount": {
     "version": 2,
     "cash": 9.105639243,
-    "highWater": 10,
+    "highWater": 10.00144432130671,
     "positions": {
       "WTI": {
         "quantity": 0.005494505494505495,
@@ -95,10 +95,10 @@
       "NVDA": 219.74,
       "SPY": 767.45,
       "QQQ": 717.51,
-      "BTCUSD": 64460,
+      "BTCUSD": 64842,
       "TSLA": 336.87,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1921.49,
+      "ETHUSD": 1935.38,
       "WTI": 72.8,
       "TLT": 81.66,
       "EURUSD": 1.1609
@@ -232,47 +232,12 @@
   },
   "activity": [
     {
-      "title": "Autopilot: chiude NVDA per segnale difensivo · apre WTI (score 82, esplorativo) · apre BTCUSD (score 55, sonda) · apre XAUUSD (score 55, sonda) · apre ETHUSD (score 52, sonda) · apre EURUSD (score 38, sonda)",
-      "detail": "chiude NVDA per segnale difensivo; apre WTI (score 82, esplorativo); apre BTCUSD (score 55, sonda); apre XAUUSD (score 55, sonda); apre ETHUSD (score 52, sonda); apre EURUSD (score 38, sonda)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot sonda: acquisto demo 0.119446 EURUSD",
-      "detail": "0,14 € · fill simulato 1,16 € · SIM-1526543",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot sonda: acquisto demo 0.000073 ETHUSD",
-      "detail": "0,14 € · fill simulato 1921 € · SIM-1526543",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot sonda: acquisto demo 0.000055 XAUUSD",
-      "detail": "0,14 € · fill simulato 2612 € · SIM-1526543",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot sonda: acquisto demo 0.000001 BTCUSD",
-      "detail": "0,07 € · fill simulato 64.460 € · SIM-1526543",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot esplorativo: acquisto demo 0.005495 WTI",
-      "detail": "0,40 € · fill simulato 72,80 € · SIM-1526542",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot: vendita demo 0.000341 NVDA",
-      "detail": "0,08 € · fill simulato 219,74 € · SIM-1526529",
-      "tag": "PAPER"
+      "title": "Autopilot: monitora",
+      "detail": "11 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-19T12:12:06.884Z"
+  "updatedAt": "2026-08-19T12:54:14.316Z"
 }
