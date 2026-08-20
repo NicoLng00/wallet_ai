@@ -48,6 +48,10 @@ function survivesLiveTrackRecord(symbol, candidateKey, candidate) {
   const liveSummary = Aurora.Engine.summarizeTrades(recentTrades);
   return Aurora.Engine.passesEdgeGate(liveSummary, candidate.outOfSampleBaseline);
 }
+// Esposta su Aurora.Engine solo per renderla testabile in isolamento (server/tests/regression.test.js,
+// guardia contro la regressione della finestra mobile) — nessun punto di chiamata interno a questo
+// file cambiato, resta comunque richiamata come funzione locale qui sotto.
+Aurora.Engine.survivesLiveTrackRecord = survivesLiveTrackRecord;
 
 // Decadimento graduale della taglia PRIMA del taglio netto a LIVE_TRACK_RECORD_MIN_TRADES:
 // survivesLiveTrackRecord sopra e' binaria (dentro/fuori) e scatta solo a campione pieno (10

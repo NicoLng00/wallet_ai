@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { generateDecision } from '../supervisor.js';
 import { AGENT_TOOL_NAMES } from '../mcp/server.js';
 import { fetchYahooDailyHistory, fetchYahooIntradayHistory, yahooTickerFor } from '../marketData.js';
+import { resolveDailyRange, resolveIntradayInterval, resolveIntradayRange } from '../lib/rangeResolvers.js';
 
 export const router = Router();
 
@@ -18,7 +19,7 @@ router.get('/history', async (req, res) => {
       res.status(404).json({ error: `Nessuna fonte storica configurata per "${symbol}".` });
       return;
     }
-    const range = ['1y', '2y', '5y', '10y'].includes(req.query.range) ? req.query.range : '2y';
+    const range = resolveDailyRange(req.query.range);
     const history = await fetchYahooDailyHistory(symbol, range);
     res.json(history);
   } catch (error) {
@@ -35,8 +36,8 @@ router.get('/intraday', async (req, res) => {
       res.status(404).json({ error: `Nessuna fonte storica configurata per "${symbol}".` });
       return;
     }
-    const interval = ['30m', '15m', '5m'].includes(req.query.interval) ? req.query.interval : '30m';
-    const range = ['5d', '30d', '60d'].includes(req.query.range) ? req.query.range : '60d';
+    const interval = resolveIntradayInterval(req.query.interval);
+    const range = resolveIntradayRange(req.query.range);
     const history = await fetchYahooIntradayHistory(symbol, interval, range);
     res.json(history);
   } catch (error) {
