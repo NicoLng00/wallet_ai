@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.31717190610415,
+    "cash": 49.65796418460415,
     "highWater": 50.00872485365284,
     "positions": {
       "WTI": {
@@ -301,6 +301,11 @@
   },
   "activity": [
     {
+      "title": "Correzione contabile: attivazione leva 1:2",
+      "detail": "Le posizioni aperte prima dell'attivazione della leva erano state finanziate al 100% in cash (nessuna leva esisteva ancora). Corretto il margine impegnato per ciascuna (WTI, XAUUSD, EURUSD) cosi' che l'equity resti quella vera invece di scendere per un artefatto contabile — nessun trade eseguito, +0.3408€ di cash rilasciato dal margine in eccesso.",
+      "tag": "SISTEMA"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -368,5 +373,5 @@
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-20T15:40:06.833Z"
+  "updatedAt": "2026-08-20T15:58:09.105Z"
 }
