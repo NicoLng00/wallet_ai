@@ -148,6 +148,33 @@ Aurora.Engine.ruleSignalFor = function ruleSignalFor(symbol) {
   return neutral;
 };
 
+// Confluenza multi-timeframe/multi-strategia: oggi il modello principale riceve solo la SINGOLA
+// candidata migliore per simbolo (ruleSignalFor sopra) — scarta silenziosamente cosa dicono le
+// ALTRE strategie/timeframe già validati sullo stesso simbolo in questo momento. "1D dice X, ma
+// 30m ORB dice Y" è contesto reale già calcolabile con i dati esistenti, semplicemente mai
+// inoltrato. Esclude deliberatamente `excludeKey` (la candidata già scelta da ruleSignalFor, per
+// non ripetere la stessa informazione due volte) e le candidate senza edge misurato (tier "nessuno"
+// — la confluenza ha senso solo tra letture che hanno già superato almeno il gate esplorativo).
+Aurora.Engine.computeConfluence = function computeConfluence(symbol, excludeKey) {
+  const researchData = Aurora.Models.researchData;
+  const candidates = researchData.validated[symbol]?.candidates || {};
+  const historyCache = Aurora.Models.historyCache;
+  return Object.entries(candidates)
+    .filter(([key, candidate]) => key !== excludeKey && (candidate.validated || candidate.exploratory))
+    .map(([key, candidate]) => {
+      const strategy = Aurora.Engine.STRATEGIES[candidate.strategyId];
+      const history = historyCache[symbol]?.[candidate.timeframe];
+      if (!strategy || !history?.closes?.length) return null;
+      const closesSoFar = [...history.closes, Aurora.Engine.getDemoPrice(symbol)];
+      const signal = strategy.signal({ closes: closesSoFar, candles: history.candles || null });
+      return {
+        candidateKey: key, timeframe: candidate.timeframe, strategyLabel: strategy.label,
+        tier: candidate.validated ? 'validated' : 'exploratory', bullish: signal === 'bullish'
+      };
+    })
+    .filter(Boolean);
+};
+
 // --- Livello "forzato" (fallback giornaliero) --------------------------------------------------
 // Diverso dalla sonda: la sonda ha comunque una direzione tecnica letta OGGI (bullish=true su
 // almeno una strategia scartata). Qui anche quel requisito cade — scatta solo come ultima

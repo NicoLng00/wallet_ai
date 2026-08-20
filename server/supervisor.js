@@ -18,12 +18,15 @@ function buildQueryContext({ symbol, tier, strategyLabel, bullish }) {
   return `${symbol}: ${strategyLabel}, fascia ${tier || 'nessuna'}, ${direction}`;
 }
 
-// Chiama sempre tutti e 8 gli agenti (tool MCP) per un simbolo — stesso spirito della UI che
-// mostra sempre "8 agenti" — e restituisce le loro evidenze strutturate.
-export async function runAgentsForSymbol({ symbol, closes, candles, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons, risk, finnhubKey, geminiKey, otherSymbols }) {
+// Chiama sempre tutti e 9 gli agenti (tool MCP) per un simbolo — stesso spirito della UI che
+// mostra sempre "9 agenti" — e restituisce le loro evidenze strutturate. macroCalendar e' l'unico
+// passato dal chiamante invece di essere richiamato qui: e' identico per ogni simbolo (eventi
+// macro globali, non legati a un titolo), richiamarlo una volta per simbolo sprecherebbe 12
+// chiamate identiche a Finnhub invece di 1 sola per l'intero ciclo (vedi generateDecision).
+export async function runAgentsForSymbol({ symbol, closes, candles, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons, confluence, risk, finnhubKey, geminiKey, otherSymbols, macroCalendar }) {
   const queryContext = buildQueryContext({ symbol, tier, strategyLabel, bullish });
   const [technical, riskManager, marketRegime, liquidity, fundamental, hedge, auditSentinel, socialSentiment] = await Promise.all([
-    callAgentTool('technical_analyst', { symbol, validated: !!validated, tier: tier || null, strategyLabel: strategyLabel || null, timeframe: timeframe || null, bullish: !!bullish, confidenceHint: confidenceHint ?? null, lessons: lessons || [] }),
+    callAgentTool('technical_analyst', { symbol, validated: !!validated, tier: tier || null, strategyLabel: strategyLabel || null, timeframe: timeframe || null, bullish: !!bullish, confidenceHint: confidenceHint ?? null, lessons: lessons || [], confluence: confluence || [] }),
     callAgentTool('risk_manager', risk),
     callAgentTool('market_regime', { symbol, candles: candles || [] }),
     callAgentTool('liquidity', {}),
@@ -32,7 +35,7 @@ export async function runAgentsForSymbol({ symbol, closes, candles, validated, t
     callAgentTool('audit_sentinel', { symbol }),
     callAgentTool('social_sentiment', { symbol, geminiKey: geminiKey || null, queryContext })
   ]);
-  return { technical, riskManager, marketRegime, liquidity, fundamental, hedge, auditSentinel, socialSentiment };
+  return { technical, riskManager, marketRegime, liquidity, fundamental, hedge, auditSentinel, socialSentiment, macroCalendar };
 }
 
 // Orchestrazione completa: per ogni simbolo fa parlare gli agenti, assembla un contesto
@@ -48,6 +51,9 @@ export async function generateDecision({ providerId, apiKey, finnhubKey, symbols
   if (!provider.implemented) throw new Error(`Provider "${providerId}" non ancora implementato in questo backend.`);
 
   const held = new Set(heldPositions || []);
+  // Chiamato UNA VOLTA per l'intero ciclo, non per simbolo: gli eventi macro sono identici per
+  // ogni titolo (vedi runAgentsForSymbol per il perche').
+  const macroCalendar = await callAgentTool('macro_calendar', { finnhubKey: finnhubKey || null });
   const context = await Promise.all(symbols.map(async (symbol) => {
     const market = marketContext[symbol] || {};
     const otherSymbols = symbols
@@ -56,7 +62,8 @@ export async function generateDecision({ providerId, apiKey, finnhubKey, symbols
     const evidence = await runAgentsForSymbol({
       symbol, closes: market.closes, candles: market.candles, validated: market.validated, tier: market.tier,
       strategyLabel: market.strategyLabel, timeframe: market.timeframe, bullish: market.bullish,
-      confidenceHint: market.confidenceHint, lessons: market.lessons, risk, finnhubKey, geminiKey: apiKey, otherSymbols
+      confidenceHint: market.confidenceHint, lessons: market.lessons, confluence: market.confluence,
+      risk, finnhubKey, geminiKey: apiKey, otherSymbols, macroCalendar
     });
     return {
       symbol,
@@ -67,7 +74,8 @@ export async function generateDecision({ providerId, apiKey, finnhubKey, symbols
       fundamentalAgent: evidence.fundamental.available ? { thesis: evidence.fundamental.thesis, headlines: evidence.fundamental.evidence } : null,
       hedgeAgent: evidence.hedge.available ? { thesis: evidence.hedge.thesis, riskFlags: evidence.hedge.risk_flags } : null,
       marketRegimeAgent: evidence.marketRegime.available ? { thesis: evidence.marketRegime.thesis, riskFlags: evidence.marketRegime.risk_flags } : null,
-      socialSentimentAgent: evidence.socialSentiment.available ? { thesis: evidence.socialSentiment.thesis, posts: evidence.socialSentiment.evidence } : null
+      socialSentimentAgent: evidence.socialSentiment.available ? { thesis: evidence.socialSentiment.thesis, posts: evidence.socialSentiment.evidence } : null,
+      macroCalendarAgent: evidence.macroCalendar?.available ? { thesis: evidence.macroCalendar.thesis, events: evidence.macroCalendar.evidence } : null
     };
   }));
 

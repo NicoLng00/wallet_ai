@@ -11,6 +11,7 @@ import { runDriverAndGetOutput, writeTempDriverFile, removeDriverFile } from './
 import { startBackend, stopBackend } from './lib/backendProcess.js';
 import { readResearchState, writeResearchState, appendValidationHistory, computeValidationStreak, readArchiveState, writeArchiveState } from './lib/stateStore.js';
 import { archiveTrackRecord, archiveEpisodes } from '../lib/archival.js';
+import { findStaleEntries } from '../lib/dataHealth.js';
 
 // Il backtest walk-forward ha bisogno dello storico intero (fino a 2 anni) per validare, ma la
 // SOLA generazione del segnale in tempo reale (evaluateCandidates in engine/rules.js) ha bisogno
@@ -152,6 +153,16 @@ async function main() {
       },
       historyCache: truncateHistoryCache(output.historyCache)
     });
+
+    // Visibilita' esplicita sui buchi (mai riempiti in silenzio): se un simbolo/timeframe non si
+    // aggiorna da piu' di un giorno, un fallimento ripetuto della fonte dati sta scivolando sotto
+    // silenzio (il sistema continua a servire l'ultima copia buona, ma invecchia). Solo nel log
+    // del job (console, visibile su GitHub Actions) — non tocca data/account.json, di proprieta'
+    // di tradingCycle.js.
+    const staleEntries = findStaleEntries(output.historyCache);
+    if (staleEntries.length) {
+      console.warn('ATTENZIONE — dati non aggiornati:', JSON.stringify(staleEntries));
+    }
 
     console.log('Setup giornaliero completato:', JSON.stringify(output.setupResults));
   } finally {

@@ -22,7 +22,7 @@ Aurora.Controllers.runAnalysis = function runAnalysis() {
   $('desk-status').textContent = 'In esecuzione';
   $('run-analysis').innerHTML = 'Analisi…';
   Aurora.Views.renderAgents('running');
-  Aurora.Models.logActivity({ title: `Desk avviato su ${Aurora.Models.activeSymbol}`, detail: 'Brief distribuito a 8 agenti nel sandbox.', tag: 'RUN' });
+  Aurora.Models.logActivity({ title: `Desk avviato su ${Aurora.Models.activeSymbol}`, detail: 'Brief distribuito a 9 agenti nel sandbox.', tag: 'RUN' });
   Aurora.Views.renderActivity();
   window.setTimeout(() => {
     const signal = Aurora.Agents.supervisor.signalFor(Aurora.Models.activeSymbol);

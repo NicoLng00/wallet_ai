@@ -4,6 +4,7 @@
 // server, non e' un problema — il frontend continua a non parlare mai direttamente con Yahoo.
 // Solo lettura, nessuna scrittura, nessun dato inventato: se Yahoo non risponde o il simbolo non
 // esiste, l'errore risale al frontend che ricade sulla fonte esistente (Alpha Vantage/CoinGecko).
+import { fetchWithRetry } from './lib/fetchRetry.js';
 
 // I nostri simboli interni non coincidono sempre con i ticker Yahoo (futures, non spot forex).
 // XAUUSD non ha mai avuto una fonte storica gratuita in questo progetto (vedi README) — GC=F
@@ -27,9 +28,14 @@ export async function fetchYahooDailyHistory(symbol, range = '2y') {
   // CORTO del timeout lato frontend (FETCH_TIMEOUT_MS in dataProviders.js, 15s) — altrimenti il
   // frontend rinuncia sulla propria chiamata al backend prima che il backend stesso abbia potuto
   // fallire in modo pulito e restituire un errore leggibile invece di un timeout generico.
-  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
-  if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
-  const payload = await res.json();
+  // 3 tentativi (fetchWithRetry): un singolo fallimento di rete transitorio non deve lasciare un
+  // simbolo senza storico aggiornato per l'intera giornata — lo stesso principio gia' misurato
+  // reale su StockTwits (~1/6 di successo al primo tentativo, ~4/5 con retry).
+  const payload = await fetchWithRetry(async () => {
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
+    return res.json();
+  });
   const result = payload?.chart?.result?.[0];
   if (!result || payload?.chart?.error) {
     throw new Error(payload?.chart?.error?.description || `Nessun dato Yahoo Finance per ${ticker}.`);
@@ -68,9 +74,11 @@ export async function fetchYahooIntradayHistory(symbol, interval = '30m', range 
   const ticker = yahooTickerFor(symbol);
   if (!ticker) throw new Error(`Nessun ticker Yahoo mappato per il simbolo "${symbol}".`);
   const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?range=${encodeURIComponent(range)}&interval=${encodeURIComponent(interval)}`;
-  const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
-  if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
-  const payload = await res.json();
+  const payload = await fetchWithRetry(async () => {
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; AuroraMarkets/1.0)' }, signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error(`Yahoo Finance ha risposto ${res.status} per ${ticker}.`);
+    return res.json();
+  });
   const result = payload?.chart?.result?.[0];
   if (!result || payload?.chart?.error) {
     throw new Error(payload?.chart?.error?.description || `Nessun dato intraday Yahoo Finance per ${ticker}.`);

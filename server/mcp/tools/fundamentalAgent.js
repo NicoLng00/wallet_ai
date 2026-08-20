@@ -54,6 +54,24 @@ export const fundamentalAgentTool = {
   async handler({ symbol, finnhubKey, isStock, geminiKey, queryContext }) {
     if (!isStock) return unavailable(`Nessuna fonte di notizie gratuita per ${symbol} (solo titoli azionari su Finnhub).`);
     if (!finnhubKey) return unavailable('Nessuna chiave Finnhub disponibile per le notizie.');
+    // Earnings imminenti (Finnhub /calendar/earnings, stessa chiave) — evidenza ADDITIVA, mai un
+    // motivo per far fallire l'intero agente se le notizie sono disponibili ma il calendario no
+    // (o viceversa). Forma esatta della risposta non verificata con dati reali in sessione
+    // (nessuna chiave Finnhub locale) — parsing difensivo, silenziosamente assente se diversa.
+    const earningsPromise = (async () => {
+      try {
+        const from = new Date().toISOString().slice(0, 10);
+        const to = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+        const url = `https://finnhub.io/api/v1/calendar/earnings?from=${from}&to=${to}&symbol=${encodeURIComponent(symbol)}&token=${encodeURIComponent(finnhubKey)}`;
+        const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+        if (!res.ok) return null;
+        const data = await res.json();
+        const upcoming = Array.isArray(data?.earningsCalendar) ? data.earningsCalendar[0] : null;
+        return upcoming?.date ? `Earnings ${symbol} previste il ${upcoming.date}${upcoming.hour ? ` (${upcoming.hour})` : ''} — volatilità attesa in aumento in prossimità della data.` : null;
+      } catch {
+        return null;
+      }
+    })();
     try {
       const to = new Date().toISOString().slice(0, 10);
       const from = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10);
@@ -61,17 +79,21 @@ export const fundamentalAgentTool = {
       const res = await fetch(url);
       if (!res.ok) return unavailable(`Finnhub news non disponibile (http ${res.status}).`);
       const items = await res.json();
-      if (!Array.isArray(items) || !items.length) return unavailable(`Nessuna notizia recente trovata per ${symbol}.`);
+      const earningsNote = await earningsPromise;
+      if (!Array.isArray(items) || !items.length) {
+        if (!earningsNote) return unavailable(`Nessuna notizia recente trovata per ${symbol}.`);
+        return { available: true, thesis: earningsNote, confidence: null, evidence: [earningsNote], risk_flags: ['earnings-imminent'], model_version: 'finnhub-earnings-calendar' };
+      }
       // Pool piu' ampio del limite finale (15, non 5): senza un pool da cui scegliere, non c'e'
       // nulla su cui il retrieval per rilevanza possa lavorare — sarebbe solo un taglio travestito.
       const pool = items.slice(0, 15).map((item) => item.headline).filter(Boolean);
       const headlines = await rankByRelevance(geminiKey, queryContext, pool, MAX_HEADLINES_IN_CONTEXT);
       return {
         available: true,
-        thesis: `${headlines.length} titoli di notizie recenti reali disponibili per ${symbol} (ultimi 7 giorni, ${geminiKey && queryContext ? 'selezionati per rilevanza' : 'ordine cronologico'}) — sentiment qualitativo, non backtestato.`,
+        thesis: `${headlines.length} titoli di notizie recenti reali disponibili per ${symbol} (ultimi 7 giorni, ${geminiKey && queryContext ? 'selezionati per rilevanza' : 'ordine cronologico'}) — sentiment qualitativo, non backtestato.${earningsNote ? ` ${earningsNote}` : ''}`,
         confidence: null,
-        evidence: headlines,
-        risk_flags: [],
+        evidence: earningsNote ? [earningsNote, ...headlines] : headlines,
+        risk_flags: earningsNote ? ['earnings-imminent'] : [],
         model_version: 'finnhub-company-news'
       };
     } catch (error) {

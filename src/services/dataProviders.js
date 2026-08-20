@@ -17,6 +17,24 @@ function fetchWithTimeout(url, options = {}) {
   return fetch(url, { ...options, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
 }
 
+// Stesso principio del gemello server-side (server/lib/fetchRetry.js, duplicato qui solo perche'
+// questo file e' uno script globale da browser, non un modulo ES importabile lato server): un
+// singolo fallimento di rete transitorio non deve trasformarsi in "dato non disponibile" per
+// l'intera giornata. Mai un retry infinito, mai su un errore che non e' transitorio (throttleAlphaVantage
+// e i controlli di simbolo restano fuori da qui, decisi dal chiamante).
+async function fetchWithRetry(fetchFn, attempts = 3, delayMs = 400) {
+  let lastError;
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    try {
+      return await fetchFn();
+    } catch (error) {
+      lastError = error;
+      if (attempt < attempts - 1) await new Promise((resolve) => setTimeout(resolve, delayMs * (attempt + 1)));
+    }
+  }
+  throw lastError;
+}
+
 let lastAlphaVantageCallAt = 0;
 async function throttleAlphaVantage() {
   const elapsed = Date.now() - lastAlphaVantageCallAt;
@@ -149,6 +167,31 @@ Aurora.Services.fetchAlphaVantageDaily = async function fetchAlphaVantageDaily(s
   return { closes, candles, dates };
 };
 
+// Ripiego reale per EURUSD (prima "nessuno, onestamente senza fonte" se il backend non era
+// raggiungibile) — Alpha Vantage FX_DAILY, verificato esistere davvero (risposta strutturata
+// anche con la chiave "demo", solo il contenuto cambia). Nessun volume: il forex OTC non ne ha
+// mai uno centralizzato (stesso limite gia' dichiarato per Yahoo).
+Aurora.Services.fetchAlphaVantageFX = async function fetchAlphaVantageFX(fromSymbol, toSymbol) {
+  await throttleAlphaVantage();
+  const url = `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=${encodeURIComponent(fromSymbol)}&to_symbol=${encodeURIComponent(toSymbol)}&outputsize=compact&apikey=${encodeURIComponent(Aurora.Models.researchData.alphaVantageKey)}`;
+  const res = await fetchWithTimeout(url);
+  if (!res.ok) throw new Error(`http-${res.status}`);
+  const data = await res.json();
+  const series = data['Time Series FX (Daily)'];
+  if (!series) throw new Error(data.Note || data.Information || data['Error Message'] || 'Dati non disponibili');
+  const dates = Object.keys(series).sort();
+  const closes = dates.map((date) => Number(series[date]['4. close']));
+  const candles = dates.map((date) => ({
+    time: date,
+    open: Number(series[date]['1. open']),
+    high: Number(series[date]['2. high']),
+    low: Number(series[date]['3. low']),
+    close: Number(series[date]['4. close']),
+    volume: null
+  }));
+  return { closes, candles, dates };
+};
+
 Aurora.Services.fetchAlphaVantageWTI = async function fetchAlphaVantageWTI() {
   await throttleAlphaVantage();
   const url = `https://www.alphavantage.co/query?function=WTI&interval=daily&apikey=${encodeURIComponent(Aurora.Models.researchData.alphaVantageKey)}`;
@@ -165,9 +208,11 @@ Aurora.Services.fetchCoinGeckoHistory = async function fetchCoinGeckoHistory(sym
   const id = Aurora.Models.COINGECKO_IDS[symbol];
   const to = Math.floor(Date.now() / 1000);
   const from = to - 365 * 86400;
-  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
-  if (!res.ok) throw new Error(`http-${res.status}`);
-  const data = await res.json();
+  const data = await fetchWithRetry(async () => {
+    const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
+    if (!res.ok) throw new Error(`http-${res.status}`);
+    return res.json();
+  });
   const points = data.prices || [];
   const volumePoints = data.total_volumes || [];
   // total_volumes arriva gia' gratis nella stessa risposta di prices, allineato per indice (stessi
@@ -190,9 +235,11 @@ Aurora.Services.fetchCoinGeckoHourly = async function fetchCoinGeckoHourly(symbo
   const id = Aurora.Models.COINGECKO_IDS[symbol];
   const to = Math.floor(Date.now() / 1000);
   const from = to - 90 * 86400;
-  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
-  if (!res.ok) throw new Error(`http-${res.status}`);
-  const data = await res.json();
+  const data = await fetchWithRetry(async () => {
+    const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`);
+    if (!res.ok) throw new Error(`http-${res.status}`);
+    return res.json();
+  });
   const points = data.prices || [];
   return { closes: points.map(([, price]) => price), dates: points.map(([ts]) => new Date(ts).toISOString()) };
 };
@@ -200,9 +247,11 @@ Aurora.Services.fetchCoinGeckoHourly = async function fetchCoinGeckoHourly(symbo
 // OHLC reale (candele vere, non solo chiusura) — usato per il pattern Engulfing e per l'ATR.
 Aurora.Services.fetchCoinGeckoOHLC = async function fetchCoinGeckoOHLC(symbol, days = 180) {
   const id = Aurora.Models.COINGECKO_IDS[symbol];
-  const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/ohlc?vs_currency=usd&days=${days}`);
-  if (!res.ok) throw new Error(`http-${res.status}`);
-  const data = await res.json();
+  const data = await fetchWithRetry(async () => {
+    const res = await fetchWithTimeout(`https://api.coingecko.com/api/v3/coins/${id}/ohlc?vs_currency=usd&days=${days}`);
+    if (!res.ok) throw new Error(`http-${res.status}`);
+    return res.json();
+  });
   return (data || []).map(([time, open, high, low, close]) => ({ time, open, high, low, close }));
 };
 
@@ -242,10 +291,13 @@ Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(sym
       return await Aurora.Services.fetchYahooDaily(symbol);
     } catch (backendError) {
       // Ripiego su Alpha Vantage (richiede la chiave dell'utente) solo se il backend locale non
-      // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend. XAUUSD,
-      // EURUSD ed ES non hanno un ripiego (forex/futures, mai integrati con l'endpoint Alpha Vantage
-      // dedicato): senza backend restano onestamente senza fonte storica, come sempre stato.
-      if (symbol === 'XAUUSD' || symbol === 'EURUSD' || symbol === 'ES') throw backendError;
+      // e' raggiungibile — la regola tecnica deve restare utilizzabile anche senza backend.
+      // XAUUSD ed ES restano senza ripiego (futures, mai integrati con un endpoint Alpha Vantage
+      // dedicato — AV free non copre futures): senza backend restano onestamente senza fonte
+      // storica. EURUSD invece ora ha un ripiego reale (FX_DAILY, aggiunto dopo aver verificato
+      // che l'endpoint esiste davvero).
+      if (symbol === 'XAUUSD' || symbol === 'ES') throw backendError;
+      if (symbol === 'EURUSD') return Aurora.Services.fetchAlphaVantageFX('EUR', 'USD');
       if (symbol === 'WTI') return Aurora.Services.fetchAlphaVantageWTI();
       return Aurora.Services.fetchAlphaVantageDaily(symbol);
     }

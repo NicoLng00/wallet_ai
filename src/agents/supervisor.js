@@ -1,5 +1,5 @@
-// Supervisor lato client: decide il segnale finale per un simbolo. L'orchestrazione REALE degli
-// 8 agenti (via MCP) vive ora in server/ (server/supervisor.js) quando la modalita' AI e' attiva
+// Supervisor lato client: decide il segnale finale per un simbolo. L'orchestrazione REALE dei
+// 9 agenti (via MCP) vive ora in server/ (server/supervisor.js) quando la modalita' AI e' attiva
 // — questo file resta il punto unico da cui la UI/Autopilot chiedono "qual e' il segnale adesso".
 //
 // Invariante non negoziabile ereditato da ARCHITECTURE.md: nessun agente o modello puo'

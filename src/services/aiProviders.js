@@ -1,5 +1,5 @@
 // Motore AI pluggable. Il giudizio del "modello principale" non arriva più da una chiamata
-// diretta del browser a Google: passa dal backend locale (server/), che orchestra gli 8 agenti
+// diretta del browser a Google: passa dal backend locale (server/), che orchestra i 9 agenti
 // via MCP reale (server+client in-process, protocollo MCP autentico) e poi interroga il
 // provider scelto. Se il backend non è in esecuzione, l'errore lo dice esplicitamente —
 // nessun fallback silenzioso a un giudizio inventato.
@@ -22,6 +22,11 @@ function buildMarketContext() {
     // Evidence Retrieval: le lezioni attive del Learning Loop per la strategia scelta (se ce n'è
     // una) diventano contesto per il modello — mai un fine-tuning, solo memoria consultabile.
     const lessons = rule.candidateKey ? Aurora.Engine.getActiveLessons(rule.candidateKey).map((lesson) => lesson.statement) : [];
+    // Confluenza multi-timeframe: cosa dicono ADESSO le altre strategie/timeframe già validati/
+    // esplorativi sullo stesso simbolo, oltre a quella scelta come migliore — mai un secondo gate,
+    // solo contesto in più per il giudizio del modello.
+    const confluence = Aurora.Engine.computeConfluence(symbol, rule.candidateKey)
+      .map((c) => `${c.strategyLabel} (${c.timeframe}, ${c.tier === 'validated' ? 'validata' : 'esplorativa'}): ${c.bullish ? 'rialzista' : 'neutra'}`);
     context[symbol] = {
       price: Number(Aurora.Engine.getDemoPrice(symbol).toFixed(6)),
       changePercent: Number(Aurora.Utils.clamp(Aurora.Engine.symbolChange(symbol), -30, 30).toFixed(2)),
@@ -33,7 +38,8 @@ function buildMarketContext() {
       timeframe: rule.timeframe || null,
       bullish: rule.bullish,
       confidenceHint: hasTechnicalOpinion ? rule.confidence : null,
-      lessons
+      lessons,
+      confluence
     };
   });
   return context;

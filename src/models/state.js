@@ -64,7 +64,8 @@ window.Aurora = window.Aurora || {};
     ['⊹', 'Hedge Strategist', 'Correlazioni e protezione'],
     ['◇', 'Risk Manager', 'Limiti, sizing e stop'],
     ['✓', 'Audit Sentinel', 'Policy, explainability e log'],
-    ['☍', 'Social Sentiment', 'Chiacchiericcio reale da StockTwits/Reddit']
+    ['☍', 'Social Sentiment', 'Chiacchiericcio reale da StockTwits/Reddit'],
+    ['◔', 'Macro Calendar', 'FOMC/CPI/NFP reali nei prossimi giorni']
   ];
 
   const SIMULATION = {
