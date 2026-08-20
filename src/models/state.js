@@ -56,7 +56,8 @@ window.Aurora = window.Aurora || {};
     ['◌', 'Fundamental Scan', 'Eventi, earnings e notizie'],
     ['⊹', 'Hedge Strategist', 'Correlazioni e protezione'],
     ['◇', 'Risk Manager', 'Limiti, sizing e stop'],
-    ['✓', 'Audit Sentinel', 'Policy, explainability e log']
+    ['✓', 'Audit Sentinel', 'Policy, explainability e log'],
+    ['☍', 'Social Sentiment', 'Chiacchiericcio reale da StockTwits/Reddit']
   ];
 
   const SIMULATION = {

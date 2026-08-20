@@ -5,9 +5,11 @@ import { fundamentalAgentTool } from './tools/fundamentalAgent.js';
 import { hedgeAgentTool } from './tools/hedgeAgent.js';
 import { marketRegimeAgentTool } from './tools/marketRegimeAgent.js';
 import { liquidityAgentTool, auditSentinelAgentTool } from './tools/unavailableAgents.js';
+import { socialSentimentAgentTool } from './tools/socialSentimentAgent.js';
 
-// I 7 agenti come tool MCP reali. Ognuno restituisce lo stesso contratto strutturato
-// descritto in ARCHITECTURE.md (available/thesis/confidence/evidence/risk_flags/model_version).
+// Gli 8 agenti come tool MCP reali (7 + Social Sentiment). Ognuno restituisce lo stesso
+// contratto strutturato descritto in ARCHITECTURE.md
+// (available/thesis/confidence/evidence/risk_flags/model_version).
 const AGENT_TOOLS = [
   technicalAgentTool,
   riskManagerAgentTool,
@@ -15,7 +17,8 @@ const AGENT_TOOLS = [
   liquidityAgentTool,
   fundamentalAgentTool,
   hedgeAgentTool,
-  auditSentinelAgentTool
+  auditSentinelAgentTool,
+  socialSentimentAgentTool
 ];
 
 export function createAgentMcpServer() {

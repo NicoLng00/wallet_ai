@@ -1,5 +1,5 @@
 // Motore AI pluggable. Il giudizio del "modello principale" non arriva più da una chiamata
-// diretta del browser a Google: passa dal backend locale (server/), che orchestra i 7 agenti
+// diretta del browser a Google: passa dal backend locale (server/), che orchestra gli 8 agenti
 // via MCP reale (server+client in-process, protocollo MCP autentico) e poi interroga il
 // provider scelto. Se il backend non è in esecuzione, l'errore lo dice esplicitamente —
 // nessun fallback silenzioso a un giudizio inventato.

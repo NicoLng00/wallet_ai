@@ -20,7 +20,7 @@ Per alimentare agenti e ordini con dati reali occorre sostituire il generatore d
 
 Node.js è ora disponibile su questa macchina: `server/` è un vero backend MCP (`@modelcontextprotocol/sdk`), non più una simulazione client-side.
 
-- `server/mcp/server.js` — un `McpServer` reale che registra i 7 agenti come tool MCP (`technical_analyst`, `risk_manager`, `market_regime`, `liquidity`, `fundamental`, `hedge`, `audit_sentinel`), ciascuno con `inputSchema`/`outputSchema` Zod e lo stesso contratto strutturato di sempre (`available`, `thesis`, `confidence`, `evidence[]`, `risk_flags[]`, `model_version`).
+- `server/mcp/server.js` — un `McpServer` reale che registra gli 8 agenti come tool MCP (`technical_analyst`, `risk_manager`, `market_regime`, `liquidity`, `fundamental`, `hedge`, `audit_sentinel`, `social_sentiment`), ciascuno con `inputSchema`/`outputSchema` Zod e lo stesso contratto strutturato di sempre (`available`, `thesis`, `confidence`, `evidence[]`, `risk_flags[]`, `model_version`).
 - `server/mcp/client.js` — un `Client` MCP reale, collegato al server in-process via `InMemoryTransport.createLinkedPair()`: handshake, JSON-RPC e tool-calling autentici del protocollo, senza bisogno di un processo separato o di stdio piping.
 - `server/supervisor.js` — orchestratore: per ogni simbolo chiama sempre tutti e 7 i tool MCP (`runAgentsForSymbol`), assembla le evidenze di Technical Analyst e Risk Manager in un contesto compatto, poi lo passa al provider AI scelto (`generateDecision`). È il punto concreto in cui "gli agenti comunicano con il modello": non testo libero, ma il risultato tipizzato di una chiamata a tool MCP.
 
