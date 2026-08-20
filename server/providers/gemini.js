@@ -1,4 +1,5 @@
-const GEMINI_MODEL = 'gemini-3.5-flash';
+import { GEMINI_MODEL } from '../lib/geminiConfig.js';
+
 const TRANSIENT_RETRY_DELAYS_MS = [3000, 6000];
 
 function wait(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }

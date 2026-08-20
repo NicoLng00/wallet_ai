@@ -1,0 +1,29 @@
+name: Test
+
+# Rete di test minima (Fase 0 della roadmap di ottimizzazione) — gira su ogni push/PR,
+# indipendente dai due job schedulati (daily-setup.yml, trading-cycle.yml): nessuna concurrency
+# condivisa, non tocca data/*.json, non richiede nessuna chiave/segreto.
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze backend
+        working-directory: server
+        run: npm install
+
+      - name: Esegui i test
+        working-directory: server
+        run: npm test

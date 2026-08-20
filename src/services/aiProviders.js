@@ -84,6 +84,11 @@ Aurora.Services.fetchGeminiSignals = async function fetchGeminiSignals() {
     const data = await res.json();
     Object.entries(data.signals || {}).forEach(([symbol, entry]) => { Models.geminiSignals[symbol] = entry; });
     if (statusEl) statusEl.textContent = `Giudizio aggiornato (${Object.keys(data.signals || {}).length} titoli, agenti + Gemini) alle ${new Date().toLocaleTimeString('it-IT', { hour12: false })}.`;
+    // Visibilita' esplicita quando il budget del context scatta (lib/contextBudget.js) — non un
+    // evento silenzioso: a 12 simboli oggi non dovrebbe mai succedere, se succede va saputo.
+    if (data.contextTrimmed && Models.logActivity) {
+      Models.logActivity({ title: 'Contesto Gemini troncato per budget', detail: `Notizie/social ridotti per: ${(data.trimmedSymbols || []).join(', ')}.`, tag: 'JOB' });
+    }
   } catch (error) {
     if (statusEl) {
       const isNetworkError = error instanceof TypeError;

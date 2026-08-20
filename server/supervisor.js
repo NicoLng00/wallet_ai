@@ -1,20 +1,36 @@
 import { callAgentTool } from './mcp/client.js';
 import { providerRegistry } from './providers/registry.js';
+import { buildBoundedContext } from './lib/contextBudget.js';
 
 const STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA'];
 
+// Payload massimo (in caratteri di JSON) del context inviato a Gemini per l'intero watchlist in
+// una sola chiamata batched — vedi lib/contextBudget.js. A 12 simboli oggi il taglio non scatta
+// mai (verificato); il tetto esiste per quando il watchlist crescera'.
+const MAX_CONTEXT_CHARS = 24000;
+
+// Query testuale usata per il retrieval per rilevanza (fundamental/social_sentiment) — riassume
+// in una riga il "di cosa stiamo decidendo adesso" per quel simbolo, cosi' l'embedding ha un
+// bersaglio concreto invece di un simbolo nudo.
+function buildQueryContext({ symbol, tier, strategyLabel, bullish }) {
+  if (!strategyLabel) return `${symbol}: nessuna strategia attiva`;
+  const direction = bullish ? 'segnale rialzista' : 'nessun segnale rialzista al momento';
+  return `${symbol}: ${strategyLabel}, fascia ${tier || 'nessuna'}, ${direction}`;
+}
+
 // Chiama sempre tutti e 8 gli agenti (tool MCP) per un simbolo — stesso spirito della UI che
 // mostra sempre "8 agenti" — e restituisce le loro evidenze strutturate.
-export async function runAgentsForSymbol({ symbol, closes, candles, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons, risk, finnhubKey, otherSymbols }) {
+export async function runAgentsForSymbol({ symbol, closes, candles, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons, risk, finnhubKey, geminiKey, otherSymbols }) {
+  const queryContext = buildQueryContext({ symbol, tier, strategyLabel, bullish });
   const [technical, riskManager, marketRegime, liquidity, fundamental, hedge, auditSentinel, socialSentiment] = await Promise.all([
     callAgentTool('technical_analyst', { symbol, validated: !!validated, tier: tier || null, strategyLabel: strategyLabel || null, timeframe: timeframe || null, bullish: !!bullish, confidenceHint: confidenceHint ?? null, lessons: lessons || [] }),
     callAgentTool('risk_manager', risk),
     callAgentTool('market_regime', { symbol, candles: candles || [] }),
     callAgentTool('liquidity', {}),
-    callAgentTool('fundamental', { symbol, finnhubKey: finnhubKey || null, isStock: STOCK_SYMBOLS.includes(symbol) }),
+    callAgentTool('fundamental', { symbol, finnhubKey: finnhubKey || null, isStock: STOCK_SYMBOLS.includes(symbol), geminiKey: geminiKey || null, queryContext }),
     callAgentTool('hedge', { symbol, candidateCloses: closes || [], otherSymbols: otherSymbols || [] }),
     callAgentTool('audit_sentinel', { symbol }),
-    callAgentTool('social_sentiment', { symbol })
+    callAgentTool('social_sentiment', { symbol, geminiKey: geminiKey || null, queryContext })
   ]);
   return { technical, riskManager, marketRegime, liquidity, fundamental, hedge, auditSentinel, socialSentiment };
 }
@@ -40,7 +56,7 @@ export async function generateDecision({ providerId, apiKey, finnhubKey, symbols
     const evidence = await runAgentsForSymbol({
       symbol, closes: market.closes, candles: market.candles, validated: market.validated, tier: market.tier,
       strategyLabel: market.strategyLabel, timeframe: market.timeframe, bullish: market.bullish,
-      confidenceHint: market.confidenceHint, lessons: market.lessons, risk, finnhubKey, otherSymbols
+      confidenceHint: market.confidenceHint, lessons: market.lessons, risk, finnhubKey, geminiKey: apiKey, otherSymbols
     });
     return {
       symbol,
@@ -55,6 +71,13 @@ export async function generateDecision({ providerId, apiKey, finnhubKey, symbols
     };
   }));
 
-  const signals = await provider.call({ apiKey, context });
-  return { signals, engine: providerId, fetchedAt: new Date().toISOString() };
+  // Budget esplicito prima di inviare a Gemini — vedi lib/contextBudget.js per la priorita'
+  // dichiarata (segnale/rischio mai tagliati, notizie/social i primi a saltare). A 12 simboli il
+  // taglio non scatta mai (verificato): il tetto esiste per quando il watchlist crescera'.
+  const bounded = buildBoundedContext(context, MAX_CONTEXT_CHARS);
+  const signals = await provider.call({ apiKey, context: bounded.context });
+  return {
+    signals, engine: providerId, fetchedAt: new Date().toISOString(),
+    contextTrimmed: bounded.trimmed, trimmedSymbols: bounded.trimmedSymbols
+  };
 }
