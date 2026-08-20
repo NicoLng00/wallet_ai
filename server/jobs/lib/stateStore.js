@@ -83,4 +83,15 @@ export function computeValidationStreak(days, symbol, candidateKey) {
   return streak;
 }
 
+// Archivio (Fase 2 della roadmap di ottimizzazione): trade/episodi piu' vecchi di quelli che
+// il motore live guarda davvero (vedi server/lib/archival.js), spostati fuori da research.json
+// perche' quel file e' servito per intero ad ogni visitatore della dashboard pubblicata.
+export function readArchiveState() {
+  return readJson('research-archive.json', { trackRecord: {}, tradeEpisodes: {} });
+}
+
+export function writeArchiveState(archive) {
+  writeJson('research-archive.json', archive);
+}
+
 export { DATA_DIR };

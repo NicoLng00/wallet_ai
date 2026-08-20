@@ -1,13 +1,16 @@
 // Job "setup giornaliero": ri-scarica lo storico reale e rigira il backtest walk-forward per
 // tutti i simboli della watchlist (stesso motore del browser, src/) — aggiorna validated e
-// historyCache. Non tocca trackRecord/tradeEpisodes/lessons (di proprieta' del job "ciclo di
-// trading", tradingCycle.js): quelli sono la memoria del Learning Loop, non si azzerano ogni
-// giorno. Pensato per girare una volta al giorno via GitHub Actions, prima dell'apertura dei
-// mercati USA.
+// historyCache. Non genera mai trackRecord/tradeEpisodes/lessons (di proprieta' del job "ciclo
+// di trading", tradingCycle.js: quelli sono la memoria del Learning Loop, non si azzerano ogni
+// giorno) — ma li ARCHIVIA quando crescono oltre la finestra che il motore live guarda davvero
+// (Fase 2 della roadmap di ottimizzazione, vedi lib/archival.js): mai un reset, solo uno
+// spostamento dei trade/episodi piu' vecchi fuori dal file servito ad ogni visitatore.
+// Pensato per girare una volta al giorno via GitHub Actions, prima dell'apertura dei mercati USA.
 import { buildDriverHtml } from './lib/driverTemplate.js';
 import { runDriverAndGetOutput, writeTempDriverFile, removeDriverFile } from './lib/chromeRunner.js';
 import { startBackend, stopBackend } from './lib/backendProcess.js';
-import { readResearchState, writeResearchState, appendValidationHistory, computeValidationStreak } from './lib/stateStore.js';
+import { readResearchState, writeResearchState, appendValidationHistory, computeValidationStreak, readArchiveState, writeArchiveState } from './lib/stateStore.js';
+import { archiveTrackRecord, archiveEpisodes } from '../lib/archival.js';
 
 // Il backtest walk-forward ha bisogno dello storico intero (fino a 2 anni) per validare, ma la
 // SOLA generazione del segnale in tempo reale (evaluateCandidates in engine/rules.js) ha bisogno
@@ -128,11 +131,23 @@ async function main() {
     // genera mai (il backtest walk-forward non chiude trade reali), quindi non deve rischiare di
     // sovrascrivere con una copia più vecchia ciò che tradingCycle.js ha aggiornato nel frattempo.
     const freshResearch = readResearchState();
+
+    // Archiviazione (Fase 2): solo i trade/episodi PIU' VECCHI della finestra che il motore live
+    // legge davvero vengono spostati — verificato con dati sintetici (server/tests/archival.test.js)
+    // che questo non cambia MAI il risultato di survivesLiveTrackRecord sugli stessi dati.
+    const archive = readArchiveState();
+    const { trackRecord: trimmedTrackRecord, archivedCount: archivedTrades } = archiveTrackRecord(freshResearch.researchData.trackRecord, archive);
+    const { tradeEpisodes: trimmedEpisodes, archivedCount: archivedEpisodes } = archiveEpisodes(freshResearch.researchData.tradeEpisodes, archive);
+    if (archivedTrades > 0 || archivedEpisodes > 0) {
+      writeArchiveState(archive);
+      console.log(`Archiviati ${archivedTrades} trade e ${archivedEpisodes} episodi in data/research-archive.json.`);
+    }
+
     writeResearchState({
       researchData: {
         validated: validatedWithStreak,
-        trackRecord: freshResearch.researchData.trackRecord,
-        tradeEpisodes: freshResearch.researchData.tradeEpisodes,
+        trackRecord: trimmedTrackRecord,
+        tradeEpisodes: trimmedEpisodes,
         lessons: freshResearch.researchData.lessons
       },
       historyCache: truncateHistoryCache(output.historyCache)
