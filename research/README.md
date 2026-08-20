@@ -44,9 +44,17 @@ python verify/reproduce_spy_bollinger.py
 
 ## Stato
 
-Non ancora eseguito: **Python non è installato sulla macchina usata per costruire questa
-sandbox** (verificato: `python3`/`python` non trovati). Lo scaffolding e la logica sono pronti e
-scritti con la stessa disciplina del resto del progetto (stessa formula di Bollinger, stesso
-stop/target percentuale, stesso split 70/30 di `runSplitBacktest`), ma la verifica di
-riproducibilità — il passo che rende questa sandbox affidabile — **deve ancora essere eseguita**
-su una macchina con Python, prima di usarla per qualunque nuova esplorazione.
+**Verificata — 20 agosto 2026.** Eseguito `verify/reproduce_spy_bollinger.py` con Python 3.13,
+storico SPY riscaricato in modo indipendente da Yahoo Finance (501 barre, 2 anni). Confronto con
+la candidata reale `SPY → bollinger_reversion@1D` in produzione (`data/research.json`,
+`checkedAt: 2026-08-20T06:46:25Z`):
+
+| | In-sample | Fuori campione |
+|---|---|---|
+| **Python (indipendente)** | count=12, winRate=75.0%, avgReturn=0.7359 | count=8, winRate=100.0%, avgReturn=1.4229 |
+| **Produzione (motore JS)** | count=12, winRate=75%, avgReturn=0.7359389595215902 | count=8, winRate=100%, avgReturn=1.4229358205096783 |
+
+Coincidenza fino alla quarta cifra decimale su entrambi i segmenti — non un'approssimazione, una
+riproduzione reale. La sandbox è ora affidabile per nuove esplorazioni, con la stessa disciplina
+di sempre: qualunque ipotesi nasca qui deve comunque passare dal gate walk-forward reale in
+`src/engine/strategies.js` prima di contare come strategia live.
