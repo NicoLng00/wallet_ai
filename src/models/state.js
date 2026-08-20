@@ -30,16 +30,65 @@ window.Aurora = window.Aurora || {};
     // (engine/autopilot.js) per questo si rifiuta di usare lo stop/target specifico ORB quando il
     // minimo del range risulta sopra il prezzo demo corrente (range e prezzo troppo divergenti),
     // ripiegando sul fallback ATR/percentuale generico invece di aprire con uno stop invalido.
-    ES: { name: 'E-mini S&P 500 Future', exchange: 'CME · USD', price: 7730, change: 0, color: '#5c9ee0', tv: 'CME_MINI:ES1!' }
+    ES: { name: 'E-mini S&P 500 Future', exchange: 'CME · USD', price: 7730, change: 0, color: '#5c9ee0', tv: 'CME_MINI:ES1!' },
+    // Espansione da 6 a 40 titoli azionari (sessione 2026-08-20, su richiesta esplicita di testare
+    // l'edge su un pool piu' ampio di simboli — non piu' trade concorrenti: il sizing reale
+    // sull'attuale capitale rende ogni slot oltre il ~15-18esimo economicamente irrilevante,
+    // verificato con un calcolo diretto, vedi conversazione). Prezzi presi da Yahoo Finance in
+    // sessione (regularMarketPrice reale, nessun valore inventato), stessa fonte gia' verificata
+    // reggere 60 richieste reali senza rate limit. "change" lasciato a 0 come seed neutro (stesso
+    // trattamento gia' in uso per ES/EURUSD): sara' sovrascritto dal primo refreshLiveQuotes reale.
+    MSFT: { name: 'Microsoft Corp.', exchange: 'NASDAQ · USD', price: 480.46, change: 0, color: '#4d8fd6', tv: 'NASDAQ:MSFT' },
+    GOOGL: { name: 'Alphabet Inc. (A)', exchange: 'NASDAQ · USD', price: 339.94, change: 0, color: '#5cb87a', tv: 'NASDAQ:GOOGL' },
+    AMZN: { name: 'Amazon.com Inc.', exchange: 'NASDAQ · USD', price: 260.92, change: 0, color: '#e8a33d', tv: 'NASDAQ:AMZN' },
+    META: { name: 'Meta Platforms Inc.', exchange: 'NASDAQ · USD', price: 543.68, change: 0, color: '#5b7fd6', tv: 'NASDAQ:META' },
+    JPM: { name: 'JPMorgan Chase & Co.', exchange: 'NYSE · USD', price: 356.39, change: 0, color: '#7a6fd0', tv: 'NYSE:JPM' },
+    V: { name: 'Visa Inc.', exchange: 'NYSE · USD', price: 368.25, change: 0, color: '#4f6bd6', tv: 'NYSE:V' },
+    MA: { name: 'Mastercard Inc.', exchange: 'NYSE · USD', price: 578.12, change: 0, color: '#d68f4f', tv: 'NYSE:MA' },
+    UNH: { name: 'UnitedHealth Group Inc.', exchange: 'NYSE · USD', price: 387, change: 0, color: '#4f9bd6', tv: 'NYSE:UNH' },
+    HD: { name: 'Home Depot Inc.', exchange: 'NYSE · USD', price: 338.51, change: 0, color: '#d6704f', tv: 'NYSE:HD' },
+    PG: { name: 'Procter & Gamble Co.', exchange: 'NYSE · USD', price: 142.90, change: 0, color: '#4fd6c4', tv: 'NYSE:PG' },
+    JNJ: { name: 'Johnson & Johnson', exchange: 'NYSE · USD', price: 271.12, change: 0, color: '#d64f6b', tv: 'NYSE:JNJ' },
+    KO: { name: 'Coca-Cola Co.', exchange: 'NYSE · USD', price: 91.32, change: 0, color: '#d63f3f', tv: 'NYSE:KO' },
+    PEP: { name: 'PepsiCo Inc.', exchange: 'NASDAQ · USD', price: 142.65, change: 0, color: '#4f9fd6', tv: 'NASDAQ:PEP' },
+    DIS: { name: 'Walt Disney Co.', exchange: 'NYSE · USD', price: 107.72, change: 0, color: '#5c5cd6', tv: 'NYSE:DIS' },
+    NFLX: { name: 'Netflix Inc.', exchange: 'NASDAQ · USD', price: 80.12, change: 0, color: '#d6414f', tv: 'NASDAQ:NFLX' },
+    ADBE: { name: 'Adobe Inc.', exchange: 'NASDAQ · USD', price: 273.18, change: 0, color: '#d64fb0', tv: 'NASDAQ:ADBE' },
+    CRM: { name: 'Salesforce Inc.', exchange: 'NYSE · USD', price: 206.92, change: 0, color: '#4fb0d6', tv: 'NYSE:CRM' },
+    ORCL: { name: 'Oracle Corp.', exchange: 'NYSE · USD', price: 142.14, change: 0, color: '#d6534f', tv: 'NYSE:ORCL' },
+    INTC: { name: 'Intel Corp.', exchange: 'NASDAQ · USD', price: 91.83, change: 0, color: '#4f7ad6', tv: 'NASDAQ:INTC' },
+    AMD: { name: 'Advanced Micro Devices Inc.', exchange: 'NASDAQ · USD', price: 465.80, change: 0, color: '#d6874f', tv: 'NASDAQ:AMD' },
+    COST: { name: 'Costco Wholesale Corp.', exchange: 'NASDAQ · USD', price: 941.27, change: 0, color: '#4fd68c', tv: 'NASDAQ:COST' },
+    WMT: { name: 'Walmart Inc.', exchange: 'NYSE · USD', price: 103.62, change: 0, color: '#4f8ed6', tv: 'NYSE:WMT' },
+    BAC: { name: 'Bank of America Corp.', exchange: 'NYSE · USD', price: 62.95, change: 0, color: '#d6474f', tv: 'NYSE:BAC' },
+    XOM: { name: 'Exxon Mobil Corp.', exchange: 'NYSE · USD', price: 167.89, change: 0, color: '#d69a4f', tv: 'NYSE:XOM' },
+    CVX: { name: 'Chevron Corp.', exchange: 'NYSE · USD', price: 207.65, change: 0, color: '#d6b04f', tv: 'NYSE:CVX' },
+    PFE: { name: 'Pfizer Inc.', exchange: 'NYSE · USD', price: 27.84, change: 0, color: '#4fc6d6', tv: 'NYSE:PFE' },
+    ABBV: { name: 'AbbVie Inc.', exchange: 'NYSE · USD', price: 264.24, change: 0, color: '#8a4fd6', tv: 'NYSE:ABBV' },
+    MRK: { name: 'Merck & Co. Inc.', exchange: 'NYSE · USD', price: 151.44, change: 0, color: '#4fd6ad', tv: 'NYSE:MRK' },
+    T: { name: 'AT&T Inc.', exchange: 'NYSE · USD', price: 25.15, change: 0, color: '#5d6bd6', tv: 'NYSE:T' },
+    VZ: { name: 'Verizon Communications Inc.', exchange: 'NYSE · USD', price: 49.50, change: 0, color: '#d64f9c', tv: 'NYSE:VZ' },
+    CSCO: { name: 'Cisco Systems Inc.', exchange: 'NASDAQ · USD', price: 111.18, change: 0, color: '#4fa8d6', tv: 'NASDAQ:CSCO' },
+    IBM: { name: 'International Business Machines Corp.', exchange: 'NYSE · USD', price: 237.07, change: 0, color: '#5c6f7a', tv: 'NYSE:IBM' },
+    NKE: { name: 'Nike Inc.', exchange: 'NYSE · USD', price: 40.19, change: 0, color: '#d6664f', tv: 'NYSE:NKE' },
+    MCD: { name: 'McDonald\'s Corp.', exchange: 'NYSE · USD', price: 270.61, change: 0, color: '#d6a44f', tv: 'NYSE:MCD' }
   };
 
+  // I nuovi 34 titoli (vedi sopra) mappano su Finnhub/Alpha Vantage con lo stesso ticker: nessuna
+  // azione USA di questo elenco ha bisogno di un prefisso OANDA:/proxy come materie prime o forex.
+  const EXPANDED_STOCK_SYMBOLS = [
+    'MSFT', 'GOOGL', 'AMZN', 'META', 'JPM', 'V', 'MA', 'UNH', 'HD', 'PG', 'JNJ', 'KO', 'PEP', 'DIS',
+    'NFLX', 'ADBE', 'CRM', 'ORCL', 'INTC', 'AMD', 'COST', 'WMT', 'BAC', 'XOM', 'CVX', 'PFE', 'ABBV',
+    'MRK', 'T', 'VZ', 'CSCO', 'IBM', 'NKE', 'MCD'
+  ];
   const FINNHUB_SYMBOLS = { AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', XAUUSD: 'OANDA:XAU_USD', WTI: 'OANDA:WTICO_USD', TLT: 'TLT', EURUSD: 'OANDA:EUR_USD' };
+  EXPANDED_STOCK_SYMBOLS.forEach((symbol) => { FINNHUB_SYMBOLS[symbol] = symbol; });
   const COINGECKO_IDS = { BTCUSD: 'bitcoin', ETHUSD: 'ethereum' };
   // TLT e' un ETF come gli altri: Alpha Vantage TIME_SERIES_DAILY funziona identico. EURUSD resta
   // fuori: e' forex, Alpha Vantage lo servirebbe solo dall'endpoint FX_DAILY (mai integrato in
   // questo progetto) — senza backend raggiungibile EURUSD resta onestamente senza fonte storica,
   // stesso trattamento gia' dichiarato per XAUUSD.
-  const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT'];
+  const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT', ...EXPANDED_STOCK_SYMBOLS];
   // Simboli il cui "prezzo" e' GIA' un tasso di cambio (quanti USD per 1 unita'), non un valore
   // in USD da convertire come azioni/materie prime — usato sia da refreshLiveQuotes (mai una
   // doppia conversione, bug reale trovato e corretto in sessione) sia da formatPrice (precisione
@@ -83,15 +132,20 @@ window.Aurora = window.Aurora || {};
     autopilotStopPercent: 1.6,
     autopilotTargetPercent: 2.8,
     // Più posizioni concorrenti = più trade/giorno quando più simboli qualificano lo stesso ciclo,
-    // senza abbassare la soglia di qualità di un singolo segnale (vedi engine/autopilot.js). Pari
-    // al numero di simboli in watchlist (12, da quando ES si e' aggiunto per la strategia
-    // orb_breakout): con meno slot che simboli, posizioni che non toccano ne'
-    // SL ne' TP restano aperte e bloccano sia nuovi ingressi sia il fallback "sonda forzata" su
-    // ALTRI simboli — verificato con un test giorno-per-giorno su 60 giorni di storico reale (con
-    // solo 3 slot: 19/60 giornate a zero trade nonostante il fallback attivo; con uno slot per
-    // simbolo + maxHoldingDays: 0/60). Il rischio reale non cresce con gli slot: ogni ordine resta
-    // comunque capato da maximumOrder/maximumPositionPercent e dai fattori di taglia per livello.
-    maxConcurrentPositions: 12,
+    // senza abbassare la soglia di qualità di un singolo segnale (vedi engine/autopilot.js). FINO
+    // all'espansione della watchlist a 46 simboli (sessione 2026-08-20) era pari 1:1 al numero di
+    // simboli — verificato con un test giorno-per-giorno su 60 giorni di storico reale (con solo 3
+    // slot: 19/60 giornate a zero trade nonostante il fallback attivo; con uno slot per simbolo +
+    // maxHoldingDays: 0/60). A 46 simboli, 1:1 non è più sensato: il sizing reale (25% del cash
+    // residuo a ogni apertura) rende ogni slot oltre il ~15-18esimo economicamente irrilevante
+    // (calcolato: la decima posizione su 50€ vale già meno di 1€, la quindicesima meno di 25
+    // centesimi) — più slot di quelli non aiuterebbero comunque. 20 è quindi un compromesso
+    // deliberato tra "abbastanza slot da non bloccare troppi simboli diversi" e "non oltre il punto
+    // in cui il capitale attuale rende lo slot inutile" — NON riverificato con lo stesso test
+    // giorno-per-giorno sui 46 simboli: la garanzia "zero giornate senza trade" documentata sopra
+    // vale per la vecchia configurazione 1:1, va ridimostrata a questa scala prima di darla per
+    // certa.
+    maxConcurrentPositions: 20,
     // Taglia ridotta per i candidati "esplorativi" (edge promettente ma non ancora confermato
     // fuori campione per carenza di dati, non perché smentito) — vedi engine/rules.js.
     exploratorySizeFactor: 0.4,

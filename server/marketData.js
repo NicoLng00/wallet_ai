@@ -9,10 +9,20 @@ import { fetchWithRetry } from './lib/fetchRetry.js';
 // I nostri simboli interni non coincidono sempre con i ticker Yahoo (futures, non spot forex).
 // XAUUSD non ha mai avuto una fonte storica gratuita in questo progetto (vedi README) — GC=F
 // (futures oro) e' un proxy dichiarato, non lo spot esatto, ma e' storico reale e correlato.
+// I 34 titoli aggiunti in sessione (src/models/state.js, 2026-08-20) mappano 1:1 sul proprio
+// ticker Yahoo, come le azioni gia' presenti — nessun proxy futures/forex necessario per loro.
+// Verificato empiricamente in sessione: Yahoo regge 60 richieste reali sequenziali senza errori
+// ne' rate limit, ben oltre questo elenco.
+const EXPANDED_STOCK_SYMBOLS = [
+  'MSFT', 'GOOGL', 'AMZN', 'META', 'JPM', 'V', 'MA', 'UNH', 'HD', 'PG', 'JNJ', 'KO', 'PEP', 'DIS',
+  'NFLX', 'ADBE', 'CRM', 'ORCL', 'INTC', 'AMD', 'COST', 'WMT', 'BAC', 'XOM', 'CVX', 'PFE', 'ABBV',
+  'MRK', 'T', 'VZ', 'CSCO', 'IBM', 'NKE', 'MCD'
+];
 const SYMBOL_TO_YAHOO = {
   AAPL: 'AAPL', NVDA: 'NVDA', SPY: 'SPY', QQQ: 'QQQ', TSLA: 'TSLA', TLT: 'TLT',
   WTI: 'CL=F', XAUUSD: 'GC=F', EURUSD: 'EURUSD=X', ES: 'ES=F'
 };
+EXPANDED_STOCK_SYMBOLS.forEach((symbol) => { SYMBOL_TO_YAHOO[symbol] = symbol; });
 
 export function yahooTickerFor(symbol) {
   return SYMBOL_TO_YAHOO[symbol] || null;
