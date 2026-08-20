@@ -50,9 +50,10 @@ Aurora.Services.fetchCoinGeckoPrices = async function fetchCoinGeckoPrices() {
 // usdToEurRate. Applicare la STESSA conversione a EURUSD lo corrompe verso ~1.0 (quotazione
 // reale ~1.16 * reciproco ~0.86 ≈ 1.0) — e un crollo apparente da 1.16 a 1.0 (~14%) avrebbe
 // sfondato uno stop loss reale (tipicamente a ~0.4% di distanza, ATR-based) per un motivo
-// del tutto fittizio, realizzando una perdita finta su una posizione vera. Se in futuro si
-// aggiungono altre coppie valutarie a FINNHUB_SYMBOLS, vanno aggiunte anche qui.
-const FX_RATE_SYMBOLS = new Set(['EURUSD']);
+// del tutto fittizio, realizzando una perdita finta su una posizione vera.
+// FX_RATE_SYMBOLS vive in models/state.js (unica fonte, condivisa anche con formatPrice in
+// utils.js per la precisione di visualizzazione) — se in futuro si aggiungono altre coppie
+// valutarie a FINNHUB_SYMBOLS, basta aggiornarla li'.
 
 Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
   const Models = Aurora.Models;
@@ -81,7 +82,7 @@ Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
       const [symbol] = finnhubEntries[index];
       if (result.status === 'fulfilled') {
         const { price, previousClose } = result.value;
-        Models.demoAccount.market[symbol] = FX_RATE_SYMBOLS.has(symbol) ? price : price * Models.usdToEurRate;
+        Models.demoAccount.market[symbol] = Models.FX_RATE_SYMBOLS.has(symbol) ? price : price * Models.usdToEurRate;
         Models.liveStatus[symbol] = 'live';
         Models.liveChangePercent[symbol] = previousClose ? ((price - previousClose) / previousClose) * 100 : null;
       } else {

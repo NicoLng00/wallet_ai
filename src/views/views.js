@@ -3,14 +3,14 @@ window.Aurora = window.Aurora || {};
 Aurora.Views = Aurora.Views || {};
 
 Aurora.Views.renderWatchlist = function renderWatchlist() {
-  const { $, formatMoney } = Aurora.Utils;
+  const { $, formatPrice } = Aurora.Utils;
   const { instruments, activeSymbol } = Aurora.Models;
   $('watchlist').innerHTML = Object.entries(instruments).map(([symbol, data]) => {
     const change = Aurora.Engine.symbolChange(symbol);
     return `<button class="watch-item ${symbol === activeSymbol ? 'active' : ''}" data-symbol="${symbol}">
       <span class="watch-icon" style="background:${data.color}">${Aurora.Engine.initials(symbol)}</span>
       <span><b class="watch-symbol">${symbol}</b><small class="watch-name">${data.name.replace(' Inc.', '')}</small></span>
-      <span class="watch-quote">${formatMoney(Aurora.Engine.getDemoPrice(symbol))}<em class="watch-change ${change < 0 ? 'negative' : ''}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</em></span>
+      <span class="watch-quote">${formatPrice(symbol, Aurora.Engine.getDemoPrice(symbol))}<em class="watch-change ${change < 0 ? 'negative' : ''}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</em></span>
     </button>`;
   }).join('');
   document.querySelectorAll('.watch-item').forEach((button) => button.addEventListener('click', () => Aurora.Controllers.selectSymbol(button.dataset.symbol)));
@@ -63,9 +63,10 @@ Aurora.Views.renderTradingViewWidget = function renderTradingViewWidget() {
 };
 
 Aurora.Views.renderChartLevelsOverlay = function renderChartLevelsOverlay() {
-  const { $, formatMoney, clamp } = Aurora.Utils;
+  const { $, formatPrice, clamp } = Aurora.Utils;
   const overlay = $('chart-levels-overlay');
-  const position = Aurora.Models.demoAccount.positions[Aurora.Models.activeSymbol];
+  const activeSymbol = Aurora.Models.activeSymbol;
+  const position = Aurora.Models.demoAccount.positions[activeSymbol];
   if (!position || (!position.stopLoss && !position.takeProfit)) { overlay.innerHTML = ''; return; }
   const entry = position.averagePrice;
   const { stopLoss, takeProfit } = position;
@@ -76,9 +77,9 @@ Aurora.Views.renderChartLevelsOverlay = function renderChartLevelsOverlay() {
   const rangeBottom = Math.min(...levels) - margin;
   const toPercent = (value) => clamp(((rangeTop - value) / (rangeTop - rangeBottom)) * 100, 4, 96);
 
-  const lines = [{ type: 'entry', label: `Entry ${formatMoney(entry)}`, value: entry }];
-  if (stopLoss) lines.push({ type: 'sl', label: `SL ${formatMoney(stopLoss)}`, value: stopLoss });
-  if (takeProfit) lines.push({ type: 'tp', label: `TP ${formatMoney(takeProfit)}`, value: takeProfit });
+  const lines = [{ type: 'entry', label: `Entry ${formatPrice(activeSymbol, entry)}`, value: entry }];
+  if (stopLoss) lines.push({ type: 'sl', label: `SL ${formatPrice(activeSymbol, stopLoss)}`, value: stopLoss });
+  if (takeProfit) lines.push({ type: 'tp', label: `TP ${formatPrice(activeSymbol, takeProfit)}`, value: takeProfit });
 
   overlay.innerHTML = lines
     .map((line) => `<div class="chart-level-line ${line.type}" style="top:${toPercent(line.value).toFixed(2)}%"><span class="chart-level-label">${line.label}</span></div>`)
@@ -86,7 +87,7 @@ Aurora.Views.renderChartLevelsOverlay = function renderChartLevelsOverlay() {
 };
 
 Aurora.Views.updateQuoteUI = function updateQuoteUI() {
-  const { $, formatMoney } = Aurora.Utils;
+  const { $, formatPrice } = Aurora.Utils;
   const { activeSymbol, instruments } = Aurora.Models;
   const data = instruments[activeSymbol];
   const price = Aurora.Engine.getDemoPrice(activeSymbol);
@@ -96,7 +97,7 @@ Aurora.Views.updateQuoteUI = function updateQuoteUI() {
   $('symbol-exchange').textContent = `${data.exchange} · modello demo`;
   $('symbol-logo').textContent = Aurora.Engine.initials(activeSymbol);
   $('symbol-logo').style.background = data.color;
-  $('quote-price').textContent = formatMoney(price);
+  $('quote-price').textContent = formatPrice(activeSymbol, price);
   $('quote-change').textContent = `${change >= 0 ? '+' : ''}${change.toFixed(2)}% simulato`;
   $('quote-change').className = change >= 0 ? 'positive' : 'negative';
   $('quote-time').textContent = 'Feed simulato · grafico separato';
@@ -194,7 +195,7 @@ Aurora.Views.renderDemoAccount = function renderDemoAccount() {
 };
 
 Aurora.Views.renderWalletOverview = function renderWalletOverview() {
-  const { $, formatMoney } = Aurora.Utils;
+  const { $, formatMoney, formatPrice } = Aurora.Utils;
   const { demoAccount } = Aurora.Models;
   const stats = Aurora.Engine.computeWalletStats();
   const signed = (value) => `${value >= 0 ? '+' : ''}${formatMoney(value)}`;
@@ -227,7 +228,7 @@ Aurora.Views.renderWalletOverview = function renderWalletOverview() {
           <span>${trade.symbol}</span>
           <span><span class="history-side ${trade.side}">${trade.side === 'buy' ? 'Buy' : 'Sell'}</span></span>
           <span>${trade.quantity.toFixed(6)}</span>
-          <span>${formatMoney(trade.price)}</span>
+          <span>${formatPrice(trade.symbol, trade.price)}</span>
           <span>${formatMoney(trade.notional)}</span>
           <span class="${pnlClass}">${pnlText}</span>
           <span><span class="history-origin">${trade.origin}</span></span>
@@ -237,7 +238,7 @@ Aurora.Views.renderWalletOverview = function renderWalletOverview() {
 };
 
 Aurora.Views.renderActivity = function renderActivity() {
-  const { $, formatMoney } = Aurora.Utils;
+  const { $, formatMoney, formatPrice } = Aurora.Utils;
   const { activity, demoAccount, selectedTab, SIMULATION } = Aurora.Models;
   const target = $('activity-content');
   $('audit-count').textContent = activity.length + demoAccount.trades.length;
@@ -251,7 +252,7 @@ Aurora.Views.renderActivity = function renderActivity() {
       const price = Aurora.Engine.getDemoPrice(symbol);
       const value = position.quantity * price;
       const pnl = (price - position.averagePrice) / position.averagePrice * 100;
-      return `<div class="position-row"><span><b>${symbol}</b><small>${position.quantity.toFixed(6)} quote · demo</small></span><span>${formatMoney(value)}</span><span>${formatMoney(position.averagePrice)}</span><span class="${pnl >= 0 ? 'positive' : 'negative'}">${pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}%</span></div>`;
+      return `<div class="position-row"><span><b>${symbol}</b><small>${position.quantity.toFixed(6)} quote · demo</small></span><span>${formatMoney(value)}</span><span>${formatPrice(symbol, position.averagePrice)}</span><span class="${pnl >= 0 ? 'positive' : 'negative'}">${pnl >= 0 ? '+' : ''}${pnl.toFixed(2)}%</span></div>`;
     }).join('') : `<div class="empty-state">Nessuna posizione nel conto demo da ${formatMoney(SIMULATION.accountSeed)}.</div>`;
   } else {
     target.innerHTML = '<div class="research-note"><strong>Come si adatta il modello.</strong> L’autopilot registra esclusivamente gli esiti del sandbox in questo browser e modifica una piccola calibrazione di confidenza. Non addestra un modello fondazionale, non accede al conto reale e non usa i prezzi dell’iframe TradingView come feed esecutivo. Per il live serviranno un data provider autorizzato, backtest e un backend con policy riproducibili.</div>';

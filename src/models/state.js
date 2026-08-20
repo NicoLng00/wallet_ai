@@ -40,6 +40,13 @@ window.Aurora = window.Aurora || {};
   // questo progetto) — senza backend raggiungibile EURUSD resta onestamente senza fonte storica,
   // stesso trattamento gia' dichiarato per XAUUSD.
   const ALPHA_VANTAGE_STOCK_SYMBOLS = ['AAPL', 'NVDA', 'SPY', 'QQQ', 'TSLA', 'TLT'];
+  // Simboli il cui "prezzo" e' GIA' un tasso di cambio (quanti USD per 1 unita'), non un valore
+  // in USD da convertire come azioni/materie prime — usato sia da refreshLiveQuotes (mai una
+  // doppia conversione, bug reale trovato e corretto in sessione) sia da formatPrice (precisione
+  // a 4 decimali, non 2: per un cambio, la differenza tra 1,1609 e 1,1563 e' reale e visibile,
+  // non rumore di arrotondamento).
+  const FX_RATE_SYMBOLS = new Set(['EURUSD']);
+
   // Simboli su cui gira orb_breakout (apertura NY, primi 30 minuti) — scope deciso esplicitamente
   // con l'utente: ES=F insieme a SPY/QQQ fin da subito, non solo il future puro. EURUSD aggiunto
   // come test esplicito su un mercato strutturalmente diverso: forex tratta 24/5, la barra 09:30 NY
@@ -262,7 +269,7 @@ window.Aurora = window.Aurora || {};
 
   Aurora.Models = {
     // Configurazione statica
-    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, ORB_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, RANDOM_BASELINE_TRIALS, GEMINI_MODEL,
+    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, ORB_SYMBOLS, FX_RATE_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, RANDOM_BASELINE_TRIALS, GEMINI_MODEL,
 
     // Stato UI
     activeSymbol: 'AAPL',
