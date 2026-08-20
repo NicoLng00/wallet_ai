@@ -340,6 +340,7 @@ Aurora.Services.hydrateFromSharedState = async function hydrateFromSharedState()
     if (research.historyCache) Models.historyCache = research.historyCache;
 
     Models.persistDemoAccount();
+    Models.persistActivity();
     Models.persistResearchData();
     Models.persistHistoryCache();
     return true;
@@ -376,7 +377,12 @@ Aurora.Services.runResearchBacktest = async function runResearchBacktest(symbol)
       const split = Aurora.Engine.runSplitBacktest(job.closes, strategy.signal, stopPct, targetPct, 0.7, warmup, job.candles);
       const inSampleBars = Math.max(1, split.splitIndex - warmup);
       const entryProb = Aurora.Utils.clamp(split.inSample.count / inSampleBars, 0.01, 0.5);
-      const baseline = Aurora.Engine.runRandomBaselineSplit(job.closes, stopPct, targetPct, split.splitIndex, entryProb, 0.15, 30, warmup);
+      // 90 invece di 30 (RANDOM_BASELINE_TRIALS): confrontando lo stesso identico backtest
+      // ri-eseguito due volte, il 4% dei candidati (soprattutto quelli a pochi trade, vicini al
+      // margine del gate) cambiava fascia validato/esplorativo/nessuno da soli per il rumore
+      // della media a 30 estrazioni casuali — mai per bollinger_reversion, che ha campioni piu'
+      // ampi. Piu' trial riduce (non elimina) quella varianza; nessuna soglia abbassata.
+      const baseline = Aurora.Engine.runRandomBaselineSplit(job.closes, stopPct, targetPct, split.splitIndex, entryProb, 0.15, Aurora.Models.RANDOM_BASELINE_TRIALS, warmup);
       const inSamplePasses = Aurora.Engine.passesEdgeGate(split.inSample, baseline.inSample);
       const hasEnoughOutOfSampleData = split.outOfSample.count >= Models.SIMULATION.minimumOutOfSampleTrades;
       const outOfSamplePasses = hasEnoughOutOfSampleData && Aurora.Engine.passesEdgeGate(split.outOfSample, baseline.outOfSample);

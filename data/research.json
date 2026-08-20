@@ -2793,18 +2793,6 @@
         "macd_cross@1D": {
           "trades": [
             {
-              "returnPct": 0,
-              "at": "2026-08-18T21:03:38.359Z"
-            },
-            {
-              "returnPct": 0,
-              "at": "2026-08-18T21:04:10.802Z"
-            },
-            {
-              "returnPct": -45.01390727010423,
-              "at": "2026-08-18T21:04:45.215Z"
-            },
-            {
               "returnPct": 3.0887372013651877,
               "at": "2026-08-19T15:13:47.070Z"
             }
@@ -2813,20 +2801,7 @@
       },
       "ETHUSD": {
         "macd_cross@1D": {
-          "trades": [
-            {
-              "returnPct": 0,
-              "at": "2026-08-18T21:03:38.385Z"
-            },
-            {
-              "returnPct": 0,
-              "at": "2026-08-18T21:04:10.833Z"
-            },
-            {
-              "returnPct": -39.946616423300355,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         },
         "sma_rsi@1D": {
           "trades": [
@@ -2841,10 +2816,6 @@
         "bollinger_reversion@1D": {
           "trades": [
             {
-              "returnPct": 20.98887787688581,
-              "at": "2026-08-18T21:04:45.215Z"
-            },
-            {
               "returnPct": 0,
               "at": "2026-08-19T12:12:06.528Z"
             }
@@ -2853,52 +2824,27 @@
       },
       "SPY": {
         "bollinger_reversion@1D": {
-          "trades": [
-            {
-              "returnPct": 19.71018109781778,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         }
       },
       "AAPL": {
         "bollinger_reversion@1D": {
-          "trades": [
-            {
-              "returnPct": 44.61703517119133,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         }
       },
       "QQQ": {
         "bollinger_reversion@1D": {
-          "trades": [
-            {
-              "returnPct": 26.25327726065001,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         }
       },
       "WTI": {
         "bollinger_reversion@1D": {
-          "trades": [
-            {
-              "returnPct": 0,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         }
       },
       "XAUUSD": {
         "bollinger_reversion@1D": {
-          "trades": [
-            {
-              "returnPct": 0,
-              "at": "2026-08-18T21:04:45.215Z"
-            }
-          ]
+          "trades": []
         }
       }
     },
@@ -4395,102 +4341,6 @@
           "at": "2026-08-12T19:34:37.176Z"
         },
         {
-          "tradeId": "SIM-7018361",
-          "symbol": "BTCUSD",
-          "returnPct": 0,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 117420.6,
-            "confidence": 35,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:03:38.361Z"
-        },
-        {
-          "tradeId": "SIM-7018387",
-          "symbol": "ETHUSD",
-          "returnPct": 0,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 3184.5,
-            "confidence": 31,
-            "score": 43,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:03:38.387Z"
-        },
-        {
-          "tradeId": "SIM-7050804",
-          "symbol": "BTCUSD",
-          "returnPct": 0,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 117420.6,
-            "confidence": 35,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:10.804Z"
-        },
-        {
-          "tradeId": "SIM-7050834",
-          "symbol": "ETHUSD",
-          "returnPct": 0,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 3184.5,
-            "confidence": 33,
-            "score": 48,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:10.834Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "BTCUSD",
-          "returnPct": -45.01390727010423,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 117420.6,
-            "confidence": 35,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "ETHUSD",
-          "returnPct": -39.946616423300355,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "macd_cross@1D",
-            "entryPrice": 3184.5,
-            "confidence": 33,
-            "score": 48,
-            "tier": "probe",
-            "volatilityRegime": null,
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
           "tradeId": "SIM-2427071",
           "symbol": "BTCUSD",
           "returnPct": 3.0887372013651877,
@@ -4863,102 +4713,6 @@
             "aiEngine": "rule"
           },
           "at": "2026-07-20T19:34:37.156Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "NVDA",
-          "returnPct": 20.98887787688581,
-          "outcomeTag": "take_profit_hit",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 181.62,
-            "confidence": 85,
-            "score": 90,
-            "tier": "validated",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "SPY",
-          "returnPct": 19.71018109781778,
-          "outcomeTag": "take_profit_hit",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 641.09,
-            "confidence": 85,
-            "score": 90,
-            "tier": "validated",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "AAPL",
-          "returnPct": 44.61703517119133,
-          "outcomeTag": "probe_win",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 214.38,
-            "confidence": 45,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "QQQ",
-          "returnPct": 26.25327726065001,
-          "outcomeTag": "probe_win",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 568.31,
-            "confidence": 38,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "WTI",
-          "returnPct": 0,
-          "outcomeTag": "exploratory_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 72.8,
-            "confidence": 75,
-            "score": 82,
-            "tier": "exploratory",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
-        },
-        {
-          "tradeId": "SIM-7085215",
-          "symbol": "XAUUSD",
-          "returnPct": 0,
-          "outcomeTag": "probe_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 2612.4,
-            "confidence": 41,
-            "score": 55,
-            "tier": "probe",
-            "volatilityRegime": "normal",
-            "aiEngine": "rule"
-          },
-          "at": "2026-08-18T21:04:45.215Z"
         },
         {
           "tradeId": "SIM-1526529",
@@ -28387,5 +28141,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-20T08:42:55.785Z"
+  "updatedAt": "2026-08-20T09:00:48.279Z"
 }

@@ -22,13 +22,13 @@ Aurora.Controllers.runAnalysis = function runAnalysis() {
   $('desk-status').textContent = 'In esecuzione';
   $('run-analysis').innerHTML = 'Analisi…';
   Aurora.Views.renderAgents('running');
-  Aurora.Models.activity.unshift({ title: `Desk avviato su ${Aurora.Models.activeSymbol}`, detail: 'Brief distribuito a 7 agenti nel sandbox.', tag: 'RUN' });
+  Aurora.Models.logActivity({ title: `Desk avviato su ${Aurora.Models.activeSymbol}`, detail: 'Brief distribuito a 7 agenti nel sandbox.', tag: 'RUN' });
   Aurora.Views.renderActivity();
   window.setTimeout(() => {
     const signal = Aurora.Agents.supervisor.signalFor(Aurora.Models.activeSymbol);
     Aurora.Views.showAnalysis(signal);
     $('run-analysis').innerHTML = 'Rianalizza <span>↗</span>';
-    Aurora.Models.activity.unshift({ title: `Audit completato — ${Aurora.Models.activeSymbol}`, detail: `Decisione simulata con score ${signal.score}/100 e confidenza ${signal.confidence}%.`, tag: 'AUDIT' });
+    Aurora.Models.logActivity({ title: `Audit completato — ${Aurora.Models.activeSymbol}`, detail: `Decisione simulata con score ${signal.score}/100 e confidenza ${signal.confidence}%.`, tag: 'AUDIT' });
     Aurora.Views.renderActivity();
     Aurora.Views.showToast('Desk completato: il Risk Manager ha rivalutato l’ordine.', 'success');
   }, 950);
@@ -55,6 +55,7 @@ Aurora.Controllers.resetDemoAccount = function resetDemoAccount() {
   Models.persistDemoAccount();
   Models.analysisReady = false;
   Models.activity = [];
+  Models.persistActivity();
   $('order-stop-loss').value = '';
   $('order-take-profit').value = '';
   Aurora.Views.resetDesk();

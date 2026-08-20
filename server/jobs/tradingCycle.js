@@ -34,6 +34,10 @@ async function main() {
       ? { alphaVantageKey: null, ...research.researchData }
       : null, // niente storico di ricerca ancora: lascia agire il fallback al seed reale locale
     'aurora-history-v1': (research.historyCache && Object.keys(research.historyCache).length) ? research.historyCache : null,
+    // Bug reale corretto: prima activity non veniva mai re-iniettata, quindi ogni ciclo ripartiva
+    // da un array vuoto e data/account.json finiva per riflettere solo l'ultimo ciclo, mai una
+    // vera finestra scorrevole di 60 voci — vedi la stessa correzione in src/models/state.js.
+    'aurora-activity-v1': Array.isArray(account.activity) && account.activity.length ? account.activity : null,
     'aurora-ai-engine-v1': { mode: geminiKey ? 'gemini' : 'rule', geminiKey },
     'aurora-live-data-v1': { enabled: true, finnhubKey },
     'aurora-autopilot-mode-v1': { mode: account.autopilotMode || 'coverage' }
@@ -60,10 +64,10 @@ async function main() {
   Models.autopilotRunning = true;
 
   try { if (Models.liveData.enabled) await Aurora.Services.refreshLiveQuotes(); }
-  catch (e) { Models.activity.unshift({ title: 'Prezzi live non disponibili', detail: String(e && e.message || e), tag: 'JOB' }); }
+  catch (e) { Models.logActivity({ title: 'Prezzi live non disponibili', detail: String(e && e.message || e), tag: 'JOB' }); }
 
   try { if (Models.aiEngine.mode === 'gemini' && Models.aiEngine.geminiKey) await Aurora.Services.fetchGeminiSignals(); }
-  catch (e) { Models.activity.unshift({ title: 'Giudizio Gemini non disponibile, procedo con la regola tecnica', detail: String(e && e.message || e), tag: 'JOB' }); }
+  catch (e) { Models.logActivity({ title: 'Giudizio Gemini non disponibile, procedo con la regola tecnica', detail: String(e && e.message || e), tag: 'JOB' }); }
 
   // Refresh intraday ORB (vedi commento in testa a tradingCycle.js): SOLO historyCache['30m'] dei
   // simboli ORB, prima di generare i segnali di questo ciclo — altrimenti orb_breakout vedrebbe
@@ -77,7 +81,7 @@ async function main() {
         Models.historyCache[symbol] = Models.historyCache[symbol] || {};
         Models.historyCache[symbol]['30m'] = { closes: trimmed.map((c) => c.close), dates: null, candles: trimmed, fetchedAt: new Date().toISOString() };
       }
-    } catch (e) { Models.activity.unshift({ title: 'Aggiornamento intraday ORB non disponibile (' + symbol + ')', detail: String(e && e.message || e), tag: 'JOB' }); }
+    } catch (e) { Models.logActivity({ title: 'Aggiornamento intraday ORB non disponibile (' + symbol + ')', detail: String(e && e.message || e), tag: 'JOB' }); }
   }
 
   Aurora.Engine.runAutopilotCycle();

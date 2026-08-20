@@ -231,7 +231,7 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
     ? actions.join('; ')
     : `${Object.keys(instruments).length} titoli scansionati, nessun segnale sopra soglia confidenza ${SIMULATION.minimumConfidence}%.`;
 
-  Models.activity.unshift({ title: `Autopilot: ${action}`, detail, tag: actions.length ? 'AUTO' : 'HOLD' });
+  Models.logActivity({ title: `Autopilot: ${action}`, detail, tag: actions.length ? 'AUTO' : 'HOLD' });
   Aurora.Views.renderDemoAccount();
   Aurora.Views.renderWalletOverview();
   Aurora.Views.updateQuoteUI();
@@ -252,11 +252,11 @@ Aurora.Engine.setAutopilot = function setAutopilot(nextState) {
   Aurora.Utils.$('autopilot-status').textContent = Models.autopilotRunning ? 'In esecuzione' : 'Pausato';
   Aurora.Utils.$('autopilot-toggle').textContent = Models.autopilotRunning ? 'Pausa' : 'Avvia';
   if (Models.autopilotRunning) {
-    Models.activity.unshift({ title: 'Autopilot demo attivato', detail: `Ordini frazionari esclusivamente nel sandbox locale da ${formatMoney(Models.SIMULATION.accountSeed)}.`, tag: 'AUTO' });
+    Models.logActivity({ title: 'Autopilot demo attivato', detail: `Ordini frazionari esclusivamente nel sandbox locale da ${formatMoney(Models.SIMULATION.accountSeed)}.`, tag: 'AUTO' });
     Aurora.Engine.runAutopilotCycle();
     Models.autopilotTimer = window.setInterval(Aurora.Engine.runAutopilotCycle, Models.SIMULATION.autopilotCadenceMs);
   } else {
-    Models.activity.unshift({ title: 'Autopilot demo in pausa', detail: 'Nessun nuovo ordine simulato verrà generato.', tag: 'AUTO' });
+    Models.logActivity({ title: 'Autopilot demo in pausa', detail: 'Nessun nuovo ordine simulato verrà generato.', tag: 'AUTO' });
     Aurora.Utils.$('autopilot-copy').textContent = `Paper only · ciclo ogni 20 s · max ${formatMoney(Models.SIMULATION.maximumOrder)} per trade.`;
   }
   Aurora.Views.renderActivity();

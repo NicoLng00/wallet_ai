@@ -80,13 +80,13 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
       returnPct, outcomeTag, snapshot: closedSnapshot, at: record.at
     });
   }
-  Aurora.Models.activity.unshift({
+  Aurora.Models.logActivity({
     title: `${origin}: ${side === 'buy' ? 'acquisto' : 'vendita'} demo ${quantity.toFixed(6)} ${symbol}`,
     detail: `${formatMoney(notional)} · fill simulato ${formatMoney(price)} · ${record.id}`,
     tag: 'PAPER'
   });
   if (side === 'sell') {
-    Aurora.Models.activity.unshift({
+    Aurora.Models.logActivity({
       title: 'Feedback salvato nel calibratore',
       detail: `P&L realizzato ${formatMoney(realizedPnl)}. Il modello adatta solo il peso di confidenza locale.`,
       tag: 'LEARN'

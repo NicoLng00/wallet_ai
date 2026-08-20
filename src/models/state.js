@@ -110,6 +110,10 @@ window.Aurora = window.Aurora || {};
   const AI_ENGINE_KEY = 'aurora-ai-engine-v1';
   const AUTOPILOT_MODE_KEY = 'aurora-autopilot-mode-v1';
   const EDGE_MARGIN = 5;
+  // Trial della baseline casuale mediati nel walk-forward (runRandomBaselineSplit). Alzato da 30
+  // a 90 dopo aver misurato che a 30 il ~4% delle candidate a pochi trade cambiava fascia
+  // (validato/esplorativo/nessuno) su una semplice ri-esecuzione identica — vedi dataProviders.js.
+  const RANDOM_BASELINE_TRIALS = 90;
   const GEMINI_MODEL = 'gemini-3.5-flash';
 
   function makeDemoAccount() {
@@ -229,16 +233,43 @@ window.Aurora = window.Aurora || {};
     try { localStorage.setItem(AUTOPILOT_MODE_KEY, JSON.stringify({ mode: Aurora.Models.autopilotMode })); } catch { /* Persistence is optional. */ }
   }
 
+  // Bug reale trovato analizzando la produzione: activity non aveva MAI una chiave di
+  // persistenza — ogni job headless (server/jobs/*.js) e ogni ricarica di pagina in locale
+  // ripartivano da un array vuoto, mai dal precedente. Il campo "activity" scritto in
+  // data/account.json rifletteva quindi solo l'ultimo ciclo, mai una vera finestra scorrevole
+  // nonostante il taglio a 60 voci applicato altrove lasciasse intendere il contrario.
+  // logActivity centralizza unshift+taglio+persistenza in un solo punto, cosi' un futuro nuovo
+  // punto di log non puo' dimenticare la persistenza come e' successo qui.
+  const ACTIVITY_KEY = 'aurora-activity-v1';
+  const ACTIVITY_CAP = 60;
+  function loadActivity() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(ACTIVITY_KEY));
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  }
+  function persistActivity() {
+    try { localStorage.setItem(ACTIVITY_KEY, JSON.stringify(Aurora.Models.activity.slice(0, ACTIVITY_CAP))); } catch { /* Persistence is optional. */ }
+  }
+  function logActivity(entry) {
+    Aurora.Models.activity.unshift(entry);
+    if (Aurora.Models.activity.length > ACTIVITY_CAP) Aurora.Models.activity.length = ACTIVITY_CAP;
+    persistActivity();
+  }
+
   Aurora.Models = {
     // Configurazione statica
-    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, ORB_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, GEMINI_MODEL,
+    instruments, FINNHUB_SYMBOLS, COINGECKO_IDS, ALPHA_VANTAGE_STOCK_SYMBOLS, ORB_SYMBOLS, deskAgents, SIMULATION, EDGE_MARGIN, RANDOM_BASELINE_TRIALS, GEMINI_MODEL,
 
     // Stato UI
     activeSymbol: 'AAPL',
     activeSide: 'buy',
     activeTimeframe: '15m',
     analysisReady: false,
-    activity: [],
+    activity: loadActivity(),
+    logActivity, persistActivity,
     selectedTab: 'activity',
     orderCount: 0,
     autopilotRunning: false,
