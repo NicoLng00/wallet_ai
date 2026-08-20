@@ -69,8 +69,13 @@ window.Aurora = window.Aurora || {};
   ];
 
   const SIMULATION = {
-    accountSeed: 10,
-    maximumOrder: 2.5,
+    // Portato da 10 a 50 su richiesta esplicita (sessione del 2026-08-20): stesso 25% di
+    // maximumPositionPercent, stesso stop/target/drawdown — piu' capitale disponibile, non un
+    // edge diverso. Il conto GIA' in produzione (data/account.json) e' stato aggiornato a parte
+    // con un deposito reale (+40€ sul cash esistente, mai un reset del P&L accumulato) — vedi
+    // git log per il commit dedicato.
+    accountSeed: 50,
+    maximumOrder: 12.5,
     maximumPositionPercent: 25,
     maximumDrawdownPercent: 20,
     autopilotCadenceMs: 20000,

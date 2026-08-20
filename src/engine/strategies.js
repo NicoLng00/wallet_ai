@@ -69,6 +69,31 @@ Aurora.Engine.STRATEGIES = {
       return price > donchianHigh && todayVolume > avgVolume ? 'bullish' : 'neutral';
     }
   },
+  // Strategia custom: invece di una singola famiglia di indicatori (le altre in questo file usano
+  // solo trend, o solo momentum, o solo volatilita'), richiede l'ACCORDO di tre famiglie
+  // indipendenti insieme — trend (SMA50), momentum (istogramma MACD positivo) e un filtro contro
+  // l'ingresso su un movimento gia' esaurito (RSI in una fascia piu' stretta di sma_rsi, 45-65
+  // invece di 40-70, e prezzo sotto la banda di Bollinger superiore). Ipotesi: meno segnali ma
+  // ciascuno confermato da piu' angolazioni indipendenti dovrebbe reggere meglio fuori campione
+  // di un singolo indicatore preso da solo — DA VERIFICARE con lo stesso identico gate
+  // walk-forward di ogni altra strategia qui, nessuna scorciatoia perche' e' quella "nostra".
+  hybrid_confluence: {
+    id: 'hybrid_confluence',
+    label: 'Ibrido custom: trend + momentum + filtro esaurimento',
+    requiresOhlc: false,
+    signal({ closes }) {
+      const sma = Aurora.Engine.computeSMA(closes, 50);
+      const rsi = Aurora.Engine.computeRSI(closes, 14);
+      const macd = Aurora.Engine.computeMACD(closes);
+      const bands = Aurora.Engine.computeBollingerBands(closes, 20, 2);
+      if (sma === null || rsi === null || !macd || !bands) return 'neutral';
+      const price = closes[closes.length - 1];
+      const trendOk = price > sma;
+      const momentumOk = macd.histogram > 0;
+      const notOverextended = rsi >= 45 && rsi <= 65 && price < bands.upper;
+      return trendOk && momentumOk && notOverextended ? 'bullish' : 'neutral';
+    }
+  },
   orb_breakout: {
     id: 'orb_breakout',
     label: 'ORB — Opening Range Breakout (30min, apertura NY)',

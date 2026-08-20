@@ -367,7 +367,7 @@ Aurora.Services.fetchHistoricalCloses = async function fetchHistoricalCloses(sym
 async function buildCandidateJobs(symbol) {
   const Models = Aurora.Models;
   const jobs = [];
-  const CLOSES_STRATEGIES = ['sma_rsi', 'macd_cross', 'bollinger_reversion', 'donchian_breakout'];
+  const CLOSES_STRATEGIES = ['sma_rsi', 'macd_cross', 'bollinger_reversion', 'donchian_breakout', 'hybrid_confluence'];
 
   // Tutte le strategie sullo STESSO (simbolo, timeframe) condividono ora un unico historyEntry
   // completo (closes + dates + candles, quando disponibili) invece di ricostruirne uno ciascuna:
@@ -395,7 +395,7 @@ async function buildCandidateJobs(symbol) {
     try {
       const hourly = await Aurora.Services.fetchCoinGeckoHourly(symbol);
       const hourlyEntry = { closes: hourly.closes, dates: hourly.dates, candles: null };
-      ['sma_rsi', 'macd_cross'].forEach((strategyId) => {
+      ['sma_rsi', 'macd_cross', 'hybrid_confluence'].forEach((strategyId) => {
         jobs.push({ candidateKey: `${strategyId}@1h`, strategyId, timeframe: '1h', closes: hourly.closes, candles: null, historyEntry: hourlyEntry });
       });
     } catch { /* orario opzionale */ }
@@ -415,8 +415,11 @@ async function buildCandidateJobs(symbol) {
 
   // orb_breakout: unica strategia del progetto che serve dati intraday con timestamp completo
   // (identifica la barra 09:30 NY) invece di chiusure giornaliere — vedi engine/strategies.js.
-  // Scope deciso esplicitamente: ES=F, SPY, QQQ. Fonte opzionale come l'orario/OHLC crypto sopra:
-  // se Yahoo non risponde, il simbolo resta comunque coperto dai candidati giornalieri.
+  // Scope deciso esplicitamente: ES=F, SPY, QQQ, EURUSD. Fonte opzionale come l'orario/OHLC crypto
+  // sopra: se Yahoo non risponde, il simbolo resta comunque coperto dai candidati giornalieri.
+  // Le CLOSES_STRATEGIES (incluso il nuovo ibrido) girano anche qui, sullo stesso storico 30m gia'
+  // scaricato per ORB — nessuna fonte dati nuova, solo piu' ipotesi testate sugli stessi dati reali,
+  // per capire onestamente se esiste un edge intraday oltre al solo opening range.
   if (Models.ORB_SYMBOLS?.includes(symbol)) {
     try {
       const intraday = await Aurora.Services.fetchYahooIntraday(symbol, '30m', '60d');
@@ -424,6 +427,9 @@ async function buildCandidateJobs(symbol) {
         const orbCloses = intraday.candles.map((c) => c.close);
         const historyEntry = { closes: orbCloses, dates: null, candles: intraday.candles };
         jobs.push({ candidateKey: 'orb_breakout@30m', strategyId: 'orb_breakout', timeframe: '30m', closes: orbCloses, candles: intraday.candles, historyEntry });
+        [...CLOSES_STRATEGIES, 'volume_breakout', 'engulfing'].forEach((strategyId) => {
+          jobs.push({ candidateKey: `${strategyId}@30m`, strategyId, timeframe: '30m', closes: orbCloses, candles: intraday.candles, historyEntry });
+        });
       }
     } catch { /* intraday opzionale: ORB salta, il resto della copertura resta intatto */ }
   }
