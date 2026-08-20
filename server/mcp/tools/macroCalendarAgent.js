@@ -8,10 +8,14 @@ function unavailable(reason) {
 // prossimi giorni — a differenza di fundamentalAgent.js (notizie per singolo titolo azionario),
 // questo si applica a QUALUNQUE simbolo: FOMC/CPI/NFP muovono EURUSD/XAUUSD/ES/TLT/WTI quanto o
 // piu' di un titolo azionario, ed erano l'unico contesto reale del progetto a cui il modello non
-// aveva mai accesso. Endpoint verificato esistere (risposta strutturata di errore-chiave, non
-// 404, con una chiave non valida) — la forma esatta della risposta NON e' stata verificata con
-// dati reali in sessione (nessuna chiave Finnhub disponibile in locale): parsing difensivo,
-// degrada a "non disponibile" se la forma non e' quella attesa, mai un dato inventato.
+// aveva mai accesso.
+// VERIFICATO CON UNA CHIAVE FINNHUB REALE (piano gratuito): l'endpoint risponde 403 "You don't
+// have access to this resource" — /calendar/economic e' riservato ai piani a pagamento di
+// Finnhub, non solo temporaneamente non raggiungibile. Con una chiave free questo agente e' quindi
+// SEMPRE available:false in pratica, non per un bug ma per un limite reale del piano gratuito —
+// il fallback sotto (`!res.ok -> unavailable`) lo gestisce correttamente, senza crash e senza dati
+// inventati, ma va dichiarato onestamente nella documentazione invece di presentarlo come un
+// agente con dati reali sempre disponibili.
 // Solo eventi ad alto impatto dichiarato da Finnhub (impact: 3, la scala e' 1-3) — un calendario
 // pieno di dati macro minori sarebbe rumore, non evidenza.
 export const macroCalendarAgentTool = {

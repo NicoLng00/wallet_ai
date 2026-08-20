@@ -56,8 +56,10 @@ export const fundamentalAgentTool = {
     if (!finnhubKey) return unavailable('Nessuna chiave Finnhub disponibile per le notizie.');
     // Earnings imminenti (Finnhub /calendar/earnings, stessa chiave) — evidenza ADDITIVA, mai un
     // motivo per far fallire l'intero agente se le notizie sono disponibili ma il calendario no
-    // (o viceversa). Forma esatta della risposta non verificata con dati reali in sessione
-    // (nessuna chiave Finnhub locale) — parsing difensivo, silenziosamente assente se diversa.
+    // (o viceversa). Forma della risposta VERIFICATA con una chiave Finnhub reale in sessione:
+    // {"earningsCalendar":[{symbol,date,hour,quarter,year,epsEstimate,epsActual,revenueEstimate,
+    // revenueActual}]} — a differenza di /calendar/economic (vedi macroCalendarAgent.js), questo
+    // endpoint e' incluso nel piano gratuito e ha risposto 200 con dati reali.
     const earningsPromise = (async () => {
       try {
         const from = new Date().toISOString().slice(0, 10);

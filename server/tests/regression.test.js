@@ -71,11 +71,18 @@ test('survivesLiveTrackRecord: campione live sotto la soglia minima -> si fida a
 // una seconda volta, corrompendolo verso ~1.0 — un crollo apparente del ~14% dalla quotazione
 // reale (~1.16) che avrebbe sfondato uno stop loss reale (ATR-based, tipicamente a ~0.4% di
 // distanza) per un motivo del tutto fittizio. Trovato testando il comportamento con EURUSD.
+// Nota: dopo il fix con la chiave Finnhub reale (OANDA:* rifiuta con 403 su questo piano),
+// EURUSD e usdToEurRate sono passati da Finnhub a fetchUsdToEurRate (Frankfurter con fallback
+// open.er-api.com, vedi dataProviders.js) — il test mocka fetchUsdToEurRate invece di
+// fetchFinnhubQuote('OANDA:USD_EUR'/'OANDA:EUR_USD').
 const dataProvidersAurora = loadEngine([
   'src/utils.js', 'src/config.js', 'src/models/seedData.js', 'src/models/state.js', 'src/services/dataProviders.js'
 ]);
+// I test successivi sovrascrivono fetchUsdToEurRate come mock per refreshLiveQuotes — la vera
+// implementazione (con la logica di fallback) va salvata subito, prima che venga rimpiazzata.
+const realFetchUsdToEurRate = dataProvidersAurora.Services.fetchUsdToEurRate;
 
-test('refreshLiveQuotes: EURUSD (gia\' un tasso di cambio) non viene convertito una seconda volta', async () => {
+function setupLiveQuotesTest() {
   const Models = dataProvidersAurora.Models;
   dataProvidersAurora.Views = new Proxy({}, { get: () => function () {} });
   dataProvidersAurora.Utils.$ = () => ({ textContent: '', classList: { toggle() {}, add() {}, remove() {} } });
@@ -84,17 +91,64 @@ test('refreshLiveQuotes: EURUSD (gia\' un tasso di cambio) non viene convertito 
   Models.liveChangePercent = {};
   Models.liveFetchInFlight = false;
   Models.liveCooldownUntil = 0;
-  dataProvidersAurora.Services.fetchFinnhubQuote = async (apiSymbol) => {
-    if (apiSymbol === 'OANDA:USD_EUR') return { price: 0.862, previousClose: 0.860 };
-    if (apiSymbol === 'OANDA:EUR_USD') return { price: 1.1609, previousClose: 1.1580 };
-    return { price: 100, previousClose: 99 };
-  };
+  Models.usdToEurRate = 1;
+  Models.usdToEurAvailable = false;
   dataProvidersAurora.Services.fetchCoinGeckoPrices = async () => ({});
+  return Models;
+}
+
+test('refreshLiveQuotes: EURUSD (gia\' un tasso di cambio, ora via Frankfurter) non viene convertito una seconda volta', async () => {
+  const Models = setupLiveQuotesTest();
+  dataProvidersAurora.Services.fetchUsdToEurRate = async () => 0.862;
+  dataProvidersAurora.Services.fetchFinnhubQuote = async () => ({ price: 100, previousClose: 99 });
 
   await dataProvidersAurora.Services.refreshLiveQuotes();
 
-  assert.ok(Math.abs(Models.demoAccount.market.EURUSD - 1.1609) < 1e-9, 'EURUSD deve restare la quotazione reale, non ~1.0 (corrotta dalla doppia conversione)');
+  assert.ok(Math.abs(Models.demoAccount.market.EURUSD - (1 / 0.862)) < 1e-9, 'EURUSD deve essere il reciproco esatto del tasso USD/EUR, non ri-convertita una seconda volta');
   assert.ok(Math.abs(Models.demoAccount.market.WTI - 86.2) < 1e-9, 'un asset genuinamente quotato in USD (WTI) deve invece restare convertito correttamente');
+});
+
+// --- Bug 5: il piano Finnhub gratuito rifiuta con HTTP 403 i soli simboli OANDA: (materie
+// prime/forex) pur restando valido per le azioni sullo stesso piano — scoperto testando con una
+// chiave reale (EURUSD/WTI/XAUUSD 403, AAPL/TLT 200 sulla STESSA chiave). Il codice trattava 403
+// come "chiave invalida" a livello globale, innescando un cooldown di 60s che bloccava anche i
+// simboli funzionanti per un problema che riguardava solo 3 simboli specifici.
+test('refreshLiveQuotes: un 403 su un simbolo specifico non deve invalidare l\'intera chiave se altri simboli riescono', async () => {
+  const Models = setupLiveQuotesTest();
+  dataProvidersAurora.Services.fetchUsdToEurRate = async () => 0.862;
+  dataProvidersAurora.Services.fetchFinnhubQuote = async (apiSymbol) => {
+    if (apiSymbol === 'OANDA:XAU_USD' || apiSymbol === 'OANDA:WTICO_USD') throw new Error('unauthorized');
+    return { price: 100, previousClose: 99 };
+  };
+
+  await dataProvidersAurora.Services.refreshLiveQuotes();
+
+  assert.equal(Models.liveStatus.AAPL, 'live', 'i simboli che rispondono davvero devono restare vivi');
+  assert.equal(Models.liveStatus.WTI, 'error', 'il simbolo senza diritti resta onestamente in errore');
+  assert.equal(Models.liveCooldownUntil, 0, 'nessun cooldown globale: il 403 era per-simbolo, non un problema della chiave');
+});
+
+test('refreshLiveQuotes: se TUTTI i simboli Finnhub falliscono con unauthorized, la chiave e\' davvero considerata invalida', async () => {
+  const Models = setupLiveQuotesTest();
+  dataProvidersAurora.Services.fetchUsdToEurRate = async () => 0.862;
+  dataProvidersAurora.Services.fetchFinnhubQuote = async () => { throw new Error('unauthorized'); };
+
+  await dataProvidersAurora.Services.refreshLiveQuotes();
+
+  assert.ok(Models.liveCooldownUntil > 0, 'zero successi Finnhub su tutto il batch -> chiave davvero invalida, cooldown corretto');
+});
+
+// --- fetchUsdToEurRate: verificato in sessione con dati reali che Frankfurter puo' essere
+// irraggiungibile da alcune reti (TLS intercettato da un proxy aziendale) pur essendo online per
+// altri — deve ricadere su open.er-api.com invece di lasciare il tasso a 1 (il default che ha
+// sovrastimato ogni prezzo USD->EUR del ~16-17% finche' la fonte Finnhub era rotta).
+test('fetchUsdToEurRate: se Frankfurter fallisce, ricade su open.er-api.com invece di restare senza tasso', async () => {
+  dataProvidersAurora.Services.fetchFrankfurterUsdEurRate = async () => { throw new Error('network'); };
+  dataProvidersAurora.Services.fetchOpenErApiUsdEurRate = async () => 0.858;
+
+  const rate = await realFetchUsdToEurRate();
+
+  assert.equal(rate, 0.858, 'il fallback deve fornire comunque un tasso reale, non propagare l\'errore');
 });
 
 test('ruleSignalFor: una candidata validata resta in fascia "validata" anche se neutra oggi', () => {

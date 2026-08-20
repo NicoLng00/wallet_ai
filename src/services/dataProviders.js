@@ -61,6 +61,48 @@ Aurora.Services.fetchCoinGeckoPrices = async function fetchCoinGeckoPrices() {
   return res.json();
 };
 
+// Bug reale trovato testando con una chiave Finnhub vera: il piano gratuito rifiuta con HTTP 403
+// ogni simbolo prefissato OANDA: (EUR_USD, USD_EUR, XAU_USD, WTICO_USD) — "unauthorized" per
+// mancanza di diritti su quello specifico simbolo, non perche' la chiave sia invalida (le azioni
+// sullo stesso piano, es. AAPL/TLT, rispondono 200 regolarmente). Il tasso USD/EUR e la quotazione
+// EURUSD stessa passano quindi da Finnhub a due fonti gratuite senza chiave, con fallback tra loro
+// per solidita' (nessun punto singolo di guasto): Frankfurter (BCE) come primaria, open.er-api.com
+// (exchangerate-api.com) se la prima non risponde — durante la verifica reale in sessione,
+// Frankfurter e' risultata irraggiungibile da questa rete (TLS intercettato da un proxy aziendale,
+// "self-signed certificate in certificate chain" anche con fetch nativo di Node, non solo curl),
+// mentre open.er-api.com ha risposto 200 in modo pulito: da qui la necessita' del fallback invece
+// di fidarsi di un'unica fonte non verificabile in ogni ambiente.
+// EURUSD e usdToEurRate sono la stessa informazione vista dai due lati (EURUSD = quanti USD per 1
+// EUR = il reciproco esatto di "quanti EUR per 1 USD"), quindi un'unica chiamata basta per entrambi
+// e restano coerenti fra loro per costruzione, senza arrotondamenti indipendenti.
+// Oro e petrolio (XAUUSD/WTI) restano invece su Finnhub: nessuna fonte gratuita equivalente
+// trovata finora per le materie prime — restano onestamente 'error' quando il piano le rifiuta.
+Aurora.Services.fetchFrankfurterUsdEurRate = async function fetchFrankfurterUsdEurRate() {
+  const res = await fetchWithTimeout('https://api.frankfurter.app/latest?from=USD&to=EUR');
+  if (!res.ok) throw new Error(`http-${res.status}`);
+  const data = await res.json();
+  const rate = Number(data?.rates?.EUR);
+  if (!rate || rate <= 0) throw new Error('no-rate');
+  return rate;
+};
+
+Aurora.Services.fetchOpenErApiUsdEurRate = async function fetchOpenErApiUsdEurRate() {
+  const res = await fetchWithTimeout('https://open.er-api.com/v6/latest/USD');
+  if (!res.ok) throw new Error(`http-${res.status}`);
+  const data = await res.json();
+  const rate = Number(data?.rates?.EUR);
+  if (!rate || rate <= 0) throw new Error('no-rate');
+  return rate;
+};
+
+Aurora.Services.fetchUsdToEurRate = async function fetchUsdToEurRate() {
+  try {
+    return await fetchWithRetry(() => Aurora.Services.fetchFrankfurterUsdEurRate(), 2, 300);
+  } catch {
+    return await fetchWithRetry(() => Aurora.Services.fetchOpenErApiUsdEurRate(), 2, 300);
+  }
+};
+
 // Bug reale trovato e riprodotto in sessione (mai visibile finora solo perche' la chiamata
 // Finnhub per EURUSD non era mai riuscita in produzione): EURUSD e' GIA' un tasso di cambio
 // (quanti USD per 1 EUR) restituito da Finnhub — a differenza di azioni/materie prime quotate
@@ -81,34 +123,48 @@ Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
   let rateLimited = false;
   let unauthorized = false;
   try {
-    const finnhubEntries = Object.entries(Models.FINNHUB_SYMBOLS);
+    // EURUSD esclusa dal batch Finnhub: quotata via Frankfurter insieme al tasso di conversione
+    // (vedi commento su fetchFrankfurterUsdEurRate) — mai piu' instradata su OANDA:EUR_USD, che
+    // 403a su questo piano.
+    const finnhubEntries = Object.entries(Models.FINNHUB_SYMBOLS).filter(([symbol]) => !Models.FX_RATE_SYMBOLS.has(symbol));
     const [fxResult, ...finnhubResults] = await Promise.allSettled([
-      Aurora.Services.fetchFinnhubQuote('OANDA:USD_EUR'),
+      Aurora.Services.fetchUsdToEurRate(),
       ...finnhubEntries.map(([, apiSymbol]) => Aurora.Services.fetchFinnhubQuote(apiSymbol))
     ]);
 
     if (fxResult.status === 'fulfilled') {
-      Models.usdToEurRate = fxResult.value.price;
+      const usdToEurRate = fxResult.value;
+      Models.usdToEurRate = usdToEurRate;
       Models.usdToEurAvailable = true;
+      // EURUSD (quanti USD per 1 EUR) = reciproco esatto di usdToEurRate (quanti EUR per 1 USD).
+      Models.demoAccount.market.EURUSD = 1 / usdToEurRate;
+      Models.liveStatus.EURUSD = 'live';
+      Models.liveChangePercent.EURUSD = null;
     } else {
       Models.usdToEurAvailable = false;
-      if (fxResult.reason?.message === 'rate-limit') rateLimited = true;
-      if (fxResult.reason?.message === 'unauthorized') unauthorized = true;
+      Models.liveStatus.EURUSD = 'error';
     }
 
+    // Il piano Finnhub puo' rifiutare simboli specifici (403, es. materie prime OANDA:) pur
+    // restando valido per il resto: la chiave si considera davvero invalida solo se NESSUNA
+    // chiamata Finnhub del batch va a buon fine (almeno un successo prova che la chiave funziona).
+    let finnhubOk = 0;
+    let finnhubUnauthorized = 0;
     finnhubResults.forEach((result, index) => {
       const [symbol] = finnhubEntries[index];
       if (result.status === 'fulfilled') {
+        finnhubOk += 1;
         const { price, previousClose } = result.value;
-        Models.demoAccount.market[symbol] = Models.FX_RATE_SYMBOLS.has(symbol) ? price : price * Models.usdToEurRate;
+        Models.demoAccount.market[symbol] = price * Models.usdToEurRate;
         Models.liveStatus[symbol] = 'live';
         Models.liveChangePercent[symbol] = previousClose ? ((price - previousClose) / previousClose) * 100 : null;
       } else {
         Models.liveStatus[symbol] = 'error';
         if (result.reason?.message === 'rate-limit') rateLimited = true;
-        if (result.reason?.message === 'unauthorized') unauthorized = true;
+        if (result.reason?.message === 'unauthorized') finnhubUnauthorized += 1;
       }
     });
+    if (finnhubUnauthorized > 0 && finnhubOk === 0 && finnhubEntries.length > 0) unauthorized = true;
 
     try {
       const prices = await Aurora.Services.fetchCoinGeckoPrices();
