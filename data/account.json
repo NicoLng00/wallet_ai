@@ -1,8 +1,8 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 9.317171906104154,
-    "highWater": 10.008724853652845,
+    "cash": 49.31717190610415,
+    "highWater": 50.00872485365284,
     "positions": {
       "WTI": {
         "quantity": 0.005494505494505495,
@@ -267,6 +267,11 @@
   },
   "activity": [
     {
+      "title": "Deposito demo",
+      "detail": "Aggiunti 40€ demo su richiesta esplicita (conto portato da 10€ a 50€) — nessun trade eseguito, solo capitale disponibile. Stesso 25% di esposizione massima, stesso rischio per posizione.",
+      "tag": "DEPOSITO"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "12 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -324,5 +329,5 @@
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-20T14:56:36.438Z"
+  "updatedAt": "2026-08-20T14:59:10.881Z"
 }
