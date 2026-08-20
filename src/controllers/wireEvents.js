@@ -103,7 +103,11 @@ Aurora.Controllers.wireEvents = function wireEvents() {
   document.querySelectorAll('.side-option').forEach((button) => button.addEventListener('click', () => Controllers.setSide(button.dataset.side)));
   document.querySelectorAll('.tab').forEach((button) => button.addEventListener('click', () => {
     Models.selectedTab = button.dataset.tab;
-    document.querySelectorAll('.tab').forEach((tab) => tab.classList.toggle('active', tab === button));
+    document.querySelectorAll('.tab').forEach((tab) => {
+      const isActive = tab === button;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+    });
     Aurora.Views.renderActivity();
   }));
   document.querySelectorAll('.time-button').forEach((button) => button.addEventListener('click', () => {
@@ -181,7 +185,11 @@ Aurora.Controllers.wireEvents = function wireEvents() {
   });
   $('view-positions').addEventListener('click', () => {
     Models.selectedTab = 'positions';
-    document.querySelectorAll('.tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.tab === 'positions'));
+    document.querySelectorAll('.tab').forEach((tab) => {
+      const isActive = tab.dataset.tab === 'positions';
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-selected', String(isActive));
+    });
     Aurora.Views.renderActivity();
     document.querySelector('.activity-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });

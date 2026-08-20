@@ -168,8 +168,8 @@
         </section>
 
         <section class="panel activity-panel">
-          <div class="activity-tabs" role="tablist"><button class="tab active" data-tab="activity">Activity & audit <span id="audit-count">0</span></button><button class="tab" data-tab="positions">Posizioni <span id="position-count">0</span></button><button class="tab" data-tab="notes">Note di ricerca</button></div>
-          <div id="activity-content" class="activity-content"></div>
+          <div class="activity-tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="activity">Activity & audit <span id="audit-count">0</span></button><button class="tab" role="tab" aria-selected="false" data-tab="positions">Posizioni <span id="position-count">0</span></button><button class="tab" role="tab" aria-selected="false" data-tab="notes">Note di ricerca</button></div>
+          <div id="activity-content" class="activity-content" aria-live="polite" aria-atomic="false"></div>
         </section>
 
         <section class="panel wallet-panel" id="portfolio">
@@ -190,7 +190,7 @@
         <section class="panel research-panel" id="research">
           <div class="panel-title compact"><div><p class="eyebrow">RESEARCH</p><h2>Backtest &amp; validazione segnali</h2></div><span id="research-status" class="status-pill idle">Nessun backtest</span></div>
           <div class="research-controls">
-            <select id="research-symbol"></select>
+            <select id="research-symbol" aria-label="Simbolo per il backtest"></select>
             <button id="run-backtest" class="outline-button">Scarica storico + backtest</button>
           </div>
           <div id="research-results" class="research-results"></div>
