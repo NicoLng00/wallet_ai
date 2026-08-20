@@ -12,14 +12,20 @@ Aurora.Engine.registerOutcome = function registerOutcome(realizedPnl) {
 };
 
 Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, quantity, origin = 'Supervisor', stopLoss = null, takeProfit = null, strategyKey = null, decisionSnapshot = null }) {
-  const { demoAccount } = Aurora.Models;
+  const { demoAccount, SIMULATION } = Aurora.Models;
   const { formatMoney } = Aurora.Utils;
   const price = Aurora.Engine.getDemoPrice(symbol);
   const notional = quantity * price;
+  // Contabilita' a margine (leva simulata, SIMULATION.leverageMultiplier): il cash si muove solo
+  // per il margine impegnato (notional/leva) e per il P&L realizzato, MAI per il notional pieno —
+  // stessa meccanica di un conto CFD/forex reale. Vedi il commento su leverageMultiplier in
+  // models/state.js per il perche' (senza, il tetto di leva non avrebbe mai effetto pratico) e
+  // engine/market.js (getMetrics) per come l'equity resta corretta di conseguenza.
+  const marginRequired = notional / SIMULATION.leverageMultiplier;
   let realizedPnl = 0;
   let closedSnapshot = null;
   if (side === 'buy') {
-    if (notional > demoAccount.cash + 0.0000001) return false;
+    if (marginRequired > demoAccount.cash + 0.0000001) return false;
     const current = demoAccount.positions[symbol] || { quantity: 0, averagePrice: 0, stopLoss: null, takeProfit: null, strategyKey: null, decisionSnapshot: null, openedAt: null };
     const nextQuantity = current.quantity + quantity;
     demoAccount.positions[symbol] = {
@@ -37,7 +43,7 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
       // impedendo sia nuovi ingressi normali sia il fallback "sonda forzata" giornaliero.
       openedAt: current.openedAt || new Date().toISOString()
     };
-    demoAccount.cash -= notional;
+    demoAccount.cash -= marginRequired;
   } else {
     const current = demoAccount.positions[symbol];
     if (!current || quantity > current.quantity + 0.0000001) return false;
@@ -46,7 +52,11 @@ Aurora.Engine.executePaperTrade = function executePaperTrade({ symbol, side, qua
     if (current.strategyKey) Aurora.Engine.recordStrategyOutcome(symbol, current.strategyKey, returnPct);
     closedSnapshot = current.decisionSnapshot || null;
     current.quantity -= quantity;
-    demoAccount.cash += notional;
+    // Restituisce il margine impegnato per la quota chiusa (valutato al prezzo di CARICO, e' quello
+    // davvero bloccato all'apertura) piu'/meno il P&L realizzato — mai il notional pieno al prezzo
+    // di uscita, che ri-accrediterebbe anche la parte a leva mai davvero debitata dal cash.
+    const marginReleased = (current.averagePrice * quantity) / SIMULATION.leverageMultiplier;
+    demoAccount.cash += marginReleased + realizedPnl;
     if (current.quantity < 0.0000001) delete demoAccount.positions[symbol];
     else demoAccount.positions[symbol] = current;
     Aurora.Engine.registerOutcome(realizedPnl);

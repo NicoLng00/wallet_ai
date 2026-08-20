@@ -146,8 +146,13 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
       const price = Aurora.Engine.getDemoPrice(opportunity.symbol);
       const metrics = Aurora.Engine.getMetrics();
       const isProbe = opportunity.signal.tier === 'probe';
+      // Stop/target calcolati PRIMA della taglia (non dopo, come prima di questa modifica): la
+      // leva puo' ampliare il notional fino a maxRiskPerTradePercent% dell'equity, ma solo
+      // conoscendo la distanza reale dello stop — altrimenti il tetto "regola d'oro" sarebbe
+      // ineseguibile (vedi models/state.js SIMULATION.maxRiskPerTradePercent).
+      const { stopLoss, takeProfit } = computeStopTarget(opportunity.symbol, price, opportunity.signal);
       // Le sonde non passano dal fattore-confidenza normale (la loro confidenza e' bassa per
-      // definizione, non misura un edge): restano comunque al minimo del fattore per non sparire.
+      // definizione, non misura un edge): restano comunque al minimo del fattore non per sparire.
       const confidenceFactor = isProbe ? 0.4 : clamp((opportunity.signal.confidence - SIMULATION.minimumConfidence) / (100 - SIMULATION.minimumConfidence), 0.4, 1);
       // Taglia ridotta per i candidati esplorativi/sonda: si prende il rischio, ma in proporzione
       // a quanto e' ancora incerto — mai un ingresso a piena taglia su un edge non confermato.
@@ -157,9 +162,20 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
       // engine/rules.js liveConfidenceFactor): riduce ulteriormente la taglia se il track record
       // recente e' gia' negativo, prima ancora del taglio netto a 10 trade.
       const liveFactor = Aurora.Engine.liveConfidenceFactor(opportunity.symbol, opportunity.signal.candidateKey);
-      const notional = Math.min(SIMULATION.maximumOrder, demoAccount.cash * 0.25, metrics.equity * 0.25) * confidenceFactor * tierFactor * liveFactor;
+      // Leva simulata: lo stesso 25% di cash/equity ora regge fino a leverageMultiplier volte il
+      // notional (vedi engine/execution.js/market.js per la contabilita' a margine che rende
+      // questo tetto davvero raggiungibile, non solo teorico).
+      const leverage = SIMULATION.leverageMultiplier;
+      const leveragedCap = Math.min(SIMULATION.maximumOrder * leverage, demoAccount.cash * 0.25 * leverage, metrics.equity * 0.25 * leverage);
+      // "Regola d'oro": rischio massimo (sul notional pieno, leva inclusa) = maxRiskPerTradePercent%
+      // dell'equity, qualunque sia lo stop usato (fisso, ATR, o l'opening range di orb_breakout,
+      // potenzialmente molto piu' largo) — mai bypassabile alzando solo la leva.
+      const stopDistancePct = stopLoss > 0 && price > 0 ? ((price - stopLoss) / price) * 100 : null;
+      const maxRiskNotional = stopDistancePct && stopDistancePct > 0
+        ? (metrics.equity * SIMULATION.maxRiskPerTradePercent / 100) / (stopDistancePct / 100)
+        : leveragedCap;
+      const notional = Math.min(leveragedCap, maxRiskNotional) * confidenceFactor * tierFactor * liveFactor;
       if (notional < 0.01) continue;
-      const { stopLoss, takeProfit } = computeStopTarget(opportunity.symbol, price, opportunity.signal);
       const decisionSnapshot = {
         strategyKey: opportunity.signal.candidateKey || null,
         entryPrice: price,
@@ -206,6 +222,11 @@ Aurora.Engine.runAutopilotCycle = function runAutopilotCycle() {
       const price = Aurora.Engine.getDemoPrice(symbol);
       const metrics = Aurora.Engine.getMetrics();
       const liveFactor = Aurora.Engine.liveConfidenceFactor(symbol, signal.candidateKey);
+      // Leva NON applicata qui, deliberatamente: questo ingresso non legge nemmeno una direzione
+      // tecnica oggi (vedi commento sopra) — esiste solo per garantire un episodio al Learning
+      // Loop, mai per catturare un edge. Amplificarne il rischio con la leva andrebbe contro lo
+      // scopo stesso della sonda forzata (taglia minima, gia' ridotta da forcedSizeFactor e da
+      // questo *0.3 aggiuntivo).
       const notional = Math.min(SIMULATION.maximumOrder, demoAccount.cash * 0.25, metrics.equity * 0.25) * 0.3 * SIMULATION.forcedSizeFactor * liveFactor;
       if (notional >= 0.01) {
         const { stopLoss, takeProfit } = computeStopTarget(symbol, price, signal);

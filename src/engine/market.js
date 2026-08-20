@@ -9,9 +9,23 @@ Aurora.Engine.getDemoPrice = function getDemoPrice(symbol) {
 
 Aurora.Engine.getMetrics = function getMetrics() {
   const demoAccount = Aurora.Models.demoAccount;
-  const positionValue = Object.entries(demoAccount.positions)
-    .reduce((sum, [symbol, position]) => sum + position.quantity * Aurora.Engine.getDemoPrice(symbol), 0);
-  const equity = demoAccount.cash + positionValue;
+  const leverage = Aurora.Models.SIMULATION.leverageMultiplier;
+  // positionValue resta il notional PIENO mark-to-market (serve invariato a exposure, che con la
+  // leva puo' e deve superare il 100% — e' esattamente cosa vuol dire "leva"). L'equity pero' NON
+  // e' piu' cash + positionValue: quel notional include la parte presa a leva, mai davvero
+  // debitata dal cash (vedi engine/execution.js) — sommarla di nuovo gonfierebbe l'equity in modo
+  // fittizio. L'equity corretta e' cash + margine ancora impegnato nelle posizioni aperte (valutato
+  // al prezzo di CARICO, quello davvero bloccato) + P&L non realizzato sul prezzo corrente.
+  let positionValue = 0;
+  let marginTiedUp = 0;
+  let unrealizedPnl = 0;
+  Object.entries(demoAccount.positions).forEach(([symbol, position]) => {
+    const price = Aurora.Engine.getDemoPrice(symbol);
+    positionValue += position.quantity * price;
+    marginTiedUp += (position.averagePrice * position.quantity) / leverage;
+    unrealizedPnl += (price - position.averagePrice) * position.quantity;
+  });
+  const equity = demoAccount.cash + marginTiedUp + unrealizedPnl;
   demoAccount.highWater = Math.max(demoAccount.highWater, equity);
   const drawdown = demoAccount.highWater ? (demoAccount.highWater - equity) / demoAccount.highWater * 100 : 0;
   return { equity, positionValue, drawdown, exposure: equity ? positionValue / equity * 100 : 0 };

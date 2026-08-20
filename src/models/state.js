@@ -169,6 +169,26 @@ window.Aurora = window.Aurora || {};
     // Soglia minima di trade fuori campione sotto la quale un candidato resta "esplorativo"
     // invece di "validato" o "escluso" — vedi services/dataProviders.js.
     minimumOutOfSampleTrades: 5,
+    // Leva simulata (sessione 2026-08-20, su richiesta esplicita "1:2"): un ordine puo' ora
+    // controllare fino a leverageMultiplier volte il notional che il solo margine (cash impegnato)
+    // permetterebbe — esattamente come un conto a margine reale, MAI simulando un broker/interessi
+    // reali (resta paper, vedi ARCHITECTURE.md). Cambia SOLO l'ampiezza di guadagni e perdite, non
+    // il win rate ne' l'edge misurato: un trade che perdeva 1,6% ne perde ora 3,2% in termini di
+    // capitale realmente impegnato, a parita' di stop tecnico. Implementato con la stessa
+    // contabilita' a margine di un conto CFD/forex reale (vedi engine/execution.js,
+    // engine/market.js): il cash si riduce solo del margine (notional/leverageMultiplier)
+    // all'apertura, non dell'intero notional — SENZA questo, il tetto piu' alto non avrebbe mai
+    // effetto pratico, dato che il cash disponibile sarebbe rimasto comunque il vincolo piu'
+    // stringente (verificato: e' esattamente quello che succedeva prima di questa modifica).
+    leverageMultiplier: 2,
+    // "Regola d'oro" esplicitamente richiesta: nessun trade, a prescindere dalla leva, puo'
+    // rischiare (prezzo di entrata -> stop loss, sul notional PIENO cioe' leva inclusa) piu' del
+    // 5% dell'equity al momento dell'apertura. Con lo stop fisso 1,6% oggi in uso questo tetto non
+    // e' quasi mai vincolante (1,6% di rischio su un notional 2x resta bene sotto il 5%) — diventa
+    // rilevante con stop piu' larghi (ATR, oppure orb_breakout che usa il minimo dell'opening
+    // range, potenzialmente molto piu' lontano) dove altrimenti la leva da sola potrebbe spingere
+    // il rischio reale oltre la soglia dichiarata. Vedi engine/riskGate.js e engine/autopilot.js.
+    maxRiskPerTradePercent: 5,
     storageKey: 'aurora-demo-account-v2'
   };
 
