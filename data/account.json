@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 9.25711015498927,
+    "cash": 9.317171906104154,
     "highWater": 10.008724853652845,
     "positions": {
       "WTI": {
@@ -54,45 +54,45 @@
           "aiEngine": "rule"
         },
         "openedAt": "2026-08-19T12:12:06.543Z"
-      },
-      "NVDA": {
-        "quantity": 0.0003215341674177008,
-        "averagePrice": 217.56,
-        "stopLoss": 210.97857256208147,
-        "takeProfit": 229.07749801635742,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 217.56,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-08-20T01:46:51.377Z"
       }
     },
     "market": {
-      "AAPL": 317.19,
-      "NVDA": 217.8,
-      "SPY": 766.58,
-      "QQQ": 712.24,
-      "BTCUSD": 71628,
-      "TSLA": 345.04,
+      "AAPL": 272.33277456,
+      "NVDA": 186.79741439999998,
+      "SPY": 658.3750413600001,
+      "QQQ": 611.855961,
+      "BTCUSD": 61552.151688,
+      "TSLA": 292.1284932,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2273.72,
+      "ETHUSD": 1954.90018344,
       "WTI": 72.8,
-      "TLT": 82.4,
-      "EURUSD": 1.1609,
+      "TLT": 70.81304555999999,
+      "EURUSD": 1.1648983509698945,
       "ES": 7730
     },
     "model": {
-      "calibration": 56,
-      "outcomes": 3,
+      "calibration": 51,
+      "outcomes": 4,
       "wins": 2
     },
     "trades": [
+      {
+        "id": "SIM-7796205",
+        "symbol": "NVDA",
+        "side": "sell",
+        "quantity": 0.0003215341674177008,
+        "price": 186.79741439999998,
+        "notional": 0.060061751114883224,
+        "realizedPnl": -0.00989122234851176,
+        "origin": "Stop Loss",
+        "at": "2026-08-20T14:56:36.205Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-0411377",
         "symbol": "NVDA",
@@ -272,6 +272,21 @@
       "tag": "HOLD"
     },
     {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Stop Loss: vendita demo 0.000322 NVDA",
+      "detail": "0,06 € · fill simulato 186,80 € · SIM-7796205",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "12 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "12 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -309,5 +324,5 @@
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-20T14:00:53.685Z"
+  "updatedAt": "2026-08-20T14:56:36.438Z"
 }
