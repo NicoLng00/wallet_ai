@@ -1,0 +1,27 @@
+{
+  "_comment": "Fonte unica di verita' per l'ordine di caricamento del motore condiviso (browser interattivo + job headless). index.html usa questa lista PIU' views.js/wireEvents.js/main.js (solo browser, mai nei job). server/jobs/lib/driverTemplate.js usa esattamente questa lista, invariata. Un test di coerenza (server/tests/engineManifest.test.js) legge entrambe le liste reali dai file sorgente e verifica che coincidano con questa — se aggiungi un file motore, aggiornalo in tutti e tre i posti: qui, index.html, driverTemplate.js.",
+  "engineScripts": [
+    "src/utils.js",
+    "src/config.js",
+    "src/models/seedData.js",
+    "src/models/state.js",
+    "src/engine/indicators.js",
+    "src/engine/rules.js",
+    "src/engine/backtest.js",
+    "src/engine/market.js",
+    "src/engine/riskGate.js",
+    "src/engine/execution.js",
+    "src/engine/strategies.js",
+    "src/engine/learning.js",
+    "src/engine/memory.js",
+    "src/agents/supervisor.js",
+    "src/engine/autopilot.js",
+    "src/services/dataProviders.js",
+    "src/services/aiProviders.js"
+  ],
+  "browserOnlyScripts": [
+    "src/views/views.js",
+    "src/controllers/wireEvents.js",
+    "src/main.js"
+  ]
+}

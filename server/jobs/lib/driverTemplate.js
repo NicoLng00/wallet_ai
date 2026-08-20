@@ -3,17 +3,18 @@
 // mock del DOM oltre a Views/$, la stessa tecnica di verifica usata in tutta questa sessione.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 
-const ENGINE_SCRIPTS = [
-  'src/utils.js', 'src/config.js', 'src/models/seedData.js', 'src/models/state.js',
-  'src/engine/indicators.js', 'src/engine/rules.js', 'src/engine/backtest.js', 'src/engine/market.js',
-  'src/engine/riskGate.js', 'src/engine/execution.js', 'src/engine/strategies.js', 'src/engine/learning.js',
-  'src/engine/memory.js', 'src/agents/supervisor.js', 'src/engine/autopilot.js',
-  'src/services/dataProviders.js', 'src/services/aiProviders.js'
-];
+// Fonte unica di verita' (src/engine-manifest.json) invece di una lista duplicata qui — prima
+// questo file e index.html mantenevano a mano due liste che dovevano restare sincronizzate,
+// un rischio reale di divergenza silenziosa. index.html resta statico per design (nessun
+// caricamento dinamico su un motore che assume ordine sincrono garantito) — un test di coerenza
+// (server/tests/engineManifest.test.js) verifica che coincida comunque con questo stesso manifest.
+const manifest = JSON.parse(readFileSync(path.join(REPO_ROOT, 'src', 'engine-manifest.json'), 'utf8'));
+const ENGINE_SCRIPTS = manifest.engineScripts;
 
 // Percorsi RELATIVI (non file:// assoluti): il percorso del repo su questa macchina contiene
 // spazi ("OneDrive - alpitronic GmbH") che un URL file:// assoluto non gestisce in modo affidabile
