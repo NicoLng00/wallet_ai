@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 9.327063128452664,
+    "cash": 9.25711015498927,
     "highWater": 10.008647685452665,
     "positions": {
       "WTI": {
@@ -54,6 +54,23 @@
           "aiEngine": "rule"
         },
         "openedAt": "2026-08-19T12:12:06.543Z"
+      },
+      "NVDA": {
+        "quantity": 0.0003215341674177008,
+        "averagePrice": 217.56,
+        "stopLoss": 210.97857256208147,
+        "takeProfit": 229.07749801635742,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 217.56,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-08-20T01:46:51.377Z"
       }
     },
     "market": {
@@ -61,10 +78,10 @@
       "NVDA": 217.56,
       "SPY": 769.06,
       "QQQ": 716.08,
-      "BTCUSD": 69262,
+      "BTCUSD": 69593,
       "TSLA": 351.12,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2251.88,
+      "ETHUSD": 2264.11,
       "WTI": 72.8,
       "TLT": 83.02,
       "EURUSD": 1.1609,
@@ -76,6 +93,23 @@
       "wins": 2
     },
     "trades": [
+      {
+        "id": "SIM-0411377",
+        "symbol": "NVDA",
+        "side": "buy",
+        "quantity": 0.0003215341674177008,
+        "price": 217.56,
+        "notional": 0.06995297346339499,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-08-20T01:46:51.377Z",
+        "stopLoss": 210.97857256208147,
+        "takeProfit": 229.07749801635742,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-2427089",
         "symbol": "ETHUSD",
@@ -233,12 +267,17 @@
   },
   "activity": [
     {
-      "title": "Autopilot: monitora",
-      "detail": "12 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
+      "title": "Autopilot: apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000322 NVDA",
+      "detail": "0,07 € · fill simulato 217,56 € · SIM-0411377",
+      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-19T23:59:56.953Z"
+  "updatedAt": "2026-08-20T01:46:51.836Z"
 }
