@@ -43,6 +43,17 @@ Aurora.Services.fetchCoinGeckoPrices = async function fetchCoinGeckoPrices() {
   return res.json();
 };
 
+// Bug reale trovato e riprodotto in sessione (mai visibile finora solo perche' la chiamata
+// Finnhub per EURUSD non era mai riuscita in produzione): EURUSD e' GIA' un tasso di cambio
+// (quanti USD per 1 EUR) restituito da Finnhub — a differenza di azioni/materie prime quotate
+// in USD (AAPL, WTI, XAUUSD...), che vanno davvero convertite in EUR moltiplicando per
+// usdToEurRate. Applicare la STESSA conversione a EURUSD lo corrompe verso ~1.0 (quotazione
+// reale ~1.16 * reciproco ~0.86 ≈ 1.0) — e un crollo apparente da 1.16 a 1.0 (~14%) avrebbe
+// sfondato uno stop loss reale (tipicamente a ~0.4% di distanza, ATR-based) per un motivo
+// del tutto fittizio, realizzando una perdita finta su una posizione vera. Se in futuro si
+// aggiungono altre coppie valutarie a FINNHUB_SYMBOLS, vanno aggiunte anche qui.
+const FX_RATE_SYMBOLS = new Set(['EURUSD']);
+
 Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
   const Models = Aurora.Models;
   if (!Models.liveData.enabled || !Models.liveData.finnhubKey) return;
@@ -70,7 +81,7 @@ Aurora.Services.refreshLiveQuotes = async function refreshLiveQuotes() {
       const [symbol] = finnhubEntries[index];
       if (result.status === 'fulfilled') {
         const { price, previousClose } = result.value;
-        Models.demoAccount.market[symbol] = price * Models.usdToEurRate;
+        Models.demoAccount.market[symbol] = FX_RATE_SYMBOLS.has(symbol) ? price : price * Models.usdToEurRate;
         Models.liveStatus[symbol] = 'live';
         Models.liveChangePercent[symbol] = previousClose ? ((price - previousClose) / previousClose) * 100 : null;
       } else {

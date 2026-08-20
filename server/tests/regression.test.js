@@ -67,6 +67,36 @@ test('survivesLiveTrackRecord: campione live sotto la soglia minima -> si fida a
 // perché quella validata non è bullish in questo momento (il confronto incrociato con Gemini in
 // server/providers/gemini.js dipende da questo: deve sapere che una regola validata esiste anche
 // quando oggi tace).
+// --- Bug 4: refreshLiveQuotes moltiplicava EURUSD (gia' un tasso di cambio) per usdToEurRate
+// una seconda volta, corrompendolo verso ~1.0 — un crollo apparente del ~14% dalla quotazione
+// reale (~1.16) che avrebbe sfondato uno stop loss reale (ATR-based, tipicamente a ~0.4% di
+// distanza) per un motivo del tutto fittizio. Trovato testando il comportamento con EURUSD.
+const dataProvidersAurora = loadEngine([
+  'src/utils.js', 'src/config.js', 'src/models/seedData.js', 'src/models/state.js', 'src/services/dataProviders.js'
+]);
+
+test('refreshLiveQuotes: EURUSD (gia\' un tasso di cambio) non viene convertito una seconda volta', async () => {
+  const Models = dataProvidersAurora.Models;
+  dataProvidersAurora.Views = new Proxy({}, { get: () => function () {} });
+  dataProvidersAurora.Utils.$ = () => ({ textContent: '', classList: { toggle() {}, add() {}, remove() {} } });
+  Models.liveData = { enabled: true, finnhubKey: 'fake-key-for-test' };
+  Models.liveStatus = {};
+  Models.liveChangePercent = {};
+  Models.liveFetchInFlight = false;
+  Models.liveCooldownUntil = 0;
+  dataProvidersAurora.Services.fetchFinnhubQuote = async (apiSymbol) => {
+    if (apiSymbol === 'OANDA:USD_EUR') return { price: 0.862, previousClose: 0.860 };
+    if (apiSymbol === 'OANDA:EUR_USD') return { price: 1.1609, previousClose: 1.1580 };
+    return { price: 100, previousClose: 99 };
+  };
+  dataProvidersAurora.Services.fetchCoinGeckoPrices = async () => ({});
+
+  await dataProvidersAurora.Services.refreshLiveQuotes();
+
+  assert.ok(Math.abs(Models.demoAccount.market.EURUSD - 1.1609) < 1e-9, 'EURUSD deve restare la quotazione reale, non ~1.0 (corrotta dalla doppia conversione)');
+  assert.ok(Math.abs(Models.demoAccount.market.WTI - 86.2) < 1e-9, 'un asset genuinamente quotato in USD (WTI) deve invece restare convertito correttamente');
+});
+
 test('ruleSignalFor: una candidata validata resta in fascia "validata" anche se neutra oggi', () => {
   const symbol = 'NVDA';
   const flatCloses = Array(60).fill(100); // prezzo piatto: sma_rsi resta neutro (price > sma e' falso)
