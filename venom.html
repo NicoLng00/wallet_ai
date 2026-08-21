@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Aurora Markets — Venom dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./venom-styles.css" />
+  </head>
+  <body>
+    <div class="app-shell venom-theme">
+      <aside class="sidebar" aria-label="Navigazione Venom">
+        <a class="brand" href="./index.html" aria-label="Torna a SpiderMan">
+          <span class="brand-mark venom-mark">V</span>
+          <span>Aurora<span class="brand-muted">/Venom</span></span>
+        </a>
+
+        <nav class="main-nav">
+          <button class="nav-item active" data-section="venom-overview"><span>⌁</span>Panoramica</button>
+          <button class="nav-item" data-section="venom-clubs"><span>◫</span>Squadre</button>
+          <button class="nav-item" data-section="venom-research"><span>◌</span>Research</button>
+          <button class="nav-item" data-section="venom-memory"><span>◈</span>Storico &amp; Memoria</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="mode-card venom-mode-card">
+            <div class="mode-icon">◈</div>
+            <div>
+              <strong>SEMBIONTE AUTONOMO</strong>
+              <span>13 club calcistici europei · Paper €50</span>
+            </div>
+          </div>
+          <a class="profile venom-cross-link" href="./index.html">
+            <span class="avatar spider-avatar">S</span>
+            <span>Vai a SpiderMan<small>Sistema principale (46 titoli)</small></span>
+            <span>→</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <button class="mobile-menu" aria-label="Apri menu">☰</button>
+          <div class="venom-title">
+            <h1>Venom <span class="venom-subtitle">— dashboard autonoma</span></h1>
+            <p id="venom-updated" class="venom-updated">Caricamento stato…</p>
+          </div>
+          <div class="topbar-actions">
+            <span id="venom-live-badge" class="status-pill idle">In caricamento</span>
+          </div>
+        </header>
+
+        <section class="panel wallet-panel" id="venom-overview">
+          <div class="panel-title compact"><div><p class="eyebrow">CONTO SEMBIONTE</p><h2>Panoramica conto</h2></div><span class="paper-badge">PAPER</span></div>
+          <div id="venom-wallet-stats" class="wallet-stats"></div>
+        </section>
+
+        <section class="panel wallet-panel" id="venom-clubs">
+          <div class="panel-title compact"><div><p class="eyebrow">WATCHLIST</p><h2>13 club calcistici europei quotati</h2></div><span id="venom-clubs-count" class="status-pill idle">—</span></div>
+          <div id="venom-club-grid" class="venom-club-grid"></div>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="activity-tabs" role="tablist"><button class="tab active">Posizioni aperte <span id="venom-position-count">0</span></button></div>
+          <div class="history-table">
+            <div class="history-row history-head" style="grid-template-columns:84px 1fr 90px 90px 90px 90px;">
+              <span>Simbolo</span><span>Strategia</span><span>Quantità</span><span>Prezzo carico</span><span>Stop / Target</span><span>Livello</span>
+            </div>
+            <div id="venom-positions" aria-label="Posizioni aperte venom"></div>
+          </div>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="activity-tabs" role="tablist"><button class="tab active">Attività recente <span id="venom-activity-count">0</span></button></div>
+          <div id="venom-activity" class="activity-content" aria-live="polite"></div>
+        </section>
+
+        <section class="panel research-panel" id="venom-research">
+          <div class="panel-title compact"><div><p class="eyebrow">RESEARCH</p><h2>Backtest &amp; validazione segnali (5 anni)</h2></div><span id="venom-research-status" class="status-pill idle">—</span></div>
+          <div id="venom-research-results" class="research-results"></div>
+          <p class="ai-disclaimer">Stesso motore di validazione walk-forward del sistema principale (in-sample + out-of-sample vs baseline casuale) — finestra storica 5 anni, deliberata (non il default 2 anni di SpiderMan). Solo i candidati "Validato" alimentano l'Autopilot; gli altri restano onestamente neutri.</p>
+        </section>
+
+        <section class="panel memory-panel" id="venom-memory">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Learning Loop</h2></div><span id="venom-memory-status" class="status-pill idle">0 trade</span></div>
+          <div class="memory-history-head"><span>Win rate per livello</span></div>
+          <div id="venom-memory-tier-stats" class="memory-tier-stats"></div>
+          <div class="memory-lessons-head"><span>Lezioni apprese</span><span id="venom-memory-lessons-count">0 lezioni</span></div>
+          <div id="venom-memory-lessons" class="memory-lessons-grid"></div>
+          <p class="ai-disclaimer">Dashboard di sola lettura: mostra lo stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Nessuna interazione manuale qui — per il conto interattivo locale usa il sistema principale.</p>
+        </section>
+      </main>
+    </div>
+
+    <script src="./src/utils.js"></script>
+    <script src="./src/config.js"></script>
+    <script src="./src/models/venomState.js"></script>
+    <script src="./src/engine/market.js"></script>
+    <script src="./src/engine/memory.js"></script>
+    <script src="./src/views/venomDashboardViews.js"></script>
+  </body>
+</html>
