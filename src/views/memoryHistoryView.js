@@ -129,6 +129,12 @@ Aurora.Views.renderMemoryHistory = function renderMemoryHistory() {
   Aurora.Views.Pagination.wire(container, MEMORY_HISTORY_PAGE_KEY, Aurora.Views.renderMemoryHistory);
 };
 
+const MEMORY_LESSONS_PAGE_KEY = 'memory-lessons';
+// Richiesto esplicitamente (a differenza del default di 20 usato altrove): le lezioni sono testo
+// da leggere per intero, non numeri da scorrere in fretta — 10 per pagina restano leggibili senza
+// scroll eccessivo dentro il pannello.
+const MEMORY_LESSONS_PAGE_SIZE = 10;
+
 Aurora.Views.renderMemoryLessons = function renderMemoryLessons() {
   const { $ } = Aurora.Utils;
   const container = $('memory-lessons');
@@ -139,22 +145,44 @@ Aurora.Views.renderMemoryLessons = function renderMemoryLessons() {
   allLessons.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   $('memory-lessons-count').textContent = `${allLessons.filter((lesson) => lesson.active).length} attive · ${allLessons.length} totali`;
 
-  container.innerHTML = allLessons.length
-    ? allLessons.map((lesson) => {
-        const isSeed = (lesson.supportingTradeIds || []).every((id) => id.startsWith('SEED-'));
-        return `
-      <div class="memory-lesson-card ${lesson.active ? '' : 'superseded'}">
-        <div class="memory-lesson-head"><strong>${lesson.strategyKey} · v${lesson.version}</strong><span class="status-pill ${lesson.active ? 'ok' : 'idle'}">${lesson.active ? 'attiva' : 'superata/disattivata'}</span></div>
-        ${isSeed ? '<span class="memory-tag account-backtest">Backtest (caso storico)</span>' : ''}
-        <p>${lesson.statement}</p>
-        <div class="memory-lesson-foot">
-          <span>${lesson.supportingTradeIds.length} trade collegati</span>
-          <button class="memory-lesson-deactivate" data-strategy="${lesson.strategyKey}" data-lesson="${lesson.id}" ${lesson.active ? '' : 'disabled'}>${lesson.active ? 'Disattiva' : 'Già disattivata'}</button>
-        </div>
-      </div>`;
-      }).join('')
-    : '<div class="memory-empty">Nessuna lezione ancora generata dal Learning Loop: servono almeno 3 trade con lo stesso esito, su almeno metà dei trade recenti di una strategia.</div>';
+  const strategySelect = $('memory-lessons-filter-strategy');
+  if (strategySelect && strategySelect.options.length <= 1) {
+    const strategies = [...new Set(allLessons.map((lesson) => lesson.strategyKey))].sort();
+    strategySelect.innerHTML = '<option value="all">Tutte le strategie</option>' + strategies.map((key) => `<option value="${key}">${key}</option>`).join('');
+  }
+  const strategyFilter = strategySelect?.value || 'all';
+  const statusFilter = $('memory-lessons-filter-status')?.value || 'all';
 
+  const filtered = allLessons.filter((lesson) => {
+    if (strategyFilter !== 'all' && lesson.strategyKey !== strategyFilter) return false;
+    if (statusFilter === 'active' && !lesson.active) return false;
+    if (statusFilter === 'superseded' && lesson.active) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = allLessons.length
+      ? '<div class="empty-state">Nessuna lezione corrisponde ai filtri selezionati.</div>'
+      : '<div class="memory-empty">Nessuna lezione ancora generata dal Learning Loop: servono almeno 3 trade con lo stesso esito, su almeno metà dei trade recenti di una strategia.</div>';
+    return;
+  }
+
+  const { pageItems, page, totalPages } = Aurora.Views.Pagination.slice(MEMORY_LESSONS_PAGE_KEY, filtered, MEMORY_LESSONS_PAGE_SIZE);
+  const header = `<div class="memory-lesson-row memory-lesson-row-head"><span>Strategia</span><span>Stato</span><span>Trade</span><span>Lezione</span><span>Azione</span></div>`;
+
+  container.innerHTML = header + pageItems.map((lesson) => {
+    const isSeed = (lesson.supportingTradeIds || []).every((id) => id.startsWith('SEED-'));
+    return `
+    <div class="memory-lesson-row ${lesson.active ? '' : 'superseded'}">
+      <span>${lesson.strategyKey} · v${lesson.version}${isSeed ? ' <small>(backtest)</small>' : ''}</span>
+      <span><span class="status-pill ${lesson.active ? 'ok' : 'idle'}">${lesson.active ? 'attiva' : 'superata'}</span></span>
+      <span>${lesson.supportingTradeIds.length}</span>
+      <span class="memory-lesson-statement">${lesson.statement}</span>
+      <span><button class="memory-lesson-deactivate" data-strategy="${lesson.strategyKey}" data-lesson="${lesson.id}" ${lesson.active ? '' : 'disabled'}>${lesson.active ? 'Disattiva' : 'Già disattivata'}</button></span>
+    </div>`;
+  }).join('') + Aurora.Views.Pagination.controlsHtml(MEMORY_LESSONS_PAGE_KEY, page, totalPages);
+
+  Aurora.Views.Pagination.wire(container, MEMORY_LESSONS_PAGE_KEY, Aurora.Views.renderMemoryLessons);
   container.querySelectorAll('.memory-lesson-deactivate').forEach((button) => button.addEventListener('click', () => {
     if (button.disabled) return;
     Aurora.Engine.deactivateLesson(button.dataset.strategy, button.dataset.lesson);

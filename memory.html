@@ -97,7 +97,15 @@
             <span>Lezioni apprese (Learning Loop)</span>
             <span id="memory-lessons-count">0 lezioni</span>
           </div>
-          <div id="memory-lessons" class="memory-lessons-grid" aria-label="Lezioni attive per strategia"></div>
+          <div class="memory-filters">
+            <select id="memory-lessons-filter-strategy" aria-label="Filtra lezioni per strategia"><option value="all">Tutte le strategie</option></select>
+            <select id="memory-lessons-filter-status" aria-label="Filtra lezioni per stato">
+              <option value="all">Tutti gli stati</option>
+              <option value="active">Attive</option>
+              <option value="superseded">Superate/disattivate</option>
+            </select>
+          </div>
+          <div id="memory-lessons" class="memory-lessons-table" aria-label="Lezioni attive per strategia"></div>
           <p class="ai-disclaimer">"Conto reale" non è ancora collegato ad alcun broker: oggi esiste solo il conto paper demo (vedi ARCHITECTURE.md) — il filtro resta predisposto per quando/se un conto reale verrà aggiunto. Le lezioni sono generate deterministicamente dal Trade Critic (nessuna chiamata AI per trade, nessun fine-tuning di Gemini): quando un pattern di fallimento ricorre almeno 3 volte su almeno metà dei trade recenti di una strategia, viene versionata una lezione attiva finché non la disattivi o non viene superata da una più recente. Livello "Sonda forzata": se entro la giornata (Autopilot attivo) nessun livello ha aperto nulla su nessun simbolo, l'ultimo ciclo del giorno forza un ingresso a taglia minima sul candidato con lo score più alto sull'intero watchlist, a prescindere dalla direzione — l'unico livello senza nemmeno una lettura tecnica direzionale a supporto, mai spacciato per un segnale. "Casi storici (backtest)": alla primissima apertura dell'app, prima di qualunque trade tuo, Storico & Lezioni parte già popolato con un backtest walk-forward reale (stesso motore, stesso storico Alpha Vantage/CoinGecko scaricato in fase di sviluppo, nessuna soglia abbassata) — righe e lezioni etichettate "Backtest" così non si confondono mai con il tuo conto demo. Basta una tua prima azione reale perché il tuo storico prenda il sopravvento.</p>
         </section>
       </main>

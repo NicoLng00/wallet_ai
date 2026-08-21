@@ -95,7 +95,15 @@
             <span>Lezioni apprese (Learning Loop)</span>
             <span id="memory-lessons-count">0 lezioni</span>
           </div>
-          <div id="memory-lessons" class="memory-lessons-grid" aria-label="Lezioni attive per strategia"></div>
+          <div class="memory-filters">
+            <select id="memory-lessons-filter-strategy" aria-label="Filtra lezioni per strategia"><option value="all">Tutte le strategie</option></select>
+            <select id="memory-lessons-filter-status" aria-label="Filtra lezioni per stato">
+              <option value="all">Tutti gli stati</option>
+              <option value="active">Attive</option>
+              <option value="superseded">Superate/disattivate</option>
+            </select>
+          </div>
+          <div id="memory-lessons" class="memory-lessons-table" aria-label="Lezioni attive per strategia"></div>
           <p class="ai-disclaimer">Stessa catalogazione dello Storico &amp; Memoria del sistema principale (conto/livello/esito/origine), applicata al bot Venom: stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Il pulsante "Disattiva" su una lezione agisce solo su questo browser (localStorage locale a Venom) — il bot autonomo resta autorevole sui prossimi cicli.</p>
         </section>
       </main>
@@ -116,6 +124,12 @@
         document.getElementById(id).addEventListener('change', () => {
           Aurora.Views.Pagination.reset('memory-history');
           Aurora.Views.renderMemoryHistory();
+        });
+      });
+      ['memory-lessons-filter-strategy', 'memory-lessons-filter-status'].forEach((id) => {
+        document.getElementById(id).addEventListener('change', () => {
+          Aurora.Views.Pagination.reset('memory-lessons');
+          Aurora.Views.renderMemoryLessons();
         });
       });
     </script>
