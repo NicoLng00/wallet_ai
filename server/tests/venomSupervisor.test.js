@@ -8,13 +8,13 @@ import assert from 'node:assert/strict';
 import { callVenomAgentTool } from '../mcp/venomClient.js';
 import { VENOM_AGENT_TOOL_NAMES } from '../mcp/venomServer.js';
 
-test('venomServer: registra esattamente i 7 tool attesi (nessuno mancante, nessuno del sistema principale infiltrato)', () => {
+test('venomServer: registra esattamente gli 8 tool attesi (nessuno mancante, nessuno del sistema principale infiltrato)', () => {
   assert.deepEqual(VENOM_AGENT_TOOL_NAMES, [
-    'technical_analyst', 'risk_manager', 'market_regime', 'liquidity_model', 'hedge', 'audit_sentinel', 'venom_news'
+    'technical_analyst', 'risk_manager', 'market_regime', 'liquidity_model', 'hedge', 'audit_sentinel', 'venom_news', 'venom_calendar'
   ]);
   assert.ok(!VENOM_AGENT_TOOL_NAMES.includes('fundamental'), 'fundamental (Finnhub) non deve esistere qui: non copre i ticker venom');
   assert.ok(!VENOM_AGENT_TOOL_NAMES.includes('social_sentiment'), 'sostituito da venom_news');
-  assert.ok(!VENOM_AGENT_TOOL_NAMES.includes('macro_calendar'), 'nessuna fonte macro verificata per questi mercati');
+  assert.ok(!VENOM_AGENT_TOOL_NAMES.includes('macro_calendar'), 'sostituito da venom_calendar (Google News RSS, non Finnhub)');
 });
 
 test('venomClient: handshake MCP reale (InMemoryTransport) + chiamata reale a technical_analyst', async () => {
@@ -79,9 +79,15 @@ test('generateVenomDecision: orchestra i 7 agenti reali e passa un contesto ben 
   assert.equal(capturedContext[0].symbol, 'JUVE.MI');
   assert.ok(capturedContext[0].technicalAgent.available, 'l\'agente tecnico reale deve aver risposto available:true con una strategia validata');
   assert.equal(capturedContext[0].liquidityAgent.riskFlags.length, 0, 'volume 50000 stabile -> nessun flag di illiquidita\'');
-  // fundamental/socialSentiment NON devono esistere nel contesto venom (sostituiti da venomNewsAgent).
+  // fundamental/socialSentiment/macroCalendar NON devono esistere nel contesto venom (sostituiti
+  // da venomNewsAgent/venomCalendarAgent).
   assert.equal(capturedContext[0].fundamentalAgent, undefined);
   assert.equal(capturedContext[0].socialSentimentAgent, undefined);
+  assert.equal(capturedContext[0].macroCalendarAgent, undefined);
+  // venomCalendarAgent presente nella forma del context (null qui: nessuna notizia di calendario
+  // reale nel mock fetch sopra, ma la CHIAVE deve esistere — provato chiamando l'agente per davvero
+  // via MCP, non un doppio mock del contesto).
+  assert.ok('venomCalendarAgent' in capturedContext[0]);
 });
 
 test('generateVenomDecision: senza chiave -> errore esplicito, mai una chiamata al modello', async () => {

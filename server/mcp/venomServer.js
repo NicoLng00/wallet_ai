@@ -6,13 +6,15 @@ import { liquidityModelAgentTool } from './tools/liquidityModelAgent.js';
 import { hedgeAgentTool } from './tools/hedgeAgent.js';
 import { auditSentinelAgentTool } from './tools/unavailableAgents.js';
 import { venomNewsAgentTool } from './tools/venomNewsAgent.js';
+import { venomCalendarAgentTool } from './tools/venomCalendarAgent.js';
 
 // Server MCP gemello di server.js, tool set diverso per la pipeline venom: gli agenti generici
 // (nessuna assunzione specifica su SpiderMan) sono RIUSATI as-is — technical_analyst, risk_manager,
 // market_regime, hedge, audit_sentinel. fundamental/social_sentiment/macro_calendar (Finnhub-based,
-// non copre i 13 ticker europei, confermato con una chiave reale) sono sostituiti da venom_news
-// (Google News RSS). liquidity_model e' la versione REALE (non il placeholder liquidityAgentTool
-// del sistema principale) — stesso identico contratto.
+// non copre i 13 ticker europei, confermato con una chiave reale) sono sostituiti da venom_news e
+// venom_calendar (entrambi Google News RSS, stessa infrastruttura verificata). liquidity_model e'
+// la versione REALE (non il placeholder liquidityAgentTool del sistema principale) — stesso
+// identico contratto.
 const VENOM_AGENT_TOOLS = [
   technicalAgentTool,
   riskManagerAgentTool,
@@ -20,7 +22,8 @@ const VENOM_AGENT_TOOLS = [
   liquidityModelAgentTool,
   hedgeAgentTool,
   auditSentinelAgentTool,
-  venomNewsAgentTool
+  venomNewsAgentTool,
+  venomCalendarAgentTool
 ];
 
 export function createVenomAgentMcpServer() {

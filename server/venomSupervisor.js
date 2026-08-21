@@ -14,23 +14,25 @@ function buildQueryContext({ symbol, tier, strategyLabel, bullish }) {
   return `${symbol}: ${strategyLabel}, fascia ${tier || 'nessuna'}, ${direction}`;
 }
 
-// 7 agenti (contro i 9 del sistema principale): fundamental/social_sentiment/macro_calendar
-// sostituiti da un solo venom_news (Finnhub non copre i 13 ticker europei, confermato con una
-// chiave reale — nessuna fonte macro/calendario ancora verificata per questi mercati, vedi
-// roadmap). clubName/locale (vedi src/models/venomState.js) passati dal chiamante invece di
-// derivati qui, stesso principio di separazione dati/orchestrazione del resto del progetto.
+// 8 agenti (contro i 9 del sistema principale): fundamental/social_sentiment/macro_calendar
+// sostituiti da venom_news + venom_calendar (Finnhub non copre i 13 ticker europei, confermato
+// con una chiave reale — entrambi via Google News RSS, stessa infrastruttura verificata).
+// clubName/locale (vedi src/models/venomState.js) passati dal chiamante invece di derivati qui,
+// stesso principio di separazione dati/orchestrazione del resto del progetto — lo stesso locale
+// serve sia a venom_news che a venom_calendar (stessa forma {hl, gl, ceid}).
 export async function runVenomAgentsForSymbol({ symbol, closes, candles, validated, tier, strategyLabel, timeframe, bullish, confidenceHint, lessons, confluence, risk, clubName, newsLocale, otherSymbols }) {
   const queryContext = buildQueryContext({ symbol, tier, strategyLabel, bullish });
-  const [technical, riskManager, marketRegime, liquidityModel, hedge, auditSentinel, venomNews] = await Promise.all([
+  const [technical, riskManager, marketRegime, liquidityModel, hedge, auditSentinel, venomNews, venomCalendar] = await Promise.all([
     callVenomAgentTool('technical_analyst', { symbol, validated: !!validated, tier: tier || null, strategyLabel: strategyLabel || null, timeframe: timeframe || null, bullish: !!bullish, confidenceHint: confidenceHint ?? null, lessons: lessons || [], confluence: confluence || [] }),
     callVenomAgentTool('risk_manager', risk),
     callVenomAgentTool('market_regime', { symbol, candles: candles || [] }),
     callVenomAgentTool('liquidity_model', { symbol, candles: candles || [] }),
     callVenomAgentTool('hedge', { symbol, candidateCloses: closes || [], otherSymbols: otherSymbols || [] }),
     callVenomAgentTool('audit_sentinel', { symbol }),
-    callVenomAgentTool('venom_news', { symbol, clubName, locale: newsLocale })
+    callVenomAgentTool('venom_news', { symbol, clubName, locale: newsLocale }),
+    callVenomAgentTool('venom_calendar', { symbol, clubName, locale: newsLocale })
   ]);
-  return { technical, riskManager, marketRegime, liquidityModel, hedge, auditSentinel, venomNews };
+  return { technical, riskManager, marketRegime, liquidityModel, hedge, auditSentinel, venomNews, venomCalendar };
 }
 
 // callModel iniettabile (default: la vera chiamata Gemini) solo per i test — nessuna chiave
@@ -60,7 +62,8 @@ export async function generateVenomDecision({ apiKey, symbols, marketContext, ri
       liquidityAgent: evidence.liquidityModel.available ? { thesis: evidence.liquidityModel.thesis, riskFlags: evidence.liquidityModel.risk_flags } : null,
       hedgeAgent: evidence.hedge.available ? { thesis: evidence.hedge.thesis, riskFlags: evidence.hedge.risk_flags } : null,
       marketRegimeAgent: evidence.marketRegime.available ? { thesis: evidence.marketRegime.thesis, riskFlags: evidence.marketRegime.risk_flags } : null,
-      venomNewsAgent: evidence.venomNews.available ? { thesis: evidence.venomNews.thesis, headlines: evidence.venomNews.evidence } : null
+      venomNewsAgent: evidence.venomNews.available ? { thesis: evidence.venomNews.thesis, headlines: evidence.venomNews.evidence } : null,
+      venomCalendarAgent: evidence.venomCalendar.available ? { thesis: evidence.venomCalendar.thesis, headlines: evidence.venomCalendar.evidence } : null
     };
   }));
 

@@ -24,6 +24,7 @@ function trimmableFields(entry) {
   if (entry.fundamentalAgent?.headlines?.length) fields.push(['fundamentalAgent', 'headlines']);
   if (entry.socialSentimentAgent?.posts?.length) fields.push(['socialSentimentAgent', 'posts']);
   if (entry.venomNewsAgent?.headlines?.length) fields.push(['venomNewsAgent', 'headlines']);
+  if (entry.venomCalendarAgent?.headlines?.length) fields.push(['venomCalendarAgent', 'headlines']);
   return fields;
 }
 
