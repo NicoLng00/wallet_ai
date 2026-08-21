@@ -4,6 +4,14 @@
 // club calcistici europei verificati, aggiorna validated/historyCache in data/venom/research.json.
 // Deliberatamente senza archiviazione/streak di validazione ancora (vedi venomStateStore.js): da
 // aggiungere quando servira' davvero, non per simmetria preventiva col sistema principale.
+//
+// Finestra storica: 5 anni, su richiesta esplicita ("test a tappeto... ultimi 5 anni") — a
+// differenza del default 2y del sistema principale, qui e' una scelta dichiarata e deliberata,
+// non un caso in cui allargare la finestra abbia gonfiato i candidati validati (verificato:
+// JUVE.MI ha 10+ anni di storico reale disponibile su Yahoo, 5y non e' "tutto quello che c'e'",
+// e' davvero un parametro scelto). Diventa cosi' la finestra di riferimento reale di venom
+// (persistita in data/venom/research.json, letta dal Learning Loop), non solo un'analisi
+// usa-e-getta.
 import { buildDriverHtml, VENOM_ENGINE_SCRIPTS } from '../lib/driverTemplate.js';
 import { runDriverAndGetOutput, writeTempDriverFile, removeDriverFile } from '../lib/chromeRunner.js';
 import { startBackend, stopBackend } from '../lib/backendProcess.js';
@@ -54,9 +62,17 @@ async function main() {
     };
   };
 
+  // 5 anni fisso (vedi commento in testa al file) invece del default 2y di fetchYahooDaily.
+  const realFetchYahooDaily = Aurora.Services.fetchYahooDaily;
+  Aurora.Services.fetchYahooDaily = (symbol) => realFetchYahooDaily(symbol, '5y');
+
+  // Ottimizzazione: 13 fetch storiche indipendenti (chiavi diverse in historyCache/validated, mai
+  // le stesse), prima eseguite in serie una dopo l'altra (13 round-trip Yahoo in fila) - nessun
+  // motivo reale per farlo, nessuno stato condiviso tra un simbolo e l'altro che renda la
+  // parallelizzazione rischiosa. Promise.all invece di un for...await sequenziale.
   const symbols = Object.keys(Models.instruments);
   const results = {};
-  for (const symbol of symbols) {
+  await Promise.all(symbols.map(async (symbol) => {
     try {
       await Aurora.Services.runResearchBacktest(symbol);
       const entry = Models.researchData.validated[symbol];
@@ -66,7 +82,7 @@ async function main() {
     } catch (e) {
       results[symbol] = { error: String(e && e.message || e) };
     }
-  }
+  }));
 
   const output = {
     setupResults: results,
