@@ -26,7 +26,7 @@ button { cursor: pointer; }
 .brand-mark { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; color: #062238; background: linear-gradient(145deg, #b7e3ff, #4c96ff); font-family: var(--mono); font-weight: 500; }
 .brand-muted { color: #7e91aa; font-weight: 600; }
 .main-nav { margin: 32px 0 26px; display: grid; gap: 4px; }
-.nav-item, .profile { width: 100%; border: 0; background: transparent; color: #9cadc2; padding: 10px 11px; border-radius: 8px; display: flex; align-items: center; gap: 12px; text-align: left; transition: .18s; }
+.nav-item, .profile { width: 100%; border: 0; background: transparent; color: #9cadc2; padding: 10px 11px; border-radius: 8px; display: flex; align-items: center; gap: 12px; text-align: left; transition: .18s; text-decoration: none; }
 .nav-item span { font-size: 17px; width: 17px; text-align: center; }
 .nav-item:hover, .nav-item.active { color: #e7f2ff; background: rgba(102, 167, 255, .11); }
 .nav-item.active { font-weight: 700; box-shadow: inset 2px 0 0 var(--blue); }

@@ -181,6 +181,10 @@
   }
 
   function renderMemory() {
+    // Guardia: renderAll() (chiamato da venom.html) include renderMemory() per compatibilita', ma
+    // il pannello Memoria vive solo su venom-memory.html — su venom.html questi elementi non
+    // esistono piu' e la funzione deve restare un no-op sicuro, non lanciare un errore.
+    if (!$('venom-memory-status')) return;
     const trades = Models.demoAccount.trades || [];
     $('venom-memory-status').textContent = `${trades.length} trade`;
     const byTier = Aurora.Engine.getWinRateByTier();
@@ -219,20 +223,28 @@
     renderMemory();
   }
 
-  loadVenomState().then((loaded) => {
+  // bootstrap(renderFn): carica lo stato condiviso, aggiorna badge/timestamp (presenti su ogni
+  // pagina venom con lo stesso topbar), poi chiama SOLO il render richiesto da questa pagina —
+  // cosi' venom-memory.html non tenta mai di popolare #venom-club-grid o #venom-positions, che li'
+  // non esistono.
+  async function bootstrap(renderFn) {
     const badge = $('venom-live-badge');
+    const updatedEl = $('venom-updated');
+    const loaded = await loadVenomState();
     if (!loaded) {
-      badge.textContent = 'Stato non disponibile';
-      badge.className = 'status-pill blocked';
-      $('venom-updated').textContent = 'Impossibile caricare data/venom/*.json — il bot autonomo non ha ancora prodotto uno stato, o la pagina è aperta da file:// (il fetch è bloccato dal browser su GitHub Pages funziona).';
+      if (badge) { badge.textContent = 'Stato non disponibile'; badge.className = 'status-pill blocked'; }
+      if (updatedEl) updatedEl.textContent = 'Impossibile caricare data/venom/*.json — il bot autonomo non ha ancora prodotto uno stato, o la pagina è aperta da file:// (il fetch è bloccato dal browser su GitHub Pages funziona).';
       return;
     }
-    badge.textContent = 'Bot autonomo attivo';
-    badge.className = 'status-pill ok';
+    if (badge) { badge.textContent = 'Bot autonomo attivo'; badge.className = 'status-pill ok'; }
     const updatedAt = loaded.account.updatedAt || loaded.research.updatedAt;
-    $('venom-updated').textContent = updatedAt
+    if (updatedEl) updatedEl.textContent = updatedAt
       ? `Aggiornato ${new Date(updatedAt).toLocaleString('it-IT', { hour12: false })} — cicli ogni ~20 minuti, setup ogni giorno prima dell'apertura dei mercati europei.`
       : 'Stato caricato.';
-    renderAll();
-  });
+    renderFn();
+  }
+
+  Aurora.VenomDashboard = {
+    bootstrap, renderAll, renderWalletStats, renderClubGrid, renderPositions, renderActivity, renderResearch, renderMemory
+  };
 })();

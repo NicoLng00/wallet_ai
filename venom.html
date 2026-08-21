@@ -23,7 +23,7 @@
           <button class="nav-item active" data-section="venom-overview"><span>⌁</span>Panoramica</button>
           <button class="nav-item" data-section="venom-clubs"><span>◫</span>Squadre</button>
           <button class="nav-item" data-section="venom-research"><span>◌</span>Research</button>
-          <button class="nav-item" data-section="venom-memory"><span>◈</span>Storico &amp; Memoria</button>
+          <a class="nav-item" href="./venom-memory.html"><span>◈</span>Storico &amp; Memoria</a>
         </nav>
 
         <div class="sidebar-bottom">
@@ -85,13 +85,9 @@
           <p class="ai-disclaimer">Stesso motore di validazione walk-forward del sistema principale (in-sample + out-of-sample vs baseline casuale) — finestra storica 5 anni, deliberata (non il default 2 anni di SpiderMan). Solo i candidati "Validato" alimentano l'Autopilot; gli altri restano onestamente neutri.</p>
         </section>
 
-        <section class="panel memory-panel" id="venom-memory">
-          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Learning Loop</h2></div><span id="venom-memory-status" class="status-pill idle">0 trade</span></div>
-          <div class="memory-history-head"><span>Win rate per livello</span></div>
-          <div id="venom-memory-tier-stats" class="memory-tier-stats"></div>
-          <div class="memory-lessons-head"><span>Lezioni apprese</span><span id="venom-memory-lessons-count">0 lezioni</span></div>
-          <div id="venom-memory-lessons" class="memory-lessons-grid"></div>
-          <p class="ai-disclaimer">Dashboard di sola lettura: mostra lo stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Nessuna interazione manuale qui — per il conto interattivo locale usa il sistema principale.</p>
+        <section class="panel memory-link-panel">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Learning Loop</h2></div></div>
+          <p class="ai-disclaimer">Win rate per livello e lezioni apprese sono ora in una pagina dedicata. <a href="./venom-memory.html" class="outline-button" style="display:inline-block;margin-top:8px;text-decoration:none;">Apri Storico &amp; Memoria →</a></p>
         </section>
       </main>
     </div>
@@ -102,5 +98,6 @@
     <script src="./src/engine/market.js"></script>
     <script src="./src/engine/memory.js"></script>
     <script src="./src/views/venomDashboardViews.js"></script>
+    <script>Aurora.VenomDashboard.bootstrap(Aurora.VenomDashboard.renderAll);</script>
   </body>
 </html>

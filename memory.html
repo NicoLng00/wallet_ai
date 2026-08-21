@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Aurora Markets — Storico &amp; Memoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./venom-styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigazione principale">
+        <a class="brand" href="./index.html" aria-label="Aurora Markets dashboard">
+          <span class="brand-mark">A</span>
+          <span>Aurora<span class="brand-muted">/Markets</span></span>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-item" href="./index.html#dashboard"><span>⌁</span>Mercati</a>
+          <a class="nav-item" href="./index.html#research"><span>◌</span>Research</a>
+          <a class="nav-item" href="./index.html#portfolio"><span>◫</span>Portafoglio</a>
+          <a class="nav-item" href="./index.html#agents"><span>✦</span>AI Desk</a>
+          <a class="nav-item active" href="./memory.html"><span>◈</span>Storico &amp; Memoria</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="mode-card">
+            <div class="mode-icon">◇</div>
+            <div>
+              <strong>PAPER MODE</strong>
+              <span>Nessun ordine reale</span>
+            </div>
+          </div>
+          <a class="profile venom-cross-link" href="./venom-memory.html">
+            <span class="avatar venom-avatar">V</span>
+            <span>Storico &amp; Memoria di Venom<small>Sembionte — 13 club calcistici</small></span>
+            <span>→</span>
+          </a>
+          <button class="profile"><span class="avatar">NL</span><span>Nicola L.<small>Workspace personale</small></span><span>⌄</span></button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <button class="mobile-menu" aria-label="Apri menu">☰</button>
+          <div class="venom-title">
+            <h1>Storico &amp; Memoria <span class="venom-subtitle">— Learning Loop</span></h1>
+            <p id="memory-page-updated" class="venom-updated">Caricamento stato…</p>
+          </div>
+          <div class="topbar-actions">
+            <span id="memory-page-badge" class="status-pill idle">In caricamento</span>
+          </div>
+        </header>
+
+        <section class="panel memory-panel" id="memory">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Storico &amp; Learning Loop</h2></div><span id="memory-status" class="status-pill idle">0 trade</span></div>
+          <div class="memory-filters">
+            <select id="memory-filter-account" aria-label="Filtra per conto">
+              <option value="all">Tutti i conti</option>
+              <option value="demo">Paper demo</option>
+              <option value="live">Conto reale</option>
+              <option value="backtest">Casi storici (backtest)</option>
+            </select>
+            <select id="memory-filter-symbol" aria-label="Filtra per simbolo"><option value="all">Tutti i simboli</option></select>
+            <select id="memory-filter-tier" aria-label="Filtra per livello">
+              <option value="all">Tutti i livelli</option>
+              <option value="validated">Validato</option>
+              <option value="exploratory">Esplorativo</option>
+              <option value="probe">Sonda</option>
+              <option value="forced">Sonda forzata</option>
+            </select>
+            <select id="memory-filter-outcome" aria-label="Filtra per esito">
+              <option value="all">Tutti gli esiti</option>
+              <option value="win">Vinti</option>
+              <option value="loss">Persi</option>
+            </select>
+          </div>
+          <div class="memory-history-head">
+            <span>Win rate per livello</span>
+          </div>
+          <div id="memory-tier-stats" class="memory-tier-stats" aria-label="Win rate segmentata per livello"></div>
+          <div class="memory-history-head">
+            <span>Storico filtrato</span>
+            <span id="memory-count">0 trade</span>
+          </div>
+          <div class="memory-table">
+            <div class="memory-row memory-head">
+              <span>Orario</span><span>Conto</span><span>Simbolo</span><span>Lato</span><span>Livello</span><span>Strategia</span><span>P&amp;L</span><span>Esito</span><span>Origine</span>
+            </div>
+            <div id="memory-history" aria-label="Storico trade filtrato per memoria"></div>
+          </div>
+          <div class="memory-lessons-head">
+            <span>Lezioni apprese (Learning Loop)</span>
+            <span id="memory-lessons-count">0 lezioni</span>
+          </div>
+          <div id="memory-lessons" class="memory-lessons-grid" aria-label="Lezioni attive per strategia"></div>
+          <p class="ai-disclaimer">"Conto reale" non è ancora collegato ad alcun broker: oggi esiste solo il conto paper demo (vedi ARCHITECTURE.md) — il filtro resta predisposto per quando/se un conto reale verrà aggiunto. Le lezioni sono generate deterministicamente dal Trade Critic (nessuna chiamata AI per trade, nessun fine-tuning di Gemini): quando un pattern di fallimento ricorre almeno 3 volte su almeno metà dei trade recenti di una strategia, viene versionata una lezione attiva finché non la disattivi o non viene superata da una più recente. Livello "Sonda forzata": se entro la giornata (Autopilot attivo) nessun livello ha aperto nulla su nessun simbolo, l'ultimo ciclo del giorno forza un ingresso a taglia minima sul candidato con lo score più alto sull'intero watchlist, a prescindere dalla direzione — l'unico livello senza nemmeno una lettura tecnica direzionale a supporto, mai spacciato per un segnale. "Casi storici (backtest)": alla primissima apertura dell'app, prima di qualunque trade tuo, Storico & Lezioni parte già popolato con un backtest walk-forward reale (stesso motore, stesso storico Alpha Vantage/CoinGecko scaricato in fase di sviluppo, nessuna soglia abbassata) — righe e lezioni etichettate "Backtest" così non si confondono mai con il tuo conto demo. Basta una tua prima azione reale perché il tuo storico prenda il sopravvento.</p>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./src/utils.js"></script>
+    <script src="./src/config.js"></script>
+    <script src="./src/models/seedData.js"></script>
+    <script src="./src/models/state.js"></script>
+    <script src="./src/engine/indicators.js"></script>
+    <script src="./src/engine/rules.js"></script>
+    <script src="./src/engine/backtest.js"></script>
+    <script src="./src/engine/market.js"></script>
+    <script src="./src/engine/riskGate.js"></script>
+    <script src="./src/engine/execution.js"></script>
+    <script src="./src/engine/strategies.js"></script>
+    <script src="./src/engine/learning.js"></script>
+    <script src="./src/engine/memory.js"></script>
+    <script src="./src/agents/supervisor.js"></script>
+    <script src="./src/engine/autopilot.js"></script>
+    <script src="./src/services/dataProviders.js"></script>
+    <script src="./src/services/aiProviders.js"></script>
+    <script src="./src/views/views.js"></script>
+    <script src="./src/views/memoryPageMain.js"></script>
+  </body>
+</html>

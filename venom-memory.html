@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Aurora Markets — Venom: Storico &amp; Memoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./venom-styles.css" />
+  </head>
+  <body>
+    <div class="app-shell venom-theme">
+      <aside class="sidebar" aria-label="Navigazione Venom">
+        <a class="brand" href="./venom.html" aria-label="Torna a Venom">
+          <span class="brand-mark venom-mark">V</span>
+          <span>Aurora<span class="brand-muted">/Venom</span></span>
+        </a>
+
+        <nav class="main-nav">
+          <a class="nav-item" href="./venom.html#venom-overview"><span>⌁</span>Panoramica</a>
+          <a class="nav-item" href="./venom.html#venom-clubs"><span>◫</span>Squadre</a>
+          <a class="nav-item" href="./venom.html#venom-research"><span>◌</span>Research</a>
+          <a class="nav-item active" href="./venom-memory.html"><span>◈</span>Storico &amp; Memoria</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="mode-card venom-mode-card">
+            <div class="mode-icon">◈</div>
+            <div>
+              <strong>SEMBIONTE AUTONOMO</strong>
+              <span>13 club calcistici europei · Paper €50</span>
+            </div>
+          </div>
+          <a class="profile venom-cross-link" href="./memory.html">
+            <span class="avatar spider-avatar">S</span>
+            <span>Storico &amp; Memoria di SpiderMan<small>Sistema principale (46 titoli)</small></span>
+            <span>→</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <button class="mobile-menu" aria-label="Apri menu">☰</button>
+          <div class="venom-title">
+            <h1>Venom <span class="venom-subtitle">— Storico &amp; Learning Loop</span></h1>
+            <p id="venom-updated" class="venom-updated">Caricamento stato…</p>
+          </div>
+          <div class="topbar-actions">
+            <span id="venom-live-badge" class="status-pill idle">In caricamento</span>
+          </div>
+        </header>
+
+        <section class="panel memory-panel" id="venom-memory">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Learning Loop</h2></div><span id="venom-memory-status" class="status-pill idle">0 trade</span></div>
+          <div class="memory-history-head"><span>Win rate per livello</span></div>
+          <div id="venom-memory-tier-stats" class="memory-tier-stats"></div>
+          <div class="memory-lessons-head"><span>Lezioni apprese</span><span id="venom-memory-lessons-count">0 lezioni</span></div>
+          <div id="venom-memory-lessons" class="memory-lessons-grid"></div>
+          <p class="ai-disclaimer">Dashboard di sola lettura: mostra lo stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Nessuna interazione manuale qui — per il conto interattivo locale usa il sistema principale.</p>
+        </section>
+      </main>
+    </div>
+
+    <script src="./src/utils.js"></script>
+    <script src="./src/config.js"></script>
+    <script src="./src/models/venomState.js"></script>
+    <script src="./src/engine/market.js"></script>
+    <script src="./src/engine/memory.js"></script>
+    <script src="./src/views/venomDashboardViews.js"></script>
+    <script>Aurora.VenomDashboard.bootstrap(Aurora.VenomDashboard.renderMemory);</script>
+  </body>
+</html>

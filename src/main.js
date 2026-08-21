@@ -15,7 +15,6 @@
   Aurora.Controllers.wireEvents();
   Views.renderLiveDataStatus();
   Views.renderResearchResults();
-  Views.renderMemoryPage();
   if (Models.liveData.enabled) Services.refreshLiveQuotes();
   if (Models.aiEngine.mode === 'gemini' && Models.aiEngine.geminiKey) {
     Aurora.Utils.$('gemini-status').textContent = 'Motore: AI (Gemini) — aggiorno il giudizio…';
@@ -32,7 +31,6 @@
     Views.renderSymbol();
     Views.renderActivity();
     Views.renderResearchResults();
-    Views.renderMemoryPage();
   }
 
   // Sul sito pubblicato lo stato del conto e' quello del bot autonomo (job schedulati, vedi
@@ -59,8 +57,6 @@
       Views.renderWatchlist();
       Views.updateOrderEstimate();
       Views.renderChartLevelsOverlay();
-      Views.renderMemoryHistory();
-      Views.renderMemoryLessons();
     }
   }, 6000);
   window.setInterval(Services.refreshLiveQuotes, 20000);

@@ -180,9 +180,6 @@ Aurora.Controllers.wireEvents = function wireEvents() {
   $('run-backtest').addEventListener('click', () => {
     Aurora.Services.runResearchBacktest($('research-symbol').value);
   });
-  ['memory-filter-account', 'memory-filter-symbol', 'memory-filter-tier', 'memory-filter-outcome'].forEach((id) => {
-    $(id).addEventListener('change', Aurora.Views.renderMemoryHistory);
-  });
   $('view-positions').addEventListener('click', () => {
     Models.selectedTab = 'positions';
     document.querySelectorAll('.tab').forEach((tab) => {
