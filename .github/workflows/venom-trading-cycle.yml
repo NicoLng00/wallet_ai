@@ -1,0 +1,64 @@
+name: Venom — Ciclo di trading
+
+# Gemello di trading-cycle.yml per la pipeline venom: stesso Autopilot (src/), stato/simboli
+# completamente separati (13 club calcistici europei, server/jobs/venom/tradingCycle.js).
+# Concurrency group SEPARATO (aurora-venom-jobs) e checkout/push sul branch venom, mai su main —
+# i due bot autonomi girano in parallelo, mai in coda o in conflitto tra loro.
+on:
+  schedule:
+    # Ogni 20 minuti, offset di 5' dal ciclo del sistema principale (*/15) per non far coincidere
+    # mai i due avvii — 13 simboli con sole quotazioni Yahoo (nessun agente Gemini ancora wireato
+    # per venom, vedi commento in server/jobs/venom/tradingCycle.js) restano leggeri anche a
+    # cadenza piu' fitta di quanto strettamente necessario.
+    - cron: '5-59/20 * * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aurora-venom-jobs
+  cancel-in-progress: false
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: venom
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze backend
+        working-directory: server
+        run: npm install --omit=dev
+
+      - name: Installa Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Esegui il ciclo di trading venom
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: node server/jobs/venom/tradingCycle.js
+
+      - name: Salva lo stato aggiornato sul branch venom
+        run: |
+          git config user.name "aurora-venom-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/venom/account.json data/venom/research.json
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare."
+            exit 0
+          fi
+          git commit -m "Venom — ciclo di trading: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:venom; then exit 0; fi
+            echo "Push fallito (tentativo $attempt), riprovo dopo un pull --rebase"
+            git pull --rebase origin venom
+          done
+          git push origin HEAD:venom
