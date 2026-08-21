@@ -1,0 +1,21 @@
+{
+  "_comment": "Manifest gemello di src/engine-manifest.json, per la pipeline venom: stessa lista, src/models/state.js sostituito da src/models/venomState.js, seedData.js omesso (venom parte onestamente senza un seed di conoscenza iniziale, vedi venomState.js), aiProviders.js sostituito da venomAiProvider.js (endpoint/contesto/agenti diversi, vedi server/venomSupervisor.js). Usato da server/jobs/venom/*.js via driverTemplate.js.",
+  "engineScripts": [
+    "src/utils.js",
+    "src/config.js",
+    "src/models/venomState.js",
+    "src/engine/indicators.js",
+    "src/engine/rules.js",
+    "src/engine/backtest.js",
+    "src/engine/market.js",
+    "src/engine/riskGate.js",
+    "src/engine/execution.js",
+    "src/engine/strategies.js",
+    "src/engine/learning.js",
+    "src/engine/memory.js",
+    "src/agents/supervisor.js",
+    "src/engine/autopilot.js",
+    "src/services/dataProviders.js",
+    "src/services/venomAiProvider.js"
+  ]
+}

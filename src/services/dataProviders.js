@@ -103,6 +103,62 @@ Aurora.Services.fetchUsdToEurRate = async function fetchUsdToEurRate() {
   }
 };
 
+// Generalizzazione multi-valuta di fetchUsdToEurRate (branch venom: i 13 club europei quotati
+// coprono EUR/USD/GBp/TRY, non solo USD) — stesso principio, stesso fallback a due fonti gratuite
+// senza chiave, ma un'unica chiamata per TUTTE le valute richieste invece di una per coppia:
+// Frankfurter accetta piu' "to" nella stessa richiesta (?from=EUR&to=USD,GBP,TRY), open.er-api.com
+// restituisce sempre tutte le valute che conosce in un'unica risposta. Ritorna quante unita' di
+// ciascuna valuta servono per 1 EUR (stessa convenzione di Frankfurter, from=EUR) — per convertire
+// un prezzo in EUR: prezzo_in_valuta / rate[valuta].
+Aurora.Services.fetchFrankfurterRates = async function fetchFrankfurterRates(currencies) {
+  const res = await fetchWithTimeout(`https://api.frankfurter.app/latest?from=EUR&to=${currencies.join(',')}`);
+  if (!res.ok) throw new Error(`http-${res.status}`);
+  const data = await res.json();
+  const rates = {};
+  currencies.forEach((code) => {
+    const rate = Number(data?.rates?.[code]);
+    if (!rate || rate <= 0) throw new Error(`no-rate-${code}`);
+    rates[code] = rate;
+  });
+  return rates;
+};
+
+Aurora.Services.fetchOpenErApiRates = async function fetchOpenErApiRates(currencies) {
+  const res = await fetchWithTimeout('https://open.er-api.com/v6/latest/EUR');
+  if (!res.ok) throw new Error(`http-${res.status}`);
+  const data = await res.json();
+  const rates = {};
+  currencies.forEach((code) => {
+    const rate = Number(data?.rates?.[code]);
+    if (!rate || rate <= 0) throw new Error(`no-rate-${code}`);
+    rates[code] = rate;
+  });
+  return rates;
+};
+
+Aurora.Services.fetchEurExchangeRates = async function fetchEurExchangeRates(currencies) {
+  try {
+    return await fetchWithRetry(() => Aurora.Services.fetchFrankfurterRates(currencies), 2, 300);
+  } catch {
+    return await fetchWithRetry(() => Aurora.Services.fetchOpenErApiRates(currencies), 2, 300);
+  }
+};
+
+// GBp (penny sterling, LSE — es. Celtic CCP.L) non e' la stessa unita' di GBP: 100 GBp = 1 GBP.
+// Un errore facile (confondere le due) sposterebbe un prezzo di un fattore 100 — bug reale
+// plausibile, prevenuto qui in un'unica funzione invece di lasciarlo implicito ai chiamanti.
+Aurora.Services.convertToEur = function convertToEur(price, currencyCode, rates) {
+  if (currencyCode === 'EUR') return price;
+  if (currencyCode === 'GBp') {
+    const gbpRate = rates.GBP;
+    if (!gbpRate) throw new Error('missing-rate-GBP');
+    return (price / 100) / gbpRate;
+  }
+  const rate = rates[currencyCode];
+  if (!rate) throw new Error(`missing-rate-${currencyCode}`);
+  return price / rate;
+};
+
 // Bug reale trovato e riprodotto in sessione (mai visibile finora solo perche' la chiamata
 // Finnhub per EURUSD non era mai riuscita in produzione): EURUSD e' GIA' un tasso di cambio
 // (quanti USD per 1 EUR) restituito da Finnhub — a differenza di azioni/materie prime quotate
@@ -324,6 +380,38 @@ Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range =
   }
   const data = await res.json();
   return { closes: data.closes, candles: data.candles, dates: data.dates };
+};
+
+// Bug reale trovato eseguendo per la prima volta il job venom end-to-end (mai visibile prima:
+// nessun refresh quotazioni esisteva ancora per questi simboli): senza questa funzione, il prezzo
+// di TRY/GBp/USD veniva scritto in demoAccount.market COSI' COM'E' nella valuta nativa (es. 1,14
+// per GSRAY.IS, davvero 1,14 LIRE TURCHE) e trattato dal motore come se fosse gia' in EUR — un
+// errore di unita' di misura reale nel sizing/margine/P&L, non solo di visualizzazione (diverso
+// dal bug EURUSD gia' corretto in sessione, che era di sola conversione ripetuta). Solo i simboli
+// con Models.instruments[symbol].currency (oggi solo venomState.js) vengono processati qui — il
+// sistema principale continua a usare refreshLiveQuotes/usdToEurRate, invariato.
+Aurora.Services.refreshVenomQuotes = async function refreshVenomQuotes() {
+  const Models = Aurora.Models;
+  const entries = Object.entries(Models.instruments).filter(([, data]) => data.currency);
+  if (!entries.length) return { updated: 0, errors: {} };
+
+  const neededCurrencies = [...new Set(entries.map(([, data]) => data.currency === 'GBp' ? 'GBP' : data.currency).filter((c) => c !== 'EUR'))];
+  const rates = neededCurrencies.length ? await Aurora.Services.fetchEurExchangeRates(neededCurrencies) : {};
+
+  const errors = {};
+  let updated = 0;
+  await Promise.all(entries.map(async ([symbol, data]) => {
+    try {
+      const history = await Aurora.Services.fetchYahooDaily(symbol);
+      const lastClose = history.closes?.[history.closes.length - 1];
+      if (!Number.isFinite(lastClose) || lastClose <= 0) throw new Error('no-price');
+      Models.demoAccount.market[symbol] = Aurora.Services.convertToEur(lastClose, data.currency, rates);
+      updated += 1;
+    } catch (error) {
+      errors[symbol] = error.message;
+    }
+  }));
+  return { updated, errors };
 };
 
 // Storico intraday (30 minuti, ~60 giorni), unico consumatore la strategia orb_breakout — vedi

@@ -24,6 +24,17 @@ const SYMBOL_TO_YAHOO = {
 };
 EXPANDED_STOCK_SYMBOLS.forEach((symbol) => { SYMBOL_TO_YAHOO[symbol] = symbol; });
 
+// Pipeline "venom" (branch dedicato, 2026-08-21): 13 club calcistici europei REALMENTE quotati,
+// verificati uno per uno con richieste dirette a Yahoo prima di aggiungerli (Lione e Rangers,
+// tra i candidati iniziali, sono stati esclusi perche' NON quotati/non trovati). Qui il simbolo
+// interno coincide col ticker Yahoo (nessuna ambiguita' da risolvere, a differenza di WTI/XAUUSD):
+// stesso pattern gia' usato per EXPANDED_STOCK_SYMBOLS.
+export const VENOM_CLUB_SYMBOLS = [
+  'JUVE.MI', 'SSL.MI', 'BVB.DE', 'MANU', 'AJAX.AS', 'CCP.L',
+  'FENER.IS', 'GSRAY.IS', 'BJKAS.IS', 'TSPOR.IS', 'SCP.LS', 'SLBEN.LS', 'FCP.LS'
+];
+VENOM_CLUB_SYMBOLS.forEach((symbol) => { SYMBOL_TO_YAHOO[symbol] = symbol; });
+
 export function yahooTickerFor(symbol) {
   return SYMBOL_TO_YAHOO[symbol] || null;
 }

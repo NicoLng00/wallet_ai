@@ -49,3 +49,21 @@ test('taglia prima il simbolo con piu evidenza, non a caso', () => {
   const result = buildBoundedContext(context, Math.floor(before * 0.6));
   assert.ok(result.trimmedSymbols.includes('BIG'), 'il simbolo con piu evidenza deve essere tra i tagliati');
 });
+
+// Bug plausibile prevenuto: senza venomNewsAgent tra i campi tagliabili, il budget non avrebbe
+// mai tagliato nulla nel context della pipeline venom (server/venomSupervisor.js), restando
+// silenziosamente inefficace se mai avesse superato maxChars.
+test('venom: taglia venomNewsAgent.headlines allo stesso modo di fundamentalAgent', () => {
+  const makeVenomEntry = (symbol, headlineCount) => ({
+    symbol, price: 2, changePercent: 1,
+    technicalAgent: { available: true, thesis: `${symbol} validata`, confidence: 70 },
+    riskAgent: { thesis: 'ok', riskFlags: [] },
+    venomNewsAgent: headlineCount ? { thesis: 'notizie', headlines: Array.from({ length: headlineCount }, (_, i) => `titolo ${symbol} ${i} `.repeat(10)) } : null
+  });
+  const context = [makeVenomEntry('JUVE.MI', 15)];
+  const before = JSON.stringify(context).length;
+  const result = buildBoundedContext(context, Math.floor(before / 3));
+  assert.equal(result.trimmed, true);
+  assert.ok(result.finalChars < before);
+  assert.equal(result.context[0].technicalAgent.thesis, context[0].technicalAgent.thesis);
+});
