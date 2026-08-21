@@ -1,10 +1,11 @@
 name: Venom — Ciclo di trading
 
 # Gemello di trading-cycle.yml per la pipeline venom: stesso Autopilot (src/), agenti -> Gemini
-# supervisor (server/venomSupervisor.js), stato/simboli completamente separati (13 club calcistici
-# europei, server/jobs/venom/tradingCycle.js). Concurrency group SEPARATO (aurora-venom-jobs) e
-# checkout/push sul branch venom, mai su main — i due bot autonomi girano in parallelo, mai in
-# coda o in conflitto tra loro.
+# supervisor (server/venomSupervisor.js). Il codice venom e' stato fuso su main (branch venom
+# ormai storico) — checkout e push puntano a main come il sistema principale, ma lo STATO resta
+# isolato per davvero (data/venom/*.json, mai gli stessi file di data/account.json/research.json).
+# Concurrency group SEPARATO (aurora-venom-jobs) cosi' i due bot autonomi girano davvero in
+# parallelo, mai in coda l'uno rispetto all'altro.
 on:
   schedule:
     # Ogni 20 minuti, offset di 5' dal ciclo del sistema principale (*/15) per non far coincidere
@@ -25,8 +26,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: venom
 
       - uses: actions/setup-node@v4
         with:
@@ -49,7 +48,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node server/jobs/venom/tradingCycle.js
 
-      - name: Salva lo stato aggiornato sul branch venom
+      - name: Salva lo stato aggiornato su main
         run: |
           git config user.name "aurora-venom-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -60,8 +59,8 @@ jobs:
           fi
           git commit -m "Venom — ciclo di trading: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           for attempt in 1 2 3; do
-            if git push origin HEAD:venom; then exit 0; fi
+            if git push origin HEAD:main; then exit 0; fi
             echo "Push fallito (tentativo $attempt), riprovo dopo un pull --rebase"
-            git pull --rebase origin venom
+            git pull --rebase origin main
           done
-          git push origin HEAD:venom
+          git push origin HEAD:main

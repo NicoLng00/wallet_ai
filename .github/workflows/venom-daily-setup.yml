@@ -1,10 +1,13 @@
 name: Venom — Setup giornaliero
 
-# Gemello di daily-setup.yml per la pipeline venom (branch dedicato, indipendente da main): stesso
-# motore, storico e simboli diversi (13 club calcistici europei, server/jobs/venom/dailySetup.js).
-# Concurrency group SEPARATO (aurora-venom-jobs, non aurora-markets-jobs) cosi' i due bot autonomi
-# girano davvero in parallelo, mai l'uno in coda o in conflitto con l'altro. Checkout e push
-# puntano al branch venom, mai a main — lo stato dei due sistemi resta isolato per davvero.
+# Gemello di daily-setup.yml per la pipeline venom: stesso motore, storico e simboli diversi (13
+# club calcistici europei, server/jobs/venom/dailySetup.js). Il codice venom e' stato fuso su main
+# (branch venom ormai storico, non piu' la fonte viva) — checkout e push puntano a main come il
+# sistema principale, ma lo STATO resta isolato per davvero (data/venom/*.json, mai gli stessi
+# file di data/account.json/research.json). Concurrency group SEPARATO (aurora-venom-jobs, non
+# aurora-markets-jobs) cosi' i due bot autonomi girano davvero in parallelo, mai l'uno in coda
+# rispetto all'altro — condividono lo stesso branch di destinazione ma mai gli stessi file, quindi
+# un'eventuale corsa tra i due push si risolve con un semplice rebase, mai un conflitto reale.
 on:
   schedule:
     # 06:10 UTC, lun-ven — 10 minuti dopo il setup del sistema principale, stesso motivo (prima
@@ -25,8 +28,6 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: venom
 
       - uses: actions/setup-node@v4
         with:
@@ -45,7 +46,7 @@ jobs:
           CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: node server/jobs/venom/dailySetup.js
 
-      - name: Salva lo stato aggiornato sul branch venom
+      - name: Salva lo stato aggiornato su main
         run: |
           git config user.name "aurora-venom-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -56,8 +57,8 @@ jobs:
           fi
           git commit -m "Venom — setup giornaliero: backtest aggiornato $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           for attempt in 1 2 3; do
-            if git push origin HEAD:venom; then exit 0; fi
+            if git push origin HEAD:main; then exit 0; fi
             echo "Push fallito (tentativo $attempt), riprovo dopo un pull --rebase"
-            git pull --rebase origin venom
+            git pull --rebase origin main
           done
-          git push origin HEAD:venom
+          git push origin HEAD:main
