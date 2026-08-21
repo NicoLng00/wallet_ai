@@ -7,11 +7,13 @@
 // come se fossero gia' in EUR, un errore di unita' di misura nel sizing/margine, non solo di
 // visualizzazione. Finnhub resta fuori (non copre questi ticker, confermato con una chiave reale).
 //
-// Limite dichiarato, non nascosto: il giudizio Gemini non e' ancora wireato per venom in questo
-// job (i due nuovi agenti reali, liquidity_model e venom_news, esistono e sono testati ma non
-// ancora orchestrati in un supervisor dedicato che li passi a un modello) — l'Autopilot gira
-// quindi sulla sola regola tecnica (walk-forward validata), esattamente come il sistema principale
-// in modalita' "rule".
+// Giudizio Gemini: come il sistema principale, wireato solo se una chiave e' disponibile
+// (VENOM_GEMINI_API_KEY dedicata, o GEMINI_API_KEY condivisa come ripiego — vedi
+// server/http/routes.js /venom-agent-decision). Chiama gli agenti reali (technical, risk,
+// market_regime, liquidity_model, hedge, audit_sentinel, venom_news) via venomSupervisor.js
+// prima di generare il segnale — architettura identica al sistema principale (agenti -> Gemini
+// supervisor), stesso invariante non negoziabile: nessun agente/modello autorizza mai da solo
+// un'esecuzione, il Risk Engine (src/engine/riskGate.js) resta l'unico gate.
 import { buildDriverHtml, VENOM_ENGINE_SCRIPTS } from '../lib/driverTemplate.js';
 import { runDriverAndGetOutput, writeTempDriverFile, removeDriverFile } from '../lib/chromeRunner.js';
 import { startBackend, stopBackend } from '../lib/backendProcess.js';
@@ -22,6 +24,8 @@ async function main() {
   const research = readResearchState();
   const backend = await startBackend(); // proxy Yahoo per refreshVenomQuotes (13 ticker europei)
 
+  const geminiKey = process.env.VENOM_GEMINI_API_KEY || process.env.GEMINI_API_KEY || null;
+
   const injections = {
     'aurora-venom-account-v1': account.demoAccount ? { version: 2, ...account.demoAccount } : null,
     'aurora-venom-research-v1': (research.researchData && Object.keys(research.researchData.validated || {}).length)
@@ -29,7 +33,7 @@ async function main() {
       : null,
     'aurora-venom-history-v1': (research.historyCache && Object.keys(research.historyCache).length) ? research.historyCache : null,
     'aurora-venom-activity-v1': Array.isArray(account.activity) && account.activity.length ? account.activity : null,
-    'aurora-venom-ai-engine-v1': { mode: 'rule', geminiKey: null },
+    'aurora-venom-ai-engine-v1': { mode: geminiKey ? 'gemini' : 'rule', geminiKey },
     'aurora-venom-live-data-v1': { enabled: false, finnhubKey: null },
     'aurora-venom-autopilot-mode-v1': { mode: account.autopilotMode || 'coverage' }
   };
@@ -50,6 +54,9 @@ async function main() {
 
   try { await Aurora.Services.refreshVenomQuotes(); }
   catch (e) { Models.logActivity({ title: 'Quotazioni venom non disponibili', detail: String(e && e.message || e), tag: 'JOB' }); }
+
+  try { if (Models.aiEngine.mode === 'gemini' && Models.aiEngine.geminiKey) await Aurora.Services.fetchVenomGeminiSignals(); }
+  catch (e) { Models.logActivity({ title: 'Giudizio Gemini venom non disponibile, procedo con la regola tecnica', detail: String(e && e.message || e), tag: 'JOB' }); }
 
   Aurora.Engine.runAutopilotCycle();
 

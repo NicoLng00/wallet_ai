@@ -15,10 +15,15 @@ function contextSize(context) {
   return JSON.stringify(context).length;
 }
 
+// venomNewsAgent (pipeline venom, server/venomSupervisor.js) aggiunto qui invece di lasciarlo
+// fuori: senza, il budget non avrebbe mai tagliato nulla nel context venom (nessun campo
+// corrisponderebbe), restando silenziosamente inefficace se mai superasse maxChars — bug
+// plausibile prevenuto, non ancora osservato davvero (13 simboli, oggi sotto soglia).
 function trimmableFields(entry) {
   const fields = [];
   if (entry.fundamentalAgent?.headlines?.length) fields.push(['fundamentalAgent', 'headlines']);
   if (entry.socialSentimentAgent?.posts?.length) fields.push(['socialSentimentAgent', 'posts']);
+  if (entry.venomNewsAgent?.headlines?.length) fields.push(['venomNewsAgent', 'headlines']);
   return fields;
 }
 

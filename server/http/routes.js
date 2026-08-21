@@ -1,13 +1,15 @@
 import { Router } from 'express';
 import { generateDecision } from '../supervisor.js';
+import { generateVenomDecision } from '../venomSupervisor.js';
 import { AGENT_TOOL_NAMES } from '../mcp/server.js';
+import { VENOM_AGENT_TOOL_NAMES } from '../mcp/venomServer.js';
 import { fetchYahooDailyHistory, fetchYahooIntradayHistory, yahooTickerFor } from '../marketData.js';
 import { resolveDailyRange, resolveIntradayInterval, resolveIntradayRange } from '../lib/rangeResolvers.js';
 
 export const router = Router();
 
 router.get('/health', (req, res) => {
-  res.json({ ok: true, agentTools: AGENT_TOOL_NAMES });
+  res.json({ ok: true, agentTools: AGENT_TOOL_NAMES, venomAgentTools: VENOM_AGENT_TOOL_NAMES });
 });
 
 // Storico reale piu' lungo per simboli non-crypto (azioni/ETF/materie prime), proxato lato server
@@ -70,5 +72,36 @@ router.post('/agent-decision', async (req, res) => {
     res.json(result);
   } catch (error) {
     res.status(502).json({ error: error.message || 'Errore interno del backend.' });
+  }
+});
+
+// Gemello di /agent-decision per la pipeline venom: stessa forma di richiesta/risposta, un solo
+// provider (Gemini — venom non ha ancora un'interfaccia multi-provider come il sistema
+// principale, non serve finche' non esiste un secondo provider reale da selezionare). Chiave
+// dedicata: VENOM_GEMINI_API_KEY se configurata su server/.env o come secret, altrimenti ricade
+// su GEMINI_API_KEY (la stessa del sistema principale) — MAI un errore se la chiave dedicata
+// manca mentre quella condivisa e' disponibile, coerente con "non si butta via nulla".
+router.post('/venom-agent-decision', async (req, res) => {
+  try {
+    const { apiKey, symbols, marketContext, risk, heldPositions } = req.body || {};
+    if (!Array.isArray(symbols) || !symbols.length) {
+      res.status(400).json({ error: 'symbols deve essere un array non vuoto.' });
+      return;
+    }
+    if (!marketContext || typeof marketContext !== 'object') {
+      res.status(400).json({ error: 'marketContext mancante.' });
+      return;
+    }
+    const resolvedKey = apiKey || process.env.VENOM_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    if (!resolvedKey) {
+      res.status(400).json({ error: 'Nessuna chiave Gemini disponibile per venom (VENOM_GEMINI_API_KEY o GEMINI_API_KEY in server/.env).' });
+      return;
+    }
+    const result = await generateVenomDecision({
+      apiKey: resolvedKey, symbols, marketContext, risk: risk || {}, heldPositions: heldPositions || []
+    });
+    res.json(result);
+  } catch (error) {
+    res.status(502).json({ error: error.message || 'Errore interno del backend venom.' });
   }
 });
