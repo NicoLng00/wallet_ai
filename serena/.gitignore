@@ -1,0 +1,10 @@
+# Ogni run e' un artefatto locale, mai versionato (puo' contenere output di LLM/dati di mercato
+# scaricati) — analogo a data/ nel progetto Node esistente, ma qui il "database" e' runs/ stesso.
+runs/*
+!runs/.gitkeep
+
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
