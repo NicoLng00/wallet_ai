@@ -141,17 +141,17 @@ button { cursor: pointer; }
 .memory-tag.outcome-win{background:rgba(58,213,159,.14);color:var(--green)}
 .memory-tag.outcome-loss{background:rgba(255,109,123,.14);color:var(--red)}
 .memory-lessons-head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 8px;color:#6f849d;font:9px var(--mono);letter-spacing:.08em}
-.memory-lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.memory-lesson-card{padding:11px;border-radius:8px;border:1px solid var(--line);background:#091526}
-.memory-lesson-card.superseded{opacity:.5}
-.memory-lesson-head{display:flex;justify-content:space-between;align-items:center;gap:6px}
-.memory-lesson-head strong{font-size:10px;color:#9eb8d6}
-.memory-lesson-card p{margin:8px 0;color:#ccd9e7;font-size:10px;line-height:1.5}
-.memory-lesson-foot{display:flex;justify-content:space-between;align-items:center;color:#71849b;font-size:8.5px}
-.memory-lesson-deactivate{border:1px solid #41688f;border-radius:5px;background:#173052;color:#b9d9ff;padding:4px 7px;font-size:8.5px;font-weight:700}
+.memory-lessons-table{border-top:1px solid var(--line);margin-top:2px}
+.memory-lesson-row{display:grid;grid-template-columns:150px 84px 56px 1fr 108px;align-items:center;gap:10px;padding:9px 6px;border-bottom:1px solid rgba(158,184,214,.07);font-size:11px}
+.memory-lesson-row-head{color:#6f849d;font-size:9.5px;letter-spacing:.06em;border-bottom:1px solid var(--line)}
+.memory-lesson-row.superseded{opacity:.55}
+.memory-lesson-row small{color:#71849b;font-size:9px}
+.memory-lesson-statement{color:#ccd9e7;line-height:1.5}
+.memory-lesson-deactivate{border:1px solid #41688f;border-radius:5px;background:#173052;color:#b9d9ff;padding:5px 8px;font-size:9.5px;font-weight:700}
 .memory-lesson-deactivate:hover{background:rgba(255,109,123,.13);border-color:rgba(255,109,123,.35);color:#ffadb5}
 .memory-lesson-deactivate:disabled{opacity:.4;cursor:default}
-.memory-empty{padding:13px 2px;color:#8da0b6;font-size:10px;line-height:1.6}
+.memory-empty{padding:13px 2px;color:#8da0b6;font-size:11px;line-height:1.6}
+@media (max-width: 700px){.memory-lesson-row{grid-template-columns:100px 70px 1fr 90px}.memory-lesson-row span:nth-child(3){display:none}}
 
 .autopilot-mode-row{margin-top:12px;padding:9px;border-radius:7px;border:1px solid var(--line);background:#091526}
 .autopilot-mode-row>span{display:block;color:#7295c1;font:8px var(--mono);letter-spacing:.07em;margin-bottom:6px}
