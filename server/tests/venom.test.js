@@ -62,7 +62,8 @@ test('fetchEurExchangeRates: usa Frankfurter quando risponde, nessun fallback su
 // --- venomState.js: stessa forma di Aurora.Models di state.js, caricata al posto sua ---
 const VenomAurora = loadEngine([
   'src/utils.js', 'src/config.js', 'src/models/venomState.js',
-  'src/engine/indicators.js', 'src/engine/rules.js', 'src/engine/backtest.js', 'src/engine/market.js', 'src/engine/strategies.js'
+  'src/engine/indicators.js', 'src/engine/rules.js', 'src/engine/backtest.js', 'src/engine/market.js', 'src/engine/strategies.js',
+  'src/services/dataProviders.js'
 ]);
 
 test('venomState: 13 club europei realmente verificati, nessuno riusato dal sistema principale', () => {
@@ -102,4 +103,36 @@ test('venomState: ogni club ha una valuta dichiarata, GBp (Celtic) resta distint
     assert.ok(['EUR', 'USD', 'GBp', 'TRY'].includes(data.currency), `${symbol}: valuta mancante o non riconosciuta (${data.currency})`);
   });
   assert.equal(instruments['CCP.L'].currency, 'GBp');
+});
+
+// --- refreshVenomQuotes: bug reale trovato eseguendo il job end-to-end per la prima volta ---
+test('refreshVenomQuotes: converte in EUR il prezzo nativo (TRY/GBp/USD), non lo scrive mai grezzo', async () => {
+  VenomAurora.Services.fetchEurExchangeRates = async () => ({ USD: 1.168175, GBP: 0.856976, TRY: 56.134409 });
+  VenomAurora.Services.fetchYahooDaily = async (symbol) => {
+    const lastCloseBySymbol = { 'JUVE.MI': 2.05, MANU: 24.02, 'CCP.L': 200, 'GSRAY.IS': 1.14 };
+    return { closes: [lastCloseBySymbol[symbol] ?? 1] };
+  };
+  const result = await VenomAurora.Services.refreshVenomQuotes();
+  assert.equal(result.updated, 13);
+  // Object.keys invece di assert.deepEqual(result.errors, {}): result.errors e' creato dentro il
+  // contesto vm (realm diverso da questo file di test) — deepStrictEqual confronta anche il
+  // prototipo, due oggetti vuoti di realm diversi non risultano "uguali" pur essendo entrambi {}.
+  assert.equal(Object.keys(result.errors).length, 0);
+
+  const market = VenomAurora.Models.demoAccount.market;
+  assert.ok(Math.abs(market['JUVE.MI'] - 2.05) < 1e-9, 'EUR nativo: nessuna conversione');
+  assert.ok(Math.abs(market.MANU - (24.02 / 1.168175)) < 1e-9, 'USD convertito in EUR');
+  assert.ok(Math.abs(market['CCP.L'] - ((200 / 100) / 0.856976)) < 1e-9, 'GBp (penny) convertito correttamente, non trattato come GBP');
+  assert.ok(Math.abs(market['GSRAY.IS'] - (1.14 / 56.134409)) < 1e-9, 'TRY convertito in EUR — MAI scritto come 1.14 grezzo (sarebbe un errore di unita\' di misura reale nel sizing)');
+});
+
+test('refreshVenomQuotes: un simbolo che fallisce non blocca gli altri, l\'errore e\' riportato per nome', async () => {
+  VenomAurora.Services.fetchEurExchangeRates = async () => ({ USD: 1.168175, GBP: 0.856976, TRY: 56.134409 });
+  VenomAurora.Services.fetchYahooDaily = async (symbol) => {
+    if (symbol === 'MANU') throw new Error('http-500');
+    return { closes: [2.5] };
+  };
+  const result = await VenomAurora.Services.refreshVenomQuotes();
+  assert.equal(result.updated, 12);
+  assert.equal(result.errors.MANU, 'http-500');
 });

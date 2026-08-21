@@ -1,0 +1,63 @@
+name: Venom — Setup giornaliero
+
+# Gemello di daily-setup.yml per la pipeline venom (branch dedicato, indipendente da main): stesso
+# motore, storico e simboli diversi (13 club calcistici europei, server/jobs/venom/dailySetup.js).
+# Concurrency group SEPARATO (aurora-venom-jobs, non aurora-markets-jobs) cosi' i due bot autonomi
+# girano davvero in parallelo, mai l'uno in coda o in conflitto con l'altro. Checkout e push
+# puntano al branch venom, mai a main — lo stato dei due sistemi resta isolato per davvero.
+on:
+  schedule:
+    # 06:10 UTC, lun-ven — 10 minuti dopo il setup del sistema principale, stesso motivo (prima
+    # dell'apertura dei mercati europei/turchi), offset solo per non far partire i due job insieme.
+    - cron: '10 6 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aurora-venom-jobs
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: venom
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze backend
+        working-directory: server
+        run: npm install --omit=dev
+
+      - name: Installa Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Esegui setup giornaliero venom (backtest reale sui 13 club)
+        env:
+          CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+        run: node server/jobs/venom/dailySetup.js
+
+      - name: Salva lo stato aggiornato sul branch venom
+        run: |
+          git config user.name "aurora-venom-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/venom/research.json
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare."
+            exit 0
+          fi
+          git commit -m "Venom — setup giornaliero: backtest aggiornato $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for attempt in 1 2 3; do
+            if git push origin HEAD:venom; then exit 0; fi
+            echo "Push fallito (tentativo $attempt), riprovo dopo un pull --rebase"
+            git pull --rebase origin venom
+          done
+          git push origin HEAD:venom

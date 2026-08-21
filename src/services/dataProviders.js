@@ -382,6 +382,38 @@ Aurora.Services.fetchYahooDaily = async function fetchYahooDaily(symbol, range =
   return { closes: data.closes, candles: data.candles, dates: data.dates };
 };
 
+// Bug reale trovato eseguendo per la prima volta il job venom end-to-end (mai visibile prima:
+// nessun refresh quotazioni esisteva ancora per questi simboli): senza questa funzione, il prezzo
+// di TRY/GBp/USD veniva scritto in demoAccount.market COSI' COM'E' nella valuta nativa (es. 1,14
+// per GSRAY.IS, davvero 1,14 LIRE TURCHE) e trattato dal motore come se fosse gia' in EUR — un
+// errore di unita' di misura reale nel sizing/margine/P&L, non solo di visualizzazione (diverso
+// dal bug EURUSD gia' corretto in sessione, che era di sola conversione ripetuta). Solo i simboli
+// con Models.instruments[symbol].currency (oggi solo venomState.js) vengono processati qui — il
+// sistema principale continua a usare refreshLiveQuotes/usdToEurRate, invariato.
+Aurora.Services.refreshVenomQuotes = async function refreshVenomQuotes() {
+  const Models = Aurora.Models;
+  const entries = Object.entries(Models.instruments).filter(([, data]) => data.currency);
+  if (!entries.length) return { updated: 0, errors: {} };
+
+  const neededCurrencies = [...new Set(entries.map(([, data]) => data.currency === 'GBp' ? 'GBP' : data.currency).filter((c) => c !== 'EUR'))];
+  const rates = neededCurrencies.length ? await Aurora.Services.fetchEurExchangeRates(neededCurrencies) : {};
+
+  const errors = {};
+  let updated = 0;
+  await Promise.all(entries.map(async ([symbol, data]) => {
+    try {
+      const history = await Aurora.Services.fetchYahooDaily(symbol);
+      const lastClose = history.closes?.[history.closes.length - 1];
+      if (!Number.isFinite(lastClose) || lastClose <= 0) throw new Error('no-price');
+      Models.demoAccount.market[symbol] = Aurora.Services.convertToEur(lastClose, data.currency, rates);
+      updated += 1;
+    } catch (error) {
+      errors[symbol] = error.message;
+    }
+  }));
+  return { updated, errors };
+};
+
 // Storico intraday (30 minuti, ~60 giorni), unico consumatore la strategia orb_breakout — vedi
 // server/marketData.js per il motivo del lookback breve (limite gratuito Yahoo). candles porta
 // .time (epoch ms), non .date: necessario per identificare la barra delle 09:30 NY.

@@ -16,20 +16,24 @@ window.Aurora = window.Aurora || {};
   // da USD): qui serve per sapere quale tasso applicare (vedi services/dataProviders.js
   // convertToEur) — GBp (Celtic) e' PENNY sterline, non sterline: 100 GBp = 1 GBP, gestito
   // esplicitamente per non sbagliare il prezzo di un fattore 100.
+  // newsQuery/newsLocale: nome reale del club + parametri di lingua/paese per Google News RSS
+  // (vedi services/venomNewsQuery.js) — query mirata per lingua nativa del club invece di un'unica
+  // ricerca generica in inglese, verificato dal vivo in sessione per l'italiano (Juventus) e il
+  // tedesco (Borussia Dortmund): stesse fonti reali (Gazzetta, Tuttosport, Goal.com...).
   const instruments = {
-    'JUVE.MI': { name: 'Juventus Football Club S.p.A.', exchange: 'Borsa Italiana · EUR', price: 2.05, change: 0, color: '#3b6ea5', tv: 'MIL:JUVE', currency: 'EUR' },
-    'SSL.MI': { name: 'S.S. Lazio S.p.A.', exchange: 'Borsa Italiana · EUR', price: 1.645, change: 0, color: '#5c9ee0', tv: 'MIL:SSL', currency: 'EUR' },
-    'BVB.DE': { name: 'Borussia Dortmund GmbH & Co. KGaA', exchange: 'XETRA · EUR', price: 3.185, change: 0, color: '#e0b04f', tv: 'XETR:BVB', currency: 'EUR' },
-    MANU: { name: 'Manchester United plc', exchange: 'NYSE · USD', price: 24.02, change: 0, color: '#d64f4f', tv: 'NYSE:MANU', currency: 'USD' },
-    'AJAX.AS': { name: 'AFC Ajax NV', exchange: 'Euronext Amsterdam · EUR', price: 8.96, change: 0, color: '#d6474f', tv: 'AMS:AJAX', currency: 'EUR' },
-    'CCP.L': { name: 'Celtic plc', exchange: 'LSE (AIM) · GBp', price: 200, change: 0, color: '#4f8f5c', tv: 'LON:CCP', currency: 'GBp' },
-    'FENER.IS': { name: 'Fenerbahçe Futbol A.S.', exchange: 'Borsa Istanbul · TRY', price: 3.17, change: 0, color: '#d6a44f', tv: 'BIST:FENER', currency: 'TRY' },
-    'GSRAY.IS': { name: 'Galatasaray Sportif A.S.', exchange: 'Borsa Istanbul · TRY', price: 1.14, change: 0, color: '#d68f4f', tv: 'BIST:GSRAY', currency: 'TRY' },
-    'BJKAS.IS': { name: 'Beşiktaş Futbol Yatırımları A.S.', exchange: 'Borsa Istanbul · TRY', price: 2.83, change: 0, color: '#3f3f3f', tv: 'BIST:BJKAS', currency: 'TRY' },
-    'TSPOR.IS': { name: 'Trabzonspor Sportif A.S.', exchange: 'Borsa Istanbul · TRY', price: 1.07, change: 0, color: '#7a3f3f', tv: 'BIST:TSPOR', currency: 'TRY' },
-    'SCP.LS': { name: 'Sporting Clube de Portugal - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 1, change: 0, color: '#4f7ad6', tv: 'ELI:SCP', currency: 'EUR' },
-    'SLBEN.LS': { name: 'Sport Lisboa e Benfica - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 6.84, change: 0, color: '#d64f4f', tv: 'ELI:SLBEN', currency: 'EUR' },
-    'FCP.LS': { name: 'Futebol Clube do Porto - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 2.98, change: 0, color: '#4f6bd6', tv: 'ELI:FCP', currency: 'EUR' }
+    'JUVE.MI': { name: 'Juventus Football Club S.p.A.', exchange: 'Borsa Italiana · EUR', price: 2.05, change: 0, color: '#3b6ea5', tv: 'MIL:JUVE', currency: 'EUR', newsQuery: 'Juventus', newsLocale: { hl: 'it', gl: 'IT', ceid: 'IT:it' } },
+    'SSL.MI': { name: 'S.S. Lazio S.p.A.', exchange: 'Borsa Italiana · EUR', price: 1.645, change: 0, color: '#5c9ee0', tv: 'MIL:SSL', currency: 'EUR', newsQuery: 'Lazio calcio', newsLocale: { hl: 'it', gl: 'IT', ceid: 'IT:it' } },
+    'BVB.DE': { name: 'Borussia Dortmund GmbH & Co. KGaA', exchange: 'XETRA · EUR', price: 3.185, change: 0, color: '#e0b04f', tv: 'XETR:BVB', currency: 'EUR', newsQuery: 'Borussia Dortmund', newsLocale: { hl: 'de', gl: 'DE', ceid: 'DE:de' } },
+    MANU: { name: 'Manchester United plc', exchange: 'NYSE · USD', price: 24.02, change: 0, color: '#d64f4f', tv: 'NYSE:MANU', currency: 'USD', newsQuery: 'Manchester United', newsLocale: { hl: 'en-GB', gl: 'GB', ceid: 'GB:en' } },
+    'AJAX.AS': { name: 'AFC Ajax NV', exchange: 'Euronext Amsterdam · EUR', price: 8.96, change: 0, color: '#d6474f', tv: 'AMS:AJAX', currency: 'EUR', newsQuery: 'Ajax voetbal', newsLocale: { hl: 'nl', gl: 'NL', ceid: 'NL:nl' } },
+    'CCP.L': { name: 'Celtic plc', exchange: 'LSE (AIM) · GBp', price: 200, change: 0, color: '#4f8f5c', tv: 'LON:CCP', currency: 'GBp', newsQuery: 'Celtic FC', newsLocale: { hl: 'en-GB', gl: 'GB', ceid: 'GB:en' } },
+    'FENER.IS': { name: 'Fenerbahçe Futbol A.S.', exchange: 'Borsa Istanbul · TRY', price: 3.17, change: 0, color: '#d6a44f', tv: 'BIST:FENER', currency: 'TRY', newsQuery: 'Fenerbahçe', newsLocale: { hl: 'tr', gl: 'TR', ceid: 'TR:tr' } },
+    'GSRAY.IS': { name: 'Galatasaray Sportif A.S.', exchange: 'Borsa Istanbul · TRY', price: 1.14, change: 0, color: '#d68f4f', tv: 'BIST:GSRAY', currency: 'TRY', newsQuery: 'Galatasaray', newsLocale: { hl: 'tr', gl: 'TR', ceid: 'TR:tr' } },
+    'BJKAS.IS': { name: 'Beşiktaş Futbol Yatırımları A.S.', exchange: 'Borsa Istanbul · TRY', price: 2.83, change: 0, color: '#3f3f3f', tv: 'BIST:BJKAS', currency: 'TRY', newsQuery: 'Beşiktaş', newsLocale: { hl: 'tr', gl: 'TR', ceid: 'TR:tr' } },
+    'TSPOR.IS': { name: 'Trabzonspor Sportif A.S.', exchange: 'Borsa Istanbul · TRY', price: 1.07, change: 0, color: '#7a3f3f', tv: 'BIST:TSPOR', currency: 'TRY', newsQuery: 'Trabzonspor', newsLocale: { hl: 'tr', gl: 'TR', ceid: 'TR:tr' } },
+    'SCP.LS': { name: 'Sporting Clube de Portugal - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 1, change: 0, color: '#4f7ad6', tv: 'ELI:SCP', currency: 'EUR', newsQuery: 'Sporting CP', newsLocale: { hl: 'pt-PT', gl: 'PT', ceid: 'PT:pt-150' } },
+    'SLBEN.LS': { name: 'Sport Lisboa e Benfica - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 6.84, change: 0, color: '#d64f4f', tv: 'ELI:SLBEN', currency: 'EUR', newsQuery: 'Benfica', newsLocale: { hl: 'pt-PT', gl: 'PT', ceid: 'PT:pt-150' } },
+    'FCP.LS': { name: 'Futebol Clube do Porto - Futebol, SAD', exchange: 'Euronext Lisbon · EUR', price: 2.98, change: 0, color: '#4f6bd6', tv: 'ELI:FCP', currency: 'EUR', newsQuery: 'FC Porto', newsLocale: { hl: 'pt-PT', gl: 'PT', ceid: 'PT:pt-150' } }
   };
 
   // Finnhub rifiuta con 403 quote/news per JUVE.MI (verificato con una chiave reale in sessione,

@@ -16,6 +16,12 @@ export const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 const manifest = JSON.parse(readFileSync(path.join(REPO_ROOT, 'src', 'engine-manifest.json'), 'utf8'));
 const ENGINE_SCRIPTS = manifest.engineScripts;
 
+// Pipeline venom (branch dedicato): stesso motore, stato diverso — manifest gemello con
+// venomState.js al posto di state.js (vedi src/venom-engine-manifest.json). Letto solo se
+// richiesto esplicitamente (engineScripts param sotto), mai per il driver del sistema principale.
+const venomManifest = JSON.parse(readFileSync(path.join(REPO_ROOT, 'src', 'venom-engine-manifest.json'), 'utf8'));
+export const VENOM_ENGINE_SCRIPTS = venomManifest.engineScripts;
+
 // Percorsi RELATIVI (non file:// assoluti): il percorso del repo su questa macchina contiene
 // spazi ("OneDrive - alpitronic GmbH") che un URL file:// assoluto non gestisce in modo affidabile
 // per il caricamento di <script src>. Stessa tecnica, verificata su decine di pagine di test in
@@ -27,7 +33,7 @@ function scriptTag(relativePath) {
 
 // injections: { [localStorageKey]: valueOrNull } — null/undefined = non impostare la chiave,
 // cosi' i fallback gia' esistenti in models/state.js (seed reale o default puliti) restano intatti.
-export function buildDriverHtml({ injections = {}, tailScript }) {
+export function buildDriverHtml({ injections = {}, tailScript, engineScripts = ENGINE_SCRIPTS }) {
   const setters = Object.entries(injections)
     .filter(([, value]) => value !== null && value !== undefined)
     .map(([key, value]) => `localStorage.setItem(${JSON.stringify(key)}, ${JSON.stringify(JSON.stringify(value))});`)
@@ -38,7 +44,7 @@ export function buildDriverHtml({ injections = {}, tailScript }) {
 <script>
 ${setters}
 </script>
-${ENGINE_SCRIPTS.map(scriptTag).join('\n')}
+${engineScripts.map(scriptTag).join('\n')}
 <script>
 ${tailScript}
 </script>
