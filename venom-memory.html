@@ -54,23 +54,70 @@
           </div>
         </header>
 
-        <section class="panel memory-panel" id="venom-memory">
-          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Learning Loop</h2></div><span id="venom-memory-status" class="status-pill idle">0 trade</span></div>
-          <div class="memory-history-head"><span>Win rate per livello</span></div>
-          <div id="venom-memory-tier-stats" class="memory-tier-stats"></div>
-          <div class="memory-lessons-head"><span>Lezioni apprese</span><span id="venom-memory-lessons-count">0 lezioni</span></div>
-          <div id="venom-memory-lessons" class="memory-lessons-grid"></div>
-          <p class="ai-disclaimer">Dashboard di sola lettura: mostra lo stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Nessuna interazione manuale qui — per il conto interattivo locale usa il sistema principale.</p>
+        <section class="panel memory-panel" id="memory">
+          <div class="panel-title compact"><div><p class="eyebrow">MEMORIA</p><h2>Storico &amp; Learning Loop</h2></div><span id="memory-status" class="status-pill idle">0 trade</span></div>
+          <div class="memory-filters">
+            <select id="memory-filter-account" aria-label="Filtra per conto">
+              <option value="all">Tutti i conti</option>
+              <option value="demo">Paper demo</option>
+              <option value="live">Conto reale</option>
+              <option value="backtest">Casi storici (backtest)</option>
+            </select>
+            <select id="memory-filter-symbol" aria-label="Filtra per club"><option value="all">Tutti i club</option></select>
+            <select id="memory-filter-tier" aria-label="Filtra per livello">
+              <option value="all">Tutti i livelli</option>
+              <option value="validated">Validato</option>
+              <option value="exploratory">Esplorativo</option>
+              <option value="probe">Sonda</option>
+              <option value="forced">Sonda forzata</option>
+            </select>
+            <select id="memory-filter-outcome" aria-label="Filtra per esito">
+              <option value="all">Tutti gli esiti</option>
+              <option value="win">Vinti</option>
+              <option value="loss">Persi</option>
+            </select>
+          </div>
+          <div class="memory-history-head">
+            <span>Win rate per livello</span>
+          </div>
+          <div id="memory-tier-stats" class="memory-tier-stats" aria-label="Win rate segmentata per livello"></div>
+          <div class="memory-history-head">
+            <span>Storico filtrato</span>
+            <span id="memory-count">0 trade</span>
+          </div>
+          <div class="memory-table">
+            <div class="memory-row memory-head">
+              <span>Orario</span><span>Conto</span><span>Club</span><span>Lato</span><span>Livello</span><span>Strategia</span><span>P&amp;L</span><span>Esito</span><span>Origine</span>
+            </div>
+            <div id="memory-history" aria-label="Storico trade filtrato per memoria"></div>
+          </div>
+          <div class="memory-lessons-head">
+            <span>Lezioni apprese (Learning Loop)</span>
+            <span id="memory-lessons-count">0 lezioni</span>
+          </div>
+          <div id="memory-lessons" class="memory-lessons-grid" aria-label="Lezioni attive per strategia"></div>
+          <p class="ai-disclaimer">Stessa catalogazione dello Storico &amp; Memoria del sistema principale (conto/livello/esito/origine), applicata al bot Venom: stato reale del bot autonomo (data/venom/*.json, aggiornato dai workflow schedulati "Venom — Setup giornaliero" e "Venom — Ciclo di trading"). Il pulsante "Disattiva" su una lezione agisce solo su questo browser (localStorage locale a Venom) — il bot autonomo resta autorevole sui prossimi cicli.</p>
         </section>
       </main>
     </div>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="./src/utils.js"></script>
     <script src="./src/config.js"></script>
     <script src="./src/models/venomState.js"></script>
     <script src="./src/engine/market.js"></script>
     <script src="./src/engine/memory.js"></script>
+    <script src="./src/views/pagination.js"></script>
+    <script src="./src/views/memoryHistoryView.js"></script>
     <script src="./src/views/venomDashboardViews.js"></script>
-    <script>Aurora.VenomDashboard.bootstrap(Aurora.VenomDashboard.renderMemory);</script>
+    <script>
+      Aurora.VenomDashboard.bootstrap(Aurora.Views.renderMemoryPage);
+      ['memory-filter-account', 'memory-filter-symbol', 'memory-filter-tier', 'memory-filter-outcome'].forEach((id) => {
+        document.getElementById(id).addEventListener('change', () => {
+          Aurora.Views.Pagination.reset('memory-history');
+          Aurora.Views.renderMemoryHistory();
+        });
+      });
+    </script>
   </body>
 </html>

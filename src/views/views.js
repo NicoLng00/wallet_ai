@@ -16,75 +16,8 @@ Aurora.Views.renderWatchlist = function renderWatchlist() {
   document.querySelectorAll('.watch-item').forEach((button) => button.addEventListener('click', () => Aurora.Controllers.selectSymbol(button.dataset.symbol)));
 };
 
-Aurora.Views.renderTradingViewWidget = function renderTradingViewWidget() {
-  const { $ } = Aurora.Utils;
-  const instrument = Aurora.Models.instruments[Aurora.Models.activeSymbol];
-  const target = $('tradingview-chart');
-  const wrapper = document.createElement('div');
-  wrapper.className = 'tradingview-widget-container';
-  const slot = document.createElement('div');
-  slot.className = 'tradingview-widget-container__widget';
-  const attribution = document.createElement('div');
-  attribution.className = 'tradingview-widget-copyright';
-  attribution.innerHTML = `<a href="https://www.tradingview.com/symbols/${instrument.tv.replace(':', '-')}/" rel="noopener nofollow" target="_blank">${instrument.tv} chart</a> by TradingView`;
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-  script.async = true;
-  script.textContent = JSON.stringify({
-    autosize: true,
-    symbol: instrument.tv,
-    interval: Aurora.Engine.widgetInterval(),
-    timezone: 'Europe/Rome',
-    theme: 'dark',
-    style: '1',
-    locale: 'it',
-    allow_symbol_change: true,
-    calendar: false,
-    details: true,
-    hotlist: false,
-    hide_side_toolbar: false,
-    hide_top_toolbar: false,
-    hide_legend: false,
-    hide_volume: false,
-    save_image: false,
-    withdateranges: true,
-    backgroundColor: '#0d1b2d',
-    gridColor: 'rgba(126, 157, 189, 0.12)',
-    support_host: 'https://www.tradingview.com'
-  });
-  script.addEventListener('load', () => { $('chart-live-status').textContent = 'Widget connesso'; });
-  script.addEventListener('error', () => { $('chart-live-status').textContent = 'Widget non disponibile — verifica la connessione'; });
-  wrapper.append(slot, attribution, script);
-  target.replaceChildren(wrapper);
-  $('chart-live-status').textContent = 'Connessione al grafico…';
-  $('chart-symbol-label').textContent = instrument.tv;
-  Aurora.Views.renderChartLevelsOverlay();
-};
-
-Aurora.Views.renderChartLevelsOverlay = function renderChartLevelsOverlay() {
-  const { $, formatPrice, clamp } = Aurora.Utils;
-  const overlay = $('chart-levels-overlay');
-  const activeSymbol = Aurora.Models.activeSymbol;
-  const position = Aurora.Models.demoAccount.positions[activeSymbol];
-  if (!position || (!position.stopLoss && !position.takeProfit)) { overlay.innerHTML = ''; return; }
-  const entry = position.averagePrice;
-  const { stopLoss, takeProfit } = position;
-  const levels = [entry, stopLoss, takeProfit].filter((value) => value !== null && value !== undefined);
-  const spread = (Math.max(...levels) - Math.min(...levels)) || entry * 0.02;
-  const margin = spread * 0.35;
-  const rangeTop = Math.max(...levels) + margin;
-  const rangeBottom = Math.min(...levels) - margin;
-  const toPercent = (value) => clamp(((rangeTop - value) / (rangeTop - rangeBottom)) * 100, 4, 96);
-
-  const lines = [{ type: 'entry', label: `Entry ${formatPrice(activeSymbol, entry)}`, value: entry }];
-  if (stopLoss) lines.push({ type: 'sl', label: `SL ${formatPrice(activeSymbol, stopLoss)}`, value: stopLoss });
-  if (takeProfit) lines.push({ type: 'tp', label: `TP ${formatPrice(activeSymbol, takeProfit)}`, value: takeProfit });
-
-  overlay.innerHTML = lines
-    .map((line) => `<div class="chart-level-line ${line.type}" style="top:${toPercent(line.value).toFixed(2)}%"><span class="chart-level-label">${line.label}</span></div>`)
-    .join('') + '<div class="chart-levels-note">TP/SL indicativi — non allineati alla scala nativa del widget</div>';
-};
+// renderTradingViewWidget/renderChartLevelsOverlay ora vivono in src/views/chartWidget.js — condivise
+// con venom.html (grafico del club selezionato dalla watchlist), non piu' esclusive di questo file.
 
 Aurora.Views.updateQuoteUI = function updateQuoteUI() {
   const { $, formatPrice } = Aurora.Utils;
@@ -259,6 +192,8 @@ Aurora.Views.renderActivity = function renderActivity() {
   }
 };
 
+const RESEARCH_RESULTS_PAGE_KEY = 'research-results';
+
 Aurora.Views.renderResearchResults = function renderResearchResults() {
   const { $ } = Aurora.Utils;
   const container = $('research-results');
@@ -272,8 +207,15 @@ Aurora.Views.renderResearchResults = function renderResearchResults() {
     container.innerHTML = '<div class="empty-state">Nessun backtest eseguito ancora.</div>';
     return;
   }
+  // Validato/Esplorativo prima (le uniche fasce che alimentano l'Autopilot), poi il resto — cosi'
+  // la prima pagina mostra sempre cio' che conta di piu', non un ordine arbitrario.
+  const sorted = [...rows].sort((a, b) => {
+    const rank = (r) => (r.result.validated ? 0 : r.result.exploratory ? 1 : 2);
+    return rank(a) - rank(b);
+  });
+  const { pageItems, page, totalPages } = Aurora.Views.Pagination.slice(RESEARCH_RESULTS_PAGE_KEY, sorted);
   container.innerHTML = `<div class="research-row research-head"><span>Simbolo</span><span>Strategia</span><span>Trade</span><span>Win rate (in/out)</span><span>vs random (out)</span><span>Rend. medio (out)</span><span>Live</span><span>Verdetto</span></div>`
-    + rows.map(({ symbol, candidateKey, result }) => {
+    + pageItems.map(({ symbol, candidateKey, result }) => {
       const winRateLabel = `${result.inSample.winRate.toFixed(1)}% / ${result.outOfSample.winRate.toFixed(1)}%`;
       const baselineLabel = `${result.outOfSampleBaseline.winRate.toFixed(1)}%`;
       const avgReturnValue = result.outOfSample.avgReturn;
@@ -299,7 +241,9 @@ Aurora.Views.renderResearchResults = function renderResearchResults() {
         <span><span class="status-pill ${verdictClass}">${verdict}</span>${streakLabel}${lessons.length ? ` <small>${lessons.length} lezione/i</small>` : ''}</span>
       </div>`;
     }).join('')
+    + Aurora.Views.Pagination.controlsHtml(RESEARCH_RESULTS_PAGE_KEY, page, totalPages)
     + renderLessonsPanel(rows);
+  Aurora.Views.Pagination.wire(container, RESEARCH_RESULTS_PAGE_KEY, Aurora.Views.renderResearchResults);
 };
 
 // Learning Loop — Memory: mostra le lezioni attive (versionate, tracciabili fino ai trade che
@@ -315,158 +259,9 @@ function renderLessonsPanel(rows) {
     + `</div>`;
 }
 
-const MEMORY_TIER_LABELS = { validated: 'Validato', exploratory: 'Esplorativo', probe: 'Sonda', forced: 'Sonda forzata' };
-
-// Storico & Memoria: unica vista che espone lo storico trade (filtrabile per conto/simbolo/
-// livello/esito) e le lezioni del Learning Loop, cosi' l'utente puo' controllarle senza leggere
-// localStorage a mano.
-Aurora.Views.renderMemoryPage = function renderMemoryPage() {
-  const { $ } = Aurora.Utils;
-  const symbolSelect = $('memory-filter-symbol');
-  if (symbolSelect && symbolSelect.options.length <= 1) {
-    const symbols = Object.keys(Aurora.Models.instruments);
-    symbolSelect.innerHTML = '<option value="all">Tutti i simboli</option>' + symbols.map((symbol) => `<option value="${symbol}">${symbol}</option>`).join('');
-  }
-  Aurora.Views.renderMemoryHistory();
-  Aurora.Views.renderMemoryLessons();
-};
-
-const MEMORY_ACCOUNT_LABELS = { demo: 'Demo', live: 'Reale', backtest: 'Backtest' };
-
-// I casi "seed" (src/models/seedData.js, tradeId con prefisso SEED-) sono un backtest reale
-// eseguito in fase di sviluppo, mai un trade del conto dell'utente: li rendiamo come righe a
-// parte (accountMode 'backtest', P&L in percentuale di rendimento invece che in euro, perche' non
-// hanno una size/notional reale associata) cosi' lo Storico non parte vuoto alla prima apertura
-// ma resta sempre visivamente distinto dal conto demo reale dell'utente.
-function collectBacktestCaseRows() {
-  const tradeEpisodes = Aurora.Models.researchData.tradeEpisodes || {};
-  const rows = [];
-  Object.entries(tradeEpisodes).forEach(([strategyKey, episodes]) => {
-    (episodes || []).forEach((episode) => {
-      if (!episode.tradeId?.startsWith('SEED-')) return;
-      rows.push({
-        kind: 'backtest', at: episode.at, symbol: episode.symbol, accountMode: 'backtest',
-        tier: episode.snapshot?.tier || null, strategyKey, returnPct: episode.returnPct,
-        origin: 'Backtest (caso storico)'
-      });
-    });
-  });
-  return rows;
-}
-
-// Win rate segmentata per livello (Aurora.Engine.getWinRateByTier): la percentuale aggregata
-// mescola trade sonda/forzati (senza edge misurato per design) con validati/esplorativi (dove un
-// edge reale, se c'e', si vede) — mostrarle separate rende visibile quale parte del sistema sta
-// davvero funzionando, invece di nascondersi dentro una media.
-Aurora.Views.renderMemoryTierStats = function renderMemoryTierStats() {
-  const { $ } = Aurora.Utils;
-  const container = $('memory-tier-stats');
-  if (!container) return;
-  const byTier = Aurora.Engine.getWinRateByTier();
-  const order = ['validated', 'exploratory', 'probe', 'forced', 'manuale'];
-  const tiers = order.filter((tier) => byTier[tier]);
-  container.innerHTML = tiers.length
-    ? tiers.map((tier) => {
-        const { count, wins, winRate } = byTier[tier];
-        const label = MEMORY_TIER_LABELS[tier] || (tier === 'manuale' ? 'Manuale' : tier);
-        const tone = winRate >= 50 ? 'positive' : 'negative';
-        return `<div class="memory-tier-stat"><span>${label}</span><strong class="${tone}">${winRate.toFixed(0)}%</strong><small>${wins}/${count} vinti</small></div>`;
-      }).join('')
-    : '<div class="memory-empty">Nessun trade chiuso ancora.</div>';
-};
-
-Aurora.Views.renderMemoryHistory = function renderMemoryHistory() {
-  const { $, formatMoney } = Aurora.Utils;
-  const container = $('memory-history');
-  if (!container) return;
-  Aurora.Views.renderMemoryTierStats();
-  const liveRows = Aurora.Models.demoAccount.trades.map((trade) => ({ kind: 'live', ...trade }));
-  const backtestRows = collectBacktestCaseRows();
-  const allRows = [...liveRows, ...backtestRows].sort((a, b) => new Date(b.at) - new Date(a.at));
-
-  const accountFilter = $('memory-filter-account')?.value || 'all';
-  const symbolFilter = $('memory-filter-symbol')?.value || 'all';
-  const tierFilter = $('memory-filter-tier')?.value || 'all';
-  const outcomeFilter = $('memory-filter-outcome')?.value || 'all';
-
-  const filtered = allRows.filter((row) => {
-    if (accountFilter !== 'all' && row.accountMode !== accountFilter) return false;
-    if (symbolFilter !== 'all' && row.symbol !== symbolFilter) return false;
-    if (tierFilter !== 'all' && row.tier !== tierFilter) return false;
-    if (outcomeFilter !== 'all') {
-      const win = row.kind === 'backtest' ? row.returnPct > 0 : row.side === 'sell' ? row.realizedPnl > 0 : null;
-      if (win === null) return false;
-      if (outcomeFilter === 'win' && !win) return false;
-      if (outcomeFilter === 'loss' && win) return false;
-    }
-    return true;
-  });
-
-  $('memory-status').textContent = `${liveRows.length} trade demo · ${backtestRows.length} casi storici`;
-  $('memory-count').textContent = `${filtered.length} righe`;
-
-  container.innerHTML = filtered.length
-    ? filtered.map((row) => {
-        const time = new Date(row.at).toLocaleString('it-IT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
-        const tierLabel = row.tier ? (MEMORY_TIER_LABELS[row.tier] || row.tier) : null;
-        const isBacktest = row.kind === 'backtest';
-        const isSell = isBacktest || row.side === 'sell';
-        const win = isBacktest ? row.returnPct > 0 : (row.side === 'sell' ? row.realizedPnl > 0 : null);
-        const pnlText = isBacktest
-          ? `${row.returnPct >= 0 ? '+' : ''}${row.returnPct.toFixed(2)}%`
-          : (row.side === 'sell' ? `${row.realizedPnl >= 0 ? '+' : ''}${formatMoney(row.realizedPnl)}` : '—');
-        const pnlClass = win === null ? '' : (win ? 'positive' : 'negative');
-        const outcomeLabel = win === null ? null : (win ? 'Vinto' : 'Perso');
-        const outcomeClass = win === null ? null : (win ? 'outcome-win' : 'outcome-loss');
-        const sideLabel = isBacktest ? 'Backtest' : (row.side === 'buy' ? 'Buy' : 'Sell');
-        return `<div class="memory-row">
-          <span>${time}</span>
-          <span><span class="memory-tag account-${row.accountMode}">${MEMORY_ACCOUNT_LABELS[row.accountMode] || row.accountMode}</span></span>
-          <span>${row.symbol}</span>
-          <span><span class="history-side ${isBacktest ? '' : row.side}">${sideLabel}</span></span>
-          <span>${tierLabel ? `<span class="memory-tag tier-${row.tier}">${tierLabel}</span>` : '—'}</span>
-          <span>${row.strategyKey || '—'}</span>
-          <span class="${pnlClass}">${pnlText}</span>
-          <span>${outcomeLabel ? `<span class="memory-tag ${outcomeClass}">${outcomeLabel}</span>` : '—'}</span>
-          <span><span class="history-origin">${row.origin}</span></span>
-        </div>`;
-      }).join('')
-    : '<div class="empty-state">Nessuna riga corrisponde ai filtri selezionati.</div>';
-};
-
-Aurora.Views.renderMemoryLessons = function renderMemoryLessons() {
-  const { $ } = Aurora.Utils;
-  const container = $('memory-lessons');
-  if (!container) return;
-  const lessonsByStrategy = Aurora.Models.researchData.lessons || {};
-  const allLessons = [];
-  Object.values(lessonsByStrategy).forEach((list) => list.forEach((lesson) => allLessons.push(lesson)));
-  allLessons.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  $('memory-lessons-count').textContent = `${allLessons.filter((lesson) => lesson.active).length} attive · ${allLessons.length} totali`;
-
-  container.innerHTML = allLessons.length
-    ? allLessons.map((lesson) => {
-        const isSeed = (lesson.supportingTradeIds || []).every((id) => id.startsWith('SEED-'));
-        return `
-      <div class="memory-lesson-card ${lesson.active ? '' : 'superseded'}">
-        <div class="memory-lesson-head"><strong>${lesson.strategyKey} · v${lesson.version}</strong><span class="status-pill ${lesson.active ? 'ok' : 'idle'}">${lesson.active ? 'attiva' : 'superata/disattivata'}</span></div>
-        ${isSeed ? '<span class="memory-tag account-backtest">Backtest (caso storico)</span>' : ''}
-        <p>${lesson.statement}</p>
-        <div class="memory-lesson-foot">
-          <span>${lesson.supportingTradeIds.length} trade collegati</span>
-          <button class="memory-lesson-deactivate" data-strategy="${lesson.strategyKey}" data-lesson="${lesson.id}" ${lesson.active ? '' : 'disabled'}>${lesson.active ? 'Disattiva' : 'Già disattivata'}</button>
-        </div>
-      </div>`;
-      }).join('')
-    : '<div class="memory-empty">Nessuna lezione ancora generata dal Learning Loop: servono almeno 3 trade con lo stesso esito, su almeno metà dei trade recenti di una strategia.</div>';
-
-  container.querySelectorAll('.memory-lesson-deactivate').forEach((button) => button.addEventListener('click', () => {
-    if (button.disabled) return;
-    Aurora.Engine.deactivateLesson(button.dataset.strategy, button.dataset.lesson);
-    Aurora.Views.renderMemoryLessons();
-    Aurora.Views.showToast('Lezione disattivata (resta nello storico, reversibile).', 'success');
-  }));
-};
+// renderMemoryPage/renderMemoryTierStats/renderMemoryHistory/renderMemoryLessons ora vivono in
+// src/views/memoryHistoryView.js — condivise con venom-memory.html, cosi' lo storico di Venom e'
+// catalogato esattamente come quello di SpiderMan (stessa funzione, non una copia).
 
 Aurora.Views.renderLiveDataStatus = function renderLiveDataStatus(errorType) {
   const { $ } = Aurora.Utils;

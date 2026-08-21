@@ -12,7 +12,7 @@
 
   Views.renderMemoryPage();
   ['memory-filter-account', 'memory-filter-symbol', 'memory-filter-tier', 'memory-filter-outcome'].forEach((id) => {
-    $(id).addEventListener('change', Views.renderMemoryHistory);
+    $(id).addEventListener('change', () => { Views.Pagination.reset('memory-history'); Views.renderMemoryHistory(); });
   });
 
   function setStatus(hydrated) {

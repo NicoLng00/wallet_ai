@@ -71,7 +71,7 @@
   }
 
   function renderClubGrid() {
-    const { instruments, demoAccount } = Models;
+    const { instruments, demoAccount, activeSymbol } = Models;
     const symbols = Object.keys(instruments);
     $('venom-clubs-count').textContent = `${symbols.length} club`;
     $('venom-club-grid').innerHTML = symbols.map((symbol) => {
@@ -81,7 +81,7 @@
       const held = !!demoAccount.positions[symbol];
       const initials = symbol.split('.')[0].slice(0, 2).toUpperCase();
       return `
-      <div class="venom-club-card ${held ? 'held' : ''}">
+      <button type="button" class="venom-club-card ${held ? 'held' : ''} ${symbol === activeSymbol ? 'selected' : ''}" data-symbol="${symbol}">
         <div class="venom-club-logo" style="background:${data.color}">${initials}</div>
         <div class="venom-club-info">
           <span class="venom-club-name">${data.name}${held ? '<span class="venom-held-badge">IN POSIZIONE</span>' : ''}</span>
@@ -91,8 +91,34 @@
           <span class="venom-club-price">${formatMoney(price)}</span>
           <span class="venom-club-change ${change === null ? '' : change >= 0 ? 'positive' : 'negative'}">${change === null ? '—' : `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`}</span>
         </div>
-      </div>`;
+      </button>`;
     }).join('');
+    if ($('venom-chart-title')) {
+      document.querySelectorAll('.venom-club-card').forEach((card) => card.addEventListener('click', () => selectVenomSymbol(card.dataset.symbol)));
+    }
+  }
+
+  // Grafico TradingView del club selezionato dalla watchlist — stessa Aurora.Views.renderTradingViewWidget
+  // usata da SpiderMan (src/views/chartWidget.js), qui guidata dal click su una card invece che dalla
+  // sidebar: Venom non duplica una seconda lista, la watchlist E' gia' il club-grid.
+  function renderVenomChartHeader() {
+    const { instruments, activeSymbol } = Models;
+    const data = instruments[activeSymbol];
+    if (!data) return;
+    const price = Aurora.Engine.getDemoPrice(activeSymbol);
+    const change = realDayChangePercent(activeSymbol);
+    $('venom-chart-title').textContent = `${data.name} · ${activeSymbol}`;
+    const priceEl = $('venom-chart-price');
+    priceEl.textContent = `${formatMoney(price)}${change === null ? '' : ` · ${change >= 0 ? '+' : ''}${change.toFixed(2)}%`}`;
+    priceEl.className = `status-pill ${change === null ? 'idle' : change >= 0 ? 'ok' : 'blocked'}`;
+  }
+
+  function selectVenomSymbol(symbol) {
+    if (!Models.instruments[symbol]) return;
+    Models.activeSymbol = symbol;
+    renderVenomChartHeader();
+    Aurora.Views.renderTradingViewWidget();
+    document.querySelectorAll('.venom-club-card').forEach((card) => card.classList.toggle('selected', card.dataset.symbol === symbol));
   }
 
   function renderPositions() {
@@ -148,10 +174,12 @@
     </div>`;
   }
 
-  // Con 13 club x ~7 strategie ciascuno, il totale sfiora i 100 candidati — mostrarli tutti per
-  // default renderebbe la pagina illeggibile. Di default solo Validato/Esplorativo (le uniche
-  // fasce che contano per l'Autopilot): un pulsante mostra il resto su richiesta, mai nascosto
-  // per sempre — stessa onesta' del resto del progetto, solo meno rumore visivo.
+  const VENOM_RESEARCH_PAGE_KEY = 'venom-research-results';
+
+  // Con 13 club x ~7 strategie ciascuno, il totale sfiora i 100 candidati — mostrarli tutti in una
+  // sola pagina renderebbe la pagina illeggibile. Validato/Esplorativo prima (le uniche fasce che
+  // contano per l'Autopilot), poi il resto, paginati con lo stesso componente usato da SpiderMan
+  // (Aurora.Views.Pagination) invece di un pulsante mostra/nascondi dedicato — stessa UX ovunque.
   function renderResearch() {
     const validated = Models.researchData.validated;
     const rows = [];
@@ -164,54 +192,16 @@
     $('venom-research-status').className = `status-pill ${validatedCount ? 'ok' : 'idle'}`;
     if (!rows.length) { container.innerHTML = '<div class="empty-state">Nessun backtest eseguito ancora.</div>'; return; }
 
-    const sorted = rows.sort((a, b) => (b.result.validated ? 1 : 0) - (a.result.validated ? 1 : 0));
-    const notable = sorted.filter((r) => r.result.validated || r.result.exploratory);
-    const rest = sorted.filter((r) => !r.result.validated && !r.result.exploratory);
+    const sorted = [...rows].sort((a, b) => {
+      const rank = (r) => (r.result.validated ? 0 : r.result.exploratory ? 1 : 2);
+      return rank(a) - rank(b);
+    });
+    const { pageItems, page, totalPages } = Aurora.Views.Pagination.slice(VENOM_RESEARCH_PAGE_KEY, sorted);
     const header = `<div class="research-row research-head"><span>Club</span><span>Strategia</span><span>Trade</span><span>Win rate (in/out)</span><span>vs random (out)</span><span>Rend. medio (out)</span><span>Live</span><span>Verdetto</span></div>`;
 
-    container.innerHTML = header + notable.map(researchRowHtml).join('')
-      + (rest.length ? `<button id="venom-research-toggle" class="outline-button" style="margin:10px 4px;">Mostra anche i ${rest.length} candidati senza edge</button><div id="venom-research-rest" class="hidden">${rest.map(researchRowHtml).join('')}</div>` : '');
-
-    const toggle = $('venom-research-toggle');
-    if (toggle) toggle.addEventListener('click', () => {
-      $('venom-research-rest').classList.toggle('hidden');
-      const isHidden = $('venom-research-rest').classList.contains('hidden');
-      toggle.textContent = isHidden ? `Mostra anche i ${rest.length} candidati senza edge` : 'Nascondi i candidati senza edge';
-    });
-  }
-
-  function renderMemory() {
-    // Guardia: renderAll() (chiamato da venom.html) include renderMemory() per compatibilita', ma
-    // il pannello Memoria vive solo su venom-memory.html — su venom.html questi elementi non
-    // esistono piu' e la funzione deve restare un no-op sicuro, non lanciare un errore.
-    if (!$('venom-memory-status')) return;
-    const trades = Models.demoAccount.trades || [];
-    $('venom-memory-status').textContent = `${trades.length} trade`;
-    const byTier = Aurora.Engine.getWinRateByTier();
-    const order = ['validated', 'exploratory', 'probe', 'forced', 'manuale'];
-    const labels = { validated: 'Validato', exploratory: 'Esplorativo', probe: 'Sonda', forced: 'Sonda forzata', manuale: 'Manuale' };
-    const tiers = order.filter((tier) => byTier[tier]);
-    $('venom-memory-tier-stats').innerHTML = tiers.length
-      ? tiers.map((tier) => {
-          const { count, wins, winRate } = byTier[tier];
-          const tone = winRate >= 50 ? 'positive' : 'negative';
-          return `<div class="memory-tier-stat"><span>${labels[tier]}</span><strong class="${tone}">${winRate.toFixed(0)}%</strong><small>${wins}/${count} vinti</small></div>`;
-        }).join('')
-      : '<div class="memory-empty">Nessun trade chiuso ancora.</div>';
-
-    const lessonsByStrategy = Models.researchData.lessons || {};
-    const allLessons = [];
-    Object.values(lessonsByStrategy).forEach((list) => list.forEach((lesson) => allLessons.push(lesson)));
-    allLessons.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    $('venom-memory-lessons-count').textContent = `${allLessons.filter((l) => l.active).length} attive · ${allLessons.length} totali`;
-    $('venom-memory-lessons').innerHTML = allLessons.length
-      ? allLessons.map((lesson) => `
-        <div class="memory-lesson-card ${lesson.active ? '' : 'superseded'}">
-          <div class="memory-lesson-head"><strong>${lesson.strategyKey} · v${lesson.version}</strong><span class="status-pill ${lesson.active ? 'ok' : 'idle'}">${lesson.active ? 'attiva' : 'superata'}</span></div>
-          <p>${lesson.statement}</p>
-          <div class="memory-lesson-foot"><span>${lesson.supportingTradeIds.length} trade collegati</span></div>
-        </div>`).join('')
-      : '<div class="memory-empty">Nessuna lezione ancora generata dal Learning Loop.</div>';
+    container.innerHTML = header + pageItems.map(researchRowHtml).join('')
+      + Aurora.Views.Pagination.controlsHtml(VENOM_RESEARCH_PAGE_KEY, page, totalPages);
+    Aurora.Views.Pagination.wire(container, VENOM_RESEARCH_PAGE_KEY, renderResearch);
   }
 
   function renderAll() {
@@ -220,7 +210,9 @@
     renderPositions();
     renderActivity();
     renderResearch();
-    renderMemory();
+    // Grafico del club selezionato — solo su venom.html, dove esiste #venom-chart-title;
+    // venom-memory.html non ha questo pannello, la guardia evita un riferimento a un elemento assente.
+    if ($('venom-chart-title')) selectVenomSymbol(Models.activeSymbol);
   }
 
   // bootstrap(renderFn): carica lo stato condiviso, aggiorna badge/timestamp (presenti su ogni
@@ -245,6 +237,6 @@
   }
 
   Aurora.VenomDashboard = {
-    bootstrap, renderAll, renderWalletStats, renderClubGrid, renderPositions, renderActivity, renderResearch, renderMemory
+    bootstrap, renderAll, renderWalletStats, renderClubGrid, renderPositions, renderActivity, renderResearch
   };
 })();

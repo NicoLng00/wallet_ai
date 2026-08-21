@@ -54,13 +54,26 @@
           </div>
         </header>
 
+        <section class="panel chart-panel" id="venom-chart">
+          <div class="panel-title compact">
+            <div>
+              <p class="eyebrow">GRAFICO</p>
+              <h2 id="venom-chart-title">Seleziona un club dalla watchlist</h2>
+            </div>
+            <span id="venom-chart-price" class="status-pill idle">—</span>
+          </div>
+          <div class="indicator-row"><span class="source-dot"></span><span class="indicator-label">TRADINGVIEW WIDGET</span><span id="chart-live-status" class="indicator-value">In attesa di una selezione…</span></div>
+          <div id="chart-wrap" class="chart-wrap"><div id="tradingview-chart" class="tradingview-chart" aria-label="Grafico TradingView del club selezionato"><div class="chart-loader">Clicca un club qui sotto per caricare il grafico…</div></div><div id="chart-levels-overlay" class="chart-levels-overlay" aria-hidden="true"></div></div>
+          <div class="chart-footer"><span id="chart-symbol-label"></span><span>Il motore demo non legge l'iframe: per il live serve un data feed autorizzato.</span></div>
+        </section>
+
         <section class="panel wallet-panel" id="venom-overview">
           <div class="panel-title compact"><div><p class="eyebrow">CONTO SEMBIONTE</p><h2>Panoramica conto</h2></div><span class="paper-badge">PAPER</span></div>
           <div id="venom-wallet-stats" class="wallet-stats"></div>
         </section>
 
         <section class="panel wallet-panel" id="venom-clubs">
-          <div class="panel-title compact"><div><p class="eyebrow">WATCHLIST</p><h2>13 club calcistici europei quotati</h2></div><span id="venom-clubs-count" class="status-pill idle">—</span></div>
+          <div class="panel-title compact"><div><p class="eyebrow">WATCHLIST</p><h2>13 club calcistici europei quotati — clicca per il grafico</h2></div><span id="venom-clubs-count" class="status-pill idle">—</span></div>
           <div id="venom-club-grid" class="venom-club-grid"></div>
         </section>
 
@@ -97,6 +110,8 @@
     <script src="./src/models/venomState.js"></script>
     <script src="./src/engine/market.js"></script>
     <script src="./src/engine/memory.js"></script>
+    <script src="./src/views/pagination.js"></script>
+    <script src="./src/views/chartWidget.js"></script>
     <script src="./src/views/venomDashboardViews.js"></script>
     <script>Aurora.VenomDashboard.bootstrap(Aurora.VenomDashboard.renderAll);</script>
   </body>

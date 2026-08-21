@@ -28,8 +28,10 @@
 .venom-updated { margin: 3px 0 0; color: #74859a; font: 10px var(--mono); }
 
 .venom-club-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 15px; }
-.venom-club-card { padding: 12px; border-radius: 10px; background: #0e1e33; border: 1px solid rgba(158, 184, 214, .09); display: flex; align-items: center; gap: 10px; }
+.venom-club-card { width: 100%; padding: 12px; border-radius: 10px; background: #0e1e33; border: 1px solid rgba(158, 184, 214, .09); display: flex; align-items: center; gap: 10px; text-align: left; font: inherit; color: inherit; cursor: pointer; transition: .15s; }
+.venom-club-card:hover { border-color: rgba(181, 140, 255, .35); }
 .venom-club-card.held { border-color: rgba(58, 213, 159, .35); background: rgba(58, 213, 159, .05); }
+.venom-club-card.selected { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue) inset; }
 .venom-club-logo { width: 32px; height: 32px; border-radius: 9px; flex: 0 0 32px; display: grid; place-items: center; color: white; font-size: 12px; font-weight: 800; }
 .venom-club-info { flex: 1; min-width: 0; }
 .venom-club-name { display: block; font-size: 11px; color: #dbe8f7; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
