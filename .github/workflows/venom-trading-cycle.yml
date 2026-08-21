@@ -1,15 +1,14 @@
 name: Venom — Ciclo di trading
 
-# Gemello di trading-cycle.yml per la pipeline venom: stesso Autopilot (src/), stato/simboli
-# completamente separati (13 club calcistici europei, server/jobs/venom/tradingCycle.js).
-# Concurrency group SEPARATO (aurora-venom-jobs) e checkout/push sul branch venom, mai su main —
-# i due bot autonomi girano in parallelo, mai in coda o in conflitto tra loro.
+# Gemello di trading-cycle.yml per la pipeline venom: stesso Autopilot (src/), agenti -> Gemini
+# supervisor (server/venomSupervisor.js), stato/simboli completamente separati (13 club calcistici
+# europei, server/jobs/venom/tradingCycle.js). Concurrency group SEPARATO (aurora-venom-jobs) e
+# checkout/push sul branch venom, mai su main — i due bot autonomi girano in parallelo, mai in
+# coda o in conflitto tra loro.
 on:
   schedule:
     # Ogni 20 minuti, offset di 5' dal ciclo del sistema principale (*/15) per non far coincidere
-    # mai i due avvii — 13 simboli con sole quotazioni Yahoo (nessun agente Gemini ancora wireato
-    # per venom, vedi commento in server/jobs/venom/tradingCycle.js) restano leggeri anche a
-    # cadenza piu' fitta di quanto strettamente necessario.
+    # mai i due avvii.
     - cron: '5-59/20 * * * *'
   workflow_dispatch: {}
 
@@ -44,6 +43,10 @@ jobs:
       - name: Esegui il ciclo di trading venom
         env:
           CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
+          # Chiave dedicata (se configurata come secret del repo) con ripiego sulla chiave
+          # condivisa del sistema principale — mai un errore se solo una delle due esiste.
+          VENOM_GEMINI_API_KEY: ${{ secrets.VENOM_GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node server/jobs/venom/tradingCycle.js
 
       - name: Salva lo stato aggiornato sul branch venom
