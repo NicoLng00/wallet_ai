@@ -1,0 +1,41 @@
+name: Report giornaliero via email
+
+# Una volta al giorno, dopo la chiusura sia del mercato USA (SpiderMan) sia delle principali borse
+# europee (Venom): aggrega data/account.json + data/research.json e data/venom/*.json in un'unica
+# email (server/jobs/sendDailyReport.js) via EmailJS. Job di sola lettura: non scrive mai in data/*,
+# nessuna interferenza con gli altri job schedulati.
+on:
+  schedule:
+    # 21:30 UTC, lun-ven — dopo la chiusura di NYSE/NASDAQ (21:00 UTC) e di tutte le borse europee coperte da Venom.
+    - cron: '30 21 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aurora-daily-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installa dipendenze backend
+        working-directory: server
+        run: npm install --omit=dev
+
+      - name: Invia il report giornaliero
+        env:
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          EMAILJS_PRIVATE_KEY: ${{ secrets.EMAILJS_PRIVATE_KEY }}
+        run: node server/jobs/sendDailyReport.js
