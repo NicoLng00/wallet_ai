@@ -12,7 +12,27 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 8 (signal engine) — complete.**
+**Phase 9 (risk engine) — complete.**
+
+- `risk/portfolio/portfolio.py` — `PortfolioState`/`Position` (signed equity-fraction sizing),
+  `apply_fill()` a pure, never-mutating state transition.
+- `risk/limits/limits.py` — 7 independent limit checks (position/exposure/leverage/daily-loss/drawdown/
+  correlation/liquidity), each its own testable function. Liquidity is honestly skipped, not faked, when
+  no order-book source is wired up (none exists yet). Correlation reuses §14's "don't concentrate in a
+  correlated cluster" principle applied to assets, with its own lightweight implementation.
+- `risk/sizing/sizing.py` — `size_position()`, the literal `(signal, portfolio, limits) -> Position` pure
+  function architecture §16 specifies; collapses to exactly `0.0` (never a partial size) if any limit
+  fails.
+- `tests/test_import_graph_lint.py` — a **real** automated check (AST-based, not text grep) that `risk/`
+  and `backtest/` never import an LLM client, including a test that the checker itself actually catches a
+  synthetic violation.
+- 42 new tests, one dedicated fixture per limit type. 197 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase9_e2e.py` — re-ran Phases 7–8's real loop and sized a real position each round against a
+  fresh $100k paper portfolio. Reported honestly: the resulting fraction was effectively zero, correctly
+  reflecting Phase 8's near-zero real signal rather than manufacturing a position.
+
+<details>
+<summary>Phase 8 (signal engine) — complete.</summary>
 
 - `signals/independence/matrix.py` — `AgentPredictionMatrix`. Uses the clustered-sampling "design
   effect" formula instead of literal Kish ESS (which is scale-invariant and doesn't actually collapse for
@@ -28,6 +48,8 @@ Full design docs live in `../docs/`:
 - `examples/phase8_e2e.py` — re-ran Phase 7's real loop and fed every round through the real pipeline: 5
   real signals persisted. Consensus was exactly 0 every round because Phase 7's real data produced all-
   `HOLD` decisions — reported as-is, not massaged into looking more interesting.
+
+</details>
 
 <details>
 <summary>Phase 7 (belief / social feedback loop) — complete.</summary>
@@ -183,7 +205,7 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 162 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v            # 197 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
@@ -191,9 +213,10 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 .venv/Scripts/python.exe examples/phase6_e2e.py  # real 5-agent OASIS Reddit simulation, writes to runs/
 .venv/Scripts/python.exe examples/phase7_e2e.py  # real 5-round belief/social feedback loop, writes to runs/
 .venv/Scripts/python.exe examples/phase8_e2e.py  # real signal pipeline over the Phase 7 loop, writes to runs/
+.venv/Scripts/python.exe examples/phase9_e2e.py  # real risk sizing over the Phase 8 signals, writes to runs/
 ```
 
 ## Next
 
-Phase 9 (`docs/IMPLEMENTATION_PLAN.md`): risk engine — `risk/portfolio`, `risk/sizing`, `risk/limits`,
-pure functions with zero imports from `agents/` or any `LLMClient`. Not started.
+Phase 10 (`docs/IMPLEMENTATION_PLAN.md`): market replay / backtest engine — walk-forward driver, 6
+baselines, and `backtest/metrics` (CAGR/Sharpe/Sortino/Calmar/VaR/CVaR/etc.). Not started.

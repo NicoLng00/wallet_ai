@@ -270,17 +270,39 @@ alongside this plan).
   because Phase 7's real data produced all-`HOLD` decisions — the pipeline correctly propagates "no
   signal" from "no real disagreement or conviction" rather than manufacturing one.
 
-## Phase 9 — Risk engine
+## Phase 9 — Risk engine (COMPLETE)
 
-- Implement `risk/portfolio`, `risk/sizing`, `risk/limits` (architecture §16) as pure functions with zero
-  imports from `agents/` or any `LLMClient` — enforced by an import-graph lint rule in CI (a real,
-  automated check, not just a code-review convention), directly testing the brief's most-repeated
-  constraint.
-- Tests: position sizing determinism (same input → same output, property-based test over many random
-  inputs); every limit type individually triggers correctly (max position, exposure, leverage, daily
-  loss, drawdown, correlation, liquidity) with a fixture per limit.
-- Minimal end-to-end example: feed Phase 8's real signal through risk sizing against a fresh paper
-  portfolio, produce one real `Position`, persist `positions.jsonl`/`portfolio.jsonl`.
+- `risk/portfolio/portfolio.py`: `PortfolioState`/`Position` (position sizes as a signed fraction of
+  equity, comparable across runs regardless of starting capital), `apply_fill()` a pure state-transition
+  function (never mutates, always returns a new `PortfolioState` — verified by a test that the original
+  object is untouched after a fill).
+- `risk/limits/limits.py`: seven independent, individually-testable limit checks — max position, max
+  portfolio exposure, max leverage, max daily loss, max drawdown, asset-correlation concentration, and
+  liquidity. **OUR DESIGN DECISION on liquidity**: no order-book/depth data source exists (Phase 3 covers
+  OHLC only, §4), so `check_liquidity_limit` requires an explicit `available_liquidity_fraction` and is
+  honestly skipped (not faked) when the caller doesn't have one. **Correlation limit** reuses §14's
+  "don't implicitly concentrate in a correlated cluster" principle applied to *assets* instead of
+  *agents* — its own small implementation (a direct pairwise lookup against a caller-supplied correlation
+  map), not a forced reuse of `AgentPredictionMatrix`, since the input shape genuinely differs (asset-pair
+  correlations vs. per-agent decision histories to correlate internally).
+- `risk/sizing/sizing.py`: `size_position()` — the literal `(risk_adjusted_signal, portfolio_state,
+  limits) -> Position` pure function architecture §16 specifies. Scales the signal into a position
+  fraction (bounded by `max_position_fraction`), runs every limit check, and returns exactly `0.0` — never
+  a partial size that quietly dodges a violated limit — if any limit fails.
+- `tests/test_import_graph_lint.py`: the **real, automated** enforcement the plan calls for — parses the
+  actual AST of every file in `risk/` and `backtest/` (not a text grep, which a comment or string could
+  fool) and asserts none imports `serena.llm`/`anthropic`/`openai`. Includes a test of the checker itself
+  (a synthetic offending file must actually be caught), so the lint isn't just vacuously passing on an
+  empty package.
+- Tests: 42 new (`tests/test_risk_portfolio.py`, `tests/test_risk_limits.py`, `tests/test_risk_sizing.py`,
+  `tests/test_import_graph_lint.py`) — one dedicated fixture per limit type as specified, determinism
+  (identical inputs → identical outputs), max-conviction and zero-signal boundary cases, and the
+  size-collapses-to-zero-on-violation behavior. 197 passing + 11 skipped (Neo4j, unchanged).
+- Minimal end-to-end example (`examples/phase9_e2e.py`, actually run): re-ran Phases 7/8's real 5-round
+  loop and pipeline, sized a real position each round against a fresh $100,000 paper portfolio, persisted
+  `portfolio.jsonl`/`positions.jsonl` with full round-trip fidelity. Reported honestly: the resulting
+  fraction was effectively zero every round, a direct and correct consequence of Phase 8's near-zero real
+  signal — the risk engine did not manufacture a position out of a signal that wasn't there.
 
 ## Phase 10 — Historical replay / backtest
 
