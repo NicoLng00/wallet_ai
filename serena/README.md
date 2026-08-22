@@ -12,7 +12,30 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 3 (data ingestion + event engine) — complete.**
+**Phase 4 (knowledge graph) — complete.**
+
+- `knowledge/graph/backend.py` — `GraphBackend` Protocol + `GraphBackendBase`: reserved-attribute-key
+  rejection, dangling-relationship rejection, and the `query_neighborhood` BFS traversal are all
+  implemented once here and inherited by every backend, so "interchangeable backends" is a tested fact,
+  not an aspiration.
+- `knowledge/graph/kuzu_backend.py` — `KuzuGraphBackend`, the default (embedded, zero-infrastructure).
+  **Verified live**: real Kuzu database, idempotent `MERGE` on nodes and relationships, confirmed with
+  real queries before the adapter was written.
+- `knowledge/graph/neo4j_backend.py` — `Neo4jGraphBackend`, real Cypher via the official driver
+  (optional extra: `pip install "serena[neo4j]"`). **Declared limitation**: no Neo4j server exists in
+  this dev environment, so unlike Kuzu this backend has never been executed live — its tests are
+  included in the same parametrized suite and skip cleanly without `SERENA_NEO4J_URI`.
+- `OntologyChangeProposal` extended with `relation_type_endpoints` to give "no dangling edges" a real
+  meaning for our fixed-ontology design: a proposed relation type's declared source/target entity types
+  must exist (in the fixed ontology or the same proposal), or the proposal is rejected.
+- 21 new tests (`tests/test_graph_backend.py`, `tests/test_graph_models.py`) — 93 passing + 11 skipped
+  (all 11 are the Neo4j cases, per the declared limitation above).
+- `examples/phase4_e2e.py` — real end-to-end run: re-used Phase 3's live Cointelegraph fetch, promoted
+  resolved entities from 30 real articles into a real Kuzu database file under `runs/{run_id}/`, queried
+  BTC's real 2-hop neighborhood, persisted and reloaded a verifiable summary.
+
+<details>
+<summary>Phase 3 (data ingestion + event engine) — complete.</summary>
 
 - `data/point_in_time.py` — `PointInTimeDataView`: no-look-ahead enforced structurally, not by
   convention. Constructed once with a fixed `current_time`; filters out any future `DataPoint` at
@@ -69,23 +92,28 @@ Full design docs live in `../docs/`:
 
 </details>
 
+</details>
+
 ## Setup
 
 ```
 cd serena
 uv venv .venv
-uv pip install --python .venv -e ".[dev]"
+uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if you have a server to test against
 ```
 
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 72 tests
+.venv/Scripts/python.exe -m pytest -v            # 93 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
+.venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
 ```
 
 ## Next
 
-Phase 4 (`docs/IMPLEMENTATION_PLAN.md`): knowledge graph — `GraphBackend` protocol + Kuzu (default)
-+ Neo4j implementations, fixed ontology seeding, `OntologyChangeProposal` validation. Not started.
+Phase 5 (`docs/IMPLEMENTATION_PLAN.md`): agent factory — the 10-archetype profile library, batched
+staged LLM-assisted profile generation at `cohort_temperature`, deterministic archetype-prior fallback.
+Not started. This is also the first phase the plan requires making real LLM calls — will need an
+`ANTHROPIC_API_KEY` in the environment to exercise the LLM path live rather than only via injected fakes.

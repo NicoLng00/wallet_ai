@@ -83,6 +83,20 @@ MAX_ONTOLOGY_ENTITY_TYPES = 24
 MAX_ONTOLOGY_RELATION_TYPES = 24
 
 
+class RelationEndpoints(BaseModel):
+    """Per quale coppia (tipi entita' sorgente, tipi entita' destinazione) un tipo di relazione,
+    esistente o proposto nello stesso OntologyChangeProposal, e' effettivamente valido — il nostro
+    equivalente del vincolo "dangling edge" di MiroFish (docs/MIROFISH_REVERSE_ENGINEERING.md §A.2:
+    _validate_and_process() scarta gli edge i cui tipi-entita' endpoint non esistono piu' dopo il
+    troncamento). Qui non tronchiamo mai l'ontologia esistente, ma una proposta puo' comunque
+    dichiarare un edge verso un tipo-entita' che non esiste ne' tra quelli fissi ne' tra quelli
+    proposti nella stessa richiesta: quello e' un edge "pendente", rifiutato allo stesso modo."""
+    model_config = ConfigDict(extra="forbid")
+
+    source_entity_types: list[str] = Field(min_length=1)
+    target_entity_types: list[str] = Field(min_length=1)
+
+
 class OntologyChangeProposal(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -90,6 +104,7 @@ class OntologyChangeProposal(BaseModel):
     reason: str = Field(min_length=1)
     new_entity_types: list[str] = Field(default_factory=list)
     new_relation_types: list[str] = Field(default_factory=list)
+    relation_type_endpoints: dict[str, RelationEndpoints] = Field(default_factory=dict)
     created_at: datetime
 
     @model_validator(mode="after")
@@ -113,4 +128,31 @@ class OntologyChangeProposal(BaseModel):
             raise ValueError(f"supererebbe il tetto massimo di {MAX_ONTOLOGY_ENTITY_TYPES} tipi di entita'")
         if len(existing_relations) + len(self.new_relation_types) > MAX_ONTOLOGY_RELATION_TYPES:
             raise ValueError(f"supererebbe il tetto massimo di {MAX_ONTOLOGY_RELATION_TYPES} tipi di relazione")
+
+        known_entity_types = existing_entities | set(self.new_entity_types)
+        known_relation_types = existing_relations | set(self.new_relation_types)
+        for relation_type_name, endpoints in self.relation_type_endpoints.items():
+            if relation_type_name not in known_relation_types:
+                raise ValueError(
+                    f"edge pendente: relation_type_endpoints referenzia '{relation_type_name}', "
+                    f"che non e' ne' un tipo di relazione esistente ne' proposto in questa richiesta"
+                )
+            dangling_sources = set(endpoints.source_entity_types) - known_entity_types
+            dangling_targets = set(endpoints.target_entity_types) - known_entity_types
+            if dangling_sources or dangling_targets:
+                raise ValueError(
+                    f"edge pendente: '{relation_type_name}' referenzia tipi di entita' inesistenti "
+                    f"(sorgente: {dangling_sources or 'nessuno'}, destinazione: {dangling_targets or 'nessuno'})"
+                )
         return self
+
+
+class Subgraph(BaseModel):
+    """Ritorno di GraphBackend.query_neighborhood (docs/TRADING_ARCHITECTURE.md §3.1) — un
+    sotto-insieme del grafo, mai il grafo intero: entita' + relazioni raggiunte entro un raggio
+    fissato da un'entita' di partenza."""
+    model_config = ConfigDict(extra="forbid")
+
+    center_entity_id: str = Field(min_length=1)
+    entities: list[Entity] = Field(default_factory=list)
+    relationships: list[Relationship] = Field(default_factory=list)

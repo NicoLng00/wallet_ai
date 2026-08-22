@@ -97,18 +97,46 @@ alongside this plan).
   30 real `Event` records via `EventEngine` (Tier 3 heuristic interpretation), persisted and reloaded all
   of it from a real `runs/{run_id}/` directory with full round-trip fidelity.
 
-## Phase 4 — Knowledge graph
+## Phase 4 — Knowledge graph (COMPLETE)
 
-- Implement `GraphBackend` protocol + `KuzuGraphBackend` (default) + `Neo4jGraphBackend` (architecture
-  §3.1).
-- Seed the fixed ontology (architecture §3.2) into both backends; implement the
-  `OntologyChangeProposal` validation path (hard cap, no duplicates, no dangling edges — the specific
-  MiroFish validation behaviors worth keeping, §A.2) even though the MVP won't exercise it live.
-- Tests: entity/relationship CRUD against both backends with the **same test suite** (parametrized over
-  backend) to guarantee they're truly interchangeable; ontology-proposal validation (valid/invalid cases
-  mirroring §A.2's guardrails: too many types, duplicate names, dangling edge, reserved attribute name).
-- Minimal end-to-end example: ingest the BTC entity + a handful of real news-derived entities (exchanges,
-  companies mentioned) from Phase 3's output into the graph, query the neighborhood back out.
+- `knowledge/graph/backend.py`: `GraphBackend` Protocol (exactly as specified in §3.1) plus
+  `GraphBackendBase`, an ABC that centralizes the behavior that MUST be identical across every backend
+  — otherwise "interchangeable backends" would be an unverified claim, not a fact. It rejects reserved
+  attribute keys and dangling relationships (source/target never upserted as an entity) before any
+  native storage call, and implements `query_neighborhood`'s BFS traversal once, generically, against
+  five small storage hooks each backend implements natively.
+- `knowledge/graph/kuzu_backend.py`: `KuzuGraphBackend` — the default, embedded, zero-infrastructure
+  backend. **Verified live in this environment**: opens a real Kuzu database (file-backed or
+  `:memory:`), `MERGE` on both nodes and relationships is idempotent by construction (confirmed with a
+  real query before writing the adapter). One generic `RELATES` relationship table carries
+  `relation_type` as a property rather than 13 separate Cypher-native relationship types — a documented
+  design simplification, not a limitation (selectivity by type is still a `WHERE`/property match away).
+- `knowledge/graph/neo4j_backend.py`: `Neo4jGraphBackend` — real Cypher against the official `neo4j`
+  driver (optional extra, `pip install "serena[neo4j]"`), same schema and same `GraphBackendBase`
+  contract as Kuzu. **Declared limitation**: no Neo4j server exists in this local dev environment, and
+  standing one up was out of this phase's scope without asking first — so unlike Kuzu, this backend has
+  never actually been executed against a live database. Its test cases are included in the same
+  parametrized suite as Kuzu's but are skipped (not deleted, not faked) unless `SERENA_NEO4J_URI` points
+  at a reachable server.
+- `OntologyChangeProposal` (already schema-complete since Phase 2) extended with `relation_type_endpoints:
+  dict[str, RelationEndpoints]` to give "no dangling edges" (§A.2) a real, testable meaning for our
+  system: a proposal that declares a new/existing relation type's allowed source/target entity types is
+  rejected if any of those entity types don't exist — neither in the fixed ontology nor among the
+  proposal's own `new_entity_types` — exactly the ontology-level analogue of MiroFish's edge-type pruning
+  after truncation. "Reserved attribute name" (the other §A.2 guardrail MiroFish enforces against Zep's
+  reserved words) was implemented at the `GraphBackend` level instead of the proposal level, since it's
+  an instance-data concern (an `attributes` dict value shadowing a structural field like `entity_id`),
+  not a type-naming concern — documented as this explicit reinterpretation, not silently relocated.
+- Tests: 21 new (`tests/test_graph_backend.py` — the shared, backend-parametrized CRUD/dangling-edge/
+  reserved-key/neighborhood-BFS suite; `tests/test_graph_models.py` — `OntologyChangeProposal` dangling-
+  edge cases, `Subgraph` round-trip). 93 passing + 11 skipped (all 11 are the Neo4j parametrized cases,
+  per the declared limitation above) — 0 unexplained skips.
+- Minimal end-to-end example (`examples/phase4_e2e.py`, actually run): re-used Phase 3's real live
+  Cointelegraph fetch + `EventEngine`, promoted the resolved entities from 30 real articles into a real
+  Kuzu database file under `runs/{run_id}/graph.kuzu` (not `:memory:`), linked each article to its
+  resolved entities with real `REPORTS_ON` relationships, queried BTC's real 2-hop neighborhood back out
+  (18 entities: BTC, ETH, the ETF product type, and 15 real news items that mentioned them), and
+  persisted a verifiable `graph_summary.json` with full round-trip fidelity.
 
 ## Phase 5 — Agent factory
 

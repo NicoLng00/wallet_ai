@@ -9,8 +9,10 @@ from serena.models.graph import (
     Entity,
     EntityType,
     OntologyChangeProposal,
+    RelationEndpoints,
     RelationType,
     Relationship,
+    Subgraph,
 )
 from serena.models.run import (
     ModelTierConfig,
@@ -31,6 +33,8 @@ __all__ = [
     "Relationship",
     "RelationType",
     "OntologyChangeProposal",
+    "RelationEndpoints",
+    "Subgraph",
     "MAX_ONTOLOGY_ENTITY_TYPES",
     "MAX_ONTOLOGY_RELATION_TYPES",
     "SimulationRun",
