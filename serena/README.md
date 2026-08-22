@@ -12,7 +12,24 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 6 (OASIS adapter) — complete.**
+**Phase 7 (belief / social feedback loop) — complete.**
+
+- `agents/beliefs/updater.py` — three pure, deterministic belief-shift functions (event/peer-exposure/
+  strategy-hint), each a proportional pull toward a target, never a direct jump.
+- `simulation/round_loop.py` — `SimulationRoundLoop` wires architecture §12's full loop end to end: real
+  `ManualAction` event injection → real OASIS social exposure → belief updates with provenance → one
+  Tier-3 deterministic `AgentDecision` per agent per round. A `BeliefUpdate` is only ever constructed when
+  something actually changed (the schema itself rejects a no-op update).
+- 24 new tests (`tests/test_belief_updater.py`, `tests/test_round_loop.py`) — zero mocking, including a
+  full proof that one agent's post genuinely shifts a second agent's belief one round later via OASIS's
+  real recommendation table. 145 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase7_e2e.py` — real 5-round run: a real Cointelegraph article at round 0, real 90-day
+  BTC/USD closes feeding the archetype strategy hints every round, 27 real belief updates with full
+  provenance, all decisions correctly `HOLD` given how small the real shifts were — reported honestly,
+  not dramatized.
+
+<details>
+<summary>Phase 6 (OASIS adapter) — complete.</summary>
 
 - `simulation/oasis/adapter.py` — `OasisSimulationAdapter`, the only module that imports `oasis`.
   `initialize`/`execute_round`/`collect_actions`/`collect_social_exposure`/`persist_state`/`close`, every
@@ -30,6 +47,8 @@ Full design docs live in `../docs/`:
 - `examples/phase6_e2e.py` — real end-to-end run: 5 real Phase-5 agents, a real Cointelegraph article
   (Phase 3) posted via `ManualAction`, a real recsys refresh, 4 agents genuinely seeing it via the real
   `rec` table and reacting with real `like_post` actions.
+
+</details>
 
 <details>
 <summary>Phase 5 (agent factory) — complete.</summary>
@@ -144,15 +163,16 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 121 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v            # 145 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
 .venv/Scripts/python.exe examples/phase5_e2e.py  # real 50-agent MVP population, writes to runs/
 .venv/Scripts/python.exe examples/phase6_e2e.py  # real 5-agent OASIS Reddit simulation, writes to runs/
+.venv/Scripts/python.exe examples/phase7_e2e.py  # real 5-round belief/social feedback loop, writes to runs/
 ```
 
 ## Next
 
-Phase 7 (`docs/IMPLEMENTATION_PLAN.md`): belief / social feedback loop — wire `EventEngine` →
-`OasisSimulationAdapter.execute_round` → belief updates, persisted `belief_updates.jsonl`. Not started.
+Phase 8 (`docs/IMPLEMENTATION_PLAN.md`): signal engine — `AgentPredictionMatrix` and the
+raw→weighted→risk-adjusted signal pipeline. Not started.

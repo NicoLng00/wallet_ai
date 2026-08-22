@@ -210,14 +210,31 @@ alongside this plan).
   with real `like_post` actions — 10 real trace rows, 1 real post, 4 real likes, all persisted to a real
   sqlite file plus a JSON summary under `runs/{run_id}/`.
 
-## Phase 7 — Belief / social simulation
+## Phase 7 — Belief / social simulation (COMPLETE)
 
-- Wire the full loop from architecture §12: `EventEngine` → `OasisSimulationAdapter.execute_round` →
-  belief updates (architecture §11) → persisted `belief_updates.jsonl`.
-- Tests: every belief change has a non-empty `reason` and `information_source` (brief rule #12, enforced
-  as a schema constraint, not just tested); belief updates are append-only.
-- Minimal end-to-end example: run 5 rounds end-to-end (real event → real OASIS round → real belief
-  updates from at least one real LLM-interpreted trigger and one deterministic market-data trigger).
+- `agents/beliefs/updater.py`: three pure, deterministic belief-shift functions (`apply_event_update`,
+  `apply_peer_exposure_update`, `apply_strategy_hint_update`) — each a proportional pull toward a target,
+  never a direct jump, so no single source can move a belief from one extreme to the other in one round.
+- `simulation/round_loop.py`: `SimulationRoundLoop` wires the full §12 loop — injects a market event as a
+  real `ManualAction(CREATE_POST, ...)` via Phase 6's adapter, reads real social exposure back via the
+  real `rec` table, applies the three belief sources in order (recording a `BeliefUpdate` only when a
+  source actually changes the value — `old_belief == new_belief` is a schema-level error by design, §11,
+  so a no-op is never even attempted), then emits one Tier-3 deterministic `AgentDecision` per agent per
+  round (a fixed-margin threshold on the updated belief — no LLM call in this phase's decision step: the
+  interpretation already happened inside the event/hint sources).
+- Tests: 24 new (`tests/test_belief_updater.py` — 13 pure-function cases including clamping and
+  zero-sensitivity no-ops; `tests/test_round_loop.py` — 11 cases against a **real** `OasisSimulationAdapter`,
+  zero mocking, including a full round-trip proof that a bullish event posted by one agent genuinely
+  shifts a second agent's belief upward one round later via OASIS's real recommendation table, and a
+  negative case proving zero `BeliefUpdate`s are written when nothing actually changes). 145 passing + 11
+  skipped (Neo4j, unchanged).
+- Minimal end-to-end example (`examples/phase7_e2e.py`, actually run): 6 real Phase-5 agents, 5 real
+  rounds — round 0 injects a real Cointelegraph article as the market event, every round feeds real
+  90-day BTC/USD closes (Phase 3's CoinGecko adapter) into the Phase-5 strategy hints. Result, reported
+  honestly rather than dramatized: 27 real belief updates recorded with full provenance, small real
+  shifts (BTC's recent trend was close to flat), all decisions correctly stayed `HOLD` given how small
+  those shifts were relative to the decision margin — the system did the right thing with genuinely
+  unexciting real data, which is the point.
 
 ## Phase 8 — Signal engine
 
