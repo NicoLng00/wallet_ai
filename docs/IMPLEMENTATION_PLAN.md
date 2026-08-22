@@ -446,12 +446,62 @@ Every phase in this plan has a real, tested, executed implementation and a real 
 population (Phase 5) → OASIS social simulation (Phase 6) → belief/decision loop (Phase 7) → signal
 aggregation (Phase 8) → risk-sized positions (Phase 9) → walk-forward backtest across 7 variants
 (Phase 10) → agent scoring/attribution (Phase 11) → report + live dashboard (Phase 12) — runs start to
-finish against real external data with zero fabricated numbers anywhere in the chain. The two
-consistently declared limitations across every phase remain: no `ANTHROPIC_API_KEY` in this dev
-environment (Tier 1/2 LLM paths are implemented and unit-tested with fake clients, never exercised live —
-real execution always exercises the Tier 3 deterministic fallback), and `Neo4jGraphBackend` is
-implemented but never run against a live server (11 tests skip cleanly without one). Both are stated
-plainly in the docs and in the code itself, not hidden.
+finish against real external data with zero fabricated numbers anywhere in the chain. At the moment
+Phase 12 completed, two limitations were declared consistently across every phase: no LLM API key in
+this dev environment (Tier 1/2 paths implemented and unit-tested with fake clients, never exercised
+live), and `Neo4jGraphBackend` never run against a live server. The section immediately below records
+what changed for the first of those two; see it for the current, more precise state.
+
+---
+
+## Post-MVP: real Tier 1/2 LLM infrastructure (Gemini)
+
+Every phase above declared the same limitation: no LLM API key existed in this dev environment, so the
+Tier 1/2 paths (`LLMBackedEventInterpreter`, `LLMBackedProfileBatchGenerator`) were implemented and
+unit-tested against injected fake clients, but never actually exercised over the network. The user
+supplied a real Gemini API key; this section is what changed once it was verified live and wired in.
+
+- `llm/config.py`: loads `serena/.env` (via `python-dotenv`; the file itself is gitignored — verified
+  with `git check-ignore`, not assumed) and `build_default_llm_client()` returns a real client when
+  `GEMINI_API_KEY` is set, `None` otherwise — the same honest fallback signature every LLM-consuming
+  class already expected.
+- `llm/gemini_client.py`: `GeminiLLMClient`, a real `LLMClient` implementation against the public
+  `generateContent` endpoint with `responseMimeType: application/json` + `responseSchema` — the identical
+  pattern already verified working in the existing Node project (`server/providers/gemini.js`), confirmed
+  again here with two live smoke-test calls (plain text, then structured JSON) before writing any
+  production code around it.
+- `llm/schema_conversion.py`: `pydantic_schema_to_gemini_schema()` — converts a Pydantic
+  `model_json_schema()` (Draft 2020-12, `$ref`/`$defs`) into Gemini's documented schema subset
+  (uppercase types, fully inlined refs, `anyOf`-with-null → `nullable`). **A real, load-bearing
+  compatibility gap was found by actually converting our own schemas, not by reading Gemini's docs in the
+  abstract**: `AgentProfile.beliefs` is an open `dict[str, float]` (no fixed `properties`), which Gemini's
+  structured-output dialect does not support. The converter raises `UnsupportedSchemaError` for this case
+  — verified against both `AgentProfile` and `AgentProfileBatch` directly, not inferred.
+- **Real live verification** (`examples/llm_infrastructure_check.py`, actually run): `EventInterpretation`
+  (a flat schema, Phase 3) is fully compatible — a real Gemini call classified a real, current
+  Cointelegraph MiCA-regulation article as `bearish`/importance 0.65/confidence 0.80, a materially
+  different (and more nuanced) read than the Tier 3 heuristic's `neutral`/0.35/0.35 on the same text.
+  `AgentProfileBatch` (Phase 5) correctly fails fast with `UnsupportedSchemaError` *before* any network
+  call, and `generate_agent_population()` was confirmed to still fall through cleanly to the deterministic
+  path for that batch — never a crashed run.
+- **A second real finding from the live run, not a bug**: calling `LLMBackedEventInterpreter.interpret()`
+  twice in a row on the *identical* prompt at `temperature=0.0` returned two different classifications
+  (`bearish` then `neutral`) — Gemini does not guarantee bit-identical output at zero temperature across
+  separate calls. This is exactly the scenario `SimulationRun`'s own Phase 2 docstring already
+  anticipated ("reproducible **as far as the external LLM API permits**") — no code change needed, it
+  confirms a design decision already made rather than exposing a gap.
+- Tests: 22 new (`tests/test_schema_conversion.py`, `tests/test_gemini_client.py`,
+  `tests/test_llm_config.py`) — schema conversion against our real models (including the
+  `UnsupportedSchemaError` regression), and `GeminiLLMClient` request/response/error handling against an
+  injected fetch reproducing the exact real response shape verified live — no live calls inside the
+  automated suite itself, per the project's standing discipline. 329 passing + 11 skipped (Neo4j,
+  unchanged).
+
+**Current state of the two MVP-completion limitations**: `Neo4jGraphBackend` is still never run against
+a live server (unchanged, 11 tests still skip cleanly). The LLM limitation is now split by schema shape
+rather than blanket-true: event interpretation (Phase 3, flat schema) is genuinely live and verified;
+agent-population generation (Phase 5) still runs its deterministic path in practice because its schema
+is incompatible with Gemini's structured output, verified explicitly rather than assumed.
 
 ---
 

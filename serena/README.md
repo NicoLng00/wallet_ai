@@ -12,7 +12,32 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 12 (reporting / dashboard) — complete. All 12 phases done — MVP runs start to finish.**
+**Post-MVP: real Gemini LLM infrastructure — live and verified.**
+
+A real `GEMINI_API_KEY` is now configured (`serena/.env`, gitignored). `llm/gemini_client.py`'s
+`GeminiLLMClient` is a real `LLMClient` implementation (public `generateContent` endpoint,
+`responseSchema`-structured output) — verified with two live smoke-test calls before any production
+code was written around it, then wired into `llm/config.py::build_default_llm_client()`.
+
+- `llm/schema_conversion.py` converts our Pydantic schemas into Gemini's dialect. **Real compatibility
+  gap found by actually converting our own schemas**: `AgentProfile.beliefs` is an open
+  `dict[str, float]`, which Gemini's structured-output schema doesn't support — raises
+  `UnsupportedSchemaError` explicitly, verified against both `AgentProfile` and `AgentProfileBatch`.
+- `examples/llm_infrastructure_check.py` (actually run): `EventInterpretation` (Phase 3, flat schema) is
+  fully live-compatible — a real call classified a real Cointelegraph MiCA-regulation article as
+  `bearish`/0.65/0.80, more nuanced than the Tier 3 heuristic's `neutral`/0.35/0.35 on the same text.
+  `AgentProfileBatch` (Phase 5) fails fast with `UnsupportedSchemaError` before any network call, and
+  `generate_agent_population()` was confirmed to still fall through cleanly to the deterministic path.
+- **A second real finding, not a bug**: two identical calls at `temperature=0.0` returned different
+  classifications (`bearish` then `neutral`) — Gemini doesn't guarantee bit-identical output at zero
+  temperature. Exactly the case `SimulationRun`'s own docstring already hedges for ("reproducible as far
+  as the external LLM API permits") — confirms a prior design decision, no code change needed.
+- 22 new tests (schema conversion against real models, `GeminiLLMClient` against an injected fetch
+  reproducing the real verified response shape — no live calls in the automated suite). 329 passing + 11
+  skipped (Neo4j, unchanged).
+
+<details>
+<summary>Phase 12 (reporting / dashboard) — complete. All 12 phases done — MVP runs start to finish.</summary>
 
 - `reports/report_agent/tools.py` — `RunReportTools`, the 10 read-only tools from §20, reading only this
   system's own artifacts. **Real bug fixed**: a naive read-only tool wrapping `RunArtifactWriter` would
@@ -40,10 +65,12 @@ Full design docs live in `../docs/`:
 All 12 phases have a real, tested, executed implementation with a real end-to-end example. Real market
 data → knowledge graph → agent population → OASIS social simulation → belief/decision loop → signal
 aggregation → risk-sized positions → 7-variant walk-forward backtest → agent scoring/attribution →
-report + live dashboard, start to finish, zero fabricated numbers. Two limitations are declared
-consistently everywhere: no `ANTHROPIC_API_KEY` in this dev environment (Tier 1/2 LLM paths exist and are
-unit-tested with fake clients; real runs always exercise the Tier 3 fallback), and `Neo4jGraphBackend` is
-implemented but never run live (its 11 tests skip cleanly without a server).
+report + live dashboard, start to finish, zero fabricated numbers. `Neo4jGraphBackend` is still never run
+live (its 11 tests skip cleanly without a server) — see the section above for the current, more precise
+state of the LLM limitation (live for Phase 3's event interpretation, still deterministic-only for
+Phase 5's agent generation, verified rather than assumed either way).
+
+</details>
 
 <details>
 <summary>Phase 11 (agent scoring / evolution) — complete.</summary>
@@ -285,12 +312,13 @@ implemented but never run live (its 11 tests skip cleanly without a server).
 cd serena
 uv venv .venv
 uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if you have a server to test against
+cp .env.example .env                              # optional: add a real GEMINI_API_KEY to exercise Tier 1/2 live
 ```
 
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v             # 311 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v             # 329 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py   # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py   # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py   # real live news -> real Kuzu graph run, writes to runs/
@@ -302,6 +330,7 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 .venv/Scripts/python.exe examples/phase10_e2e.py  # real walk-forward backtest, 7 variants, writes to runs/
 .venv/Scripts/python.exe examples/phase11_e2e.py  # real agent scoring + PnL attribution, writes to runs/
 .venv/Scripts/python.exe examples/phase12_e2e.py  # real run + real live server + real HTTP verification
+.venv/Scripts/python.exe examples/llm_infrastructure_check.py  # real live Gemini call (needs .env key)
 ```
 
 To browse a run's dashboard yourself:
@@ -315,5 +344,7 @@ then open `http://127.0.0.1:8000/dashboard/{run_id}` (find a `run_id` under `ser
 ## Status: MVP complete
 
 All 12 phases of `docs/IMPLEMENTATION_PLAN.md` are implemented, tested, and actually executed end to end.
-Nothing left to build for the MVP scope — further work (a live LLM backend, a running Neo4j server, agent
-mutation/new-strategy generation, richer dashboard views) is optional extension, not a gap in the plan.
+A live LLM backend (Gemini) is now wired in and verified for Phase 3's event interpretation. Nothing left
+to build for the MVP scope — further work (a running Neo4j server, a schema-compatible path for Phase 5's
+agent generation, agent mutation/new-strategy generation, richer dashboard views) is optional extension,
+not a gap in the plan.
