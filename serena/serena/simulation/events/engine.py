@@ -21,7 +21,7 @@ from typing import Literal, Optional, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from serena.llm.client import LLMClient, LLMTier
+from serena.llm.client import LLMClient, LLMQuotaExceededError, LLMTier
 from serena.models.data import DataPoint
 from serena.models.event import Event
 
@@ -81,7 +81,11 @@ class LLMBackedEventInterpreter:
     """Tier 1/2 reale (docs/TRADING_ARCHITECTURE.md §7): un retry a temperatura ridotta su
     fallimento, poi rilancia l'errore — la decisione di ricadere sul Tier 3 e' di EventEngine, non
     di questa classe (separazione di responsabilita': questa classe sa parlare con un LLMClient,
-    EventEngine sa cosa fare se anche quello fallisce)."""
+    EventEngine sa cosa fare se anche quello fallisce).
+
+    ECCEZIONE al retry, VERIFICATA dal vivo (Fase 5): su LLMQuotaExceededError (quota giornaliera
+    esaurita, non un blip transitorio) il retry e' garantito fallire di nuovo e sprecherebbe solo
+    un'altra chiamata contro la stessa quota — rilanciato subito, senza ritentare."""
 
     def __init__(self, llm_client: LLMClient, tier: LLMTier = "fast", temperature: float = 0.0,
                  retry_temperature_delta: float = 0.1):
@@ -93,6 +97,8 @@ class LLMBackedEventInterpreter:
     async def interpret(self, text: str) -> EventInterpretation:
         try:
             return await self._call(text, self._temperature)
+        except LLMQuotaExceededError:
+            raise
         except Exception:
             return await self._call(text, max(0.0, self._temperature - self._retry_temperature_delta))
 

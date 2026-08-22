@@ -1,25 +1,25 @@
 """Verifica dal vivo dell'infrastruttura LLM (docs/TRADING_ARCHITECTURE.md §7), ora che una vera
-GEMINI_API_KEY e' configurata in serena/.env: per la prima volta in questo progetto, il percorso
-Tier 1/2 viene esercitato con una chiamata di rete reale, non solo testato con un client finto.
+GEMINI_API_KEY e' configurata in serena/.env: il percorso Tier 1/2 viene esercitato con una chiamata
+di rete reale, non solo testato con un client finto.
 
-Due percorsi verificati separatamente, con esito onesto per ciascuno:
-1. EventEngine (Fase 3) + LLMBackedEventInterpreter: schema piatto (EventInterpretation), COMPATIBILE
-   con lo schema strutturato di Gemini — interpretazione reale attesa con successo.
-2. LLMBackedProfileBatchGenerator (Fase 5): schema con AgentProfile.beliefs (dict a proprieta' libere),
-   NON COMPATIBILE con il dialetto di schema documentato da Gemini (verificato in
-   tests/test_schema_conversion.py) — atteso un fallimento esplicito (UnsupportedSchemaError), non un
-   funzionamento silenzioso ne' un crash generico.
+Due percorsi, ENTRAMBI ora compatibili con lo schema strutturato di Gemini (dopo la ricostruzione di
+Fase 5 — vedi docs/IMPLEMENTATION_PLAN.md, sezione "Phase 5 rebuild"):
+1. EventEngine (Fase 3) + LLMBackedEventInterpreter: schema piatto (EventInterpretation).
+2. LLMBackedPersonaGenerator (Fase 5, ricostruita): schema AgentPersonaDraftBatch — solo i campi
+   qualitativi, mai i coefficienti numerici ne' le beliefs.
 
-Uso: .venv/Scripts/python.exe examples/llm_infrastructure_check.py
-"""
+LIMITE REALE VERIFICATO DAL VIVO: la chiave configurata e' sul piano gratuito, con una quota fissa di
+20 richieste/giorno per gemini-3.5-flash (dal corpo reale di una risposta 429 RESOURCE_EXHAUSTED, non
+assunta). Se la quota e' esaurita per oggi, questo script lo dichiara esplicitamente invece di fallire
+con uno stack trace generico o, peggio, ricadere in silenzio su un valore finto."""
 from __future__ import annotations
 import asyncio
 from datetime import datetime, timezone
 
-from serena.agents.profiles.generator import LLMBackedProfileBatchGenerator
+from serena.agents.profiles.generator import LLMBackedPersonaGenerator
 from serena.data.news.cointelegraph import CointelegraphNewsAdapter
+from serena.llm.client import LLMQuotaExceededError
 from serena.llm.config import build_default_llm_client
-from serena.llm.schema_conversion import UnsupportedSchemaError
 from serena.models.agent import AgentArchetype
 from serena.simulation.events.engine import EventEngine, HeuristicEventInterpreter, LLMBackedEventInterpreter
 
@@ -38,31 +38,31 @@ async def check_event_interpretation(llm_client) -> None:
           f"importance={heuristic_result.importance:.2f} confidence={heuristic_result.confidence:.2f}")
 
     llm_interpreter = LLMBackedEventInterpreter(llm_client, tier="fast", temperature=0.0)
-    llm_result = await llm_interpreter.interpret(text)
-    print(f"Tier 1/2 (Gemini reale, CHIAMATA DI RETE VERA): direction={llm_result.direction} "
-          f"importance={llm_result.importance:.2f} confidence={llm_result.confidence:.2f}")
-
-    engine = EventEngine(interpreter=llm_interpreter)
-    event = await engine.build_event(article, text, "evt-llm-check-1", "SOCIAL_SPIKE")
-    print(f"Event completo costruito con interpretazione LLM reale: entities={event.entities}, "
-          f"direction={event.direction}, confidence={event.confidence}")
-    print("OK — Tier 1/2 esercitato con successo su una chiamata di rete reale.\n")
-
-
-async def check_agent_profile_generation(llm_client) -> None:
-    print("=== 2. LLMBackedProfileBatchGenerator (schema NON compatibile, atteso) ===")
-    generator = LLMBackedProfileBatchGenerator(llm_client, tier="opus", temperature=0.0)
     try:
-        await generator.generate_batch(AgentArchetype.MOMENTUM, count=3, start_index=0, created_at=NOW,
-                                        preferred_assets=["BTC/USDT"])
-        print("INATTESO: la generazione ha avuto successo nonostante lo schema con dict aperto.")
-    except UnsupportedSchemaError as exc:
-        print(f"Fallito come atteso, esplicitamente, PRIMA di qualunque chiamata di rete: {exc}")
-        print("Limite reale e dichiarato: AgentProfile.beliefs e' un dict[str, float] a proprieta' "
-              "libere, non rappresentabile nel dialetto di schema strutturato documentato da Gemini. "
-              "generate_agent_population() continua a funzionare per davvero: ricade correttamente sul "
-              "percorso deterministico (Fase 5) per l'intero batch, mai un crash del run.")
-    print()
+        llm_result = await llm_interpreter.interpret(text)
+        print(f"Tier 1/2 (Gemini reale, CHIAMATA DI RETE VERA): direction={llm_result.direction} "
+              f"importance={llm_result.importance:.2f} confidence={llm_result.confidence:.2f}")
+        print("OK — Tier 1/2 esercitato con successo su una chiamata di rete reale.\n")
+    except LLMQuotaExceededError as exc:
+        print(f"Quota Gemini esaurita per oggi (limite reale: 20 richieste/giorno per "
+              f"gemini-3.5-flash): {exc}")
+        print("Non e' un bug: EventEngine ricadrebbe comunque su HeuristicEventInterpreter (Tier 3) "
+              "in un run reale, mai un crash.\n")
+
+
+async def check_agent_persona_generation(llm_client) -> None:
+    print("=== 2. LLMBackedPersonaGenerator (schema compatibile dopo la ricostruzione di Fase 5) ===")
+    generator = LLMBackedPersonaGenerator(llm_client, tier="opus", temperature=0.0)
+    agent_ids = [f"momentum-{i:03d}" for i in range(3)]
+    try:
+        personas = await generator.generate_batch(AgentArchetype.MOMENTUM, agent_ids)
+        print(f"OK — {len(personas)} persone reali generate da Gemini:")
+        for persona in personas:
+            print(f"  - {persona.agent_id}: {persona.identity[:100]}...")
+    except LLMQuotaExceededError as exc:
+        print(f"Quota Gemini esaurita per oggi: {exc}")
+        print("generate_agent_population() ricadrebbe correttamente sul percorso deterministico "
+              "(identity generica ma valida) per questo batch, mai un crash del run.\n")
 
 
 async def main() -> None:
@@ -73,9 +73,10 @@ async def main() -> None:
 
     print(f"Client LLM reale configurato: {type(llm_client).__name__} (modello: {llm_client.model})\n")
     await check_event_interpretation(llm_client)
-    await check_agent_profile_generation(llm_client)
-    print("Verifica infrastruttura LLM completata: il percorso Tier 1/2 funziona per davvero dove lo "
-          "schema lo permette, e fallisce esplicitamente (non in silenzio) dove non lo permette.")
+    await check_agent_persona_generation(llm_client)
+    print("\nVerifica infrastruttura LLM completata: entrambi i percorsi Tier 1/2 sono ora "
+          "compatibili con lo schema strutturato di Gemini; se la quota giornaliera e' esaurita, "
+          "questo script lo dichiara esplicitamente invece di fallire in silenzio.")
 
 
 if __name__ == "__main__":

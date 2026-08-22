@@ -12,7 +12,37 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Post-MVP: real Gemini LLM infrastructure — live and verified.**
+**Phase 5 rebuilt with real Gemini-generated agent personas.**
+
+`AgentProfile.beliefs` (an open dict) is incompatible with Gemini's structured schema (see below) — fixed
+by having the LLM generate only a narrow, schema-compatible `AgentPersonaDraft` (identity/strategy/
+information_sources/behavioral_biases), never the numeric risk coefficients or beliefs, which always
+come from the same seeded archetype-prior sampling as before. `apply_persona_overlay()` merges the two.
+
+- **Real bug found and fixed**: the first version derived per-archetype RNG seeds from a list ordered by
+  the caller's dict iteration order — since `RandomSeedBundle.derive()` assigns seeds positionally,
+  `{MOMENTUM:3, CONTRARIAN:3}` and `{CONTRARIAN:3, MOMENTUM:3}` produced different populations for the
+  same seed. Caught by a test comparing both orderings; fixed by deriving from the full, fixed, canonical
+  list of all 12 archetypes every time, so an archetype's seed depends only on itself, never on what else
+  was requested alongside it.
+- **Optimization**: archetypes now generate in **parallel** (`asyncio.gather`) instead of sequentially —
+  safe specifically because of the independent-seeding fix above.
+- **A second real constraint found live**: the configured Gemini key is free-tier, capped at a **hard 20
+  requests/day** for `gemini-3.5-flash` (read from the real 429 `RESOURCE_EXHAUSTED` body) — not a short
+  burst limit. Retrying a quota-exhausted call wastes another request against the same daily cap for
+  nothing, so a new `LLMQuotaExceededError` is now explicitly excluded from the retry-at-reduced-
+  temperature logic everywhere it's used.
+- **Real live verification, captured before the daily cap hit**: a full 50-agent run produced 10 genuine
+  Gemini-authored personas (one per archetype) — e.g. a real `momentum-000`: *"Trader retail iperattivo
+  che passa ore davanti ai grafici a caccia di trend esplosivi... behavioral_biases: FOMO, Herding"* — the
+  rest correctly fell back to the deterministic generic identity once the quota was exhausted, never a
+  crash. Confirmed afterward the cap is a genuine full-day lock, not a short cooldown.
+- Tests updated for the new API (`AgentProfileBatch`/`LLMBackedProfileBatchGenerator` removed, nothing
+  else used them), plus new tests for the seed-independence fix, the persona overlay, and the
+  quota-no-retry behavior. 335 passing + 11 skipped (Neo4j, unchanged).
+
+<details>
+<summary>Post-MVP: real Gemini LLM infrastructure — live and verified.</summary>
 
 A real `GEMINI_API_KEY` is now configured (`serena/.env`, gitignored). `llm/gemini_client.py`'s
 `GeminiLLMClient` is a real `LLMClient` implementation (public `generateContent` endpoint,
@@ -22,19 +52,19 @@ code was written around it, then wired into `llm/config.py::build_default_llm_cl
 - `llm/schema_conversion.py` converts our Pydantic schemas into Gemini's dialect. **Real compatibility
   gap found by actually converting our own schemas**: `AgentProfile.beliefs` is an open
   `dict[str, float]`, which Gemini's structured-output schema doesn't support — raises
-  `UnsupportedSchemaError` explicitly, verified against both `AgentProfile` and `AgentProfileBatch`.
+  `UnsupportedSchemaError` explicitly, verified against `AgentProfile` (the schema that later drove the
+  Phase 5 rebuild above).
 - `examples/llm_infrastructure_check.py` (actually run): `EventInterpretation` (Phase 3, flat schema) is
   fully live-compatible — a real call classified a real Cointelegraph MiCA-regulation article as
   `bearish`/0.65/0.80, more nuanced than the Tier 3 heuristic's `neutral`/0.35/0.35 on the same text.
-  `AgentProfileBatch` (Phase 5) fails fast with `UnsupportedSchemaError` before any network call, and
-  `generate_agent_population()` was confirmed to still fall through cleanly to the deterministic path.
 - **A second real finding, not a bug**: two identical calls at `temperature=0.0` returned different
   classifications (`bearish` then `neutral`) — Gemini doesn't guarantee bit-identical output at zero
   temperature. Exactly the case `SimulationRun`'s own docstring already hedges for ("reproducible as far
   as the external LLM API permits") — confirms a prior design decision, no code change needed.
 - 22 new tests (schema conversion against real models, `GeminiLLMClient` against an injected fetch
-  reproducing the real verified response shape — no live calls in the automated suite). 329 passing + 11
-  skipped (Neo4j, unchanged).
+  reproducing the real verified response shape — no live calls in the automated suite).
+
+</details>
 
 <details>
 <summary>Phase 12 (reporting / dashboard) — complete. All 12 phases done — MVP runs start to finish.</summary>
@@ -318,7 +348,7 @@ cp .env.example .env                              # optional: add a real GEMINI_
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v             # 329 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v             # 335 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py   # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py   # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py   # real live news -> real Kuzu graph run, writes to runs/

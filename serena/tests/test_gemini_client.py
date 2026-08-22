@@ -6,9 +6,26 @@ import json
 
 import pytest
 
-from serena.llm.client import LLMUnavailableError
+from serena.llm.client import LLMQuotaExceededError, LLMUnavailableError
 from serena.llm.gemini_client import GeminiLLMClient
 from serena.simulation.events.engine import EventInterpretation
+
+REAL_QUOTA_EXHAUSTED_BODY = json.dumps({
+    "error": {
+        "code": 429,
+        "message": "You exceeded your current quota, please check your plan and billing details.",
+        "status": "RESOURCE_EXHAUSTED",
+        "details": [{
+            "@type": "type.googleapis.com/google.rpc.QuotaFailure",
+            "violations": [{
+                "quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+                "quotaId": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+                "quotaDimensions": {"location": "global", "model": "gemini-3.5-flash"},
+                "quotaValue": "20",
+            }],
+        }],
+    },
+})
 
 
 def real_shaped_response(payload: dict) -> str:
@@ -120,3 +137,56 @@ async def test_429_from_default_fetch_raises_llm_unavailable_without_a_real_call
     client = GeminiLLMClient(api_key="fake-key")
     with pytest.raises(LLMUnavailableError):
         await client.complete_json("prompt", EventInterpretation, tier="fast", temperature=0.0)
+
+
+@pytest.mark.asyncio
+async def test_real_quota_exhausted_body_raises_the_specific_quota_error(monkeypatch):
+    """Il corpo qui e' quello VERO catturato dal vivo (Fase 5) quando la chiave ha esaurito la
+    quota giornaliera gratuita di gemini-3.5-flash (20 richieste/giorno) — non una forma inventata."""
+    import httpx
+
+    class _FakeResponse:
+        status_code = 429
+        text = REAL_QUOTA_EXHAUSTED_BODY
+
+    class _FakeAsyncClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args):
+            return False
+
+        async def post(self, *args, **kwargs):
+            return _FakeResponse()
+
+    monkeypatch.setattr(httpx, "AsyncClient", lambda *args, **kwargs: _FakeAsyncClient())
+
+    client = GeminiLLMClient(api_key="fake-key")
+    with pytest.raises(LLMQuotaExceededError):
+        await client.complete_json("prompt", EventInterpretation, tier="fast", temperature=0.0)
+
+
+@pytest.mark.asyncio
+async def test_generic_429_without_resource_exhausted_status_is_not_treated_as_quota_error(monkeypatch):
+    import httpx
+
+    class _FakeResponse:
+        status_code = 429
+        text = json.dumps({"error": {"code": 429, "status": "UNAVAILABLE", "message": "transient"}})
+
+    class _FakeAsyncClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args):
+            return False
+
+        async def post(self, *args, **kwargs):
+            return _FakeResponse()
+
+    monkeypatch.setattr(httpx, "AsyncClient", lambda *args, **kwargs: _FakeAsyncClient())
+
+    client = GeminiLLMClient(api_key="fake-key")
+    with pytest.raises(LLMUnavailableError) as exc_info:
+        await client.complete_json("prompt", EventInterpretation, tier="fast", temperature=0.0)
+    assert not isinstance(exc_info.value, LLMQuotaExceededError)

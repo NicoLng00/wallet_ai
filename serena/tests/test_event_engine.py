@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from serena.llm.client import LLMUnavailableError
+from serena.llm.client import LLMQuotaExceededError, LLMUnavailableError
 from serena.models.data import DataPoint
 from serena.simulation.events.engine import (
     EventEngine,
@@ -107,6 +107,26 @@ async def test_llm_backed_interpreter_retries_once_at_reduced_temperature():
     result = await interpreter.interpret("some market text")
     assert result == expected
     assert client.calls == [0.3, pytest.approx(0.2)]
+
+
+@pytest.mark.asyncio
+async def test_llm_backed_interpreter_does_not_retry_on_quota_exceeded():
+    """VERIFICATO dal vivo (Fase 5): un retry immediato contro una quota giornaliera esaurita e'
+    garantito fallire di nuovo e spreca solo un'altra chiamata — deve rilanciare subito, una sola
+    chiamata totale, mai due."""
+    call_count = 0
+
+    async def raise_quota_exceeded(*args, **kwargs):
+        nonlocal call_count
+        call_count += 1
+        raise LLMQuotaExceededError("quota esaurita per oggi")
+
+    client = _FakeLLMClient()
+    client.complete_json = raise_quota_exceeded
+    interpreter = LLMBackedEventInterpreter(client, temperature=0.0)
+    with pytest.raises(LLMQuotaExceededError):
+        await interpreter.interpret("some market text")
+    assert call_count == 1
 
 
 @pytest.mark.asyncio

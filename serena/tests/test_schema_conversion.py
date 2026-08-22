@@ -7,7 +7,7 @@ from typing import Optional
 import pytest
 from pydantic import BaseModel, ConfigDict
 
-from serena.agents.profiles.generator import AgentProfileBatch
+from serena.agents.profiles.generator import AgentPersonaDraftBatch
 from serena.llm.schema_conversion import UnsupportedSchemaError, pydantic_schema_to_gemini_schema
 from serena.models.agent import AgentProfile
 from serena.simulation.events.engine import EventInterpretation
@@ -66,6 +66,14 @@ def test_open_dict_field_raises_unsupported_schema_error():
         pydantic_schema_to_gemini_schema(AgentProfile)
 
 
-def test_agent_profile_batch_also_raises_because_it_nests_agent_profile():
-    with pytest.raises(UnsupportedSchemaError):
-        pydantic_schema_to_gemini_schema(AgentProfileBatch)
+def test_agent_persona_draft_batch_converts_successfully_no_open_dicts():
+    """AgentPersonaDraftBatch (Fase 5, ridisegnata per Gemini) e' esattamente lo schema che ha
+    sostituito il vecchio AgentProfileBatch (che invece falliva, vedi il test sopra su AgentProfile
+    stesso): niente dict a proprieta' libere, solo stringhe e liste di stringhe — deve convertire
+    senza sollevare nulla."""
+    schema = pydantic_schema_to_gemini_schema(AgentPersonaDraftBatch)
+    assert schema["type"] == "OBJECT"
+    persona_schema = schema["properties"]["personas"]["items"]
+    assert persona_schema["type"] == "OBJECT"
+    assert persona_schema["properties"]["information_sources"]["type"] == "ARRAY"
+    assert persona_schema["properties"]["information_sources"]["items"]["type"] == "STRING"

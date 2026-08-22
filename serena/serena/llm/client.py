@@ -28,6 +28,17 @@ class LLMUnavailableError(RuntimeError):
     a temperatura piu' bassa o cadere sul fallback Tier 3 (docs/TRADING_ARCHITECTURE.md §7)."""
 
 
+class LLMQuotaExceededError(LLMUnavailableError):
+    """Sottoclasse specifica per una quota ESAURITA (non un errore transitorio) — VERIFICATO dal
+    vivo (Fase 5, ricostruzione con Gemini): il piano gratuito di gemini-3.5-flash ha un limite di
+    20 richieste/giorno per progetto/modello (`GenerateRequestsPerDayPerProjectPerModel-FreeTier`,
+    dal corpo reale di una risposta 429 RESOURCE_EXHAUSTED). Un retry immediato a temperatura ridotta
+    su QUESTO errore specifico e' garantito fallire di nuovo e spreca solo un'altra chiamata contro
+    la stessa quota esaurita — i chiamanti (LLMBackedEventInterpreter, LLMBackedPersonaGenerator)
+    la distinguono esplicitamente da LLMUnavailableError generico per NON ritentare in questo caso,
+    e cadere subito sul fallback Tier 3."""
+
+
 class LLMClient(Protocol):
     async def complete_json(
         self,
