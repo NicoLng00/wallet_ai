@@ -9,6 +9,12 @@ dependencies = [
     "pandas>=2.2.0",
     "httpx>=0.27.0",
     "kuzu>=0.11.0",
+    "camel-oasis==0.2.5",
+    # camel-ai==0.2.78 (pulled in by camel-oasis==0.2.5) under-constrains its own `mcp` dependency:
+    # uv resolves to mcp==2.0.0 by default, which removed `FastMCP` from `mcp.server` and breaks
+    # `import oasis` at camel/toolkits/base.py — VERIFIED live in this environment (Fase 6). Pinning
+    # below 2.0 here is the fix, re-verify if camel-ai is ever upgraded past 0.2.78.
+    "mcp<2.0",
 ]
 
 [project.optional-dependencies]

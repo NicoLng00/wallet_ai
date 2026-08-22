@@ -138,28 +138,77 @@ alongside this plan).
   (18 entities: BTC, ETH, the ETF product type, and 15 real news items that mentioned them), and
   persisted a verifiable `graph_summary.json` with full round-trip fidelity.
 
-## Phase 5 — Agent factory
+## Phase 5 — Agent factory (COMPLETE)
 
-- Implement the 10-archetype library the MVP needs (of the 12 in the brief; 2 may be deferred past MVP,
-  see MVP section below) with profile priors + deterministic strategy hints (architecture §6).
-- Implement batched, staged LLM-assisted profile generation at `cohort_temperature` (default 0.0), with
-  the deterministic archetype prior as fallback on validation failure — never a `random`-based fallback
-  (the specific MiroFish/OASIS failure mode being deliberately avoided, §A.12/B.11).
-- Tests: profile schema validation, archetype-prior fallback triggers correctly on injected LLM failure,
-  determinism (same seed + temperature=0 → identical population across two runs).
-- Minimal end-to-end example: generate 50 real agent profiles (real LLM calls, Tier 1/2) across 10
-  archetypes, persist `agents.json`.
+- `agents/profiles/archetypes.py`: `ArchetypePrior` per all 12 archetypes from the brief (behavioral
+  coefficient ranges, capital range, risk profile, time horizon) — the profile-prior library architecture
+  §6 point 1 calls for.
+- `agents/strategies/hints.py`: deterministic, non-LLM starting-belief heuristics per archetype (§6 point
+  2) — `momentum`/`trend_follower`/`mean_reversion`/`contrarian`/`long_term_holder` compute a real
+  sigmoid-mapped return-based belief from recent closes; the other 6 archetypes (macro, fundamental, news,
+  retail, whale, market_maker, quant) return a neutral 0.5 — **declared honestly** as "no non-price
+  signal wired up yet" rather than fabricating a plausible-looking number.
+- `agents/profiles/generator.py`: `generate_agent_population()` orchestrates batched generation
+  (`DEFAULT_BATCH_SIZE = 12`, matching MiroFish's own useful batching pattern, §A.5) at
+  `cohort_temperature` (0.0), deriving its RNG from `RandomSeedBundle.derive(seed, ["cohort_generation"])`
+  — never Python's unseeded global `random`. `LLMBackedProfileBatchGenerator` (Tier 1) does one retry at
+  reduced temperature (§7) before the orchestrator falls through to
+  `generate_archetype_batch_deterministic()` for that batch only — never the whole population, and never
+  a `random`-based fallback (the exact MiroFish/OASIS failure mode from §A.12/§B.11).
+- **Declared limitation**: no `ANTHROPIC_API_KEY` in this environment — `LLMBackedProfileBatchGenerator`
+  is implemented and unit-tested against an injected fake client (same pattern as Phase 3's
+  `LLMBackedEventInterpreter`) but has never made a real network call.
+- Tests: 17 new (`tests/test_agent_factory.py`) — schema validation via `AgentProfile` itself, every hint
+  bounded to `[0,1]`, determinism (same seed → byte-identical population across two independent calls,
+  different seed → different population), persistent/collision-free `agent_id` assignment across multiple
+  batches, LLM-batch success/retry/wrong-count-rejection, and the deterministic-fallback composition.
+- Minimal end-to-end example (`examples/phase5_e2e.py`, actually run): generated the real MVP population
+  — 50 agents across the 10 archetypes the MVP section below selects — persisted and reloaded
+  `agents.json` with full round-trip fidelity.
 
-## Phase 6 — OASIS adapter
+## Phase 6 — OASIS adapter (COMPLETE)
 
-- Add `camel-oasis` dependency; implement `OasisSimulationAdapter` exactly as scoped in architecture §9
-  (tool-based decision collection, `ManualAction` event injection, targeted RNG seeding around the OASIS
-  call, no `Platform` forking).
-- Tests: adapter initializes a real (small, e.g. 5-agent) OASIS environment locally, executes a round,
-  collects real actions; a determinism test that seeds twice and compares the *sequence of agents
-  activated* (guards against the exact non-determinism source found in §A.6/B.11).
-- Minimal end-to-end example: run 3 real rounds of a 5-agent OASIS Reddit simulation seeded with one
-  Phase-3-derived market event, inspect the resulting posts/actions.
+- Added `camel-oasis==0.2.5` (exact-pinned, per the brief's own caution about this library's
+  release-specific API surface, §A.9) plus an explicit `mcp<2.0` pin — **newly verified in this phase**:
+  `camel-ai==0.2.78` (pulled in by `camel-oasis`) under-constrains its own `mcp` dependency, so an
+  unpinned resolve picks `mcp==2.0.0`, which removed `FastMCP` from `mcp.server` and breaks `import oasis`
+  outright. Confirmed by actually hitting the `ImportError` before adding the pin.
+- **Two more upstream bugs/constraints verified by actually running a minimal simulation**, not read from
+  a docstring:
+  1. `UserInfo.to_reddit_system_message()`/`to_twitter_system_message()` (`social_platform/config/user.py`)
+     raise `UnboundLocalError` unless `profile["other_info"]` contains ALL of `user_profile` (non-None),
+     `gender`, `age`, `mbti`, `country` — undocumented, found only via a real stack trace. Worked around
+     by always populating all five (only `user_profile`, derived from `AgentProfile.identity`, carries
+     real information for our domain; the other four are inert placeholders forced by this bug).
+  2. `SocialAgent(model=None, ...)` does **not** mean "no model": `ChatAgent._resolve_models` resolves
+     `None` to `ModelFactory.create(DEFAULT, DEFAULT)`, which raises `ValueError` for a missing
+     `OPENAI_API_KEY` at agent-construction time — even for an agent that will only ever receive
+     `ManualAction`s, never an `LLMAction`. Worked around with `simulation/oasis/null_model.py`'s
+     `NullModelBackend`, a real (not mocked) `BaseModelBackend` subclass whose `_run`/`_arun` raise loudly
+     instead of fabricating a response — verified never invoked across every real simulation run in this
+     phase (confirmed: zero exceptions raised from it).
+- `simulation/oasis/adapter.py`: `OasisSimulationAdapter` exactly as scoped in architecture §9 —
+  `initialize()`/`execute_round()`/`collect_actions()`/`collect_social_exposure()`/`persist_state()`/
+  `close()`. Every call that touches OASIS is wrapped in `seeded_random()` (`determinism.py`) — targeted
+  seeding of Python's global `random` for the call's duration only, restored after, per the verified
+  finding that neither `platform.py` nor `recsys.py` seed it themselves (§B.11). Trading decisions are
+  never sent as `LLMAction`/`INTERVIEW` — only `ManualAction`, so the adapter's own persisted
+  `SocialAction` log (read from the real sqlite `trace` table) is what downstream phases consume, not
+  OASIS's own audit trail (§B.12).
+- **Real behavioral finding, not a bug**: `OasisEnv.step()` refreshes the recommendation table at the
+  *start* of the step, before that step's own actions are applied — so a post created in round N only
+  appears in another agent's `rec` table starting at round N+1's refresh, not within round N itself. First
+  written as a test that assumed same-round visibility; the test was wrong, not OASIS — fixed to match
+  the real, verified sequencing.
+- Tests: 11 new (`tests/test_oasis_adapter.py`), all against a **real** `OasisEnv` (Reddit platform, real
+  sqlite database per test, no mocking of OASIS itself) — construction, `create_post`/`like_post` via
+  `ManualAction`, real recsys-driven exposure, non-repeating action collection, `persist_state` round-trip,
+  and `NullModelBackend`/`seeded_random` unit behavior. 121 passing + 11 skipped (unchanged Neo4j skips).
+- Minimal end-to-end example (`examples/phase6_e2e.py`, actually run): 5 real agents from Phase 5, a real
+  Cointelegraph article (Phase 3's live adapter) injected as a `ManualAction(CREATE_POST, ...)`, a real
+  recsys refresh round, 4 of the 5 agents genuinely seeing the post via the real `rec` table and reacting
+  with real `like_post` actions — 10 real trace rows, 1 real post, 4 real likes, all persisted to a real
+  sqlite file plus a JSON summary under `runs/{run_id}/`.
 
 ## Phase 7 — Belief / social simulation
 

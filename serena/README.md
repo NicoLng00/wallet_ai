@@ -12,7 +12,44 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 4 (knowledge graph) — complete.**
+**Phase 6 (OASIS adapter) — complete.**
+
+- `simulation/oasis/adapter.py` — `OasisSimulationAdapter`, the only module that imports `oasis`.
+  `initialize`/`execute_round`/`collect_actions`/`collect_social_exposure`/`persist_state`/`close`, every
+  OASIS-touching call wrapped in targeted `random` seeding (`determinism.py`).
+- **Two upstream bugs found by actually running a simulation, not by reading docs**: (1) `UserInfo`'s
+  Reddit/Twitter system-message builders raise `UnboundLocalError` unless `profile["other_info"]` has all
+  of `user_profile`/`gender`/`age`/`mbti`/`country` — worked around by always populating them. (2)
+  `SocialAgent(model=None)` still requires a real `OPENAI_API_KEY` (resolves to a default OpenAI model) —
+  worked around with `null_model.py`'s `NullModelBackend`, a real `BaseModelBackend` that raises loudly if
+  ever actually invoked (verified: never invoked, since this adapter only ever sends `ManualAction`).
+- Also pinned `mcp<2.0` — `camel-ai==0.2.78` under-constrains it, and an unpinned resolve breaks
+  `import oasis` outright (verified live).
+- 11 new tests (`tests/test_oasis_adapter.py`), **zero mocking of OASIS** — a real `OasisEnv` with a real
+  sqlite database per test. 121 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase6_e2e.py` — real end-to-end run: 5 real Phase-5 agents, a real Cointelegraph article
+  (Phase 3) posted via `ManualAction`, a real recsys refresh, 4 agents genuinely seeing it via the real
+  `rec` table and reacting with real `like_post` actions.
+
+<details>
+<summary>Phase 5 (agent factory) — complete.</summary>
+
+- `agents/profiles/archetypes.py` — behavioral-coefficient priors for all 12 archetypes.
+- `agents/strategies/hints.py` — deterministic, non-LLM starting-belief heuristics (5 archetypes get a
+  real price-based sigmoid; the other 6 honestly return neutral 0.5 rather than fabricate a signal they
+  don't have wired up yet).
+- `agents/profiles/generator.py` — batched population generation seeded via `RandomSeedBundle`, Tier 1
+  LLM path with one retry then per-batch (never whole-population) fallback to the deterministic prior.
+- **Declared limitation**: no `ANTHROPIC_API_KEY` here, so the LLM path is unit-tested with a fake client
+  only — real execution used the deterministic path.
+- 17 new tests (`tests/test_agent_factory.py`): determinism across seeds, collision-free multi-batch IDs,
+  LLM retry/fallback composition.
+- `examples/phase5_e2e.py` — generated the real 50-agent MVP population across 10 archetypes.
+
+</details>
+
+<details>
+<summary>Phase 4 (knowledge graph) — complete.</summary>
 
 - `knowledge/graph/backend.py` — `GraphBackend` Protocol + `GraphBackendBase`: reserved-attribute-key
   rejection, dangling-relationship rejection, and the `query_neighborhood` BFS traversal are all
@@ -94,6 +131,8 @@ Full design docs live in `../docs/`:
 
 </details>
 
+</details>
+
 ## Setup
 
 ```
@@ -105,15 +144,15 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 93 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v            # 121 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
+.venv/Scripts/python.exe examples/phase5_e2e.py  # real 50-agent MVP population, writes to runs/
+.venv/Scripts/python.exe examples/phase6_e2e.py  # real 5-agent OASIS Reddit simulation, writes to runs/
 ```
 
 ## Next
 
-Phase 5 (`docs/IMPLEMENTATION_PLAN.md`): agent factory — the 10-archetype profile library, batched
-staged LLM-assisted profile generation at `cohort_temperature`, deterministic archetype-prior fallback.
-Not started. This is also the first phase the plan requires making real LLM calls — will need an
-`ANTHROPIC_API_KEY` in the environment to exercise the LLM path live rather than only via injected fakes.
+Phase 7 (`docs/IMPLEMENTATION_PLAN.md`): belief / social feedback loop — wire `EventEngine` →
+`OasisSimulationAdapter.execute_round` → belief updates, persisted `belief_updates.jsonl`. Not started.
