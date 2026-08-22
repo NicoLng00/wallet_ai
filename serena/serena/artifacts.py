@@ -24,10 +24,15 @@ def _default_json(obj):
 
 
 def _serialize(payload: Serializable):
+    """Ricorsivo su list/dict (trovato mancante in Fase 10: un dict[str, BacktestMetrics] passato a
+    write_once lasciava i valori BaseModel non convertiti, facendo fallire json.dumps — bug reale,
+    non ipotetico, scoperto usando davvero write_once con un dizionario di modelli)."""
     if isinstance(payload, BaseModel):
         return payload.model_dump(mode="json")
     if isinstance(payload, list):
         return [_serialize(item) for item in payload]
+    if isinstance(payload, dict):
+        return {key: _serialize(value) for key, value in payload.items()}
     return payload
 
 

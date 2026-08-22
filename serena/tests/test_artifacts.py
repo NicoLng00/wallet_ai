@@ -66,6 +66,23 @@ def test_resuming_a_run_does_not_recreate_or_clear_the_directory(tmp_path):
     assert resumed_writer.read_jsonl("events.jsonl") == [{"a": 1}]
 
 
+def test_write_once_serializes_a_dict_of_pydantic_models_recursively(tmp_path):
+    """Bug reale trovato in Fase 10: un dict[str, BaseModel] non veniva ricorsivamente serializzato
+    (_serialize si fermava su list/BaseModel, lasciava i dict intatti con oggetti Pydantic dentro),
+    facendo fallire json.dumps al primo uso reale con un dizionario di metriche di backtest."""
+    from serena.backtest.metrics.metrics import compute_all_metrics
+
+    writer = RunArtifactWriter("run-1", root=tmp_path)
+    metrics_by_variant = {
+        "buy_and_hold": compute_all_metrics([100.0, 110.0], [1.0], [0.1], [], periods_per_year=365),
+        "momentum": compute_all_metrics([100.0, 95.0], [-0.5], [-0.05], [], periods_per_year=365),
+    }
+    writer.write_once("metrics.json", metrics_by_variant)
+    loaded = writer.read_json("metrics.json")
+    assert loaded["buy_and_hold"]["final_equity"] == 110.0
+    assert loaded["momentum"]["final_equity"] == 95.0
+
+
 def test_different_run_ids_are_fully_isolated(tmp_path):
     writer_a = RunArtifactWriter("run-a", root=tmp_path)
     writer_b = RunArtifactWriter("run-b", root=tmp_path)

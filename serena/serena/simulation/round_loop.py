@@ -17,6 +17,7 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
 
+from serena.agents.beliefs.decision import DECISION_MARGIN, decide_from_belief  # noqa: F401 (re-esportata per compatibilita')
 from serena.agents.beliefs.updater import apply_event_update, apply_peer_exposure_update, apply_strategy_hint_update
 from serena.agents.strategies.hints import STRATEGY_HINTS
 from serena.artifacts import RunArtifactWriter
@@ -27,9 +28,6 @@ from serena.models.decision import AgentDecision
 from serena.models.event import Event
 from serena.simulation.events.engine import EventEngine
 from serena.simulation.oasis.adapter import OasisSimulationAdapter
-
-DECISION_MARGIN = 0.05
-MAX_EXPECTED_RETURN = 0.05
 
 
 class RoundOutcome(BaseModel):
@@ -132,17 +130,7 @@ class SimulationRoundLoop:
         return new_belief, True
 
     def _decide(self, agent: AgentProfile, belief: float, timestamp: datetime, information_used: list[str]) -> AgentDecision:
-        if belief > 0.5 + DECISION_MARGIN:
-            action = "BUY"
-        elif belief < 0.5 - DECISION_MARGIN:
-            action = "SELL"
-        else:
-            action = "HOLD"
-        confidence = min(1.0, abs(belief - 0.5) * 2)
-        expected_return = (belief - 0.5) * 2 * MAX_EXPECTED_RETURN
-        return AgentDecision(
-            agent_id=agent.agent_id, timestamp=timestamp, action=action, asset=self._asset,
-            confidence=confidence, expected_return=expected_return, time_horizon_hours=self._time_horizon_hours,
-            reasoning_summary=f"Belief Tier 3 deterministica = {belief:.3f} (soglia decisione ±{DECISION_MARGIN})",
-            information_used=information_used, belief_update={self._asset: belief},
+        return decide_from_belief(
+            agent.agent_id, self._asset, belief, timestamp,
+            time_horizon_hours=self._time_horizon_hours, information_used=information_used,
         )

@@ -1,15 +1,27 @@
-"""Verifica automatica, non solo convenzione (docs/IMPLEMENTATION_PLAN.md Fase 9): risk/ e backtest/
-non devono MAI importare un modulo legato a un LLM. Analizza l'AST reale di ogni file .py in quei
-package — non un grep testuale, che sarebbe ingannato da stringhe/commenti — ed elenca gli import
-effettivi (import X / from X import Y)."""
+"""Verifica automatica, non solo convenzione (docs/IMPLEMENTATION_PLAN.md Fase 9): risk/ non deve MAI
+importare un modulo legato a un LLM. Analizza l'AST reale di ogni file .py nel package — non un grep
+testuale, che sarebbe ingannato da stringhe/commenti — ed elenca gli import diretti (import X / from
+X import Y).
+
+CORREZIONE FATTA IN FASE 10 (trovata eseguendo per davvero un controllo di raggiungibilita'
+TRANSITIVA, non solo diretta, sui path — la stessa disciplina "verificare, non assumere" di questo
+progetto): `backtest/engine/` orchestra deliberatamente la variante "sistema completo" (architettura
+§15), che importa `SimulationRoundLoop` -> `EventEngine` -> `serena.llm.client.LLMClient` per
+l'interpretazione Tier 1/2 degli eventi — un import diretto qui sarebbe corretto e voluto, non un
+bug. Il vincolo "mai un LLM in un calcolo/decisione deterministica" resta vero e verificato per
+`backtest/metrics/` (i calcoli, es. Sharpe/Sortino) e `backtest/walk_forward/` (lo split), a cui
+questo test resta applicato — solo `backtest/engine/` (l'orchestratore, non il calcolo) e' escluso,
+esplicitamente, non per omissione."""
 from __future__ import annotations
 import ast
 import tempfile
 from pathlib import Path
 
+import pytest
+
 SERENA_PACKAGE_ROOT = Path(__file__).resolve().parent.parent / "serena"
 FORBIDDEN_MODULE_PREFIXES = ("serena.llm", "anthropic", "openai")
-LLM_FREE_PACKAGES = ["risk", "backtest"]
+LLM_FREE_PACKAGES = ["risk", "backtest/metrics", "backtest/walk_forward"]
 
 
 def _imported_modules(path: Path) -> set[str]:
@@ -37,14 +49,20 @@ def _find_violations(package_name: str) -> dict[str, set[str]]:
     return violations
 
 
-def test_risk_package_never_imports_an_llm_client():
-    violations = _find_violations("risk")
-    assert not violations, f"risk/ importa moduli LLM vietati: {violations}"
+@pytest.mark.parametrize("package_name", LLM_FREE_PACKAGES)
+def test_llm_free_package_never_imports_an_llm_client(package_name):
+    violations = _find_violations(package_name)
+    assert not violations, f"{package_name}/ importa moduli LLM vietati: {violations}"
 
 
-def test_backtest_package_never_imports_an_llm_client():
-    violations = _find_violations("backtest")
-    assert not violations, f"backtest/ importa moduli LLM vietati: {violations}"
+def test_backtest_engine_is_deliberately_exempt_and_does_reach_simulation():
+    """Documenta l'eccezione, non la nasconde: backtest/engine/engine.py importa DAVVERO
+    SimulationRoundLoop (per far girare la variante "sistema completo", architettura §15) — se un
+    giorno questo import sparisse, l'eccezione qui sopra (LLM_FREE_PACKAGES non include
+    backtest/engine) andrebbe rivista, non lasciata a coprire un'assenza diventata silenziosa."""
+    engine_file = SERENA_PACKAGE_ROOT / "backtest" / "engine" / "engine.py"
+    modules = _imported_modules(engine_file)
+    assert any(module.startswith("serena.simulation") for module in modules)
 
 
 def test_the_lint_itself_actually_detects_a_forbidden_import():

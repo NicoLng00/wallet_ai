@@ -23,6 +23,24 @@ def _clamp(value: float, low: float, high: float) -> float:
     return max(low, min(high, value))
 
 
+def clamp_to_limits(
+    candidate_fraction: float, asset: str, portfolio: PortfolioState, limits: RiskLimits,
+    asset_correlations: Optional[dict[frozenset, float]] = None,
+    available_liquidity_fraction: Optional[float] = None,
+) -> tuple[float, LimitCheckResult]:
+    """Punto unico condiviso da size_position() e dalle baseline del backtest (Fase 10): applica lo
+    STESSO controllo limiti a qualunque frazione candidata, cosi' un confronto di profittabilita' fra
+    varianti non e' truccato da regole di rischio diverse (docs/TRADING_ARCHITECTURE.md §15, regola
+    #8 del brief). Ritorna 0.0 (mai una size parziale che aggira il limite) se qualcosa e' violato."""
+    result = evaluate_all_limits(
+        portfolio, asset, candidate_fraction, limits,
+        asset_correlations=asset_correlations, available_liquidity_fraction=available_liquidity_fraction,
+    )
+    if not result.passed:
+        return 0.0, result
+    return candidate_fraction, result
+
+
 def size_position(
     signal: RiskAdjustedSignal, portfolio: PortfolioState, limits: RiskLimits, price: float,
     asset_correlations: Optional[dict[frozenset, float]] = None,
@@ -32,14 +50,10 @@ def size_position(
     parziale che aggira il limite) e il risultato dettagliato del controllo limiti."""
     scale = limits.max_position_fraction / REFERENCE_SIGNAL_MAGNITUDE
     candidate_fraction = _clamp(signal.risk_adjusted_signal * scale, -limits.max_position_fraction, limits.max_position_fraction)
-
-    result = evaluate_all_limits(
-        portfolio, signal.asset, candidate_fraction, limits,
+    return clamp_to_limits(
+        candidate_fraction, signal.asset, portfolio, limits,
         asset_correlations=asset_correlations, available_liquidity_fraction=available_liquidity_fraction,
     )
-    if not result.passed:
-        return 0.0, result
-    return candidate_fraction, result
 
 
 def build_position(asset: str, fraction: float, price: float, timestamp: datetime) -> Optional[Position]:

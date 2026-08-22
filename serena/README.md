@@ -12,7 +12,34 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 9 (risk engine) — complete.**
+**Phase 10 (historical replay / backtest) — complete.**
+
+- `backtest/metrics/metrics.py` — CAGR/Sharpe/Sortino/max drawdown/Calmar/win rate/profit factor/
+  turnover/exposure/VaR/CVaR, all pure Tier 3 functions. **A real bug was found and fixed by the
+  hand-computed test discipline itself**: a floating-point edge case in `value_at_risk`'s index
+  truncation (`1-0.9` lands just under an integer in float) — fixed properly, not by changing the test
+  to match the bug.
+- `backtest/walk_forward/split.py` — `make_walk_forward_split()` + `assert_chronological()`, the actual
+  structural guard against shuffling time-series data, not just a documented convention.
+- `backtest/engine/baselines.py` — the 6 baselines (Buy & Hold, Momentum, Mean Reversion, Random,
+  single-agent, multi-agent-no-social), all reusing the exact same decision threshold and risk engine as
+  the full system (extracted in this phase specifically so the comparison is honest — strategy differs,
+  risk discipline doesn't).
+- **Corrected during this phase**: Phase 9's import lint was too strict — `backtest/engine/` legitimately
+  needs `SimulationRoundLoop` (→ `serena.llm`) to run the full-system variant the brief requires comparing
+  against. Narrowed the "never imports LLM" guarantee to `backtest/metrics/`/`backtest/walk_forward/`
+  (the actual calculations), with the exception itself asserted by a test.
+- **Found and fixed en route**: `RunArtifactWriter._serialize()` didn't recurse into `dict` values — a
+  real gap from Phase 2, only exposed once this phase's own metrics output needed it, fixed with a
+  regression test.
+- 55 new tests. 245 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase10_e2e.py` — a real walk-forward split over 23 real BTC/USD candles, all 7 variants on
+  the identical out-of-sample slice, real metrics persisted. Reported honestly: two variants tied exactly
+  because no event was injected per period in this run (Cointelegraph has no historical archive to align
+  to past dates) — Phase 7 already proved the social channel matters when an event *is* injected.
+
+<details>
+<summary>Phase 9 (risk engine) — complete.</summary>
 
 - `risk/portfolio/portfolio.py` — `PortfolioState`/`Position` (signed equity-fraction sizing),
   `apply_fill()` a pure, never-mutating state transition.
@@ -30,6 +57,8 @@ Full design docs live in `../docs/`:
 - `examples/phase9_e2e.py` — re-ran Phases 7–8's real loop and sized a real position each round against a
   fresh $100k paper portfolio. Reported honestly: the resulting fraction was effectively zero, correctly
   reflecting Phase 8's near-zero real signal rather than manufacturing a position.
+
+</details>
 
 <details>
 <summary>Phase 8 (signal engine) — complete.</summary>
@@ -205,18 +234,19 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 197 passed, 11 skipped (Neo4j, no server available)
-.venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
-.venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
-.venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
-.venv/Scripts/python.exe examples/phase5_e2e.py  # real 50-agent MVP population, writes to runs/
-.venv/Scripts/python.exe examples/phase6_e2e.py  # real 5-agent OASIS Reddit simulation, writes to runs/
-.venv/Scripts/python.exe examples/phase7_e2e.py  # real 5-round belief/social feedback loop, writes to runs/
-.venv/Scripts/python.exe examples/phase8_e2e.py  # real signal pipeline over the Phase 7 loop, writes to runs/
-.venv/Scripts/python.exe examples/phase9_e2e.py  # real risk sizing over the Phase 8 signals, writes to runs/
+.venv/Scripts/python.exe -m pytest -v             # 245 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe examples/phase2_e2e.py   # real end-to-end run, writes to runs/
+.venv/Scripts/python.exe examples/phase3_e2e.py   # real live CoinGecko + Cointelegraph run, writes to runs/
+.venv/Scripts/python.exe examples/phase4_e2e.py   # real live news -> real Kuzu graph run, writes to runs/
+.venv/Scripts/python.exe examples/phase5_e2e.py   # real 50-agent MVP population, writes to runs/
+.venv/Scripts/python.exe examples/phase6_e2e.py   # real 5-agent OASIS Reddit simulation, writes to runs/
+.venv/Scripts/python.exe examples/phase7_e2e.py   # real 5-round belief/social feedback loop, writes to runs/
+.venv/Scripts/python.exe examples/phase8_e2e.py   # real signal pipeline over the Phase 7 loop, writes to runs/
+.venv/Scripts/python.exe examples/phase9_e2e.py   # real risk sizing over the Phase 8 signals, writes to runs/
+.venv/Scripts/python.exe examples/phase10_e2e.py  # real walk-forward backtest, 7 variants, writes to runs/
 ```
 
 ## Next
 
-Phase 10 (`docs/IMPLEMENTATION_PLAN.md`): market replay / backtest engine — walk-forward driver, 6
-baselines, and `backtest/metrics` (CAGR/Sharpe/Sortino/Calmar/VaR/CVaR/etc.). Not started.
+Phase 11 (`docs/IMPLEMENTATION_PLAN.md`): agent scoring / evolution — `evaluation/agent_scoring`,
+`evaluation/calibration`, `evaluation/attribution`, weight decay/recovery (never deletion). Not started.
