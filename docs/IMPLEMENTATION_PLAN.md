@@ -354,15 +354,40 @@ alongside this plan).
   Phase 7 already proved the social channel does move beliefs differently when a real event is injected;
   this backtest simply doesn't exercise that path, which is stated plainly rather than glossed over.
 
-## Phase 11 — Agent scoring / evolution
+## Phase 11 — Agent scoring / evolution (COMPLETE)
 
-- Implement `evaluation/agent_scoring`, `evaluation/calibration`, `evaluation/attribution`.
-- Implement weight decay/recovery (architecture §17) — explicitly **not** deletion.
-- Defer agent mutation / new-strategy generation past the MVP gate (flagged in the architecture doc as
-  Phase 11 work; a real feature, just not required for the MVP to run end-to-end).
-- Tests: a synthetic winning/losing trade sequence correctly decays and recovers an agent's weight; PnL
-  attribution sums correctly back to portfolio-level PnL (a reconciliation test, not just unit-level).
-- Minimal end-to-end example: score the real agents from the Phase-10 backtest run, persist
+- `evaluation/agent_scoring/outcomes.py`: `AgentOutcome` — derives `direction_correct`/`brier_score` from
+  a decision plus its realized return. **OUR DESIGN DECISION**: `HOLD` decisions carry no falsifiable
+  directional claim, so both are `None` for `HOLD` (excluded from accuracy/calibration, not forced to
+  "always right" or "always wrong" via an arbitrary no-move threshold) — `pnl_contribution` is still
+  correctly `0.0` for `HOLD` (no position, no PnL).
+- `evaluation/agent_scoring/scoring.py`: `AgentScoreTracker` — a **real** implementation of Phase 8's
+  `AgentScoreProvider` Protocol (drop-in replacement for `NeutralAgentScoreProvider` once real history
+  exists, no changes needed to `signals/`). Every score is Bayesian-shrunk toward the neutral 0.5 prior in
+  proportion to sample size (§13's explicit requirement), and `recency_weight` implements §17's "do not
+  automatically delete losing agents" literally: always recomputed from exponentially-recency-weighted
+  history, so a losing streak lowers it but a later winning streak recovers it automatically — there is no
+  deletion path and no permanent floor lower than what current evidence supports.
+- `evaluation/calibration/calibration.py`: `reliability_curve()` — buckets outcomes by predicted
+  confidence and compares to actual accuracy per bucket, a real diagnostic for Phase 12's report/dashboard.
+- `evaluation/attribution/attribution.py`: `attribute_portfolio_pnl()` — proportionally scales each
+  agent's raw (full-weight) PnL contribution so the sum reconciles **exactly** to the realized portfolio
+  return for that period (the plan's explicit reconciliation requirement, not an approximation); handles
+  the zero-raw-total edge case (offsetting long/short bets) with a uniform fallback that still reconciles.
+  `attribute_by_archetype()` aggregates the same reconciled attribution by archetype.
+- Agent mutation / new-strategy generation confirmed still deferred past the MVP, per the architecture
+  doc's own explicit note — not implemented here, not silently dropped.
+- Tests: 28 new evaluation tests + 7 attribution tests + 4 calibration tests — hand-computed Bayesian
+  shrinkage arithmetic, the exact §17 scenario (losing streak lowers `recency_weight`, winning streak
+  recovers it, never reaching exactly 0 or 1 with a finite sample), and the PnL reconciliation test summing
+  attributions back to the exact portfolio return to `1e-12`. 273 passing + 11 skipped (Neo4j, unchanged).
+- Minimal end-to-end example (`examples/phase11_e2e.py`, actually run): 15 real rounds (real BTC/USD
+  closes, real OASIS, real Phase 8/9 signal+sizing) scored into a real `AgentScoreTracker`, a real weight
+  change shown for the agent with the most directional evidence (0.5000 with half its real history →
+  0.5438 with the full history), real per-round PnL attribution reconciled to the real realized portfolio
+  return, persisted to `agent_scores.json`. Reported honestly: most agents in this window never made a
+  directional call (`HOLD` throughout, consistent with every earlier phase's finding that this BTC slice
+  is fairly quiet), so their scores stayed at the neutral prior — correctly, not a bug.
   `agent_scores.jsonl`, show at least one real weight change with full provenance.
 
 ## Phase 12 — Reporting / dashboard

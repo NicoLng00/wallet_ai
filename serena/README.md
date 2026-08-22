@@ -12,7 +12,25 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 10 (historical replay / backtest) — complete.**
+**Phase 11 (agent scoring / evolution) — complete.**
+
+- `evaluation/agent_scoring/scoring.py` — `AgentScoreTracker`, a **real** drop-in implementation of
+  Phase 8's `AgentScoreProvider` Protocol. Every score is Bayesian-shrunk toward the neutral prior by
+  sample size; `recency_weight` implements §17's "never delete losing agents" literally — always
+  recomputed from recency-weighted history, so it recovers automatically after a losing streak ends.
+- `evaluation/calibration/calibration.py` — `reliability_curve()`, a real confidence-vs-accuracy
+  diagnostic for Phase 12's dashboard.
+- `evaluation/attribution/attribution.py` — `attribute_portfolio_pnl()`, proportionally scaled so
+  per-agent attributions sum **exactly** to the realized portfolio return (a reconciliation, not an
+  approximation), plus `attribute_by_archetype()`.
+- 39 new tests — hand-computed Bayesian shrinkage, the exact §17 decay-then-recovery scenario, and
+  exact-reconciliation PnL attribution. 273 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase11_e2e.py` — 15 real rounds scored into a real tracker, a real weight change shown
+  (0.5000 → 0.5438 as real evidence accumulated), real PnL attribution reconciled to the real portfolio
+  return.
+
+<details>
+<summary>Phase 10 (historical replay / backtest) — complete.</summary>
 
 - `backtest/metrics/metrics.py` — CAGR/Sharpe/Sortino/max drawdown/Calmar/win rate/profit factor/
   turnover/exposure/VaR/CVaR, all pure Tier 3 functions. **A real bug was found and fixed by the
@@ -37,6 +55,8 @@ Full design docs live in `../docs/`:
   the identical out-of-sample slice, real metrics persisted. Reported honestly: two variants tied exactly
   because no event was injected per period in this run (Cointelegraph has no historical archive to align
   to past dates) — Phase 7 already proved the social channel matters when an event *is* injected.
+
+</details>
 
 <details>
 <summary>Phase 9 (risk engine) — complete.</summary>
@@ -234,7 +254,7 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v             # 245 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v             # 273 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py   # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py   # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py   # real live news -> real Kuzu graph run, writes to runs/
@@ -244,9 +264,11 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 .venv/Scripts/python.exe examples/phase8_e2e.py   # real signal pipeline over the Phase 7 loop, writes to runs/
 .venv/Scripts/python.exe examples/phase9_e2e.py   # real risk sizing over the Phase 8 signals, writes to runs/
 .venv/Scripts/python.exe examples/phase10_e2e.py  # real walk-forward backtest, 7 variants, writes to runs/
+.venv/Scripts/python.exe examples/phase11_e2e.py  # real agent scoring + PnL attribution, writes to runs/
 ```
 
 ## Next
 
-Phase 11 (`docs/IMPLEMENTATION_PLAN.md`): agent scoring / evolution — `evaluation/agent_scoring`,
+Phase 12 (`docs/IMPLEMENTATION_PLAN.md`, final phase): Report Agent + FastAPI read endpoints + a minimal
+research dashboard (equity curve, agent leaderboard, correlation matrix — real charts). Not started.
 `evaluation/calibration`, `evaluation/attribution`, weight decay/recovery (never deletion). Not started.
