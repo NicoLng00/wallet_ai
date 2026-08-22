@@ -95,10 +95,10 @@
       "NVDA": 183.80590271999998,
       "SPY": 655.47622872,
       "QQQ": 610.72318944,
-      "BTCUSD": 66001.316652,
+      "BTCUSD": 66033.84564,
       "TSLA": 310.61759436,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2071.24906986,
+      "ETHUSD": 2072.1992587199998,
       "WTI": 72.8,
       "TLT": 70.23693329999999,
       "EURUSD": 1.16818881669482,
@@ -419,6 +419,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -662,14 +667,9 @@
       "title": "Correzione contabile: attivazione leva 1:2",
       "detail": "Le posizioni aperte prima dell'attivazione della leva erano state finanziate al 100% in cash (nessuna leva esisteva ancora). Corretto il margine impegnato per ciascuna (WTI, XAUUSD, EURUSD) cosi' che l'equity resti quella vera invece di scendere per un artefatto contabile — nessun trade eseguito, +0.3408€ di cash rilasciato dal margine in eccesso.",
       "tag": "SISTEMA"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-22T08:34:24.565Z"
+  "updatedAt": "2026-08-22T09:04:36.320Z"
 }
