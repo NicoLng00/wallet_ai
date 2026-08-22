@@ -12,7 +12,25 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 7 (belief / social feedback loop) — complete.**
+**Phase 8 (signal engine) — complete.**
+
+- `signals/independence/matrix.py` — `AgentPredictionMatrix`. Uses the clustered-sampling "design
+  effect" formula instead of literal Kish ESS (which is scale-invariant and doesn't actually collapse for
+  N equally-weighted correlated copies) — the real tool for the brief's actual "100 copies ≠ 100 votes"
+  requirement. `independence_score(agent)` and the reported `effective_sample_size` are the same
+  correction, not two disconnected numbers.
+- `signals/aggregation/pipeline.py` — `compute_risk_adjusted_signal()`: the full §13 weight formula,
+  min-max normalized with a constant-vector fallback, → `independent_consensus` → `confidence` → final
+  `risk_adjusted_signal`. `NeutralAgentScoreProvider` — the 3 historical factors that depend on Phase 11's
+  not-yet-built track record honestly return `1.0` (no preference) rather than a fabricated score.
+- 26 new tests — hand-computed arithmetic to `1e-9`, and the exact brief scenario (100 correlated copies)
+  proving effective sample size ≈ 1, not ~100. 162 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase8_e2e.py` — re-ran Phase 7's real loop and fed every round through the real pipeline: 5
+  real signals persisted. Consensus was exactly 0 every round because Phase 7's real data produced all-
+  `HOLD` decisions — reported as-is, not massaged into looking more interesting.
+
+<details>
+<summary>Phase 7 (belief / social feedback loop) — complete.</summary>
 
 - `agents/beliefs/updater.py` — three pure, deterministic belief-shift functions (event/peer-exposure/
   strategy-hint), each a proportional pull toward a target, never a direct jump.
@@ -27,6 +45,8 @@ Full design docs live in `../docs/`:
   BTC/USD closes feeding the archetype strategy hints every round, 27 real belief updates with full
   provenance, all decisions correctly `HOLD` given how small the real shifts were — reported honestly,
   not dramatized.
+
+</details>
 
 <details>
 <summary>Phase 6 (OASIS adapter) — complete.</summary>
@@ -163,16 +183,17 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v            # 145 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v            # 162 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py  # real live news -> real Kuzu graph run, writes to runs/
 .venv/Scripts/python.exe examples/phase5_e2e.py  # real 50-agent MVP population, writes to runs/
 .venv/Scripts/python.exe examples/phase6_e2e.py  # real 5-agent OASIS Reddit simulation, writes to runs/
 .venv/Scripts/python.exe examples/phase7_e2e.py  # real 5-round belief/social feedback loop, writes to runs/
+.venv/Scripts/python.exe examples/phase8_e2e.py  # real signal pipeline over the Phase 7 loop, writes to runs/
 ```
 
 ## Next
 
-Phase 8 (`docs/IMPLEMENTATION_PLAN.md`): signal engine — `AgentPredictionMatrix` and the
-raw→weighted→risk-adjusted signal pipeline. Not started.
+Phase 9 (`docs/IMPLEMENTATION_PLAN.md`): risk engine — `risk/portfolio`, `risk/sizing`, `risk/limits`,
+pure functions with zero imports from `agents/` or any `LLMClient`. Not started.

@@ -236,14 +236,39 @@ alongside this plan).
   those shifts were relative to the decision margin — the system did the right thing with genuinely
   unexciting real data, which is the point.
 
-## Phase 8 — Signal engine
+## Phase 8 — Signal engine (COMPLETE)
 
-- Implement `AgentPredictionMatrix` (architecture §14) and the weighting pipeline (architecture §13).
-- Tests: weight-formula unit tests with hand-constructed inputs/expected outputs; a synthetic
-  "100 correlated copies" fixture that asserts `independent_consensus` does **not** scale linearly with
-  copy count (the specific brief requirement, directly testable).
-- Minimal end-to-end example: feed Phase 7's real `AgentDecision`s through the signal engine, produce one
-  real `risk_adjusted_signal`, persist `signals.jsonl`.
+- `signals/independence/matrix.py`: `AgentPredictionMatrix`. **OUR DESIGN DECISION on "Kish's effective
+  sample size"**: literal Kish ESS (`(Σw)²/Σw²`) is scale-invariant in the weights and does NOT collapse
+  when N agents share an *equal* weight — it only detects unevenness, not correlation. We use the
+  design-effect formula from clustered-sampling statistics instead (`design_effect = 1 + (n-1)·mean_ρ`,
+  `n_eff = n/design_effect`), which correctly goes to 1 as intra-cluster correlation goes to 1 and to n as
+  it goes to 0 — the actual tool for the actual stated requirement, even though it isn't literally the
+  named formula. `independence_score(agent) = 1/design_effect(agent's cluster)` feeds directly into §13's
+  weight formula, so the correlation correction and the diagnostic reported alongside a signal
+  (`effective_sample_size`) are the *same* correction, not two disconnected numbers.
+- `signals/aggregation/score_provider.py`: `AgentScoreProvider` Protocol for the three historical factors
+  (`accuracy_score`/`calibration_score`/`regime_score`) plus `recency_weight` — all of which depend on a
+  measured track record that doesn't exist until Phase 11's `evaluation/agent_scoring`.
+  **Declared honestly**: `NeutralAgentScoreProvider` (what Phase 8 actually uses) returns `1.0` for every
+  agent on every factor — no preference until a real track record exists — rather than a plausible-looking
+  fabricated score.
+- `signals/aggregation/pipeline.py`: `compute_risk_adjusted_signal()` implements §13's full multiplicative
+  weight formula (min-max normalized per-round, with a constant-vector fallback to avoid a division by
+  zero when every agent scores identically — which is always true today under the neutral provider), then
+  `independent_consensus` → `confidence` (weighted agreement × mean weighted `AgentDecision.confidence`,
+  since real calibration is Phase 11 and is `1.0` by construction until then) → `expected_return` →
+  `risk_adjusted_signal = expected_return × confidence`.
+- Tests: 26 new (`tests/test_agent_prediction_matrix.py`, `tests/test_signal_pipeline.py`) — hand-computed
+  weight-formula arithmetic checked to `1e-9`; the exact brief scenario (100 correlated copies +
+  independent dissenters) proving `effective_sample_size ≈ 1` (not ~100) and `independent_consensus`
+  barely moves between 2 and 100 copies; degenerate all-zero-confidence fallback; schema-bound checks.
+  162 passing + 11 skipped (Neo4j, unchanged).
+- Minimal end-to-end example (`examples/phase8_e2e.py`, actually run): re-ran Phase 7's real 5-round loop
+  and fed every round's real `AgentDecision`s through the real pipeline — 5 real `RiskAdjustedSignal`s
+  persisted and reloaded with full fidelity. Reported honestly: consensus was exactly 0 every round
+  because Phase 7's real data produced all-`HOLD` decisions — the pipeline correctly propagates "no
+  signal" from "no real disagreement or conviction" rather than manufacturing one.
 
 ## Phase 9 — Risk engine
 
