@@ -12,7 +12,39 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 2 (project skeleton + schemas + persistence) — complete.**
+**Phase 3 (data ingestion + event engine) — complete.**
+
+- `data/point_in_time.py` — `PointInTimeDataView`: no-look-ahead enforced structurally, not by
+  convention. Constructed once with a fixed `current_time`; filters out any future `DataPoint` at
+  construction; no public method accepts a timestamp parameter, so there is literally no call an
+  agent/LLM can make to read `t > now` (verified by a test that inspects every method signature).
+- `data/market/coingecko.py` — real CoinGecko OHLC adapter (no API key required). Declares
+  explicitly which fields it does NOT cover (volume/volatility/mcap/funding/OI/liquidations/
+  orderbook — `CoinGeckoUnavailableFieldError` on request, never a faked value).
+- `data/news/cointelegraph.py` — real Cointelegraph RSS adapter (no API key required; verified live
+  that CryptoCompare/coindesk.com now requires one and Reddit's public JSON endpoint blocks
+  unauthenticated requests, so this was the source actually reachable from this environment).
+- `simulation/events/engine.py` — `EventEngine`: deterministic `resolve_entities()` (keyword→id,
+  a documented placeholder ahead of the real Phase 4 graph lookup) and `compute_novelty()` (Jaccard
+  text-overlap, a documented placeholder ahead of Phase 4's embedding-based distance), composed with
+  an `EventInterpreter` for the LLM-judged fields (`direction`/`importance`/`confidence`):
+  `HeuristicEventInterpreter` (Tier 3, deterministic, no network) and `LLMBackedEventInterpreter`
+  (Tier 1/2, one retry at reduced temperature per §7) — `EventEngine` always falls through to the
+  Tier 3 heuristic if the LLM path fails, so no event is ever left without an interpretation.
+- **Limitation, stated plainly**: no `ANTHROPIC_API_KEY` exists in this local dev environment, so
+  `LLMBackedEventInterpreter` is implemented and unit-tested against an injected fake client but has
+  never made a real network call — only the Tier 3 deterministic path has been exercised live. A
+  concrete Anthropic backend is deferred to Phase 5, the first phase the plan requires to make real
+  LLM calls.
+- 29 new tests (`tests/test_point_in_time.py`, `tests/test_data_market.py`, `tests/test_data_news.py`,
+  `tests/test_event_engine.py`) — 72 total, all passing. Market/news tests replay real payloads
+  captured live on 2026-08-22 (`tests/fixtures/`), no live network calls inside the test suite.
+- `examples/phase3_e2e.py` — real end-to-end run: live CoinGecko + Cointelegraph calls, a real
+  `PointInTimeDataView` (including a synthetic future probe proven excluded), 30 real `Event`s built
+  by `EventEngine`, all persisted to and reloaded from a real `runs/{run_id}/` directory.
+
+<details>
+<summary>Phase 2 (project skeleton + schemas + persistence) — complete.</summary>
 
 - Full package tree matching `TRADING_ARCHITECTURE.md` §1 (`data/ knowledge/ agents/ simulation/
   signals/ risk/ backtest/ evaluation/ reports/ api/`), currently empty subpackages awaiting their
@@ -35,6 +67,8 @@ Full design docs live in `../docs/`:
   `BeliefUpdate`, writes them, reloads every one from disk, asserts round-trip fidelity, and confirms
   the never-overwrite guard actually raises.
 
+</details>
+
 ## Setup
 
 ```
@@ -46,11 +80,12 @@ uv pip install --python .venv -e ".[dev]"
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v          # 43 tests
+.venv/Scripts/python.exe -m pytest -v            # 72 tests
 .venv/Scripts/python.exe examples/phase2_e2e.py  # real end-to-end run, writes to runs/
+.venv/Scripts/python.exe examples/phase3_e2e.py  # real live CoinGecko + Cointelegraph run, writes to runs/
 ```
 
 ## Next
 
-Phase 3 (`docs/IMPLEMENTATION_PLAN.md`): data ingestion adapters (`data/market/`, `data/news/`) +
-`PointInTimeDataView` (no-look-ahead, enforced structurally) + `EventEngine`. Not started.
+Phase 4 (`docs/IMPLEMENTATION_PLAN.md`): knowledge graph — `GraphBackend` protocol + Kuzu (default)
++ Neo4j implementations, fixed ontology seeding, `OntologyChangeProposal` validation. Not started.

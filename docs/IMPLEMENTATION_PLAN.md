@@ -57,21 +57,45 @@ alongside this plan).
   `Event`/`AgentDecision` records to a real `runs/{run_id}/` directory, read them back, assert
   round-trip fidelity.
 
-## Phase 3 — Data ingestion + event engine
+## Phase 3 — Data ingestion + event engine (COMPLETE)
 
-- Implement `data/market/` adapters for OHLCV/volume/volatility/mcap at minimum (funding/OI/liquidations/
-  order-book as available per exchange; document which are genuinely available for the MVP's chosen asset
-  rather than stubbing them silently — matches the existing Aurora Markets project's own honesty
-  discipline about data-source limits, e.g. its documented Finnhub/Stooq findings).
-- Implement `data/news/` for at least one real free source.
-- Implement `PointInTimeDataView` (architecture §4) with a test that specifically tries to read `t >
-  now` and confirms it structurally cannot.
-- Implement `EventEngine` (architecture §5): deterministic timestamp/entity-resolution/novelty, LLM-based
-  direction/importance/confidence via Tier 1/2 `LLMClient`.
-- Tests: no-look-ahead (the load-bearing test for the brief's rule #1/#2), event schema validation,
-  adapter normalization correctness against recorded fixture responses (not live API calls in CI).
-- Minimal end-to-end example: pull a real recent slice of BTC/USDT OHLCV + real recent news, produce a
-  handful of real `Event` records, persist them.
+- `data/market/coingecko.py`: real, no-key CoinGecko OHLC adapter. **Declared limitation**: covers OHLC
+  only — volume/volatility/mcap/funding/OI/liquidations/order-book are not implemented (CoinGecko's free
+  tier does not expose all of them in a compatible shape); requesting one raises
+  `CoinGeckoUnavailableFieldError` explicitly rather than returning a faked value.
+- `data/news/cointelegraph.py`: real, no-key Cointelegraph RSS adapter. **Verified at this phase, not
+  assumed**: CryptoCompare/coindesk.com now requires an API key (live call returned 401) and Reddit's
+  public JSON endpoint rejects unauthenticated requests (live call returned 403) — Cointelegraph's RSS
+  feed was the source actually reachable from this dev environment without new credentials.
+- `data/point_in_time.py`: `PointInTimeDataView` — no-look-ahead enforced structurally. Built once with a
+  fixed `current_time`; filters out any future point at construction; no public method accepts a
+  timestamp parameter, so there is no call that could read `t > now`. A test inspects every method
+  signature to enforce this, not just behavioral tests.
+- `simulation/events/engine.py`: `EventEngine` composing deterministic `resolve_entities()` and
+  `compute_novelty()` with an `EventInterpreter` for the LLM-judged fields. Two interpreters:
+  `HeuristicEventInterpreter` (Tier 3, deterministic, no network, always available) and
+  `LLMBackedEventInterpreter` (Tier 1/2, one retry at reduced temperature per §7). `EventEngine` always
+  falls through to the Tier 3 heuristic if the LLM path raises, so no event is ever left uninterpreted.
+- **Declared limitation, inherited from Phase 1/2's "no real Python/LLM key in this dev machine" finding**:
+  no `ANTHROPIC_API_KEY` is available in this environment, so `LLMBackedEventInterpreter` is implemented
+  and unit-tested against an injected fake client (same pattern as `server/tests/emailSender.test.js` in
+  the existing Node project) but has never made a real network call. Only the Tier 3 deterministic path
+  has been exercised end-to-end against real data. A concrete Anthropic backend is deferred to Phase 5,
+  the first phase this plan requires making real LLM calls.
+- **Design decisions flagged as pre-Phase-4 placeholders, not final**: `resolve_entities()` uses a fixed
+  keyword→entity_id dictionary rather than the real knowledge-graph lookup (Phase 4 doesn't exist yet);
+  `compute_novelty()` uses Jaccard text-overlap rather than the embedding-distance approach the
+  architecture doc specifies (`knowledge/embeddings/` doesn't exist yet). Both are deterministic, tested,
+  and documented in-code as temporary — replaced when their real Phase 4 dependencies land.
+- Tests: 29 new (`tests/test_point_in_time.py`, `tests/test_data_market.py`, `tests/test_data_news.py`,
+  `tests/test_event_engine.py`) — 72 total, all passing. Market/news adapter tests replay real payloads
+  captured live on 2026-08-22 (`tests/fixtures/coingecko_ohlc_btc_sample.json`,
+  `tests/fixtures/cointelegraph_rss_sample.xml`); no live network calls inside the test suite itself.
+- Minimal end-to-end example (`examples/phase3_e2e.py`, actually run — real output, not asserted-only):
+  pulled 23 real BTC/USD OHLC candles from CoinGecko and 30 real Cointelegraph articles live, built a
+  real `PointInTimeDataView` (including a synthetic future probe proven structurally excluded), produced
+  30 real `Event` records via `EventEngine` (Tier 3 heuristic interpretation), persisted and reloaded all
+  of it from a real `runs/{run_id}/` directory with full round-trip fidelity.
 
 ## Phase 4 — Knowledge graph
 
