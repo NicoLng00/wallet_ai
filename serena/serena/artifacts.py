@@ -59,6 +59,22 @@ class RunArtifactWriter:
         path.write_text(json.dumps(_serialize(payload), indent=2, default=_default_json), encoding="utf-8")
         return path
 
+    def write_once_text(self, filename: str, text: str) -> Path:
+        """Come write_once, ma per artefatti testuali non-JSON (report.md, docs/TRADING_ARCHITECTURE.md
+        §19/§20 — il report e' markdown, non ha senso passarlo attraverso json.dumps). Stessa garanzia
+        di mai sovrascrivere."""
+        path = self._path(filename)
+        if path.exists():
+            raise FileExistsError(
+                f"{path} esiste gia' — un artefatto di run non viene mai sovrascritto "
+                f"(run_id={self.run_id})."
+            )
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def read_text(self, filename: str) -> str:
+        return self._path(filename).read_text(encoding="utf-8")
+
     def append_jsonl(self, filename: str, record: Serializable) -> Path:
         if not filename.endswith(".jsonl"):
             raise ValueError(f"append_jsonl richiede un nome file .jsonl, ricevuto: {filename}")

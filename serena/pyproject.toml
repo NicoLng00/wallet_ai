@@ -9,6 +9,8 @@ dependencies = [
     "pandas>=2.2.0",
     "httpx>=0.27.0",
     "kuzu>=0.11.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
     "camel-oasis==0.2.5",
     # camel-ai==0.2.78 (pulled in by camel-oasis==0.2.5) under-constrains its own `mcp` dependency:
     # uv resolves to mcp==2.0.0 by default, which removed `FastMCP` from `mcp.server` and breaks

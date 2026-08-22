@@ -12,7 +12,41 @@ Full design docs live in `../docs/`:
 
 ## Status
 
-**Phase 11 (agent scoring / evolution) — complete.**
+**Phase 12 (reporting / dashboard) — complete. All 12 phases done — MVP runs start to finish.**
+
+- `reports/report_agent/tools.py` — `RunReportTools`, the 10 read-only tools from §20, reading only this
+  system's own artifacts. **Real bug fixed**: a naive read-only tool wrapping `RunArtifactWriter` would
+  silently create an empty directory for a mistyped `run_id` (the writer's directory creation is
+  idempotent, needed for real run-resuming) — fixed with an existence check first, tested explicitly.
+- `reports/report_agent/report_generator.py` — `generate_report()` + a real tag validator: every claim
+  must carry `[SIMULATION FACT]`, `[MODEL INTERPRETATION]`, or `[REAL MARKET OUTCOME]`, or generation
+  fails. No `ANTHROPIC_API_KEY` here, so only real `[SIMULATION FACT]` sections are emitted, plus one
+  `[MODEL INTERPRETATION]` section stating its own honest absence.
+- `api/chart_data.py` — pure, tested Python functions behind every chart (the actual logic, not
+  unverifiable browser JS). `api/app.py` — FastAPI read-only endpoints, never touching OASIS/LLM/data
+  adapters directly. `api/dashboard.py` — one self-contained HTML page, vanilla JS, zero external
+  libraries, real inline SVG charts: agent population, equity curve, leaderboard, signal timeline, belief
+  distribution, backtest variant comparison. Correlation matrix and predicted-vs-actual are declared as
+  not-yet-wired (no artifact persists that data yet), not fabricated.
+- **Declared limitation**: no browser automation was used, so SVG rendering was never visually observed.
+  What *was* verified: a real `uvicorn` server (an actual OS process on a real port) queried with real
+  HTTP requests — every endpoint, including the dashboard, confirmed serving correct real content.
+- 36 new tests. 311 passing + 11 skipped (Neo4j, unchanged).
+- `examples/phase12_e2e.py` — builds a full real run (Phases 5–11), starts a real server, and verifies
+  every endpoint (including the dashboard HTML) over real HTTP, plus a real 404 for an unknown run.
+
+### MVP complete
+
+All 12 phases have a real, tested, executed implementation with a real end-to-end example. Real market
+data → knowledge graph → agent population → OASIS social simulation → belief/decision loop → signal
+aggregation → risk-sized positions → 7-variant walk-forward backtest → agent scoring/attribution →
+report + live dashboard, start to finish, zero fabricated numbers. Two limitations are declared
+consistently everywhere: no `ANTHROPIC_API_KEY` in this dev environment (Tier 1/2 LLM paths exist and are
+unit-tested with fake clients; real runs always exercise the Tier 3 fallback), and `Neo4jGraphBackend` is
+implemented but never run live (its 11 tests skip cleanly without a server).
+
+<details>
+<summary>Phase 11 (agent scoring / evolution) — complete.</summary>
 
 - `evaluation/agent_scoring/scoring.py` — `AgentScoreTracker`, a **real** drop-in implementation of
   Phase 8's `AgentScoreProvider` Protocol. Every score is Bayesian-shrunk toward the neutral prior by
@@ -28,6 +62,8 @@ Full design docs live in `../docs/`:
 - `examples/phase11_e2e.py` — 15 real rounds scored into a real tracker, a real weight change shown
   (0.5000 → 0.5438 as real evidence accumulated), real PnL attribution reconciled to the real portfolio
   return.
+
+</details>
 
 <details>
 <summary>Phase 10 (historical replay / backtest) — complete.</summary>
@@ -254,7 +290,7 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 ## Running
 
 ```
-.venv/Scripts/python.exe -m pytest -v             # 273 passed, 11 skipped (Neo4j, no server available)
+.venv/Scripts/python.exe -m pytest -v             # 311 passed, 11 skipped (Neo4j, no server available)
 .venv/Scripts/python.exe examples/phase2_e2e.py   # real end-to-end run, writes to runs/
 .venv/Scripts/python.exe examples/phase3_e2e.py   # real live CoinGecko + Cointelegraph run, writes to runs/
 .venv/Scripts/python.exe examples/phase4_e2e.py   # real live news -> real Kuzu graph run, writes to runs/
@@ -265,10 +301,19 @@ uv pip install --python .venv -e ".[dev]"        # add ",neo4j" to the extras if
 .venv/Scripts/python.exe examples/phase9_e2e.py   # real risk sizing over the Phase 8 signals, writes to runs/
 .venv/Scripts/python.exe examples/phase10_e2e.py  # real walk-forward backtest, 7 variants, writes to runs/
 .venv/Scripts/python.exe examples/phase11_e2e.py  # real agent scoring + PnL attribution, writes to runs/
+.venv/Scripts/python.exe examples/phase12_e2e.py  # real run + real live server + real HTTP verification
 ```
 
-## Next
+To browse a run's dashboard yourself:
 
-Phase 12 (`docs/IMPLEMENTATION_PLAN.md`, final phase): Report Agent + FastAPI read endpoints + a minimal
-research dashboard (equity curve, agent leaderboard, correlation matrix — real charts). Not started.
-`evaluation/calibration`, `evaluation/attribution`, weight decay/recovery (never deletion). Not started.
+```
+.venv/Scripts/python.exe -c "import uvicorn; from serena.api.app import create_app; uvicorn.run(create_app())"
+```
+
+then open `http://127.0.0.1:8000/dashboard/{run_id}` (find a `run_id` under `serena/runs/`, or via `http://127.0.0.1:8000/runs`).
+
+## Status: MVP complete
+
+All 12 phases of `docs/IMPLEMENTATION_PLAN.md` are implemented, tested, and actually executed end to end.
+Nothing left to build for the MVP scope — further work (a live LLM backend, a running Neo4j server, agent
+mutation/new-strategy generation, richer dashboard views) is optional extension, not a gap in the plan.

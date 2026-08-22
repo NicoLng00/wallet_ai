@@ -83,6 +83,20 @@ def test_write_once_serializes_a_dict_of_pydantic_models_recursively(tmp_path):
     assert loaded["momentum"]["final_equity"] == 95.0
 
 
+def test_write_once_text_writes_and_reads_back_plain_text(tmp_path):
+    writer = RunArtifactWriter("run-1", root=tmp_path)
+    writer.write_once_text("report.md", "# Report\n\n- [SIMULATION FACT] ok\n")
+    assert writer.read_text("report.md") == "# Report\n\n- [SIMULATION FACT] ok\n"
+
+
+def test_write_once_text_never_overwrites_an_existing_file(tmp_path):
+    writer = RunArtifactWriter("run-1", root=tmp_path)
+    writer.write_once_text("report.md", "prima versione")
+    with pytest.raises(FileExistsError):
+        writer.write_once_text("report.md", "seconda versione")
+    assert writer.read_text("report.md") == "prima versione"
+
+
 def test_different_run_ids_are_fully_isolated(tmp_path):
     writer_a = RunArtifactWriter("run-a", root=tmp_path)
     writer_b = RunArtifactWriter("run-b", root=tmp_path)
