@@ -5,19 +5,19 @@
     "highWater": 50,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.1138721869863515,
-      "SSL.MI": 1.6191948194627963,
-      "BVB.DE": 3.2065341963065688,
-      "MANU": 20.336691299166862,
-      "AJAX.AS": 8.887314133716444,
-      "CCP.L": 2.3230281933176413,
-      "FENER.IS": 0.0568625276361264,
-      "GSRAY.IS": 0.019931434860378437,
-      "BJKAS.IS": 0.052335191686546004,
-      "TSPOR.IS": 0.019063294543234993,
-      "SCP.LS": 0.9947174264061792,
-      "SLBEN.LS": 6.871772743526871,
-      "FCP.LS": 2.981287813875799
+      "JUVE.MI": 2.113723484757179,
+      "SSL.MI": 1.6197573835824788,
+      "BVB.DE": 3.199782281345401,
+      "MANU": 20.334706497774217,
+      "AJAX.AS": 8.90196619776256,
+      "CCP.L": 2.323706110857611,
+      "FENER.IS": 0.0568401249659186,
+      "GSRAY.IS": 0.01995594266529025,
+      "BJKAS.IS": 0.052294855899029255,
+      "TSPOR.IS": 0.019038967094428906,
+      "SCP.LS": 0.9957900335235772,
+      "SLBEN.LS": 6.8771193715808945,
+      "FCP.LS": 2.9801865196256165
     },
     "model": {
       "calibration": 50,
@@ -283,6 +283,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -311,16 +321,6 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     },
     {
       "title": "Autopilot: monitora",
@@ -330,5 +330,5 @@
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-23T19:06:10.329Z"
+  "updatedAt": "2026-08-23T19:42:27.567Z"
 }
