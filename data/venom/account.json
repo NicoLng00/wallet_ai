@@ -5,19 +5,19 @@
     "highWater": 50,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.1121871587983265,
-      "SSL.MI": 1.617884248704127,
-      "BVB.DE": 3.2059370802687646,
-      "MANU": 20.328088134690695,
-      "AJAX.AS": 8.890726588159547,
-      "CCP.L": 2.324975028204824,
-      "FENER.IS": 0.05687308924582609,
-      "GSRAY.IS": 0.019932064945145864,
-      "BJKAS.IS": 0.052291216915989716,
-      "TSPOR.IS": 0.019063789847251784,
-      "SCP.LS": 0.9943571022753542,
-      "SLBEN.LS": 6.876589727099518,
-      "FCP.LS": 2.983614108089914
+      "JUVE.MI": 2.113502783759072,
+      "SSL.MI": 1.6192192512075507,
+      "BVB.DE": 3.203105768246126,
+      "MANU": 20.352101710831054,
+      "AJAX.AS": 8.904432344788445,
+      "CCP.L": 2.3216012734828464,
+      "FENER.IS": 0.05679829042991889,
+      "GSRAY.IS": 0.019942367564518452,
+      "BJKAS.IS": 0.05228465929440479,
+      "TSPOR.IS": 0.01905617499942119,
+      "SCP.LS": 0.9961654994803109,
+      "SLBEN.LS": 6.878102206059213,
+      "FCP.LS": 2.9788982490836147
     },
     "model": {
       "calibration": 50,
@@ -83,14 +83,14 @@
       "tag": "HOLD"
     },
     {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
     },
     {
       "title": "Autopilot: monitora",
@@ -330,5 +330,5 @@
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-23T22:59:25.371Z"
+  "updatedAt": "2026-08-23T23:30:22.718Z"
 }
