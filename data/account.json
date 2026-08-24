@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.09350496190279,
+    "cash": 49.290038707726154,
     "highWater": 50.00872485365284,
     "positions": {
       "WTI": {
@@ -88,23 +88,6 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-08-22T00:01:34.037Z"
-      },
-      "ETHUSD": {
-        "quantity": 0.00017713754325684623,
-        "averagePrice": 2086.4421656000004,
-        "stopLoss": 2053.0590909504003,
-        "takeProfit": 2144.8625462368004,
-        "strategyKey": "sma_rsi@1D",
-        "decisionSnapshot": {
-          "strategyKey": "sma_rsi@1D",
-          "entryPrice": 2086.4421656000004,
-          "confidence": 67,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": null,
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-08-24T01:51:35.957Z"
       }
     },
     "market": {
@@ -112,10 +95,10 @@
       "NVDA": 183.8389696,
       "SPY": 655.5941496,
       "QQQ": 610.8330592000001,
-      "BTCUSD": 67038.03782,
+      "BTCUSD": 67837.70994,
       "TSLA": 310.6734748,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2131.5114808000003,
+      "ETHUSD": 2152.7190594,
       "WTI": 72.8,
       "TLT": 70.24956900000001,
       "EURUSD": 1.1679786960685836,
@@ -156,11 +139,28 @@
       "MCD": 231.98197100000002
     },
     "model": {
-      "calibration": 49,
-      "outcomes": 5,
-      "wins": 2
+      "calibration": 52,
+      "outcomes": 6,
+      "wins": 3
     },
     "trades": [
+      {
+        "id": "SIM-7265836",
+        "symbol": "ETHUSD",
+        "side": "sell",
+        "quantity": 0.00017713754325684623,
+        "price": 2152.7190594,
+        "notional": 0.3813273655043048,
+        "realizedPnl": 0.01174012614242681,
+        "origin": "Take Profit",
+        "at": "2026-08-24T13:14:25.836Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-6295957",
         "symbol": "ETHUSD",
@@ -436,6 +436,21 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Take Profit: vendita demo 0.000177 ETHUSD",
+      "detail": "0,38 € · fill simulato 2153 € · SIM-7265836",
+      "tag": "PAPER"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -720,24 +735,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-24T12:03:03.409Z"
+  "updatedAt": "2026-08-24T13:14:26.258Z"
 }
