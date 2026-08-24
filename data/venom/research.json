@@ -3239,8 +3239,38 @@
         }
       }
     },
-    "trackRecord": {},
-    "tradeEpisodes": {},
+    "trackRecord": {
+      "BVB.DE": {
+        "bollinger_reversion@1D": {
+          "trades": [
+            {
+              "returnPct": 0.13032767028682812,
+              "at": "2026-08-24T09:10:36.220Z"
+            }
+          ]
+        }
+      }
+    },
+    "tradeEpisodes": {
+      "bollinger_reversion@1D": [
+        {
+          "tradeId": "SIM-2636221",
+          "symbol": "BVB.DE",
+          "returnPct": 0.13032767028682812,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 3.208471395388805,
+            "confidence": 67,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-08-24T09:10:36.221Z"
+        }
+      ]
+    },
     "lessons": {}
   },
   "historyCache": {
@@ -22888,5 +22918,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-24T08:09:58.870Z"
+  "updatedAt": "2026-08-24T09:10:36.459Z"
 }
