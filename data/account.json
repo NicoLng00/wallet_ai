@@ -44,10 +44,10 @@
       "NVDA": 182.62880355,
       "SPY": 656.5464770099999,
       "QQQ": 609.23700192,
-      "BTCUSD": 67525.082103,
+      "BTCUSD": 67420.50236099999,
       "TSLA": 300.23815275,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2099.63547918,
+      "ETHUSD": 2099.74691661,
       "WTI": 72.8,
       "TLT": 71.55140216999999,
       "EURUSD": 1.1665739240397055,
@@ -536,6 +536,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude WTI per limite di detenzione (6g) · chiude XAUUSD per limite di detenzione (6g) · chiude EURUSD per limite di detenzione (6g)",
       "detail": "chiude WTI per limite di detenzione (6g); chiude XAUUSD per limite di detenzione (6g); chiude EURUSD per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -764,14 +769,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-25T22:46:41.092Z"
+  "updatedAt": "2026-08-25T23:27:58.364Z"
 }
