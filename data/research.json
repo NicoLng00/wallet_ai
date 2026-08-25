@@ -12797,12 +12797,32 @@
       },
       "WTI": {
         "bollinger_reversion@1D": {
-          "trades": []
+          "trades": [
+            {
+              "returnPct": 0,
+              "at": "2026-08-25T13:12:41.959Z"
+            }
+          ]
         }
       },
       "XAUUSD": {
         "bollinger_reversion@1D": {
-          "trades": []
+          "trades": [
+            {
+              "returnPct": 0,
+              "at": "2026-08-25T13:12:41.967Z"
+            }
+          ]
+        }
+      },
+      "EURUSD": {
+        "sma_rsi@1D": {
+          "trades": [
+            {
+              "returnPct": 0.4887521784568402,
+              "at": "2026-08-25T13:12:41.974Z"
+            }
+          ]
         }
       }
     },
@@ -13047,6 +13067,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-08-24T13:14:25.836Z"
+        },
+        {
+          "tradeId": "SIM-3561978",
+          "symbol": "EURUSD",
+          "returnPct": 0.4887521784568402,
+          "outcomeTag": "probe_win",
+          "snapshot": {
+            "strategyKey": "sma_rsi@1D",
+            "entryPrice": 1.1609,
+            "confidence": 31,
+            "score": 38,
+            "tier": "probe",
+            "volatilityRegime": "normal",
+            "aiEngine": "rule"
+          },
+          "at": "2026-08-25T13:12:41.978Z"
         }
       ],
       "macd_cross@1D": [
@@ -13631,6 +13667,38 @@
             "aiEngine": "gemini"
           },
           "at": "2026-08-24T19:45:59.986Z"
+        },
+        {
+          "tradeId": "SIM-3561962",
+          "symbol": "WTI",
+          "returnPct": 0,
+          "outcomeTag": "exploratory_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 72.8,
+            "confidence": 75,
+            "score": 82,
+            "tier": "exploratory",
+            "volatilityRegime": "normal",
+            "aiEngine": "rule"
+          },
+          "at": "2026-08-25T13:12:41.962Z"
+        },
+        {
+          "tradeId": "SIM-3561969",
+          "symbol": "XAUUSD",
+          "returnPct": 0,
+          "outcomeTag": "probe_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2612.4,
+            "confidence": 38,
+            "score": 55,
+            "tier": "probe",
+            "volatilityRegime": "normal",
+            "aiEngine": "rule"
+          },
+          "at": "2026-08-25T13:12:41.970Z"
         }
       ],
       "engulfing@1D": [
@@ -13743,21 +13811,21 @@
           "version": 1,
           "strategyKey": "bollinger_reversion@1D",
           "failureMode": "probe_loss",
-          "statement": "Negli ultimi 8 trade sonda di bollinger_reversion@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -3.75%) — coerente con l'assenza di un edge misurato: la sonda sta facendo il suo lavoro, non è un errore da correggere.",
+          "statement": "Negli ultimi 8 trade sonda di bollinger_reversion@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -3.28%) — coerente con l'assenza di un edge misurato: la sonda sta facendo il suo lavoro, non è un errore da correggere. Concentrato in volatilità normale.",
           "sampleSize": 8,
           "occurrences": 4,
-          "avgReturn": -3.75,
+          "avgReturn": -3.283,
           "supportingTradeIds": [
-            "SEED-WTI-00083",
             "SEED-WTI-00136",
             "SEED-WTI-00137",
-            "SEED-WTI-00138"
+            "SEED-WTI-00138",
+            "SIM-3561969"
           ],
           "createdAt": "2026-08-18T19:34:37.156Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-08-20T14:56:36.206Z",
-          "dominantRegime": null
+          "updatedAt": "2026-08-25T13:12:41.970Z",
+          "dominantRegime": "normal"
         }
       ]
     }
@@ -19651,7 +19719,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-08-25T12:04:34.688Z"
+        "fetchedAt": "2026-08-25T13:12:41.537Z"
       }
     },
     "QQQ": {
@@ -22520,7 +22588,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-08-25T12:04:34.892Z"
+        "fetchedAt": "2026-08-25T13:12:41.713Z"
       }
     },
     "BTCUSD": {
@@ -32817,8 +32885,6 @@
       },
       "30m": {
         "closes": [
-          1.1701380014419556,
-          1.1709601879119873,
           1.1710972785949707,
           1.1712344884872437,
           1.1700011491775513,
@@ -32965,27 +33031,13 @@
           1.1665889024734497,
           1.1664528846740723,
           1.1663167476654053,
-          1.1664528846740723,
-          1.1665889024734497
+          1.1667250394821167,
+          1.1669973134994507,
+          1.1675423383712769,
+          1.1678149700164795
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1787214600000,
-            "open": 1.1693171262741089,
-            "high": 1.1702749729156494,
-            "low": 1.1693171262741089,
-            "close": 1.1701380014419556,
-            "volume": 0
-          },
-          {
-            "time": 1787216400000,
-            "open": 1.1702749729156494,
-            "high": 1.1712344884872437,
-            "low": 1.169864296913147,
-            "close": 1.1709601879119873,
-            "volume": 0
-          },
           {
             "time": 1787218200000,
             "open": 1.1709601879119873,
@@ -34157,29 +34209,42 @@
           {
             "time": 1787659200000,
             "open": 1.1664528846740723,
-            "high": 1.1664528846740723,
+            "high": 1.1667250394821167,
             "low": 1.1664528846740723,
-            "close": 1.1664528846740723,
+            "close": 1.1667250394821167,
             "volume": 0
           },
           {
-            "time": 1787659470000,
-            "open": 1.1665889024734497,
-            "high": 1.1665889024734497,
-            "low": 1.1665889024734497,
-            "close": 1.1665889024734497,
+            "time": 1787661000000,
+            "open": 1.1667250394821167,
+            "high": 1.1669973134994507,
+            "low": 1.1664528846740723,
+            "close": 1.1669973134994507,
+            "volume": 0
+          },
+          {
+            "time": 1787662800000,
+            "open": 1.1669973134994507,
+            "high": 1.1675423383712769,
+            "low": 1.1667250394821167,
+            "close": 1.1675423383712769,
+            "volume": 0
+          },
+          {
+            "time": 1787663552000,
+            "open": 1.1678149700164795,
+            "high": 1.1678149700164795,
+            "low": 1.1678149700164795,
+            "close": 1.1678149700164795,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-08-25T12:04:35.057Z"
+        "fetchedAt": "2026-08-25T13:12:41.958Z"
       }
     },
     "ES": {
       "30m": {
         "closes": [
-          7742.5,
-          7732.75,
-          7730,
           7723,
           7718.5,
           7724.5,
@@ -34325,35 +34390,14 @@
           7703.5,
           7702,
           7698.75,
-          7703.5,
-          7703.5
+          7704.75,
+          7705.25,
+          7698,
+          7697.25,
+          7696.75
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1787207400000,
-            "open": 7740.75,
-            "high": 7745.25,
-            "low": 7740,
-            "close": 7742.5,
-            "volume": 3621
-          },
-          {
-            "time": 1787209200000,
-            "open": 7742.5,
-            "high": 7742.5,
-            "low": 7731.25,
-            "close": 7732.75,
-            "volume": 7079
-          },
-          {
-            "time": 1787211000000,
-            "open": 7732.75,
-            "high": 7736,
-            "low": 7730,
-            "close": 7730,
-            "volume": 6460
-          },
           {
             "time": 1787212800000,
             "open": 7730.25,
@@ -35519,19 +35563,43 @@
             "open": 7699,
             "high": 7706.5,
             "low": 7698.5,
-            "close": 7703.5,
-            "volume": 6412
+            "close": 7704.75,
+            "volume": 7756
           },
           {
-            "time": 1787658871000,
-            "open": 7703.5,
-            "high": 7703.5,
-            "low": 7703.5,
-            "close": 7703.5,
+            "time": 1787659200000,
+            "open": 7704.75,
+            "high": 7709,
+            "low": 7701.25,
+            "close": 7705.25,
+            "volume": 9839
+          },
+          {
+            "time": 1787661000000,
+            "open": 7705.25,
+            "high": 7705.25,
+            "low": 7694.75,
+            "close": 7698,
+            "volume": 12678
+          },
+          {
+            "time": 1787662800000,
+            "open": 7697.75,
+            "high": 7699.75,
+            "low": 7696.5,
+            "close": 7697.25,
+            "volume": 1381
+          },
+          {
+            "time": 1787662957000,
+            "open": 7696.75,
+            "high": 7696.75,
+            "low": 7696.75,
+            "close": 7696.75,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-08-25T12:04:34.540Z"
+        "fetchedAt": "2026-08-25T13:12:41.306Z"
       },
       "1D": {
         "closes": [
@@ -88418,5 +88486,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-25T12:04:35.513Z"
+  "updatedAt": "2026-08-25T13:12:42.452Z"
 }

@@ -1,60 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.3695595256286,
+    "cash": 49.71102953017169,
     "highWater": 50.00872485365284,
     "positions": {
-      "WTI": {
-        "quantity": 0.005494505494505495,
-        "averagePrice": 72.8,
-        "stopLoss": 69.26785681588309,
-        "takeProfit": 78.98125057220459,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 72.8,
-          "confidence": 75,
-          "score": 82,
-          "tier": "exploratory",
-          "volatilityRegime": "normal",
-          "aiEngine": "rule"
-        },
-        "openedAt": "2026-08-19T12:12:06.542Z"
-      },
-      "XAUUSD": {
-        "quantity": 0.00005470831419384475,
-        "averagePrice": 2612.4,
-        "stopLoss": 2533.292804827009,
-        "takeProfit": 2750.8375915527345,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 2612.4,
-          "confidence": 38,
-          "score": 55,
-          "tier": "probe",
-          "volatilityRegime": "normal",
-          "aiEngine": "rule"
-        },
-        "openedAt": "2026-08-19T12:12:06.543Z"
-      },
-      "EURUSD": {
-        "quantity": 0.11944573778964598,
-        "averagePrice": 1.1609,
-        "stopLoss": 1.1563087563923427,
-        "takeProfit": 1.1689346763134003,
-        "strategyKey": "sma_rsi@1D",
-        "decisionSnapshot": {
-          "strategyKey": "sma_rsi@1D",
-          "entryPrice": 1.1609,
-          "confidence": 31,
-          "score": 38,
-          "tier": "probe",
-          "volatilityRegime": "normal",
-          "aiEngine": "rule"
-        },
-        "openedAt": "2026-08-19T12:12:06.543Z"
-      },
       "SPY": {
         "quantity": 0.0005660515470705753,
         "averagePrice": 655.48465164,
@@ -95,10 +44,10 @@
       "NVDA": 178.71134927999998,
       "SPY": 654.45488217,
       "QQQ": 605.46527352,
-      "BTCUSD": 67841.392962,
+      "BTCUSD": 67615.08925799999,
       "TSLA": 299.12377845,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2126.0290058699998,
+      "ETHUSD": 2118.57984228,
       "WTI": 72.8,
       "TLT": 70.77134016,
       "EURUSD": 1.1665739240397055,
@@ -140,10 +89,61 @@
     },
     "model": {
       "calibration": 50,
-      "outcomes": 7,
-      "wins": 3
+      "outcomes": 10,
+      "wins": 4
     },
     "trades": [
+      {
+        "id": "SIM-3561978",
+        "symbol": "EURUSD",
+        "side": "sell",
+        "quantity": 0.11944573778964598,
+        "price": 1.1665739240397055,
+        "notional": 0.13934228304308505,
+        "realizedPnl": 0.000677726043085027,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-08-25T13:12:41.978Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": "probe_win"
+      },
+      {
+        "id": "SIM-3561969",
+        "symbol": "XAUUSD",
+        "side": "sell",
+        "quantity": 0.00005470831419384475,
+        "price": 2612.4,
+        "notional": 0.14292000000000002,
+        "realizedPnl": 0,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-08-25T13:12:41.970Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "probe",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "probe_loss"
+      },
+      {
+        "id": "SIM-3561962",
+        "symbol": "WTI",
+        "side": "sell",
+        "quantity": 0.005494505494505495,
+        "price": 72.8,
+        "notional": 0.4,
+        "realizedPnl": 0,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-08-25T13:12:41.962Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "exploratory",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "exploratory_loss"
+      },
       {
         "id": "SIM-1164485",
         "symbol": "NVDA",
@@ -471,6 +471,41 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude WTI per limite di detenzione (6g) · chiude XAUUSD per limite di detenzione (6g) · chiude EURUSD per limite di detenzione (6g)",
+      "detail": "chiude WTI per limite di detenzione (6g); chiude XAUUSD per limite di detenzione (6g); chiude EURUSD per limite di detenzione (6g)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.119446 EURUSD",
+      "detail": "0,14 € · fill simulato 1,17 € · SIM-3561978",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000055 XAUUSD",
+      "detail": "0,14 € · fill simulato 2612 € · SIM-3561969",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.005495 WTI",
+      "detail": "0,40 € · fill simulato 72,80 € · SIM-3561962",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -734,44 +769,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-25T12:04:35.493Z"
+  "updatedAt": "2026-08-25T13:12:42.428Z"
 }
