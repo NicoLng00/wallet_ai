@@ -5,19 +5,19 @@
     "highWater": 50.0007826405678,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.1112134514323446,
-      "SSL.MI": 1.6182141425058125,
-      "BVB.DE": 3.206785491439395,
-      "MANU": 20.328647408802123,
-      "AJAX.AS": 8.89910852932257,
-      "CCP.L": 2.3270748187195385,
-      "FENER.IS": 0.05693573553319108,
-      "GSRAY.IS": 0.01995004934266384,
-      "BJKAS.IS": 0.052373349137727586,
-      "TSPOR.IS": 0.019082733468127656,
-      "SCP.LS": 0.9947565253812963,
-      "SLBEN.LS": 6.880289463336996,
-      "FCP.LS": 2.9845794428928554
+      "JUVE.MI": 2.1131837084703413,
+      "SSL.MI": 1.6184150659977123,
+      "BVB.DE": 3.2019282897707178,
+      "MANU": 20.331610248548973,
+      "AJAX.AS": 8.907288882569086,
+      "CCP.L": 2.324722382391848,
+      "FENER.IS": 0.05687438160134422,
+      "GSRAY.IS": 0.019973025393759714,
+      "BJKAS.IS": 0.0523239519078224,
+      "TSPOR.IS": 0.019069354417161646,
+      "SCP.LS": 0.9959353815605683,
+      "SLBEN.LS": 6.883297051647922,
+      "FCP.LS": 2.978439325086539
     },
     "model": {
       "calibration": 67,
@@ -96,6 +96,11 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -390,14 +395,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-25T04:05:50.343Z"
+  "updatedAt": "2026-08-25T05:00:46.440Z"
 }
