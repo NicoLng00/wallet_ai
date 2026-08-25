@@ -44,10 +44,10 @@
       "NVDA": 182.62880355,
       "SPY": 656.5464770099999,
       "QQQ": 609.23700192,
-      "BTCUSD": 67640.805588,
+      "BTCUSD": 67246.488528,
       "TSLA": 300.23815275,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2110.4191935599997,
+      "ETHUSD": 2097.62960544,
       "WTI": 72.8,
       "TLT": 71.55140216999999,
       "EURUSD": 1.1665739240397055,
@@ -61,7 +61,7 @@
       "MA": 513.78655707,
       "UNH": 339.96131048999996,
       "HD": 289.63445268,
-      "PG": 124.62990728999998,
+      "PG": 124.6384794,
       "JNJ": 234.13861253999997,
       "KO": 78.55481603999999,
       "PEP": 121.95540897000001,
@@ -69,18 +69,18 @@
       "NFLX": 70.48846053,
       "ADBE": 234.80723712,
       "CRM": 176.31973058999998,
-      "ORCL": 124.04700380999999,
+      "ORCL": 124.08986435999998,
       "INTC": 74.98881828,
       "AMD": 410.75836698,
       "COST": 822.9311321099999,
       "WMT": 90.33289518,
       "BAC": 53.515682729999995,
-      "XOM": 137.69380292999998,
-      "CVX": 171.35647889999998,
+      "XOM": 137.70237504,
+      "CVX": 171.34790678999997,
       "PFE": 24.49051827,
-      "ABBV": 227.81239535999998,
-      "MRK": 134.09351673,
-      "T": 22.08175536,
+      "ABBV": 227.83811169,
+      "MRK": 134.11066094999998,
+      "T": 22.09032747,
       "VZ": 43.07485275,
       "CSCO": 95.24471421,
       "IBM": 200.75024409,
@@ -516,6 +516,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude WTI per limite di detenzione (6g) · chiude XAUUSD per limite di detenzione (6g) · chiude EURUSD per limite di detenzione (6g)",
       "detail": "chiude WTI per limite di detenzione (6g); chiude XAUUSD per limite di detenzione (6g); chiude EURUSD per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -764,14 +769,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-25T20:03:08.324Z"
+  "updatedAt": "2026-08-25T20:47:40.051Z"
 }
