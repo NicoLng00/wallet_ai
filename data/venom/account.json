@@ -5,19 +5,19 @@
     "highWater": 50.0007826405678,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.087907721485986,
-      "SSL.MI": 1.6180619866104176,
-      "BVB.DE": 3.173109394096797,
-      "MANU": 20.33305304773196,
-      "AJAX.AS": 8.957904453316418,
-      "CCP.L": 2.3266519693771905,
-      "FENER.IS": 0.0558754402549568,
-      "GSRAY.IS": 0.020316085475390686,
-      "BJKAS.IS": 0.047880690689520396,
-      "TSPOR.IS": 0.021398439799671973,
-      "SCP.LS": 0.995292891679847,
-      "SLBEN.LS": 6.896024541376797,
-      "FCP.LS": 2.9028899927205436
+      "JUVE.MI": 2.080727632564569,
+      "SSL.MI": 1.6014420008630792,
+      "BVB.DE": 3.188271465189372,
+      "MANU": 20.290233327063866,
+      "AJAX.AS": 8.96171503062066,
+      "CCP.L": 2.3166217118185757,
+      "FENER.IS": 0.05575418270954524,
+      "GSRAY.IS": 0.02032454166037326,
+      "BJKAS.IS": 0.04798829948133711,
+      "TSPOR.IS": 0.02137572124383994,
+      "SCP.LS": 0.994542449072518,
+      "SLBEN.LS": 6.886582157689885,
+      "FCP.LS": 2.9000752413266495
     },
     "model": {
       "calibration": 67,
@@ -96,6 +96,16 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -385,19 +395,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude BVB.DE per segnale difensivo",
-      "detail": "chiude BVB.DE per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-25T09:46:41.250Z"
+  "updatedAt": "2026-08-25T10:43:10.914Z"
 }
