@@ -5,19 +5,19 @@
     "highWater": 50.0007826405678,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.078702354434091,
-      "SSL.MI": 1.6006436897182976,
-      "BVB.DE": 3.2047526796294536,
-      "MANU": 20.359609233544028,
-      "AJAX.AS": 8.756275419799533,
-      "CCP.L": 2.32234189810541,
-      "FENER.IS": 0.056173529275171365,
-      "GSRAY.IS": 0.01998444131377527,
-      "BJKAS.IS": 0.04581897234229253,
-      "TSPOR.IS": 0.021577953737976222,
-      "SCP.LS": 0.9708251453117324,
-      "SLBEN.LS": 6.83657409996066,
-      "FCP.LS": 2.896510141862079
+      "JUVE.MI": 2.074355063546769,
+      "SSL.MI": 1.6016816106676977,
+      "BVB.DE": 3.2089585140586863,
+      "MANU": 20.29727545072764,
+      "AJAX.AS": 8.75392050261788,
+      "CCP.L": 2.3269722808100464,
+      "FENER.IS": 0.056106968566220036,
+      "GSRAY.IS": 0.01994683964409538,
+      "BJKAS.IS": 0.04585765334476968,
+      "TSPOR.IS": 0.02157807789128124,
+      "SCP.LS": 0.9694592628346898,
+      "SLBEN.LS": 6.842928185533221,
+      "FCP.LS": 2.8999322781116383
     },
     "model": {
       "calibration": 67,
@@ -96,6 +96,16 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -385,19 +395,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-25T15:55:01.365Z"
+  "updatedAt": "2026-08-25T16:49:46.748Z"
 }
