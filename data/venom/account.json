@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 2.070452130560998,
-      "SSL.MI": 1.6029570119116885,
-      "BVB.DE": 3.173703134692898,
-      "MANU": 20.49493628535286,
-      "AJAX.AS": 8.965777577320875,
-      "CCP.L": 2.324872686779001,
-      "FENER.IS": 0.05581463685038763,
-      "GSRAY.IS": 0.019959980222771224,
-      "BJKAS.IS": 0.04878861255226954,
-      "TSPOR.IS": 0.02086226060251748,
-      "SCP.LS": 0.9712990396514833,
-      "SLBEN.LS": 6.75720198324295,
-      "FCP.LS": 2.8993525524953268
+      "JUVE.MI": 2.067869890139544,
+      "SSL.MI": 1.6039151732044938,
+      "BVB.DE": 3.1758445360600813,
+      "MANU": 20.452571273245205,
+      "AJAX.AS": 8.954428511727512,
+      "CCP.L": 2.328679164776799,
+      "FENER.IS": 0.055789450979154186,
+      "GSRAY.IS": 0.019925414706491274,
+      "BJKAS.IS": 0.04877003276411397,
+      "TSPOR.IS": 0.020846638722664193,
+      "SCP.LS": 0.9692953187007298,
+      "SLBEN.LS": 6.759283532125925,
+      "FCP.LS": 2.9030907931878214
     },
     "model": {
       "calibration": 67,
@@ -131,6 +131,11 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
     {
       "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
@@ -425,14 +430,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-26T00:01:05.786Z"
+  "updatedAt": "2026-08-26T01:52:37.582Z"
 }
