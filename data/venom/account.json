@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 2.085497262349681,
-      "SSL.MI": 1.620782605594677,
-      "BVB.DE": 3.267498935434739,
-      "MANU": 20.44506200673065,
-      "AJAX.AS": 8.812050474842026,
-      "CCP.L": 2.193042644828583,
-      "FENER.IS": 0.05711093844477772,
-      "GSRAY.IS": 0.02048244259711004,
-      "BJKAS.IS": 0.048616343102299106,
-      "TSPOR.IS": 0.022059372291531456,
-      "SCP.LS": 0.9701354583733444,
-      "SLBEN.LS": 6.731181374509069,
-      "FCP.LS": 2.8993214511909295
+      "JUVE.MI": 2.088797836777432,
+      "SSL.MI": 1.6199795212899437,
+      "BVB.DE": 3.2559884570182787,
+      "MANU": 20.47475327181685,
+      "AJAX.AS": 8.792650301215549,
+      "CCP.L": 2.1899036702228702,
+      "FENER.IS": 0.0573804971994235,
+      "GSRAY.IS": 0.020298127508427993,
+      "BJKAS.IS": 0.04755712487648568,
+      "TSPOR.IS": 0.021930282127446687,
+      "SCP.LS": 0.9701918843948235,
+      "SLBEN.LS": 6.810757818357358,
+      "FCP.LS": 2.9001169820729573
     },
     "model": {
       "calibration": 56,
@@ -165,6 +165,16 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
     {
       "title": "Autopilot: apre AJAX.AS (score 73)",
       "detail": "apre AJAX.AS (score 73)",
@@ -454,19 +464,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-26T12:04:24.919Z"
+  "updatedAt": "2026-08-26T13:13:24.278Z"
 }
