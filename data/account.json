@@ -61,10 +61,10 @@
       "NVDA": 182.56424940000002,
       "SPY": 656.31440628,
       "QQQ": 609.02165376,
-      "BTCUSD": 67265.564184,
+      "BTCUSD": 66927.942432,
       "TSLA": 300.132027,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2110.07596644,
+      "ETHUSD": 2095.75703376,
       "WTI": 72.8,
       "TLT": 71.52611076,
       "EURUSD": 1.166986420946006,
@@ -565,6 +565,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre AAPL forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre AAPL forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -798,14 +803,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-26T12:04:53.959Z"
+  "updatedAt": "2026-08-26T13:18:02.644Z"
 }
