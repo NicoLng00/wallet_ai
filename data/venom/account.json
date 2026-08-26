@@ -5,19 +5,19 @@
     "highWater": 50.0007826405678,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.069126296329306,
-      "SSL.MI": 1.6053085138277552,
-      "BVB.DE": 3.180057565408067,
-      "MANU": 20.439811543583613,
-      "AJAX.AS": 8.94804985317651,
-      "CCP.L": 2.326453352482861,
-      "FENER.IS": 0.05576081761034022,
-      "GSRAY.IS": 0.019930638178588988,
-      "BJKAS.IS": 0.048855622905161024,
-      "TSPOR.IS": 0.020856094202757674,
-      "SCP.LS": 0.9686736589033601,
-      "SLBEN.LS": 6.754668605244744,
-      "FCP.LS": 2.9019071482102183
+      "JUVE.MI": 2.0751974106403246,
+      "SSL.MI": 1.6205283391947258,
+      "BVB.DE": 3.1770684683826995,
+      "MANU": 20.420952715223347,
+      "AJAX.AS": 8.896212345455943,
+      "CCP.L": 2.1990571190481623,
+      "FENER.IS": 0.056811078363723864,
+      "GSRAY.IS": 0.020305870391417274,
+      "BJKAS.IS": 0.04563718062331357,
+      "TSPOR.IS": 0.021547103567076252,
+      "SCP.LS": 0.9683234249014258,
+      "SLBEN.LS": 6.839716725839348,
+      "FCP.LS": 2.901954244604009
     },
     "model": {
       "calibration": 56,
@@ -130,6 +130,16 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -419,19 +429,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude BVB.DE per segnale difensivo",
-      "detail": "chiude BVB.DE per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-26T06:20:35.646Z"
+  "updatedAt": "2026-08-26T07:15:52.187Z"
 }
