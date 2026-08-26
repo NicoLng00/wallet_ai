@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.71102953017169,
+    "cash": 49.52461316943355,
     "highWater": 50.00872485365284,
     "positions": {
       "SPY": {
@@ -37,55 +37,72 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-08-25T01:26:04.485Z"
+      },
+      "AAPL": {
+        "quantity": 0.001403971356073482,
+        "averagePrice": 265.5557892,
+        "stopLoss": 259.5122209975725,
+        "takeProfit": 276.13203355424804,
+        "strategyKey": "hybrid_confluence@1D",
+        "decisionSnapshot": {
+          "strategyKey": "hybrid_confluence@1D",
+          "entryPrice": 265.5557892,
+          "confidence": 78,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-08-26T01:36:01.303Z"
       }
     },
     "market": {
-      "AAPL": 265.64968889999994,
-      "NVDA": 182.62880355,
-      "SPY": 656.5464770099999,
-      "QQQ": 609.23700192,
-      "BTCUSD": 67256.77506,
-      "TSLA": 300.23815275,
+      "AAPL": 265.5557892,
+      "NVDA": 182.56424940000002,
+      "SPY": 656.31440628,
+      "QQQ": 609.02165376,
+      "BTCUSD": 67574.907972,
+      "TSLA": 300.132027,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2091.8262869699997,
+      "ETHUSD": 2105.3801105999996,
       "WTI": 72.8,
-      "TLT": 71.55140216999999,
-      "EURUSD": 1.1665739240397055,
+      "TLT": 71.52611076,
+      "EURUSD": 1.166986420946006,
       "ES": 7730,
-      "MSFT": 421.49922080999994,
-      "GOOGL": 297.41792855999995,
-      "AMZN": 223.78350365999998,
-      "META": 488.65313054999996,
-      "JPM": 305.75859159,
-      "V": 329.28903354,
-      "MA": 513.78655707,
-      "UNH": 339.96131048999996,
-      "HD": 289.63445268,
-      "PG": 124.6384794,
-      "JNJ": 234.13861253999997,
-      "KO": 78.55481603999999,
-      "PEP": 121.95540897000001,
-      "DIS": 95.36472375,
-      "NFLX": 70.48846053,
-      "ADBE": 234.80723712,
-      "CRM": 176.31973058999998,
-      "ORCL": 124.08986435999998,
-      "INTC": 74.98881828,
-      "AMD": 410.75836698,
-      "COST": 822.9311321099999,
-      "WMT": 90.33289518,
-      "BAC": 53.515682729999995,
-      "XOM": 137.70237504,
-      "CVX": 171.34790678999997,
-      "PFE": 24.49051827,
-      "ABBV": 227.83811169,
-      "MRK": 134.11066094999998,
-      "T": 22.09032747,
-      "VZ": 43.07485275,
-      "CSCO": 95.24471421,
-      "IBM": 200.75024409,
-      "NKE": 33.84269027999999,
-      "MCD": 229.8182691
+      "MSFT": 421.35023268,
+      "GOOGL": 297.31279968,
+      "AMZN": 223.70440248,
+      "META": 488.48040539999994,
+      "JPM": 305.65051452,
+      "V": 329.17263912,
+      "MA": 513.60494796,
+      "UNH": 339.84114372,
+      "HD": 289.53207504,
+      "PG": 124.59442320000001,
+      "JNJ": 234.05585112,
+      "KO": 78.52704912,
+      "PEP": 121.91230116000001,
+      "DIS": 95.331015,
+      "NFLX": 70.46354484,
+      "ADBE": 234.72423936,
+      "CRM": 176.25740652,
+      "ORCL": 124.04600208,
+      "INTC": 74.96231184,
+      "AMD": 410.61317544,
+      "COST": 822.64024908,
+      "WMT": 90.30096504,
+      "BAC": 53.49676644,
+      "XOM": 137.65370112,
+      "CVX": 171.28734011999998,
+      "PFE": 24.48186156,
+      "ABBV": 227.75757732000002,
+      "MRK": 134.0632566,
+      "T": 22.08251916,
+      "VZ": 43.059627,
+      "CSCO": 95.21104788,
+      "IBM": 200.67928452,
+      "NKE": 33.830727839999994,
+      "MCD": 229.73703480000003
     },
     "model": {
       "calibration": 50,
@@ -93,6 +110,23 @@
       "wins": 4
     },
     "trades": [
+      {
+        "id": "SIM-8161303",
+        "symbol": "AAPL",
+        "side": "buy",
+        "quantity": 0.001403971356073482,
+        "price": 265.5557892,
+        "notional": 0.3728327214762877,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-08-26T01:36:01.303Z",
+        "stopLoss": 259.5122209975725,
+        "takeProfit": 276.13203355424804,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "hybrid_confluence@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-3561978",
         "symbol": "EURUSD",
@@ -471,6 +505,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre AAPL forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre AAPL forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001404 AAPL",
+      "detail": "0,37 € · fill simulato 265,56 € · SIM-8161303",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -759,19 +803,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-25T23:51:45.237Z"
+  "updatedAt": "2026-08-26T01:36:01.778Z"
 }
