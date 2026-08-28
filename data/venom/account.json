@@ -2,7 +2,7 @@
   "demoAccount": {
     "version": 2,
     "cash": 49.89292128060362,
-    "highWater": 50.08042128060362,
+    "highWater": 50.0818725222408,
     "positions": {
       "JUVE.MI": {
         "quantity": 0.180986180502561,
@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 2.0719814018877187,
-      "SSL.MI": 1.6051698559604992,
-      "BVB.DE": 3.215128671046369,
-      "MANU": 19.308545530478348,
-      "AJAX.AS": 8.89068732270305,
-      "CCP.L": 2.188511492672261,
-      "FENER.IS": 0.05716075914855478,
-      "GSRAY.IS": 0.020500064776404762,
-      "BJKAS.IS": 0.0478914511471409,
-      "TSPOR.IS": 0.021518835371629515,
-      "SCP.LS": 0.9855108686503766,
-      "SLBEN.LS": 6.8045712363120625,
-      "FCP.LS": 2.858374655310442
+      "JUVE.MI": 2.0795334376451944,
+      "SSL.MI": 1.5673608616979562,
+      "BVB.DE": 3.2927805538941612,
+      "MANU": 19.309453103814576,
+      "AJAX.AS": 9.105625497885871,
+      "CCP.L": 2.187836713438008,
+      "FENER.IS": 0.05841970396705167,
+      "GSRAY.IS": 0.019788107920766695,
+      "BJKAS.IS": 0.045669124307049815,
+      "TSPOR.IS": 0.020111103892217912,
+      "SCP.LS": 0.9847539642429125,
+      "SLBEN.LS": 6.702578870771148,
+      "FCP.LS": 2.8977713368921574
     },
     "model": {
       "calibration": 61,
@@ -233,6 +233,11 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
     {
       "title": "Autopilot: apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
@@ -527,14 +532,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-28T00:01:15.367Z"
+  "updatedAt": "2026-08-28T11:15:00.137Z"
 }
