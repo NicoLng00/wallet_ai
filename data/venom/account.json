@@ -5,19 +5,19 @@
     "highWater": 50.0818725222408,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0708260360831563,
-      "SSL.MI": 1.5862447895897638,
-      "BVB.DE": 3.2269729139475456,
-      "MANU": 19.392365746692033,
-      "AJAX.AS": 8.961369078953064,
-      "CCP.L": 2.188660678219483,
-      "FENER.IS": 0.05982357550427611,
-      "GSRAY.IS": 0.020400145097396627,
-      "BJKAS.IS": 0.04860583361213512,
-      "TSPOR.IS": 0.02230628361014025,
-      "SCP.LS": 0.9703083179075972,
-      "SLBEN.LS": 6.737504468395523,
-      "FCP.LS": 2.8582066994435142
+      "JUVE.MI": 2.0696555937073624,
+      "SSL.MI": 1.5853143895846546,
+      "BVB.DE": 3.225339965400892,
+      "MANU": 19.032594472798312,
+      "AJAX.AS": 8.966883896045873,
+      "CCP.L": 2.188963781531424,
+      "FENER.IS": 0.05982884126446265,
+      "GSRAY.IS": 0.020376309443462345,
+      "BJKAS.IS": 0.04856053515261862,
+      "TSPOR.IS": 0.022302111506794103,
+      "SCP.LS": 0.9703136799213253,
+      "SLBEN.LS": 6.743128951465048,
+      "FCP.LS": 2.85823505881354
     },
     "model": {
       "calibration": 59,
@@ -266,6 +266,16 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
     {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
@@ -555,19 +565,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-29T18:41:18.129Z"
+  "updatedAt": "2026-08-29T21:17:04.086Z"
 }
