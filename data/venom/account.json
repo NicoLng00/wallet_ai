@@ -5,19 +5,19 @@
     "highWater": 50.0818725222408,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0673735988512374,
-      "SSL.MI": 1.586537868275236,
-      "BVB.DE": 3.2316883435059807,
-      "MANU": 19.00516591727404,
-      "AJAX.AS": 8.95546951361842,
-      "CCP.L": 2.1911753987058216,
-      "FENER.IS": 0.05981165839471353,
-      "GSRAY.IS": 0.02036902096113298,
-      "BJKAS.IS": 0.048664739483864385,
-      "TSPOR.IS": 0.02231768148732661,
-      "SCP.LS": 0.9689531886546754,
-      "SLBEN.LS": 6.742158361937061,
-      "FCP.LS": 2.861647289101197
+      "JUVE.MI": 2.0708260360831563,
+      "SSL.MI": 1.5862447895897638,
+      "BVB.DE": 3.2269729139475456,
+      "MANU": 19.392365746692033,
+      "AJAX.AS": 8.961369078953064,
+      "CCP.L": 2.188660678219483,
+      "FENER.IS": 0.05982357550427611,
+      "GSRAY.IS": 0.020400145097396627,
+      "BJKAS.IS": 0.04860583361213512,
+      "TSPOR.IS": 0.02230628361014025,
+      "SCP.LS": 0.9703083179075972,
+      "SLBEN.LS": 6.737504468395523,
+      "FCP.LS": 2.8582066994435142
     },
     "model": {
       "calibration": 59,
@@ -266,6 +266,11 @@
     ]
   },
   "activity": [
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
     {
       "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
       "detail": "chiude JUVE.MI per segnale difensivo",
@@ -560,14 +565,9 @@
       "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
       "detail": "chiude AJAX.AS per segnale difensivo",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-29T15:09:12.052Z"
+  "updatedAt": "2026-08-29T18:41:18.129Z"
 }
