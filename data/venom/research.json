@@ -3282,6 +3282,10 @@
             {
               "returnPct": -0.024616043976958796,
               "at": "2026-08-29T15:09:11.691Z"
+            },
+            {
+              "returnPct": 0.05931374053418478,
+              "at": "2026-08-30T07:27:31.018Z"
             }
           ]
         }
@@ -3402,6 +3406,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-08-29T15:09:11.692Z"
+        },
+        {
+          "tradeId": "SIM-4851019",
+          "symbol": "JUVE.MI",
+          "returnPct": 0.05931374053418478,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "engulfing@1D",
+            "entryPrice": 2.0656027856040517,
+            "confidence": 64,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-08-30T07:27:31.019Z"
         }
       ]
     },
@@ -23055,5 +23075,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-30T01:41:06.645Z"
+  "updatedAt": "2026-08-30T07:27:31.464Z"
 }
