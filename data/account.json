@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.69381754433745,
+    "cash": 49.50746572854619,
     "highWater": 50.017265718199006,
     "positions": {
       "AAPL": {
@@ -37,55 +37,72 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-08-29T03:17:09.035Z"
+      },
+      "SPY": {
+        "quantity": 0.0005622936930691579,
+        "averagePrice": 662.8273377,
+        "stopLoss": 657.7298863537388,
+        "takeProfit": 671.7478775559571,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 662.8273377,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-08-30T01:42:37.215Z"
       }
     },
     "market": {
-      "AAPL": 275.3748738,
-      "NVDA": 187.3875627,
-      "SPY": 662.6826999,
-      "QQQ": 617.0998462199999,
-      "BTCUSD": 67405.25727,
-      "TSLA": 300.3972075,
+      "AAPL": 275.4349774,
+      "NVDA": 187.42846210000002,
+      "SPY": 662.8273377,
+      "QQQ": 617.23453506,
+      "BTCUSD": 67240.768474,
+      "TSLA": 300.4627725,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2114.73604602,
+      "ETHUSD": 2116.7139243799998,
       "WTI": 72.8,
-      "TLT": 71.38901951999999,
-      "EURUSD": 1.1609628561543803,
+      "TLT": 71.40460096,
+      "EURUSD": 1.1607095185144776,
       "ES": 7730,
-      "MSFT": 442.3311196199999,
-      "GOOGL": 298.53668286,
-      "AMZN": 229.49054622,
-      "META": 497.87983907999995,
-      "JPM": 308.03741748,
-      "V": 328.6926864,
-      "MA": 512.7640362,
-      "UNH": 338.4690543,
-      "HD": 284.41047726,
-      "PG": 123.84547812,
-      "JNJ": 230.87732616,
-      "KO": 77.22899964,
-      "PEP": 121.51120877999999,
-      "DIS": 93.1123674,
-      "NFLX": 70.38984887999999,
-      "ADBE": 251.10191807999996,
-      "CRM": 220.506624,
-      "ORCL": 129.9352509,
-      "INTC": 77.06534237999999,
-      "AMD": 401.02919532,
-      "COST": 814.38436638,
-      "WMT": 88.79698386,
-      "BAC": 53.67958128,
-      "XOM": 134.98278534,
-      "CVX": 173.87291844,
-      "PFE": 24.083457839999998,
-      "ABBV": 220.05871992,
-      "MRK": 127.78186589999999,
-      "T": 22.40381754,
-      "VZ": 43.1538354,
-      "CSCO": 94.68864522,
-      "IBM": 202.92638886,
-      "NKE": 34.1096184,
-      "MCD": 228.25880999999998
+      "MSFT": 442.42766326,
+      "GOOGL": 298.60184178,
+      "AMZN": 229.54063506000003,
+      "META": 497.98850684,
+      "JPM": 308.10465004,
+      "V": 328.76442720000006,
+      "MA": 512.8759526,
+      "UNH": 338.5429289,
+      "HD": 284.47255298,
+      "PG": 123.87250876,
+      "JNJ": 230.92771768000003,
+      "KO": 77.24585572,
+      "PEP": 121.53772993999999,
+      "DIS": 93.1326902,
+      "NFLX": 70.40521224,
+      "ADBE": 251.15672383999998,
+      "CRM": 220.554752,
+      "ORCL": 129.9636107,
+      "INTC": 77.08216274,
+      "AMD": 401.11672436,
+      "COST": 814.5621147400001,
+      "WMT": 88.81636478,
+      "BAC": 53.69129744,
+      "XOM": 135.01224682,
+      "CVX": 173.91086812000003,
+      "PFE": 24.08871432,
+      "ABBV": 220.10675016,
+      "MRK": 127.8097557,
+      "T": 22.408707420000002,
+      "VZ": 43.163254200000004,
+      "CSCO": 94.70931206000002,
+      "IBM": 202.97067978,
+      "NKE": 34.117063200000004,
+      "MCD": 228.30863
     },
     "model": {
       "calibration": 53,
@@ -93,6 +110,23 @@
       "wins": 6
     },
     "trades": [
+      {
+        "id": "SIM-4157215",
+        "symbol": "SPY",
+        "side": "buy",
+        "quantity": 0.0005622936930691579,
+        "price": 662.8273377,
+        "notional": 0.3727036315825309,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-08-30T01:42:37.215Z",
+        "stopLoss": 657.7298863537388,
+        "takeProfit": 671.7478775559571,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-3429035",
         "symbol": "NVDA",
@@ -607,6 +641,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000562 SPY",
+      "detail": "0,37 € · fill simulato 662,83 € · SIM-4157215",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -895,19 +939,9 @@
       "title": "Autopilot: chiude WTI per limite di detenzione (6g) · chiude XAUUSD per limite di detenzione (6g) · chiude EURUSD per limite di detenzione (6g)",
       "detail": "chiude WTI per limite di detenzione (6g); chiude XAUUSD per limite di detenzione (6g); chiude EURUSD per limite di detenzione (6g)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.119446 EURUSD",
-      "detail": "0,14 € · fill simulato 1,17 € · SIM-3561978",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-08-29T23:32:17.904Z"
+  "updatedAt": "2026-08-30T01:42:37.679Z"
 }
