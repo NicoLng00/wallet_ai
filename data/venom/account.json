@@ -5,19 +5,19 @@
     "highWater": 50.08189114149969,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.067415035157299,
-      "SSL.MI": 1.5849945963787107,
-      "BVB.DE": 3.232926961753271,
-      "MANU": 19.036523442628468,
-      "AJAX.AS": 8.947738310190854,
-      "CCP.L": 2.1910023370323533,
-      "FENER.IS": 0.059926220500911356,
-      "GSRAY.IS": 0.020374368153248588,
-      "BJKAS.IS": 0.048660471795948484,
-      "TSPOR.IS": 0.02236173609228838,
-      "SCP.LS": 0.9688059208952742,
-      "SLBEN.LS": 6.734192008846017,
-      "FCP.LS": 2.860789331793184
+      "JUVE.MI": 2.081812032769804,
+      "SSL.MI": 1.5741622539355244,
+      "BVB.DE": 3.2950443295786753,
+      "MANU": 18.943362889895777,
+      "AJAX.AS": 9.19418677337009,
+      "CCP.L": 2.187987403143147,
+      "FENER.IS": 0.056523559651910124,
+      "GSRAY.IS": 0.019507146005079447,
+      "BJKAS.IS": 0.039479961093352216,
+      "TSPOR.IS": 0.01967249849363826,
+      "SCP.LS": 0.969961717479361,
+      "SLBEN.LS": 6.56972799327148,
+      "FCP.LS": 2.879862347605535
     },
     "model": {
       "calibration": 58,
@@ -335,6 +335,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
       "detail": "chiude JUVE.MI per segnale difensivo",
       "tag": "AUTO"
@@ -623,19 +633,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,08 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-08-31T06:57:15.125Z"
+  "updatedAt": "2026-08-31T15:02:05.261Z"
 }
