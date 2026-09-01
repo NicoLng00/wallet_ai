@@ -3308,6 +3308,10 @@
             {
               "returnPct": -3.287689215944018,
               "at": "2026-09-01T15:12:11.966Z"
+            },
+            {
+              "returnPct": 4.744008645713525,
+              "at": "2026-09-01T23:26:20.448Z"
             }
           ]
         }
@@ -3410,6 +3414,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-01T15:12:11.968Z"
+        },
+        {
+          "tradeId": "SIM-5180449",
+          "symbol": "SLBEN.LS",
+          "returnPct": 4.744008645713525,
+          "outcomeTag": "signal_flip_profit",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 6.262214591514103,
+            "confidence": 70,
+            "score": 75,
+            "tier": "validated",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-01T23:26:20.449Z"
         }
       ],
       "engulfing@1D": [
@@ -23181,5 +23201,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-01T21:21:39.162Z"
+  "updatedAt": "2026-09-01T23:26:20.774Z"
 }
