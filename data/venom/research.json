@@ -3290,6 +3290,10 @@
             {
               "returnPct": -0.06440945225889876,
               "at": "2026-08-31T06:57:14.877Z"
+            },
+            {
+              "returnPct": -0.04863649026917844,
+              "at": "2026-09-01T05:42:46.309Z"
             }
           ]
         }
@@ -3468,12 +3472,48 @@
             "aiEngine": "gemini"
           },
           "at": "2026-08-31T06:57:14.878Z"
+        },
+        {
+          "tradeId": "SIM-1366311",
+          "symbol": "JUVE.MI",
+          "returnPct": -0.04863649026917844,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "engulfing@1D",
+            "entryPrice": 2.0804879162918857,
+            "confidence": 64,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-01T05:42:46.311Z"
         }
       ]
     },
     "lessons": {
       "bollinger_reversion@1D": [],
-      "engulfing@1D": []
+      "engulfing@1D": [
+        {
+          "id": "engulfing@1D::forced_loss::v1",
+          "version": 1,
+          "strategyKey": "engulfing@1D",
+          "failureMode": "forced_loss",
+          "statement": "Negli ultimi 6 trade forzati (fallback giornaliero) di engulfing@1D, 3 (50%) hanno chiuso in perdita (rendimento medio -0.05%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "dominantRegime": "normal",
+          "sampleSize": 6,
+          "occurrences": 3,
+          "avgReturn": -0.046,
+          "supportingTradeIds": [
+            "SIM-6151692",
+            "SIM-9434878",
+            "SIM-1366311"
+          ],
+          "createdAt": "2026-09-01T05:42:46.311Z",
+          "supersedes": null,
+          "active": true
+        }
+      ]
     }
   },
   "historyCache": {
@@ -23121,5 +23161,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-01T00:33:21.901Z"
+  "updatedAt": "2026-09-01T05:42:46.748Z"
 }
