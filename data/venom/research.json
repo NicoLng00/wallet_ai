@@ -3293,6 +3293,16 @@
             }
           ]
         }
+      },
+      "SLBEN.LS": {
+        "bollinger_reversion@1D": {
+          "trades": [
+            {
+              "returnPct": 1.4737797259415877,
+              "at": "2026-09-01T00:33:20.987Z"
+            }
+          ]
+        }
       }
     },
     "tradeEpisodes": {
@@ -3360,6 +3370,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-08-26T14:10:08.831Z"
+        },
+        {
+          "tradeId": "SIM-2800989",
+          "symbol": "SLBEN.LS",
+          "returnPct": 1.4737797259415877,
+          "outcomeTag": "signal_flip_profit",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 6.566495580770016,
+            "confidence": 65,
+            "score": 73,
+            "tier": "validated",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-01T00:33:20.989Z"
         }
       ],
       "engulfing@1D": [
@@ -23095,5 +23121,5 @@
       }
     }
   },
-  "updatedAt": "2026-08-31T20:47:09.616Z"
+  "updatedAt": "2026-09-01T00:33:21.901Z"
 }
