@@ -78,10 +78,10 @@
       "NVDA": 190.18011278,
       "SPY": 660.73763705,
       "QQQ": 617.41778076,
-      "BTCUSD": 68032.58957899999,
+      "BTCUSD": 67175.495584,
       "TSLA": 316.95249794999995,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2132.81164798,
+      "ETHUSD": 2115.97987244,
       "WTI": 72.8,
       "TLT": 71.08281052,
       "EURUSD": 1.1608995113773957,
@@ -709,6 +709,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude AAPL per limite di detenzione (6g)",
       "detail": "chiude AAPL per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -1002,14 +1007,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001404 AAPL",
       "detail": "0,37 € · fill simulato 265,56 € · SIM-8161303",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-01T05:33:28.028Z"
+  "updatedAt": "2026-09-01T10:29:15.574Z"
 }
