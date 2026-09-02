@@ -2,7 +2,7 @@
   "demoAccount": {
     "version": 2,
     "cash": 45.37271520897235,
-    "highWater": 50.37809334425102,
+    "highWater": 50.38640962322314,
     "positions": {
       "SLBEN.LS": {
         "quantity": 1.5779665078547664,
@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 2.0408642524429363,
-      "SSL.MI": 1.5531336477540487,
-      "BVB.DE": 3.239923004064948,
-      "MANU": 18.418615883440303,
-      "AJAX.AS": 9.09432658439694,
-      "CCP.L": 2.158923302960453,
-      "FENER.IS": 0.05457230996902376,
-      "GSRAY.IS": 0.01839310077158238,
-      "BJKAS.IS": 0.03891181689250637,
-      "TSPOR.IS": 0.018233288878979025,
-      "SCP.LS": 0.9999544421437534,
-      "SLBEN.LS": 6.335869300377289,
-      "FCP.LS": 2.8024980769600503
+      "JUVE.MI": 2.0370802126584207,
+      "SSL.MI": 1.5561744491426626,
+      "BVB.DE": 3.2410465010098437,
+      "MANU": 18.30882526660651,
+      "AJAX.AS": 9.109032608835324,
+      "CCP.L": 2.1589191111108983,
+      "FENER.IS": 0.055140629706689225,
+      "GSRAY.IS": 0.018920147027647237,
+      "BJKAS.IS": 0.04021567540303537,
+      "TSPOR.IS": 0.018928410610661084,
+      "SCP.LS": 0.9998895736216681,
+      "SLBEN.LS": 6.345948639850618,
+      "FCP.LS": 2.7997513487502403
     },
     "model": {
       "calibration": 57,
@@ -545,6 +545,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -833,14 +838,9 @@
       "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
       "detail": "chiude JUVE.MI per segnale difensivo",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-02T18:50:29.631Z"
+  "updatedAt": "2026-09-02T21:45:16.356Z"
 }
