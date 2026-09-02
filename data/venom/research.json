@@ -3294,6 +3294,10 @@
             {
               "returnPct": -0.04863649026917844,
               "at": "2026-09-01T05:42:46.309Z"
+            },
+            {
+              "returnPct": -0.15974364236723276,
+              "at": "2026-09-02T06:26:50.296Z"
             }
           ]
         }
@@ -3528,6 +3532,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-01T05:42:46.311Z"
+        },
+        {
+          "tradeId": "SIM-0410297",
+          "symbol": "JUVE.MI",
+          "returnPct": -0.15974364236723276,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "engulfing@1D",
+            "entryPrice": 2.0826403018913586,
+            "confidence": 64,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-02T06:26:50.297Z"
         }
       ]
     },
@@ -3539,19 +3559,21 @@
           "version": 1,
           "strategyKey": "engulfing@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 6 trade forzati (fallback giornaliero) di engulfing@1D, 3 (50%) hanno chiuso in perdita (rendimento medio -0.05%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 7 trade forzati (fallback giornaliero) di engulfing@1D, 4 (57%) hanno chiuso in perdita (rendimento medio -0.07%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
-          "sampleSize": 6,
-          "occurrences": 3,
-          "avgReturn": -0.046,
+          "sampleSize": 7,
+          "occurrences": 4,
+          "avgReturn": -0.074,
           "supportingTradeIds": [
             "SIM-6151692",
             "SIM-9434878",
-            "SIM-1366311"
+            "SIM-1366311",
+            "SIM-0410297"
           ],
           "createdAt": "2026-09-01T05:42:46.311Z",
           "supersedes": null,
-          "active": true
+          "active": true,
+          "updatedAt": "2026-09-02T06:26:50.298Z"
         }
       ]
     }
@@ -23201,5 +23223,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-02T01:26:09.565Z"
+  "updatedAt": "2026-09-02T06:26:50.586Z"
 }
