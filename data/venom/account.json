@@ -5,19 +5,19 @@
     "highWater": 50.44252969914739,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.048993978728765,
-      "SSL.MI": 1.6220530448791648,
-      "BVB.DE": 3.2311462151231933,
-      "MANU": 17.98220267143843,
-      "AJAX.AS": 8.99874833389568,
-      "CCP.L": 2.1492443685177602,
-      "FENER.IS": 0.05487994549218961,
-      "GSRAY.IS": 0.018311225783109095,
-      "BJKAS.IS": 0.03577214450669347,
-      "TSPOR.IS": 0.018475717919553963,
-      "SCP.LS": 0.9893994622265176,
-      "SLBEN.LS": 6.560669288668863,
-      "FCP.LS": 2.7987066766859043
+      "JUVE.MI": 2.038873387935258,
+      "SSL.MI": 1.6298602435283218,
+      "BVB.DE": 3.243446762128644,
+      "MANU": 18.045742739536124,
+      "AJAX.AS": 8.900502472347677,
+      "CCP.L": 2.124489547363309,
+      "FENER.IS": 0.0548991769944699,
+      "GSRAY.IS": 0.01809963475301031,
+      "BJKAS.IS": 0.035540757382512306,
+      "TSPOR.IS": 0.01831196876153129,
+      "SCP.LS": 0.9895194925554508,
+      "SLBEN.LS": 6.567437205465741,
+      "FCP.LS": 2.802289299143747
     },
     "model": {
       "calibration": 59,
@@ -627,6 +627,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
       "detail": "chiude JUVE.MI per segnale difensivo",
       "tag": "AUTO"
@@ -895,19 +905,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS (score 71)",
-      "detail": "apre SLBEN.LS (score 71)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini): acquisto demo 1.531493 SLBEN.LS",
-      "detail": "10,00 € · fill simulato 6,53 € · SIM-8577924",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-04T15:06:58.417Z"
+  "updatedAt": "2026-09-04T18:30:39.590Z"
 }
