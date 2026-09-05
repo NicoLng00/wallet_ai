@@ -61,10 +61,10 @@
       "NVDA": 198.36691212000002,
       "SPY": 663.2237022300001,
       "QQQ": 619.1086783200001,
-      "BTCUSD": 68652.552825,
+      "BTCUSD": 68664.608463,
       "TSLA": 304.90430736,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2118.14115192,
+      "ETHUSD": 2118.45976521,
       "WTI": 72.8,
       "TLT": 70.79242857,
       "EURUSD": 1.1612823809075885,
@@ -855,6 +855,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre NVDA forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre NVDA forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1138,14 +1143,9 @@
       "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000562 SPY",
-      "detail": "0,37 € · fill simulato 662,83 € · SIM-4157215",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-05T09:14:54.469Z"
+  "updatedAt": "2026-09-05T12:47:57.877Z"
 }
