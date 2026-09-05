@@ -5,19 +5,19 @@
     "highWater": 50.44252969914739,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0410118884049475,
-      "SSL.MI": 1.6284678129137762,
-      "BVB.DE": 3.241938031804551,
-      "MANU": 17.991594153172223,
-      "AJAX.AS": 8.896821788216876,
-      "CCP.L": 2.1263501488065377,
-      "FENER.IS": 0.05497814160355505,
-      "GSRAY.IS": 0.018120645752339414,
-      "BJKAS.IS": 0.03557173493917381,
-      "TSPOR.IS": 0.01831289281317118,
-      "SCP.LS": 0.9893194520634061,
-      "SLBEN.LS": 6.563795386527986,
-      "FCP.LS": 2.80441320675351
+      "JUVE.MI": 2.0399499213372105,
+      "SSL.MI": 1.6311207481330434,
+      "BVB.DE": 3.2435156457606267,
+      "MANU": 17.9962239467914,
+      "AJAX.AS": 8.90439528358515,
+      "CCP.L": 2.125197616201125,
+      "FENER.IS": 0.05487563793275552,
+      "GSRAY.IS": 0.018120723179871547,
+      "BJKAS.IS": 0.03559573686248146,
+      "TSPOR.IS": 0.01832341249936487,
+      "SCP.LS": 0.9901311826049429,
+      "SLBEN.LS": 6.567985212954369,
+      "FCP.LS": 2.799953784836591
     },
     "model": {
       "calibration": 58,
@@ -661,6 +661,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
       "detail": "chiude AJAX.AS per segnale difensivo",
       "tag": "AUTO"
@@ -929,19 +939,9 @@
       "title": "Autopilot (Gemini): vendita demo 0.180060 JUVE.MI",
       "detail": "0,37 € · fill simulato 2,08 € · SIM-0410297",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-05T12:54:20.933Z"
+  "updatedAt": "2026-09-05T15:58:44.613Z"
 }
