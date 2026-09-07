@@ -95,10 +95,10 @@
       "NVDA": 198.35654592,
       "SPY": 663.18904368,
       "QQQ": 619.07632512,
-      "BTCUSD": 68909.870016,
+      "BTCUSD": 68689.43558399999,
       "TSLA": 304.88837376,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2159.46524736,
+      "ETHUSD": 2156.91647424,
       "WTI": 72.8,
       "TLT": 70.78872911999999,
       "EURUSD": 1.1613430700336325,
@@ -913,6 +913,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre TLT forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre TLT forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1206,14 +1211,9 @@
       "title": "Stop Loss: vendita demo 0.000562 SPY",
       "detail": "0,37 € · fill simulato 657,10 € · SIM-5307218",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-07T01:13:41.602Z"
+  "updatedAt": "2026-09-07T06:10:30.691Z"
 }
