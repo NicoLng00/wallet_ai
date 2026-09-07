@@ -5,19 +5,19 @@
     "highWater": 50.44252969914739,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0107969124803424,
-      "SSL.MI": 1.620279383354944,
-      "BVB.DE": 3.2337642079046085,
-      "MANU": 17.99821951958646,
-      "AJAX.AS": 8.987105216237204,
-      "CCP.L": 2.125390489145418,
-      "FENER.IS": 0.05204911169830946,
-      "GSRAY.IS": 0.01846554973712153,
-      "BJKAS.IS": 0.03912660448099085,
-      "TSPOR.IS": 0.018495818911558697,
-      "SCP.LS": 0.974114138832966,
-      "SLBEN.LS": 6.597318588462764,
-      "FCP.LS": 2.80174051039647
+      "JUVE.MI": 2.044083910885943,
+      "SSL.MI": 1.6317574311314416,
+      "BVB.DE": 3.237902512711848,
+      "MANU": 17.98989865843019,
+      "AJAX.AS": 8.903078961654561,
+      "CCP.L": 2.1222793875119517,
+      "FENER.IS": 0.054863195674747685,
+      "GSRAY.IS": 0.018147272614114415,
+      "BJKAS.IS": 0.03554926910064274,
+      "TSPOR.IS": 0.018294121492915105,
+      "SCP.LS": 0.9904798552428097,
+      "SLBEN.LS": 6.559898398417655,
+      "FCP.LS": 2.797269385920131
     },
     "model": {
       "calibration": 59,
@@ -719,6 +719,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
       "detail": "chiude AJAX.AS per segnale difensivo",
       "tag": "AUTO"
@@ -997,19 +1007,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.183860 JUVE.MI",
-      "detail": "0,38 € · fill simulato 2,04 € · SIM-5012083",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-07T17:47:35.444Z"
+  "updatedAt": "2026-09-07T23:47:37.170Z"
 }
