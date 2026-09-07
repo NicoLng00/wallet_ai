@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.432963534111046,
+    "cash": 50.245463534111046,
     "highWater": 50.44252969914739,
-    "positions": {},
+    "positions": {
+      "AJAX.AS": {
+        "quantity": 0.04215112610490292,
+        "averagePrice": 8.89655946715931,
+        "stopLoss": 8.757988136680098,
+        "takeProfit": 9.139059295497933,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 8.89655946715931,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-07T00:53:37.450Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 2.040783005953739,
-      "SSL.MI": 1.6307458182562178,
-      "BVB.DE": 3.240629012008652,
-      "MANU": 17.974349017747695,
-      "AJAX.AS": 8.903352069916588,
-      "CCP.L": 2.125791556589738,
-      "FENER.IS": 0.05493388663068756,
-      "GSRAY.IS": 0.018132212436746648,
-      "BJKAS.IS": 0.035578025632949095,
-      "TSPOR.IS": 0.018302014358445653,
-      "SCP.LS": 0.9888775155384683,
-      "SLBEN.LS": 6.5663088031037775,
-      "FCP.LS": 2.800759162583274
+      "JUVE.MI": 2.0409159867573496,
+      "SSL.MI": 1.6274609286940624,
+      "BVB.DE": 3.242125983276866,
+      "MANU": 18.01380464840815,
+      "AJAX.AS": 8.89655946715931,
+      "CCP.L": 2.125505514626143,
+      "FENER.IS": 0.0549561598362457,
+      "GSRAY.IS": 0.018099404865874812,
+      "BJKAS.IS": 0.03551272592499538,
+      "TSPOR.IS": 0.018309345386254935,
+      "SCP.LS": 0.9898926236099009,
+      "SLBEN.LS": 6.560030452520596,
+      "FCP.LS": 2.8032068167345328
     },
     "model": {
       "calibration": 57,
@@ -25,6 +43,23 @@
       "wins": 10
     },
     "trades": [
+      {
+        "id": "SIM-2417450",
+        "symbol": "AJAX.AS",
+        "side": "buy",
+        "quantity": 0.04215112610490292,
+        "price": 8.89655946715931,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-07T00:53:37.450Z",
+        "stopLoss": 8.757988136680098,
+        "takeProfit": 9.139059295497933,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-8829428",
         "symbol": "AJAX.AS",
@@ -675,6 +710,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.042151 AJAX.AS",
+      "detail": "0,38 € · fill simulato 8,90 € · SIM-2417450",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -958,24 +1008,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude SLBEN.LS per segnale difensivo",
-      "detail": "chiude SLBEN.LS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,18 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-06T22:51:59.073Z"
+  "updatedAt": "2026-09-07T00:53:37.856Z"
 }
