@@ -5,19 +5,19 @@
     "highWater": 50.44252969914739,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0253701752459286,
-      "SSL.MI": 1.6605078880520205,
-      "BVB.DE": 3.275439981287952,
-      "MANU": 17.94590106682175,
-      "AJAX.AS": 8.982286242875613,
-      "CCP.L": 2.1483166002405523,
-      "FENER.IS": 0.05199578861383407,
-      "GSRAY.IS": 0.018284839326513782,
-      "BJKAS.IS": 0.040992998164369236,
-      "TSPOR.IS": 0.018112289148344635,
-      "SCP.LS": 0.9862097776062996,
-      "SLBEN.LS": 6.496287095586219,
-      "FCP.LS": 2.7964619203754917
+      "JUVE.MI": 2.0096656231906627,
+      "SSL.MI": 1.660949067370917,
+      "BVB.DE": 3.265517812047925,
+      "MANU": 17.78408549314403,
+      "AJAX.AS": 8.889342011541064,
+      "CCP.L": 2.125686031885649,
+      "FENER.IS": 0.05200535980652099,
+      "GSRAY.IS": 0.018261835451152605,
+      "BJKAS.IS": 0.040497995835785,
+      "TSPOR.IS": 0.018304173479860325,
+      "SCP.LS": 0.9840322507351852,
+      "SLBEN.LS": 6.556135514786982,
+      "FCP.LS": 2.8007707829708512
     },
     "model": {
       "calibration": 58,
@@ -743,6 +743,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
       "detail": "chiude JUVE.MI per segnale difensivo",
       "tag": "AUTO"
@@ -1031,19 +1041,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-08T13:31:06.528Z"
+  "updatedAt": "2026-09-08T17:31:48.515Z"
 }
