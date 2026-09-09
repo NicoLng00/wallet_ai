@@ -3250,6 +3250,10 @@
             {
               "returnPct": 0.07837648112458279,
               "at": "2026-08-25T03:08:13.366Z"
+            },
+            {
+              "returnPct": 0.10971496384837004,
+              "at": "2026-09-09T06:08:59.773Z"
             }
           ]
         }
@@ -3542,6 +3546,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-07T12:19:38.400Z"
+        },
+        {
+          "tradeId": "SIM-4139774",
+          "symbol": "BVB.DE",
+          "returnPct": 0.10971496384837004,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 3.235418343291613,
+            "confidence": 67,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-09T06:08:59.774Z"
         }
       ],
       "engulfing@1D": [
@@ -23364,5 +23384,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-09T01:12:30.068Z"
+  "updatedAt": "2026-09-09T06:09:00.151Z"
 }
