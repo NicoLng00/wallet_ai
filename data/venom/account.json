@@ -5,19 +5,19 @@
     "highWater": 50.44252969914739,
     "positions": {},
     "market": {
-      "JUVE.MI": 2.0430075365033695,
-      "SSL.MI": 1.6292006030013937,
-      "BVB.DE": 3.238968081357299,
-      "MANU": 17.854003542238306,
-      "AJAX.AS": 8.901432190362032,
-      "CCP.L": 2.124988680534449,
-      "FENER.IS": 0.054832223202000145,
-      "GSRAY.IS": 0.018102215596535347,
-      "BJKAS.IS": 0.03547122139489227,
-      "TSPOR.IS": 0.018289829644681215,
-      "SCP.LS": 0.9908757495337716,
-      "SLBEN.LS": 6.553737754030554,
-      "FCP.LS": 2.7981558784441796
+      "JUVE.MI": 2.004242231758853,
+      "SSL.MI": 1.6799764796255028,
+      "BVB.DE": 3.2368250790259947,
+      "MANU": 17.855226203643447,
+      "AJAX.AS": 8.911536413919487,
+      "CCP.L": 2.1019763808172214,
+      "FENER.IS": 0.05198802391211155,
+      "GSRAY.IS": 0.01846932614871828,
+      "BJKAS.IS": 0.041323996883318476,
+      "TSPOR.IS": 0.018099245799057473,
+      "SCP.LS": 0.9865620219453234,
+      "SLBEN.LS": 6.562698242288571,
+      "FCP.LS": 2.7990252544892473
     },
     "model": {
       "calibration": 59,
@@ -777,6 +777,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude BVB.DE per segnale difensivo",
       "detail": "chiude BVB.DE per segnale difensivo",
       "tag": "AUTO"
@@ -1065,19 +1075,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-09T06:09:00.144Z"
+  "updatedAt": "2026-09-09T11:36:26.134Z"
 }
