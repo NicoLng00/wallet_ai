@@ -61,10 +61,10 @@
       "NVDA": 187.69832552,
       "SPY": 651.41702706,
       "QQQ": 609.1771675800001,
-      "BTCUSD": 66292.68300399999,
+      "BTCUSD": 65856.87492999999,
       "TSLA": 312.50963192,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2113.53162578,
+      "ETHUSD": 2095.3600622999998,
       "WTI": 72.8,
       "TLT": 69.43703396,
       "EURUSD": 1.1633561428694412,
@@ -1030,6 +1030,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -1308,14 +1313,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001445 NVDA",
       "detail": "0,29 € · fill simulato 198,37 € · SIM-9382930",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-10T21:57:36.384Z"
+  "updatedAt": "2026-09-10T23:59:30.578Z"
 }
