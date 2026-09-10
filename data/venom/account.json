@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.245792363163886,
+    "cash": 50.42433174702373,
     "highWater": 50.44252969914739,
-    "positions": {
-      "JUVE.MI": {
-        "quantity": 0.18374953589333834,
-        "averagePrice": 2.0109594088792835,
-        "stopLoss": 1.9770308527776208,
-        "takeProfit": 2.0703343820571933,
-        "strategyKey": "engulfing@1D",
-        "decisionSnapshot": {
-          "strategyKey": "engulfing@1D",
-          "entryPrice": 2.0109594088792835,
-          "confidence": 64,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-10T01:15:13.785Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 2.0109594088792835,
-      "SSL.MI": 1.6621439070445299,
-      "BVB.DE": 3.2581665799088375,
-      "MANU": 17.812363721537306,
-      "AJAX.AS": 8.907304661942767,
-      "CCP.L": 2.124150245073091,
-      "FENER.IS": 0.051872091766842474,
-      "GSRAY.IS": 0.018268378262942003,
-      "BJKAS.IS": 0.04042217038982582,
-      "TSPOR.IS": 0.018244200879996307,
-      "SCP.LS": 0.9850280398502844,
-      "SLBEN.LS": 6.559620290388341,
-      "FCP.LS": 2.795614706611196
+      "JUVE.MI": 1.9771250639331308,
+      "SSL.MI": 1.6738144530336303,
+      "BVB.DE": 3.2315232556418376,
+      "MANU": 17.549720177357052,
+      "AJAX.AS": 8.979892181125425,
+      "CCP.L": 2.157497927914552,
+      "FENER.IS": 0.051757488337612755,
+      "GSRAY.IS": 0.01788554872063007,
+      "BJKAS.IS": 0.04183145821932516,
+      "TSPOR.IS": 0.01808071729779026,
+      "SCP.LS": 0.9738275018925521,
+      "SLBEN.LS": 6.4007779143092,
+      "FCP.LS": 2.803568234811239
     },
     "model": {
       "calibration": 59,
-      "outcomes": 22,
+      "outcomes": 23,
       "wins": 12
     },
     "trades": [
+      {
+        "id": "SIM-0010942",
+        "symbol": "JUVE.MI",
+        "side": "sell",
+        "quantity": 0.18374953589333834,
+        "price": 1.9771250639331308,
+        "notional": 0.36329581290079965,
+        "realizedPnl": -0.006217045181110671,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-09-10T11:33:30.942Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "engulfing@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-2913785",
         "symbol": "JUVE.MI",
@@ -812,6 +811,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude JUVE.MI per segnale difensivo",
+      "detail": "chiude JUVE.MI per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.183750 JUVE.MI",
+      "detail": "0,36 € · fill simulato 1,98 € · SIM-0010942",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre JUVE.MI forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1090,29 +1109,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.042154 AJAX.AS",
-      "detail": "0,37 € · fill simulato 8,89 € · SIM-8829428",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.042154 AJAX.AS",
-      "detail": "0,38 € · fill simulato 8,90 € · SIM-2948825",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-10T01:15:14.214Z"
+  "updatedAt": "2026-09-10T11:33:31.453Z"
 }
