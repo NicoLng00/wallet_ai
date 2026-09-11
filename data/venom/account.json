@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.9590999278750694,
-      "SSL.MI": 1.6628268358969436,
-      "BVB.DE": 3.2360073024709846,
-      "MANU": 17.21302600847364,
-      "AJAX.AS": 8.674897517013154,
-      "CCP.L": 2.1259284620427916,
-      "FENER.IS": 0.05233924522151317,
-      "GSRAY.IS": 0.0182394478699803,
-      "BJKAS.IS": 0.050148095222045094,
-      "TSPOR.IS": 0.018448567847947878,
-      "SCP.LS": 0.9750081780215701,
-      "SLBEN.LS": 6.638359576474135,
-      "FCP.LS": 2.7235209979316806
+      "JUVE.MI": 1.9618693813836727,
+      "SSL.MI": 1.6652556931129927,
+      "BVB.DE": 3.234303194758622,
+      "MANU": 17.274796783222126,
+      "AJAX.AS": 8.679283906476348,
+      "CCP.L": 2.1214798249994646,
+      "FENER.IS": 0.05228312481323961,
+      "GSRAY.IS": 0.018099668871085908,
+      "BJKAS.IS": 0.04573763072195516,
+      "TSPOR.IS": 0.018093334438256933,
+      "SCP.LS": 0.9761581697447705,
+      "SLBEN.LS": 6.637214393232876,
+      "FCP.LS": 2.7157412644969114
     },
     "model": {
       "calibration": 58,
@@ -890,6 +890,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre AJAX.AS (score 71)",
       "detail": "apre AJAX.AS (score 71)",
       "tag": "AUTO"
@@ -1168,19 +1178,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-11T18:40:51.994Z"
+  "updatedAt": "2026-09-11T21:20:47.238Z"
 }
