@@ -3284,6 +3284,10 @@
             {
               "returnPct": 0.14249116418283472,
               "at": "2026-09-07T12:19:38.399Z"
+            },
+            {
+              "returnPct": 1.6908997630272191,
+              "at": "2026-09-11T23:24:26.812Z"
             }
           ]
         }
@@ -3586,6 +3590,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-11T11:34:54.660Z"
+        },
+        {
+          "tradeId": "SIM-9066813",
+          "symbol": "AJAX.AS",
+          "returnPct": 1.6908997630272191,
+          "outcomeTag": "signal_flip_profit",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 8.69828125942587,
+            "confidence": 60,
+            "score": 71,
+            "tier": "validated",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-11T23:24:26.813Z"
         }
       ],
       "engulfing@1D": [
@@ -23425,5 +23445,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-11T21:20:47.243Z"
+  "updatedAt": "2026-09-11T23:24:27.026Z"
 }
