@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.959083093130469,
-      "SSL.MI": 1.6640680357345972,
-      "BVB.DE": 3.2379191805480843,
-      "MANU": 17.287430252405684,
-      "AJAX.AS": 8.670725853830191,
-      "CCP.L": 2.126359992521753,
-      "FENER.IS": 0.052333589553305776,
-      "GSRAY.IS": 0.01824514863154984,
-      "BJKAS.IS": 0.0501741548308514,
-      "TSPOR.IS": 0.01846242445439322,
-      "SCP.LS": 0.9747181579107252,
-      "SLBEN.LS": 6.636452951128909,
-      "FCP.LS": 2.7219042078476186
+      "JUVE.MI": 1.9591179605728193,
+      "SSL.MI": 1.6655604612871953,
+      "BVB.DE": 3.23335885511211,
+      "MANU": 17.2669349653925,
+      "AJAX.AS": 8.68269618656947,
+      "CCP.L": 2.130281275343706,
+      "FENER.IS": 0.052312923317428664,
+      "GSRAY.IS": 0.018258758819495378,
+      "BJKAS.IS": 0.05019624914182912,
+      "TSPOR.IS": 0.018422362379521606,
+      "SCP.LS": 0.9740124654586642,
+      "SLBEN.LS": 6.6495180767376265,
+      "FCP.LS": 2.7209428654413728
     },
     "model": {
       "calibration": 60,
@@ -933,6 +933,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
       "detail": "chiude AJAX.AS per segnale difensivo",
       "tag": "AUTO"
@@ -1201,19 +1211,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.115905 BVB.DE",
-      "detail": "0,38 € · fill simulato 3,24 € · SIM-6349729",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-12T13:45:33.677Z"
+  "updatedAt": "2026-09-12T16:33:11.448Z"
 }
