@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.47015867985158,
+    "cash": 49.284645584802135,
     "highWater": 50.017265718199006,
     "positions": {
       "ES": {
@@ -54,6 +54,23 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-09-11T04:27:56.960Z"
+      },
+      "QQQ": {
+        "quantity": 0.0006029765783546568,
+        "averagePrice": 615.32438144,
+        "stopLoss": 613.398822532355,
+        "takeProfit": 618.6941095283789,
+        "strategyKey": "bollinger_reversion@30m",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@30m",
+          "entryPrice": 615.32438144,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-12T00:32:48.678Z"
       }
     },
     "market": {
@@ -61,10 +78,10 @@
       "NVDA": 187.89049802,
       "SPY": 657.85344602,
       "QQQ": 615.32438144,
-      "BTCUSD": 66413.683342,
+      "BTCUSD": 66493.731976,
       "TSLA": 314.54809472,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2170.44554818,
+      "ETHUSD": 2164.14494602,
       "WTI": 72.8,
       "TLT": 69.60788206000001,
       "EURUSD": 1.1617937165548633,
@@ -110,6 +127,23 @@
       "wins": 10
     },
     "trades": [
+      {
+        "id": "SIM-3168678",
+        "symbol": "QQQ",
+        "side": "buy",
+        "quantity": 0.0006029765783546568,
+        "price": 615.32438144,
+        "notional": 0.3710261900988869,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-12T00:32:48.678Z",
+        "stopLoss": 613.398822532355,
+        "takeProfit": 618.6941095283789,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@30m",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-3796251",
         "symbol": "AAPL",
@@ -1049,6 +1083,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre QQQ forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre QQQ forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000603 QQQ",
+      "detail": "0,37 € · fill simulato 615,32 € · SIM-3168678",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1337,19 +1381,9 @@
       "title": "Autopilot: apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000172 ETHUSD",
-      "detail": "0,37 € · fill simulato 2163 € · SIM-6297644",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-11T22:27:24.110Z"
+  "updatedAt": "2026-09-12T00:32:49.091Z"
 }
