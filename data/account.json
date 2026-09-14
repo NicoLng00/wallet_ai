@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.09982816385913,
+    "cash": 48.917771272318284,
     "highWater": 50.017265718199006,
     "positions": {
       "ES": {
@@ -88,55 +88,72 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-09-13T00:49:36.739Z"
+      },
+      "ETHUSD": {
+        "quantity": 0.00017013156865414955,
+        "averagePrice": 2140.18941906,
+        "stopLoss": 2105.94638835504,
+        "takeProfit": 2200.1147227936804,
+        "strategyKey": "sma_rsi@1D",
+        "decisionSnapshot": {
+          "strategyKey": "sma_rsi@1D",
+          "entryPrice": 2140.18941906,
+          "confidence": 83,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": null,
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-14T01:07:21.757Z"
       }
     },
     "market": {
-      "AAPL": 286.36291226,
-      "NVDA": 188.13061702,
-      "SPY": 658.69416502,
-      "QQQ": 616.11074944,
-      "BTCUSD": 66100.389086,
-      "TSLA": 314.95007872,
+      "AAPL": 286.49847841999997,
+      "NVDA": 188.21967933999997,
+      "SPY": 659.0059953399999,
+      "QQQ": 616.4024204799999,
+      "BTCUSD": 66204.110126,
+      "TSLA": 315.09917823999996,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2133.2645095,
+      "ETHUSD": 2140.18941906,
       "WTI": 72.8,
-      "TLT": 69.69683906,
-      "EURUSD": 1.1603108704884213,
+      "TLT": 69.72983402,
+      "EURUSD": 1.1597618313103222,
       "ES": 7730,
-      "MSFT": 427.15276794,
-      "GOOGL": 291.732163,
-      "AMZN": 221.30276163999997,
-      "META": 558.4968791399999,
-      "JPM": 307.01255074,
-      "V": 319.2678871,
-      "MA": 490.54957122,
-      "UNH": 326.71416741999997,
-      "HD": 266.08386412,
-      "PG": 125.19920626000001,
-      "JNJ": 228.88693604,
-      "KO": 76.09167702,
-      "PEP": 117.48575616,
-      "DIS": 91.8288389,
-      "NFLX": 66.7062612,
-      "ADBE": 217.38139873999998,
-      "CRM": 213.49450936,
-      "ORCL": 129.51701464,
-      "INTC": 88.71760372,
-      "AMD": 444.82044694,
-      "COST": 779.76516726,
-      "WMT": 92.3459417,
-      "BAC": 54.02862422,
-      "XOM": 143.05648962,
-      "CVX": 184.48504228,
-      "PFE": 23.89014936,
-      "ABBV": 221.59578656,
-      "MRK": 124.04434334000001,
-      "T": 22.45949828,
-      "VZ": 43.61762118,
-      "CSCO": 96.63789494,
-      "IBM": 209.67656702,
-      "NKE": 31.715638399999996,
-      "MCD": 217.63995014
+      "MSFT": 427.35498498,
+      "GOOGL": 291.870271,
+      "AMZN": 221.40752787999998,
+      "META": 558.7612753799999,
+      "JPM": 307.15789258,
+      "V": 319.41903069999995,
+      "MA": 490.78180074,
+      "UNH": 326.86883614,
+      "HD": 266.20983004,
+      "PG": 125.25847642000001,
+      "JNJ": 228.99529267999998,
+      "KO": 76.12769934,
+      "PEP": 117.54137472,
+      "DIS": 91.87231129999999,
+      "NFLX": 66.7378404,
+      "ADBE": 217.48430857999998,
+      "CRM": 213.59557912,
+      "ORCL": 129.57832888,
+      "INTC": 88.75960323999999,
+      "AMD": 445.03102798,
+      "COST": 780.1343134199999,
+      "WMT": 92.3896589,
+      "BAC": 54.054201739999996,
+      "XOM": 143.12421354,
+      "CVX": 184.57237876,
+      "PFE": 23.90145912,
+      "ABBV": 221.70069152,
+      "MRK": 124.10306678,
+      "T": 22.470130759999996,
+      "VZ": 43.638270059999996,
+      "CSCO": 96.68364397999999,
+      "IBM": 209.77582933999997,
+      "NKE": 31.730652799999994,
+      "MCD": 217.74298238
     },
     "model": {
       "calibration": 55,
@@ -144,6 +161,23 @@
       "wins": 10
     },
     "trades": [
+      {
+        "id": "SIM-8041757",
+        "symbol": "ETHUSD",
+        "side": "buy",
+        "quantity": 0.00017013156865414955,
+        "price": 2140.18941906,
+        "notional": 0.36411378308169084,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-14T01:07:21.757Z",
+        "stopLoss": 2105.94638835504,
+        "takeProfit": 2200.1147227936804,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-0576740",
         "symbol": "TSLA",
@@ -1117,6 +1151,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000170 ETHUSD",
+      "detail": "0,36 € · fill simulato 2140 € · SIM-8041757",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1405,19 +1449,9 @@
       "title": "Stop Loss: vendita demo 0.000172 ETHUSD",
       "detail": "0,36 € · fill simulato 2123 € · SIM-8763797",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre ES forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre ES forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000048 ES",
-      "detail": "0,37 € · fill simulato 7730 € · SIM-0764918",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-13T23:00:42.205Z"
+  "updatedAt": "2026-09-14T01:07:22.227Z"
 }
