@@ -3300,6 +3300,10 @@
             {
               "returnPct": -0.06838074281545889,
               "at": "2026-09-14T22:25:57.163Z"
+            },
+            {
+              "returnPct": -0.8027577212695954,
+              "at": "2026-09-15T11:38:48.426Z"
             }
           ]
         }
@@ -3666,6 +3670,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-14T22:25:57.165Z"
+        },
+        {
+          "tradeId": "SIM-2328427",
+          "symbol": "AJAX.AS",
+          "returnPct": -0.8027577212695954,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 8.678697531150453,
+            "confidence": 79,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-15T11:38:48.427Z"
         }
       ],
       "engulfing@1D": [
@@ -23526,5 +23546,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-15T00:56:11.924Z"
+  "updatedAt": "2026-09-15T11:38:48.753Z"
 }
