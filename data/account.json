@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.10028728800497,
+    "cash": 49.45616338504342,
     "highWater": 50.017265718199006,
     "positions": {
       "SPY": {
@@ -54,96 +54,96 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-09-13T00:49:36.739Z"
-      },
-      "ETHUSD": {
-        "quantity": 0.00017013156865414955,
-        "averagePrice": 2140.18941906,
-        "stopLoss": 2105.94638835504,
-        "takeProfit": 2200.1147227936804,
-        "strategyKey": "sma_rsi@1D",
-        "decisionSnapshot": {
-          "strategyKey": "sma_rsi@1D",
-          "entryPrice": 2140.18941906,
-          "confidence": 83,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": null,
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-14T01:07:21.757Z"
-      },
-      "QQQ": {
-        "quantity": 0.0006020867715586592,
-        "averagePrice": 613.92861584,
-        "stopLoss": 611.5527744267746,
-        "takeProfit": 618.0863383131446,
-        "strategyKey": "bollinger_reversion@30m",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@30m",
-          "entryPrice": 613.92861584,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-15T00:39:34.209Z"
       }
     },
     "market": {
-      "AAPL": 288.34335904,
-      "NVDA": 182.62554048,
-      "SPY": 658.68468544,
-      "QQQ": 613.92861584,
-      "BTCUSD": 66639.796552,
-      "TSLA": 310.75602136000003,
+      "AAPL": 285.1576272,
+      "NVDA": 183.77690551999999,
+      "SPY": 655.2046196800001,
+      "QQQ": 610.46586384,
+      "BTCUSD": 65788.825248,
+      "TSLA": 311.33603232,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2142.55182936,
+      "ETHUSD": 2087.78840648,
       "WTI": 72.8,
-      "TLT": 70.06012984,
+      "TLT": 69.89564912,
       "EURUSD": 1.1551505854303166,
       "ES": 7730,
-      "MSFT": 437.52737208,
-      "GOOGL": 302.46273032,
-      "AMZN": 219.48653552,
-      "META": 576.2019328,
-      "JPM": 303.10333944,
-      "V": 324.87539264,
-      "MA": 497.26850096,
-      "UNH": 332.0346324,
-      "HD": 269.11642856000003,
-      "PG": 126.50298744,
-      "JNJ": 230.55002816,
-      "KO": 77.34922279999999,
-      "PEP": 118.02790192,
-      "DIS": 94.00505992000001,
-      "NFLX": 69.53206016,
-      "ADBE": 229.92673280000002,
-      "CRM": 224.58543784,
-      "ORCL": 125.34296551999999,
-      "INTC": 84.13621672,
-      "AMD": 427.13911608,
-      "COST": 795.48936008,
-      "WMT": 94.42924704,
-      "BAC": 51.48246536,
-      "XOM": 142.90777504000002,
-      "CVX": 183.67302296,
-      "PFE": 23.99687136,
-      "ABBV": 226.61114776,
-      "MRK": 125.3949068,
-      "T": 22.94938888,
-      "VZ": 44.40113752,
-      "CSCO": 95.27762128,
-      "IBM": 215.63422392,
-      "NKE": 32.0737404,
-      "MCD": 222.90600312
+      "MSFT": 434.34164024,
+      "GOOGL": 298.45459488,
+      "AMZN": 215.56496888,
+      "META": 580.46111776,
+      "JPM": 298.81818384,
+      "V": 323.53357624,
+      "MA": 494.29053424,
+      "UNH": 326.43363103999997,
+      "HD": 265.12560688,
+      "PG": 126.86657640000001,
+      "JNJ": 227.87505224000003,
+      "KO": 76.59607424000001,
+      "PEP": 117.1708708,
+      "DIS": 93.17399944,
+      "NFLX": 67.71411536,
+      "ADBE": 225.89262672,
+      "CRM": 224.17856447999998,
+      "ORCL": 123.85398216,
+      "INTC": 85.01921847999999,
+      "AMD": 435.01687688,
+      "COST": 785.42140864,
+      "WMT": 94.11759936,
+      "BAC": 51.292014,
+      "XOM": 145.50483904,
+      "CVX": 186.56442088,
+      "PFE": 23.80642,
+      "ABBV": 226.34278447999998,
+      "MRK": 123.90592344,
+      "T": 23.1138696,
+      "VZ": 44.5396476,
+      "CSCO": 95.75374968,
+      "IBM": 215.2100368,
+      "NKE": 31.44178816,
+      "MCD": 221.32179408
     },
     "model": {
       "calibration": 55,
-      "outcomes": 28,
+      "outcomes": 30,
       "wins": 10
     },
     "trades": [
+      {
+        "id": "SIM-5106263",
+        "symbol": "QQQ",
+        "side": "sell",
+        "quantity": 0.0006020867715586592,
+        "price": 610.46586384,
+        "notional": 0.36755342110619366,
+        "realizedPnl": -0.0020848771723883043,
+        "origin": "Stop Loss",
+        "at": "2026-09-15T15:11:46.263Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@30m",
+        "outcomeTag": "forced_loss"
+      },
+      {
+        "id": "SIM-5106255",
+        "symbol": "ETHUSD",
+        "side": "sell",
+        "quantity": 0.00017013156865414955,
+        "price": 2087.78840648,
+        "notional": 0.3551987166123896,
+        "realizedPnl": -0.00891506646930123,
+        "origin": "Stop Loss",
+        "at": "2026-09-15T15:11:46.255Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "sma_rsi@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-2774209",
         "symbol": "QQQ",
@@ -1190,6 +1190,31 @@
       "tag": "HOLD"
     },
     {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Stop Loss: vendita demo 0.000602 QQQ",
+      "detail": "0,37 € · fill simulato 610,47 € · SIM-5106263",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Stop Loss: vendita demo 0.000170 ETHUSD",
+      "detail": "0,36 € · fill simulato 2088 € · SIM-5106255",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1458,34 +1483,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre AAPL forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre AAPL forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001363 AAPL",
-      "detail": "0,37 € · fill simulato 272,04 € · SIM-7801247",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-15T10:19:27.003Z"
+  "updatedAt": "2026-09-15T15:11:47.477Z"
 }
