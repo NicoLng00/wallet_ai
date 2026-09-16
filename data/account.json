@@ -61,10 +61,10 @@
       "NVDA": 183.88986069999999,
       "SPY": 656.4374869,
       "QQQ": 610.6318633999999,
-      "BTCUSD": 65590.01267,
+      "BTCUSD": 65790.22267999999,
       "TSLA": 309.0514518,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2076.7931678,
+      "ETHUSD": 2083.5881742,
       "WTI": 72.8,
       "TLT": 69.95216409999999,
       "EURUSD": 1.1537884644229328,
@@ -1219,6 +1219,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SPY per limite di detenzione (6g)",
       "detail": "chiude SPY per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -1512,14 +1517,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.001445 NVDA",
-      "detail": "0,27 € · fill simulato 188,18 € · SIM-0037563",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-16T05:09:27.416Z"
+  "updatedAt": "2026-09-16T09:58:33.719Z"
 }
