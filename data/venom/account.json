@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.58265059210509,
+    "cash": 50.39515059210509,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "AJAX.AS": {
+        "quantity": 0.043223339739403475,
+        "averagePrice": 8.675868229084127,
+        "stopLoss": 8.510154033287705,
+        "takeProfit": 8.965868071727865,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 8.675868229084127,
+          "confidence": 79,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-16T00:35:22.430Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.913496960122848,
-      "SSL.MI": 1.6994558448671313,
-      "BVB.DE": 3.2668237969511296,
-      "MANU": 17.26879983469344,
-      "AJAX.AS": 8.682419565495126,
-      "CCP.L": 2.1067584952362104,
-      "FENER.IS": 0.05144485270692964,
-      "GSRAY.IS": 0.01796683534038463,
-      "BJKAS.IS": 0.04807335737774332,
-      "TSPOR.IS": 0.01797463544087547,
-      "SCP.LS": 0.989064177472279,
-      "SLBEN.LS": 6.764549598521859,
-      "FCP.LS": 2.8017759897842605
+      "JUVE.MI": 1.9151323036396162,
+      "SSL.MI": 1.701694938630004,
+      "BVB.DE": 3.2670086312293214,
+      "MANU": 17.474351798350387,
+      "AJAX.AS": 8.675868229084127,
+      "CCP.L": 2.1318029569751222,
+      "FENER.IS": 0.05144962911955737,
+      "GSRAY.IS": 0.017997637259583595,
+      "BJKAS.IS": 0.04814774433301558,
+      "TSPOR.IS": 0.01798170647833966,
+      "SCP.LS": 0.9742936565535725,
+      "SLBEN.LS": 6.682259808164469,
+      "FCP.LS": 2.7197454925983475
     },
     "model": {
       "calibration": 60,
@@ -25,6 +43,23 @@
       "wins": 14
     },
     "trades": [
+      {
+        "id": "SIM-8922430",
+        "symbol": "AJAX.AS",
+        "side": "buy",
+        "quantity": 0.043223339739403475,
+        "price": 8.675868229084127,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-16T00:35:22.430Z",
+        "stopLoss": 8.510154033287705,
+        "takeProfit": 8.965868071727865,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-2328427",
         "symbol": "AJAX.AS",
@@ -1015,6 +1050,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.043223 AJAX.AS",
+      "detail": "0,38 € · fill simulato 8,68 € · SIM-8922430",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1298,24 +1348,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,17 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 1.149652 AJAX.AS",
-      "detail": "10,17 € · fill simulato 8,85 € · SIM-9066813",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-15T22:21:47.368Z"
+  "updatedAt": "2026-09-16T00:35:22.763Z"
 }
