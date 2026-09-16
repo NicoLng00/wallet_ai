@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.2707027723495,
+    "cash": 49.45608062519195,
     "highWater": 50.017265718199006,
     "positions": {
-      "SPY": {
-        "quantity": 0.0005638615714711488,
-        "averagePrice": 655.3453168,
-        "stopLoss": 649.8924620985491,
-        "takeProfit": 664.887812527539,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 655.3453168,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-10T03:55:34.672Z"
-      },
       "NVDA": {
         "quantity": 0.0013661662616163675,
         "averagePrice": 187.95074968,
@@ -78,10 +61,10 @@
       "NVDA": 183.88986069999999,
       "SPY": 656.4374869,
       "QQQ": 610.6318633999999,
-      "BTCUSD": 65683.61735,
+      "BTCUSD": 65590.01267,
       "TSLA": 309.0514518,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2082.8168023,
+      "ETHUSD": 2076.7931678,
       "WTI": 72.8,
       "TLT": 69.95216409999999,
       "EURUSD": 1.1537884644229328,
@@ -122,11 +105,28 @@
       "MCD": 219.0869538
     },
     "model": {
-      "calibration": 55,
-      "outcomes": 30,
-      "wins": 10
+      "calibration": 56,
+      "outcomes": 31,
+      "wins": 11
     },
     "trades": [
+      {
+        "id": "SIM-5366995",
+        "symbol": "SPY",
+        "side": "sell",
+        "quantity": 0.0005638615714711488,
+        "price": 656.4374869,
+        "notional": 0.3701398729360056,
+        "realizedPnl": 0.000615832748899788,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-09-16T05:09:26.995Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-8531862",
         "symbol": "QQQ",
@@ -1219,6 +1219,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude SPY per limite di detenzione (6g)",
+      "detail": "chiude SPY per limite di detenzione (6g)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000564 SPY",
+      "detail": "0,37 € · fill simulato 656,44 € · SIM-5366995",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: apre QQQ forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre QQQ forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1502,24 +1517,9 @@
       "title": "Stop Loss: vendita demo 0.001445 NVDA",
       "detail": "0,27 € · fill simulato 188,18 € · SIM-0037563",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-16T00:28:52.326Z"
+  "updatedAt": "2026-09-16T05:09:27.416Z"
 }
