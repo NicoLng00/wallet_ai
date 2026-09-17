@@ -44,10 +44,10 @@
       "NVDA": 185.9424144,
       "SPY": 655.4926488,
       "QQQ": 612.61027712,
-      "BTCUSD": 66446.378352,
+      "BTCUSD": 66433.33891199999,
       "TSLA": 311.27751168,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2121.1691696,
+      "ETHUSD": 2118.53520272,
       "WTI": 72.8,
       "TLT": 70.30866047999999,
       "EURUSD": 1.1503561502641217,
@@ -1253,6 +1253,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude NVDA per limite di detenzione (6g)",
       "detail": "chiude NVDA per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -1546,14 +1551,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,02 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.001363 AAPL",
-      "detail": "0,39 € · fill simulato 286,36 € · SIM-3796251",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-17T05:09:17.154Z"
+  "updatedAt": "2026-09-17T10:00:47.390Z"
 }
