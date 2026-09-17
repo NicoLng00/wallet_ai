@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.577780533684475,
+    "cash": 50.390280533684475,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.3791183818480513,
+        "averagePrice": 0.9891369502370847,
+        "stopLoss": 0.9780655322241932,
+        "takeProfit": 1.008511931759645,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9891369502370847,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-17T00:25:44.347Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.8906435483723547,
-      "SSL.MI": 1.6602785073027961,
-      "BVB.DE": 3.257741073573346,
-      "MANU": 17.331679803182443,
-      "AJAX.AS": 8.562947449433892,
-      "CCP.L": 2.0754694240052447,
-      "FENER.IS": 0.048416941564761166,
-      "GSRAY.IS": 0.017786811743043526,
-      "BJKAS.IS": 0.04668557683975577,
-      "TSPOR.IS": 0.017282029587662083,
-      "SCP.LS": 0.974117316486089,
-      "SLBEN.LS": 6.768722440914701,
-      "FCP.LS": 2.7215807630461266
+      "JUVE.MI": 1.8921999034746642,
+      "SSL.MI": 1.6599669116177977,
+      "BVB.DE": 3.2560067016950023,
+      "MANU": 17.33621017026758,
+      "AJAX.AS": 8.563298437883992,
+      "CCP.L": 2.1024198788253643,
+      "FENER.IS": 0.04852703851570814,
+      "GSRAY.IS": 0.017847193499570445,
+      "BJKAS.IS": 0.046798945815192894,
+      "TSPOR.IS": 0.017306901667059622,
+      "SCP.LS": 0.9891369502370847,
+      "SLBEN.LS": 6.7666296707766165,
+      "FCP.LS": 2.8026881823402214
     },
     "model": {
       "calibration": 59,
@@ -25,6 +43,23 @@
       "wins": 14
     },
     "trades": [
+      {
+        "id": "SIM-4744347",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.3791183818480513,
+        "price": 0.9891369502370847,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-17T00:25:44.347Z",
+        "stopLoss": 0.9780655322241932,
+        "takeProfit": 1.008511931759645,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-1013636",
         "symbol": "AJAX.AS",
@@ -1049,6 +1084,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.379118 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,99 € · SIM-4744347",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1332,24 +1382,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-16T22:04:10.805Z"
+  "updatedAt": "2026-09-17T00:25:44.690Z"
 }
