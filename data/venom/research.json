@@ -3390,6 +3390,10 @@
             {
               "returnPct": -0.007784489204909342,
               "at": "2026-09-17T05:07:57.461Z"
+            },
+            {
+              "returnPct": -0.07997267245766636,
+              "at": "2026-09-18T05:14:10.439Z"
             }
           ]
         }
@@ -3732,6 +3736,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-17T05:07:57.462Z"
+        },
+        {
+          "tradeId": "SIM-8450440",
+          "symbol": "SCP.LS",
+          "returnPct": -0.07997267245766636,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 0.9748596188353937,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-18T05:14:10.440Z"
         }
       ],
       "engulfing@1D": [
@@ -3904,22 +3924,22 @@
           "version": 1,
           "strategyKey": "bollinger_reversion@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -0.48%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -0.45%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 5,
-          "avgReturn": -0.483,
+          "avgReturn": -0.45,
           "supportingTradeIds": [
-            "SIM-6494660",
             "SIM-0523691",
             "SIM-2328427",
             "SIM-1013636",
-            "SIM-1677462"
+            "SIM-1677462",
+            "SIM-8450440"
           ],
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-09-17T05:07:57.462Z"
+          "updatedAt": "2026-09-18T05:14:10.440Z"
         }
       ],
       "engulfing@1D": [
@@ -23594,5 +23614,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-18T00:30:36.135Z"
+  "updatedAt": "2026-09-18T05:14:10.766Z"
 }
