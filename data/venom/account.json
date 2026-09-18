@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.948580198682589,
-      "SSL.MI": 1.68143367114093,
-      "BVB.DE": 3.179300531491874,
-      "MANU": 17.12122601502697,
-      "AJAX.AS": 8.556870966475065,
-      "CCP.L": 2.03879695108259,
-      "FENER.IS": 0.04627742000740846,
-      "GSRAY.IS": 0.01680756753613962,
-      "BJKAS.IS": 0.034350644565184316,
-      "TSPOR.IS": 0.015720907611702063,
-      "SCP.LS": 0.9736390025604502,
-      "SLBEN.LS": 6.802477662951767,
-      "FCP.LS": 2.720355591625424
+      "JUVE.MI": 1.8881904574827164,
+      "SSL.MI": 1.6432639529987008,
+      "BVB.DE": 3.1909589006598043,
+      "MANU": 17.152431719767765,
+      "AJAX.AS": 8.50298801648905,
+      "CCP.L": 2.0372998890403555,
+      "FENER.IS": 0.046157154548711596,
+      "GSRAY.IS": 0.017345942650256376,
+      "BJKAS.IS": 0.04213153798485832,
+      "TSPOR.IS": 0.016622411526351195,
+      "SCP.LS": 0.9751528531041705,
+      "SLBEN.LS": 6.794259199970959,
+      "FCP.LS": 2.720653988122277
     },
     "model": {
       "calibration": 59,
@@ -1127,6 +1127,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -1410,14 +1415,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-18T20:00:57.891Z"
+  "updatedAt": "2026-09-18T22:30:53.984Z"
 }
