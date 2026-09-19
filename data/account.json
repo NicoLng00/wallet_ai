@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.45694495776825,
+    "cash": 49.64460787973235,
     "highWater": 50.017265718199006,
     "positions": {
-      "TSLA": {
-        "quantity": 0.001173629939666192,
-        "averagePrice": 314.95007872,
-        "stopLoss": 299.65579771414065,
-        "takeProfit": 341.7150704802539,
-        "strategyKey": "engulfing@1D",
-        "decisionSnapshot": {
-          "strategyKey": "engulfing@1D",
-          "entryPrice": 314.95007872,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-13T00:49:36.739Z"
-      },
       "NVDA": {
         "quantity": 0.0013908479609418339,
         "averagePrice": 190.96266816,
@@ -57,59 +40,76 @@
       }
     },
     "market": {
-      "AAPL": 292.64284512,
-      "NVDA": 193.51359648,
-      "SPY": 663.1455945600001,
-      "QQQ": 628.1116848,
-      "BTCUSD": 70720.78752,
-      "TSLA": 317.14220448,
+      "AAPL": 292.85729606,
+      "NVDA": 193.65540474,
+      "SPY": 663.63155278,
+      "QQQ": 628.5719699,
+      "BTCUSD": 70609.686266,
+      "TSLA": 317.37460874,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2280.65180544,
+      "ETHUSD": 2285.00657168,
       "WTI": 72.8,
-      "TLT": 70.73819999999999,
-      "EURUSD": 1.1486014628588233,
+      "TLT": 70.7900375,
+      "EURUSD": 1.1477603751799115,
       "ES": 7730,
-      "MSFT": 429.89671871999997,
-      "GOOGL": 304.31791296,
-      "AMZN": 220.88601504,
-      "META": 579.617928,
-      "JPM": 304.43109408,
-      "V": 320.64211296,
-      "MA": 492.11150976,
-      "UNH": 328.1381856,
-      "HD": 261.16978752,
-      "PG": 127.45064735999998,
-      "JNJ": 235.05977375999998,
-      "KO": 76.832568,
-      "PEP": 112.96346399999999,
-      "DIS": 89.38696608,
-      "NFLX": 62.50209696,
-      "ADBE": 216.71572607999997,
-      "CRM": 207.13886207999997,
-      "ORCL": 128.51280864,
-      "INTC": 94.5497664,
-      "AMD": 487.39272768,
-      "COST": 779.4783734399999,
-      "WMT": 92.92169952,
-      "BAC": 50.26112351999999,
-      "XOM": 142.38184895999999,
-      "CVX": 182.40443423999997,
-      "PFE": 24.081459839999997,
-      "ABBV": 229.80991103999997,
-      "MRK": 127.86854688,
-      "T": 22.113849599999998,
-      "VZ": 41.86830816,
-      "CSCO": 95.34203424,
-      "IBM": 199.8517392,
-      "NKE": 30.915858239999995,
-      "MCD": 216.12370176
+      "MSFT": 430.21175035999994,
+      "GOOGL": 304.54091948,
+      "AMZN": 221.04788202,
+      "META": 580.0426765,
+      "JPM": 304.65418354,
+      "V": 320.87708198,
+      "MA": 492.47213288,
+      "UNH": 328.37864779999995,
+      "HD": 261.36117476,
+      "PG": 127.54404417999999,
+      "JNJ": 235.23202738,
+      "KO": 76.8888715,
+      "PEP": 113.0462445,
+      "DIS": 89.45246954,
+      "NFLX": 62.54789898000001,
+      "ADBE": 216.87453703999998,
+      "CRM": 207.29065504,
+      "ORCL": 128.60698382,
+      "INTC": 94.6190532,
+      "AMD": 487.74989284000003,
+      "COST": 780.0495812199999,
+      "WMT": 92.98979326,
+      "BAC": 50.297955259999995,
+      "XOM": 142.48618747999998,
+      "CVX": 182.53810162,
+      "PFE": 24.09910692,
+      "ABBV": 229.97831752,
+      "MRK": 127.96224994,
+      "T": 22.1300548,
+      "VZ": 41.89898958,
+      "CSCO": 95.41190162000001,
+      "IBM": 199.9981921,
+      "NKE": 30.93851362,
+      "MCD": 216.28207888
     },
     "model": {
       "calibration": 57,
-      "outcomes": 34,
-      "wins": 13
+      "outcomes": 35,
+      "wins": 14
     },
     "trades": [
+      {
+        "id": "SIM-4477670",
+        "symbol": "TSLA",
+        "side": "sell",
+        "quantity": 0.001173629939666192,
+        "price": 317.37460874,
+        "notional": 0.37248034290710746,
+        "realizedPnl": 0.002845501021091428,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-09-19T05:07:57.670Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "engulfing@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-8375439",
         "symbol": "SPY",
@@ -1321,6 +1321,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude TSLA per limite di detenzione (6g)",
+      "detail": "chiude TSLA per limite di detenzione (6g)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.001174 TSLA",
+      "detail": "0,37 € · fill simulato 317,37 € · SIM-4477670",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1604,24 +1619,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre TSLA forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre TSLA forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-19T00:39:35.830Z"
+  "updatedAt": "2026-09-19T05:07:58.318Z"
 }
