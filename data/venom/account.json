@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.8857496855556628,
-      "SSL.MI": 1.6433422502680086,
-      "BVB.DE": 3.197334722294697,
-      "MANU": 17.164735235304306,
-      "AJAX.AS": 8.493568664412308,
-      "CCP.L": 2.039234579848411,
-      "FENER.IS": 0.0461138762886315,
-      "GSRAY.IS": 0.017306370241349636,
-      "BJKAS.IS": 0.04213961789514395,
-      "TSPOR.IS": 0.016626882275435132,
-      "SCP.LS": 0.9750253125260229,
-      "SLBEN.LS": 6.760100408145038,
-      "FCP.LS": 2.724339353697639
+      "JUVE.MI": 1.8886262862084349,
+      "SSL.MI": 1.6452065371850717,
+      "BVB.DE": 3.191965396940544,
+      "MANU": 17.163338384060996,
+      "AJAX.AS": 8.502436296624277,
+      "CCP.L": 2.036466760030255,
+      "FENER.IS": 0.046116919334155564,
+      "GSRAY.IS": 0.01735107904185191,
+      "BJKAS.IS": 0.04214959302308278,
+      "TSPOR.IS": 0.01661040498810037,
+      "SCP.LS": 0.9750813820042206,
+      "SLBEN.LS": 6.757354870229382,
+      "FCP.LS": 2.718553199732857
     },
     "model": {
       "calibration": 59,
@@ -1151,6 +1151,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude BVB.DE per segnale difensivo",
       "detail": "chiude BVB.DE per segnale difensivo",
       "tag": "AUTO"
@@ -1439,19 +1449,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 1.151422 AJAX.AS",
-      "detail": "9,99 € · fill simulato 8,68 € · SIM-4757165",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-19T09:37:48.175Z"
+  "updatedAt": "2026-09-19T13:26:17.036Z"
 }
