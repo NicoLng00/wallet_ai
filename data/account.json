@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.64310660754655,
+    "cash": 49.45694495776825,
     "highWater": 50.017265718199006,
     "positions": {
       "TSLA": {
@@ -37,6 +37,23 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-09-18T00:22:31.924Z"
+      },
+      "SPY": {
+        "quantity": 0.0005614503098729581,
+        "averagePrice": 663.1455945600001,
+        "stopLoss": 656.4320194693192,
+        "takeProfit": 674.8943509686915,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 663.1455945600001,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-19T00:39:35.439Z"
       }
     },
     "market": {
@@ -44,10 +61,10 @@
       "NVDA": 193.51359648,
       "SPY": 663.1455945600001,
       "QQQ": 628.1116848,
-      "BTCUSD": 70728.623136,
+      "BTCUSD": 70720.78752,
       "TSLA": 317.14220448,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2290.55080032,
+      "ETHUSD": 2280.65180544,
       "WTI": 72.8,
       "TLT": 70.73819999999999,
       "EURUSD": 1.1486014628588233,
@@ -93,6 +110,23 @@
       "wins": 13
     },
     "trades": [
+      {
+        "id": "SIM-8375439",
+        "symbol": "SPY",
+        "side": "buy",
+        "quantity": 0.0005614503098729581,
+        "price": 663.1455945600001,
+        "notional": 0.3723232995565991,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-19T00:39:35.439Z",
+        "stopLoss": 656.4320194693192,
+        "takeProfit": 674.8943509686915,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-0951924",
         "symbol": "NVDA",
@@ -1287,6 +1321,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000561 SPY",
+      "detail": "0,37 € · fill simulato 663,15 € · SIM-8375439",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1575,19 +1619,9 @@
       "title": "Autopilot: apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001174 TSLA",
-      "detail": "0,37 € · fill simulato 314,95 € · SIM-0576740",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-18T22:30:44.374Z"
+  "updatedAt": "2026-09-19T00:39:35.830Z"
 }
