@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.57745144432824,
+    "cash": 50.38995144432824,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "BVB.DE": {
+        "quantity": 0.11751849337444352,
+        "averagePrice": 3.190987130894842,
+        "stopLoss": 3.131701405028797,
+        "takeProfit": 3.294737151160421,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 3.190987130894842,
+          "confidence": 64,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-19T00:39:49.024Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.8881904574827164,
-      "SSL.MI": 1.6432639529987008,
-      "BVB.DE": 3.1909589006598043,
-      "MANU": 17.152431719767765,
-      "AJAX.AS": 8.50298801648905,
-      "CCP.L": 2.0372998890403555,
-      "FENER.IS": 0.046157154548711596,
-      "GSRAY.IS": 0.017345942650256376,
-      "BJKAS.IS": 0.04213153798485832,
-      "TSPOR.IS": 0.016622411526351195,
-      "SCP.LS": 0.9751528531041705,
-      "SLBEN.LS": 6.794259199970959,
-      "FCP.LS": 2.720653988122277
+      "JUVE.MI": 1.8869566805133333,
+      "SSL.MI": 1.64532559866994,
+      "BVB.DE": 3.190987130894842,
+      "MANU": 17.371691201005877,
+      "AJAX.AS": 8.509829499518554,
+      "CCP.L": 2.067643286342109,
+      "FENER.IS": 0.04607341626388538,
+      "GSRAY.IS": 0.017334192287472055,
+      "BJKAS.IS": 0.04212374755463308,
+      "TSPOR.IS": 0.01659157289707753,
+      "SCP.LS": 0.9755415595371195,
+      "SLBEN.LS": 6.765588148384576,
+      "FCP.LS": 2.719185374129484
     },
     "model": {
       "calibration": 59,
@@ -25,6 +43,23 @@
       "wins": 14
     },
     "trades": [
+      {
+        "id": "SIM-8389024",
+        "symbol": "BVB.DE",
+        "side": "buy",
+        "quantity": 0.11751849337444352,
+        "price": 3.190987130894842,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-19T00:39:49.024Z",
+        "stopLoss": 3.131701405028797,
+        "takeProfit": 3.294737151160421,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-8450440",
         "symbol": "SCP.LS",
@@ -1117,6 +1152,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.117518 BVB.DE",
+      "detail": "0,38 € · fill simulato 3,19 € · SIM-8389024",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1400,24 +1450,9 @@
       "title": "Autopilot: apre AJAX.AS (score 71)",
       "detail": "apre AJAX.AS (score 71)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini): acquisto demo 1.151422 AJAX.AS",
-      "detail": "10,00 € · fill simulato 8,68 € · SIM-7423701",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-18T22:30:53.984Z"
+  "updatedAt": "2026-09-19T00:39:49.881Z"
 }
