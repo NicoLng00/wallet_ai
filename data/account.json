@@ -44,10 +44,10 @@
       "NVDA": 193.65540474,
       "SPY": 663.63155278,
       "QQQ": 628.5719699,
-      "BTCUSD": 71300.597032,
+      "BTCUSD": 70932.053206,
       "TSLA": 317.37460874,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2306.98851194,
+      "ETHUSD": 2298.00580072,
       "WTI": 72.8,
       "TLT": 70.7900375,
       "EURUSD": 1.1477603751799115,
@@ -1336,6 +1336,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude TSLA per limite di detenzione (6g)",
       "detail": "chiude TSLA per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -1614,14 +1619,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000170 ETHUSD",
       "detail": "0,36 € · fill simulato 2140 € · SIM-8041757",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-19T16:44:39.790Z"
+  "updatedAt": "2026-09-19T18:59:03.598Z"
 }
