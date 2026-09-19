@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9476988821009513,
-      "SSL.MI": 1.6804563332721265,
-      "BVB.DE": 3.1792510137920234,
-      "MANU": 17.150981046104018,
-      "AJAX.AS": 8.570527927283855,
-      "CCP.L": 2.0377489241549074,
-      "FENER.IS": 0.04622480128353972,
-      "GSRAY.IS": 0.0167948130685639,
-      "BJKAS.IS": 0.03430076275977988,
-      "TSPOR.IS": 0.015709116109953264,
-      "SCP.LS": 0.9758073905809291,
-      "SLBEN.LS": 6.807764915573037,
-      "FCP.LS": 2.7380862370032704
+      "JUVE.MI": 1.8881290157902713,
+      "SSL.MI": 1.6439068072759246,
+      "BVB.DE": 3.1918133728506985,
+      "MANU": 17.158048629461483,
+      "AJAX.AS": 8.496051160796508,
+      "CCP.L": 2.038159451072608,
+      "FENER.IS": 0.04613927892417078,
+      "GSRAY.IS": 0.0173281613402997,
+      "BJKAS.IS": 0.042089956001511726,
+      "TSPOR.IS": 0.016608170387212552,
+      "SCP.LS": 0.9755145300961874,
+      "SLBEN.LS": 6.753499887477707,
+      "FCP.LS": 2.720298332994737
     },
     "model": {
       "calibration": 59,
@@ -1156,6 +1156,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -1444,14 +1449,9 @@
       "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.043209 AJAX.AS",
-      "detail": "0,38 € · fill simulato 8,68 € · SIM-3771165",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-19T19:17:42.465Z"
+  "updatedAt": "2026-09-19T21:31:30.054Z"
 }
