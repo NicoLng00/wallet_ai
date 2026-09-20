@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9464940826843078,
-      "SSL.MI": 1.6794241027816201,
-      "BVB.DE": 3.1842771225813986,
-      "MANU": 17.159643284438648,
-      "AJAX.AS": 8.557612131111595,
-      "CCP.L": 2.0395677631088125,
-      "FENER.IS": 0.0462334304235006,
-      "GSRAY.IS": 0.016754890508482605,
-      "BJKAS.IS": 0.03429211726782951,
-      "TSPOR.IS": 0.015722521052928092,
-      "SCP.LS": 0.9745454317887762,
-      "SLBEN.LS": 6.801805444252519,
-      "FCP.LS": 2.742532417238828
+      "JUVE.MI": 1.9497300659192196,
+      "SSL.MI": 1.680447247703005,
+      "BVB.DE": 3.1788476655273787,
+      "MANU": 17.177547810331834,
+      "AJAX.AS": 8.565070971056006,
+      "CCP.L": 2.0367769514377736,
+      "FENER.IS": 0.046214766498026215,
+      "GSRAY.IS": 0.016785189531463036,
+      "BJKAS.IS": 0.03425659299534406,
+      "TSPOR.IS": 0.015714670656359914,
+      "SCP.LS": 0.9764649039986788,
+      "SLBEN.LS": 6.799783456121247,
+      "FCP.LS": 2.737748661476366
     },
     "model": {
       "calibration": 60,
@@ -1185,6 +1185,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude BVB.DE per segnale difensivo",
       "detail": "chiude BVB.DE per segnale difensivo",
       "tag": "AUTO"
@@ -1473,19 +1483,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.043223 AJAX.AS",
-      "detail": "0,38 € · fill simulato 8,68 € · SIM-8922430",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-20T12:16:33.959Z"
+  "updatedAt": "2026-09-20T16:19:10.064Z"
 }
