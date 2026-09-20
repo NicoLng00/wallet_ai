@@ -61,10 +61,10 @@
       "NVDA": 193.66185057,
       "SPY": 663.65364179,
       "QQQ": 628.5928919500001,
-      "BTCUSD": 70730.532089,
+      "BTCUSD": 70360.233414,
       "TSLA": 317.38517257,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2291.77414312,
+      "ETHUSD": 2281.5103351400003,
       "WTI": 72.8,
       "TLT": 70.79239375,
       "EURUSD": 1.1477221731889804,
@@ -1375,6 +1375,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre QQQ forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre QQQ forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1648,14 +1653,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-20T18:49:47.636Z"
+  "updatedAt": "2026-09-20T21:17:58.847Z"
 }
