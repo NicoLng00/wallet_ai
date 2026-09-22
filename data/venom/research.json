@@ -3406,6 +3406,10 @@
             {
               "returnPct": -0.07997267245766636,
               "at": "2026-09-18T05:14:10.439Z"
+            },
+            {
+              "returnPct": 0.4182276071113965,
+              "at": "2026-09-22T12:33:10.541Z"
             }
           ]
         }
@@ -3812,6 +3816,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-09-21T07:14:39.829Z"
+        },
+        {
+          "tradeId": "SIM-0390542",
+          "symbol": "SCP.LS",
+          "returnPct": 0.4182276071113965,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 0.974779329508343,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-09-22T12:33:10.542Z"
         }
       ],
       "engulfing@1D": [
@@ -3998,7 +4018,7 @@
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-09-21T07:14:39.830Z"
+          "updatedAt": "2026-09-22T12:33:10.542Z"
         }
       ],
       "engulfing@1D": [
@@ -23673,5 +23693,5 @@
       }
     }
   },
-  "updatedAt": "2026-09-22T11:34:25.018Z"
+  "updatedAt": "2026-09-22T12:33:10.979Z"
 }
