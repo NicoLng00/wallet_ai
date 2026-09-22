@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9308702143128949,
-      "SSL.MI": 1.6817048441817166,
-      "BVB.DE": 3.1926824267894345,
-      "MANU": 17.756154257705415,
-      "AJAX.AS": 8.49708463349526,
-      "CCP.L": 2.040120624228618,
-      "FENER.IS": 0.045144586453417526,
-      "GSRAY.IS": 0.016256480752454075,
-      "BJKAS.IS": 0.0330702043339344,
-      "TSPOR.IS": 0.015888676796745903,
-      "SCP.LS": 0.9795835379703951,
-      "SLBEN.LS": 6.803947801716973,
-      "FCP.LS": 2.639108387726542
+      "JUVE.MI": 1.932059718628835,
+      "SSL.MI": 1.6818823928581554,
+      "BVB.DE": 3.1884517755149493,
+      "MANU": 17.86030332771936,
+      "AJAX.AS": 8.503023668251672,
+      "CCP.L": 2.038755603312218,
+      "FENER.IS": 0.045163981943805026,
+      "GSRAY.IS": 0.01626318544621823,
+      "BJKAS.IS": 0.0330453700047394,
+      "TSPOR.IS": 0.015872941558978063,
+      "SCP.LS": 0.9795645190495371,
+      "SLBEN.LS": 6.802243528303756,
+      "FCP.LS": 2.6372834666816702
     },
     "model": {
       "calibration": 61,
@@ -1258,6 +1258,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1541,19 +1551,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
-      "detail": "chiude SCP.LS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-22T17:18:53.617Z"
+  "updatedAt": "2026-09-22T20:17:06.068Z"
 }
