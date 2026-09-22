@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.960181610226106,
-      "SSL.MI": 1.696799401873241,
-      "BVB.DE": 3.235433450197947,
-      "MANU": 17.76342775690985,
-      "AJAX.AS": 8.478809184767373,
-      "CCP.L": 2.055795390439795,
-      "FENER.IS": 0.04516145000791374,
-      "GSRAY.IS": 0.01607100024272177,
-      "BJKAS.IS": 0.03200453224793759,
-      "TSPOR.IS": 0.015886386050361058,
-      "SCP.LS": 0.9788561257727623,
-      "SLBEN.LS": 6.764748696677728,
-      "FCP.LS": 2.760593629746497
+      "JUVE.MI": 1.9308702143128949,
+      "SSL.MI": 1.6817048441817166,
+      "BVB.DE": 3.1926824267894345,
+      "MANU": 17.756154257705415,
+      "AJAX.AS": 8.49708463349526,
+      "CCP.L": 2.040120624228618,
+      "FENER.IS": 0.045144586453417526,
+      "GSRAY.IS": 0.016256480752454075,
+      "BJKAS.IS": 0.0330702043339344,
+      "TSPOR.IS": 0.015888676796745903,
+      "SCP.LS": 0.9795835379703951,
+      "SLBEN.LS": 6.803947801716973,
+      "FCP.LS": 2.639108387726542
     },
     "model": {
       "calibration": 61,
@@ -1253,6 +1253,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1546,14 +1551,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.384671 SCP.LS",
-      "detail": "0,37 € · fill simulato 0,97 € · SIM-8450440",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-22T12:33:10.972Z"
+  "updatedAt": "2026-09-22T17:18:53.617Z"
 }
