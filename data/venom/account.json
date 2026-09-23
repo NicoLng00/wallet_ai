@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9352340106232129,
-      "SSL.MI": 1.6795583053959862,
-      "BVB.DE": 3.1895476421103615,
-      "MANU": 17.81184738544384,
-      "AJAX.AS": 8.505448980523964,
-      "CCP.L": 2.036962557999361,
-      "FENER.IS": 0.0448709294311813,
-      "GSRAY.IS": 0.016086734231933707,
-      "BJKAS.IS": 0.030360748272055305,
-      "TSPOR.IS": 0.016096875302002683,
-      "SCP.LS": 0.9764525734495008,
-      "SLBEN.LS": 6.716047700218461,
-      "FCP.LS": 2.758662805401015
+      "JUVE.MI": 1.9342582699447253,
+      "SSL.MI": 1.6789464098216158,
+      "BVB.DE": 3.1902843061082007,
+      "MANU": 17.917564163697563,
+      "AJAX.AS": 8.499668665790656,
+      "CCP.L": 2.0387049738282483,
+      "FENER.IS": 0.0448884322301805,
+      "GSRAY.IS": 0.016088478210557356,
+      "BJKAS.IS": 0.030348866016512575,
+      "TSPOR.IS": 0.016098840393965884,
+      "SCP.LS": 0.9761716218943629,
+      "SLBEN.LS": 6.7167593611167,
+      "FCP.LS": 2.759880163699396
     },
     "model": {
       "calibration": 61,
@@ -1292,6 +1292,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1580,14 +1585,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-23T17:17:43.384Z"
+  "updatedAt": "2026-09-23T20:32:40.595Z"
 }
