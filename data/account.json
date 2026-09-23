@@ -61,10 +61,10 @@
       "NVDA": 196.91691056999997,
       "SPY": 670.4570666699999,
       "QQQ": 647.22976047,
-      "BTCUSD": 73662.869313,
+      "BTCUSD": 73775.513016,
       "TSLA": 331.92344484,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2334.8245369499996,
+      "ETHUSD": 2346.2984769299997,
       "WTI": 72.8,
       "TLT": 70.25823521999999,
       "EURUSD": 1.1452038291035231,
@@ -1477,6 +1477,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1750,14 +1755,9 @@
       "title": "Autopilot: chiude NVDA per limite di detenzione (6g)",
       "detail": "chiude NVDA per limite di detenzione (6g)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-23T20:24:27.140Z"
+  "updatedAt": "2026-09-23T23:04:08.210Z"
 }
