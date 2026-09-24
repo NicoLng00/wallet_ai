@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.473888108649525,
+    "cash": 49.47130826539132,
     "highWater": 50.017265718199006,
     "positions": {
-      "NVDA": {
-        "quantity": 0.0013908479609418339,
-        "averagePrice": 190.96266816,
-        "stopLoss": 183.41481441767297,
-        "takeProfit": 204.17141220907226,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 190.96266816,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-18T00:22:31.924Z"
-      },
       "TSLA": {
         "quantity": 0.0011688220654143128,
         "averagePrice": 317.38662965,
@@ -54,62 +37,113 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-09-23T01:25:17.247Z"
+      },
+      "NVDA": {
+        "quantity": 0.0014653843575710061,
+        "averagePrice": 197.85615972,
+        "stopLoss": 191.78687609834822,
+        "takeProfit": 208.47740605789062,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 197.85615972,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-24T01:26:07.329Z"
       }
     },
     "market": {
-      "AAPL": 294.28822313999996,
-      "NVDA": 196.91691056999997,
-      "SPY": 670.4570666699999,
-      "QQQ": 647.22976047,
-      "BTCUSD": 73775.513016,
-      "TSLA": 331.92344484,
+      "AAPL": 295.69191144,
+      "NVDA": 197.85615972,
+      "SPY": 673.65499532,
+      "QQQ": 650.31690012,
+      "BTCUSD": 73912.449396,
+      "TSLA": 333.50664464000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2346.2984769299997,
+      "ETHUSD": 2352.12904736,
       "WTI": 72.8,
-      "TLT": 70.25823521999999,
-      "EURUSD": 1.1452038291035231,
+      "TLT": 70.59335112,
+      "EURUSD": 1.1397673962697692,
       "ES": 7730,
-      "MSFT": 437.11869212999994,
-      "GOOGL": 294.99552080999996,
-      "AMZN": 217.66430889,
-      "META": 649.7533287,
-      "JPM": 294.73355870999995,
-      "V": 315.68179463999996,
-      "MA": 488.92606343999995,
-      "UNH": 324.21302703,
-      "HD": 259.09798104000004,
-      "PG": 128.70197972999998,
-      "JNJ": 235.04112819,
-      "KO": 76.92080462999999,
-      "PEP": 113.67408726,
-      "DIS": 90.34199621999998,
-      "NFLX": 62.31205152,
-      "ADBE": 210.17219283,
-      "CRM": 207.45651906,
-      "ORCL": 126.23080392,
-      "INTC": 107.05517819999999,
-      "AMD": 536.6817542699999,
-      "COST": 789.9903729,
-      "WMT": 96.51556971,
-      "BAC": 48.899592,
-      "XOM": 140.78716461,
-      "CVX": 179.45277056999998,
-      "PFE": 24.60697326,
-      "ABBV": 231.46971155999998,
-      "MRK": 129.30449256,
-      "T": 22.0921371,
-      "VZ": 40.62158964,
-      "CSCO": 92.93542101,
-      "IBM": 203.24766132,
-      "NKE": 31.479112349999998,
-      "MCD": 208.10269223999998
+      "MSFT": 439.20364948,
+      "GOOGL": 296.40258276,
+      "AMZN": 218.70251844,
+      "META": 652.8525052,
+      "JPM": 296.13937116,
+      "V": 317.18752544,
+      "MA": 491.25813024,
+      "UNH": 325.75944988000003,
+      "HD": 260.33381984000005,
+      "PG": 129.31585908,
+      "JNJ": 236.16222124000004,
+      "KO": 77.28769948,
+      "PEP": 114.21628696,
+      "DIS": 90.77290712,
+      "NFLX": 62.609265920000006,
+      "ADBE": 211.17466668,
+      "CRM": 208.44603976000002,
+      "ORCL": 126.83289632,
+      "INTC": 107.5658072,
+      "AMD": 539.24160492,
+      "COST": 793.7584484,
+      "WMT": 96.97592716000001,
+      "BAC": 49.132832,
+      "XOM": 141.45868756,
+      "CVX": 180.30871972,
+      "PFE": 24.72434296,
+      "ABBV": 232.57376976,
+      "MRK": 129.92124576,
+      "T": 22.197511600000002,
+      "VZ": 40.81534544,
+      "CSCO": 93.37870196000001,
+      "IBM": 204.21710672,
+      "NKE": 31.6292606,
+      "MCD": 209.09529504
     },
     "model": {
       "calibration": 59,
-      "outcomes": 38,
-      "wins": 17
+      "outcomes": 39,
+      "wins": 18
     },
     "trades": [
+      {
+        "id": "SIM-3167329",
+        "symbol": "NVDA",
+        "side": "buy",
+        "quantity": 0.0014653843575710061,
+        "price": 197.85615972,
+        "notional": 0.2899353215027586,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-24T01:26:07.329Z",
+        "stopLoss": 191.78687609834822,
+        "takeProfit": 208.47740605789062,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
+      {
+        "id": "SIM-3167316",
+        "symbol": "NVDA",
+        "side": "sell",
+        "quantity": 0.0013908479609418339,
+        "price": 197.85615972,
+        "notional": 0.2751878363063438,
+        "realizedPnl": 0.009587798679995744,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-09-24T01:26:07.316Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-6717247",
         "symbol": "SPY",
@@ -1457,6 +1491,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude NVDA per limite di detenzione (6g) · apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "detail": "chiude NVDA per limite di detenzione (6g); apre NVDA forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001465 NVDA",
+      "detail": "0,29 € · fill simulato 197,86 € · SIM-3167329",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.001391 NVDA",
+      "detail": "0,28 € · fill simulato 197,86 € · SIM-3167316",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1735,29 +1789,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude NVDA per limite di detenzione (6g)",
-      "detail": "chiude NVDA per limite di detenzione (6g)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-23T23:04:08.210Z"
+  "updatedAt": "2026-09-24T01:26:08.017Z"
 }
