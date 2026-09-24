@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9257870529144312,
-      "SSL.MI": 1.6587845949469169,
-      "BVB.DE": 3.1925457038033667,
-      "MANU": 17.963189938796226,
-      "AJAX.AS": 8.389527057779613,
-      "CCP.L": 2.095844878189774,
-      "FENER.IS": 0.04440389315221436,
-      "GSRAY.IS": 0.01598257322052075,
-      "BJKAS.IS": 0.029111040546575172,
-      "TSPOR.IS": 0.01599793249756102,
-      "SCP.LS": 0.9742743454064293,
-      "SLBEN.LS": 6.6958808943280985,
-      "FCP.LS": 2.7615981238137133
+      "JUVE.MI": 1.9275641586222132,
+      "SSL.MI": 1.6298278544859912,
+      "BVB.DE": 3.1737706046234546,
+      "MANU": 18.778612788674764,
+      "AJAX.AS": 8.27061406376436,
+      "CCP.L": 2.03692903659015,
+      "FENER.IS": 0.04365729809235903,
+      "GSRAY.IS": 0.01579034718623016,
+      "BJKAS.IS": 0.029112281484373042,
+      "TSPOR.IS": 0.016182349408166555,
+      "SCP.LS": 0.9752014441751866,
+      "SLBEN.LS": 6.7184375985289035,
+      "FCP.LS": 2.762526278683947
     },
     "model": {
       "calibration": 61,
@@ -1326,6 +1326,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1614,14 +1619,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-24T12:41:23.020Z"
+  "updatedAt": "2026-09-24T17:34:13.225Z"
 }
