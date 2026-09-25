@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.9133237887737835,
-      "SSL.MI": 1.6654375233739311,
-      "BVB.DE": 3.1662573053013636,
-      "MANU": 17.573793066481812,
-      "AJAX.AS": 8.312002193054541,
-      "CCP.L": 1.9834727005768649,
-      "FENER.IS": 0.044005849896357904,
-      "GSRAY.IS": 0.015823864790067633,
-      "BJKAS.IS": 0.030720071535072762,
-      "TSPOR.IS": 0.015971384451964235,
-      "SCP.LS": 0.9752229689613029,
-      "SLBEN.LS": 6.724781732992539,
-      "FCP.LS": 2.7587471387554987
+      "JUVE.MI": 1.928254185676282,
+      "SSL.MI": 1.6582308287228862,
+      "BVB.DE": 3.1663490314949922,
+      "MANU": 17.890705547733127,
+      "AJAX.AS": 8.297096962026105,
+      "CCP.L": 2.0342161197500404,
+      "FENER.IS": 0.04406064699995189,
+      "GSRAY.IS": 0.015802019041620447,
+      "BJKAS.IS": 0.030701555676422652,
+      "TSPOR.IS": 0.016004344104684994,
+      "SCP.LS": 0.9752588404669779,
+      "SLBEN.LS": 6.679023627861817,
+      "FCP.LS": 2.7636804213649224
     },
     "model": {
       "calibration": 61,
@@ -1361,6 +1361,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1649,14 +1654,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.118125 BVB.DE",
-      "detail": "0,38 € · fill simulato 3,18 € · SIM-6593689",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-25T15:22:12.035Z"
+  "updatedAt": "2026-09-25T19:22:56.251Z"
 }
