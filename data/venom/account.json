@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.928439958973804,
-      "SSL.MI": 1.6593684144561496,
-      "BVB.DE": 3.168182446985025,
-      "MANU": 17.8979200221633,
-      "AJAX.AS": 8.290435717397177,
-      "CCP.L": 2.0339135219437394,
-      "FENER.IS": 0.043960333845717466,
-      "GSRAY.IS": 0.01578309608122994,
-      "BJKAS.IS": 0.030703756968429464,
-      "TSPOR.IS": 0.01598551278854377,
-      "SCP.LS": 0.9747526674890962,
-      "SLBEN.LS": 6.676631576822951,
-      "FCP.LS": 2.76128237820666
+      "JUVE.MI": 1.9287022859419956,
+      "SSL.MI": 1.6604644996025881,
+      "BVB.DE": 3.162445603237031,
+      "MANU": 17.88505082347351,
+      "AJAX.AS": 8.308037926089035,
+      "CCP.L": 2.0340212802456072,
+      "FENER.IS": 0.04392097414692465,
+      "GSRAY.IS": 0.0157999033155561,
+      "BJKAS.IS": 0.030688372103431533,
+      "TSPOR.IS": 0.015949225630536797,
+      "SCP.LS": 0.9756083311540487,
+      "SLBEN.LS": 6.691400281419952,
+      "FCP.LS": 2.7593580190793308
     },
     "model": {
       "calibration": 61,
@@ -1394,6 +1394,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1677,19 +1687,9 @@
       "title": "Autopilot (Gemini): vendita demo 0.118101 BVB.DE",
       "detail": "0,38 € · fill simulato 3,19 € · SIM-4879829",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-26T11:18:09.297Z"
+  "updatedAt": "2026-09-26T15:02:47.330Z"
 }
