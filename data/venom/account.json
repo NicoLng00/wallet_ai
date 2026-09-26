@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.9304240269877406,
-      "SSL.MI": 1.629614083155137,
-      "BVB.DE": 3.1717138949135095,
-      "MANU": 17.92224500705075,
-      "AJAX.AS": 8.272844206187965,
-      "CCP.L": 2.0312839220804904,
-      "FENER.IS": 0.043629492137035784,
-      "GSRAY.IS": 0.015793391686814637,
-      "BJKAS.IS": 0.0290561338709184,
-      "TSPOR.IS": 0.016170610314783427,
-      "SCP.LS": 0.975334442912741,
-      "SLBEN.LS": 6.712674498077876,
-      "FCP.LS": 2.759964688011439
+      "JUVE.MI": 1.928439958973804,
+      "SSL.MI": 1.6593684144561496,
+      "BVB.DE": 3.168182446985025,
+      "MANU": 17.8979200221633,
+      "AJAX.AS": 8.290435717397177,
+      "CCP.L": 2.0339135219437394,
+      "FENER.IS": 0.043960333845717466,
+      "GSRAY.IS": 0.01578309608122994,
+      "BJKAS.IS": 0.030703756968429464,
+      "TSPOR.IS": 0.01598551278854377,
+      "SCP.LS": 0.9747526674890962,
+      "SLBEN.LS": 6.676631576822951,
+      "FCP.LS": 2.76128237820666
     },
     "model": {
       "calibration": 61,
@@ -1389,6 +1389,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1682,14 +1687,9 @@
       "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.118101 BVB.DE",
-      "detail": "0,38 € · fill simulato 3,18 € · SIM-4948625",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-26T06:05:32.761Z"
+  "updatedAt": "2026-09-26T11:18:09.297Z"
 }
