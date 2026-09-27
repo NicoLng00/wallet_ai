@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.9293260996247772,
-      "SSL.MI": 1.662506889097213,
-      "BVB.DE": 3.165506703357661,
-      "MANU": 17.88683798101173,
-      "AJAX.AS": 8.305240120926504,
-      "CCP.L": 2.0329927535780583,
-      "FENER.IS": 0.04391147224759024,
-      "GSRAY.IS": 0.015812439100423025,
-      "BJKAS.IS": 0.03070433556848155,
-      "TSPOR.IS": 0.015959736561319153,
-      "SCP.LS": 0.9750531537365863,
-      "SLBEN.LS": 6.683622490310842,
-      "FCP.LS": 2.7562339730791785
+      "JUVE.MI": 1.931555681521654,
+      "SSL.MI": 1.6596008503123607,
+      "BVB.DE": 3.1649907993221356,
+      "MANU": 17.906655915344512,
+      "AJAX.AS": 8.289910705386099,
+      "CCP.L": 2.0316396568408015,
+      "FENER.IS": 0.044024671065743266,
+      "GSRAY.IS": 0.015807073529070605,
+      "BJKAS.IS": 0.030668497095591354,
+      "TSPOR.IS": 0.015979356363424447,
+      "SCP.LS": 0.9754517229239925,
+      "SLBEN.LS": 6.668916155413961,
+      "FCP.LS": 2.758634464534408
     },
     "model": {
       "calibration": 61,
@@ -1424,6 +1424,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1717,14 +1722,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-27T05:10:11.718Z"
+  "updatedAt": "2026-09-27T10:38:05.057Z"
 }
