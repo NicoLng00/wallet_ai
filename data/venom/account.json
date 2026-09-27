@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.58268952920688,
+    "cash": 50.39518952920688,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.38459441781499787,
+        "averagePrice": 0.9750531537365863,
+        "stopLoss": 0.9689817309553233,
+        "takeProfit": 0.9856781436037967,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9750531537365863,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-27T05:10:11.368Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.9291425559240512,
-      "SSL.MI": 1.662210940430137,
-      "BVB.DE": 3.1644835485638647,
-      "MANU": 17.88484080541528,
-      "AJAX.AS": 8.304246220947114,
-      "CCP.L": 2.0334979029100646,
-      "FENER.IS": 0.043952159026564186,
-      "GSRAY.IS": 0.015812874353754554,
-      "BJKAS.IS": 0.030709510902437082,
-      "TSPOR.IS": 0.015957923249294202,
-      "SCP.LS": 0.97444554040496,
-      "SLBEN.LS": 6.681666978338917,
-      "FCP.LS": 2.7573096944349595
+      "JUVE.MI": 1.9293260996247772,
+      "SSL.MI": 1.662506889097213,
+      "BVB.DE": 3.165506703357661,
+      "MANU": 17.88683798101173,
+      "AJAX.AS": 8.305240120926504,
+      "CCP.L": 2.0329927535780583,
+      "FENER.IS": 0.04391147224759024,
+      "GSRAY.IS": 0.015812439100423025,
+      "BJKAS.IS": 0.03070433556848155,
+      "TSPOR.IS": 0.015959736561319153,
+      "SCP.LS": 0.9750531537365863,
+      "SLBEN.LS": 6.683622490310842,
+      "FCP.LS": 2.7562339730791785
     },
     "model": {
       "calibration": 61,
@@ -25,6 +43,23 @@
       "wins": 21
     },
     "trades": [
+      {
+        "id": "SIM-5811368",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.38459441781499787,
+        "price": 0.9750531537365863,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-27T05:10:11.368Z",
+        "stopLoss": 0.9689817309553233,
+        "takeProfit": 0.9856781436037967,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-2732340",
         "symbol": "SCP.LS",
@@ -1389,6 +1424,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.384594 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,98 € · SIM-5811368",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1672,24 +1722,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.384702 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,97 € · SIM-0923143",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-26T23:55:58.181Z"
+  "updatedAt": "2026-09-27T05:10:11.718Z"
 }
