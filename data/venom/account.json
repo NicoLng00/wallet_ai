@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.9283732727512235,
-      "SSL.MI": 1.6610236106909824,
-      "BVB.DE": 3.163691766583647,
-      "MANU": 17.920880355194377,
-      "AJAX.AS": 8.30704087122524,
-      "CCP.L": 2.041484343672976,
-      "FENER.IS": 0.043928798006564344,
-      "GSRAY.IS": 0.015797833349417586,
-      "BJKAS.IS": 0.030699679329455377,
-      "TSPOR.IS": 0.015953079403029827,
-      "SCP.LS": 0.9750452944551812,
-      "SLBEN.LS": 6.690192973997906,
-      "FCP.LS": 2.760907902746443
+      "JUVE.MI": 1.9277628992870917,
+      "SSL.MI": 1.6606743744447672,
+      "BVB.DE": 3.169717406162272,
+      "MANU": 17.971525665166613,
+      "AJAX.AS": 8.29442935939084,
+      "CCP.L": 2.039965446195934,
+      "FENER.IS": 0.04394780549028538,
+      "GSRAY.IS": 0.01578316414567991,
+      "BJKAS.IS": 0.03072765885692875,
+      "TSPOR.IS": 0.015979353834779584,
+      "SCP.LS": 0.9738932363977563,
+      "SLBEN.LS": 6.682435911445372,
+      "FCP.LS": 2.7612740730956165
     },
     "model": {
       "calibration": 62,
@@ -1492,6 +1492,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1785,14 +1790,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-29T00:57:46.836Z"
+  "updatedAt": "2026-09-29T06:49:11.386Z"
 }
