@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.58301938605548,
+    "cash": 50.39551938605548,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.38459751781022233,
+        "averagePrice": 0.9750452944551811,
+        "stopLoss": 0.969331014190463,
+        "takeProfit": 0.985045284918438,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9750452944551812,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-29T00:57:46.567Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.9107537513949158,
-      "SSL.MI": 1.681770425261273,
-      "BVB.DE": 3.1647725809094243,
-      "MANU": 18.101185426932446,
-      "AJAX.AS": 8.297544243624912,
-      "CCP.L": 2.020260100881069,
-      "FENER.IS": 0.041765262421722724,
-      "GSRAY.IS": 0.014892842318518208,
-      "BJKAS.IS": 0.029305388477014114,
-      "TSPOR.IS": 0.015078384623676656,
-      "SCP.LS": 0.9945938864924291,
-      "SLBEN.LS": 6.663611404881266,
-      "FCP.LS": 2.7584485124944025
+      "JUVE.MI": 1.9283732727512235,
+      "SSL.MI": 1.6610236106909824,
+      "BVB.DE": 3.163691766583647,
+      "MANU": 17.920880355194377,
+      "AJAX.AS": 8.30704087122524,
+      "CCP.L": 2.041484343672976,
+      "FENER.IS": 0.043928798006564344,
+      "GSRAY.IS": 0.015797833349417586,
+      "BJKAS.IS": 0.030699679329455377,
+      "TSPOR.IS": 0.015953079403029827,
+      "SCP.LS": 0.9750452944551812,
+      "SLBEN.LS": 6.690192973997906,
+      "FCP.LS": 2.760907902746443
     },
     "model": {
       "calibration": 62,
@@ -25,6 +43,23 @@
       "wins": 23
     },
     "trades": [
+      {
+        "id": "SIM-3466567",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.38459751781022233,
+        "price": 0.9750452944551812,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-29T00:57:46.567Z",
+        "stopLoss": 0.969331014190463,
+        "takeProfit": 0.985045284918438,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-7694151",
         "symbol": "SCP.LS",
@@ -1457,6 +1492,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.384598 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,98 € · SIM-3466567",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1740,24 +1790,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
-      "detail": "chiude SCP.LS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-28T14:31:56.658Z"
+  "updatedAt": "2026-09-29T00:57:46.836Z"
 }
