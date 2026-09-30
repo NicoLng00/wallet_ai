@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.706003007144138,
-      "SSL.MI": 1.7021616837193478,
-      "BVB.DE": 3.1756043567971304,
-      "MANU": 18.33535085934579,
-      "AJAX.AS": 8.127413687582143,
-      "CCP.L": 1.9948214902553483,
-      "FENER.IS": 0.04362334812825125,
-      "GSRAY.IS": 0.014562701355997087,
-      "BJKAS.IS": 0.028979355873528363,
-      "TSPOR.IS": 0.014746844945343065,
-      "SCP.LS": 0.9952923781310874,
-      "SLBEN.LS": 6.629017971790241,
-      "FCP.LS": 2.698282136899291
+      "JUVE.MI": 1.702986773230744,
+      "SSL.MI": 1.6692639345641356,
+      "BVB.DE": 3.1414482983412197,
+      "MANU": 18.471525906218417,
+      "AJAX.AS": 8.138165194131822,
+      "CCP.L": 2.0102191555220275,
+      "FENER.IS": 0.0419440930166999,
+      "GSRAY.IS": 0.014219133342901499,
+      "BJKAS.IS": 0.02838762437632835,
+      "TSPOR.IS": 0.014376913126917454,
+      "SCP.LS": 0.9752214860879996,
+      "SLBEN.LS": 6.695524236257456,
+      "FCP.LS": 2.7583207240572953
     },
     "model": {
       "calibration": 62,
@@ -1525,6 +1525,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1813,19 +1823,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-30T08:24:46.224Z"
+  "updatedAt": "2026-09-30T20:10:05.442Z"
 }
