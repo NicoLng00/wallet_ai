@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.59048394537482,
+    "cash": 50.40298394537482,
     "highWater": 50.5927324896691,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.3766038172852928,
+        "averagePrice": 0.9957413674219934,
+        "stopLoss": 0.9900270871572752,
+        "takeProfit": 1.0057413578852503,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9957413674219934,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-09-30T02:03:14.695Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.8819355392956023,
-      "SSL.MI": 1.6651025163659405,
-      "BVB.DE": 3.1544958347281704,
-      "MANU": 18.295291918988987,
-      "AJAX.AS": 8.384324541912065,
-      "CCP.L": 2.039276565050446,
-      "FENER.IS": 0.04146353292797863,
-      "GSRAY.IS": 0.014547833050026049,
-      "BJKAS.IS": 0.02887842344795497,
-      "TSPOR.IS": 0.015048214159150213,
-      "SCP.LS": 0.9953535654261734,
-      "SLBEN.LS": 6.6207697725009735,
-      "FCP.LS": 2.6987728112019567
+      "JUVE.MI": 1.8823578845325935,
+      "SSL.MI": 1.6643337522954138,
+      "BVB.DE": 3.1557614336910733,
+      "MANU": 18.35745890240675,
+      "AJAX.AS": 8.378599010529445,
+      "CCP.L": 2.0390857734704393,
+      "FENER.IS": 0.04157912621245397,
+      "GSRAY.IS": 0.014582617502180088,
+      "BJKAS.IS": 0.028921394186334826,
+      "TSPOR.IS": 0.015101685630822462,
+      "SCP.LS": 0.9957413674219934,
+      "SLBEN.LS": 6.617467285790795,
+      "FCP.LS": 2.7004522521969894
     },
     "model": {
       "calibration": 62,
@@ -25,6 +43,23 @@
       "wins": 24
     },
     "trades": [
+      {
+        "id": "SIM-3794695",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.3766038172852928,
+        "price": 0.9957413674219934,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-09-30T02:03:14.695Z",
+        "stopLoss": 0.9900270871572752,
+        "takeProfit": 1.0057413578852503,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-0360580",
         "symbol": "SCP.LS",
@@ -1491,6 +1526,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.376604 SCP.LS",
+      "detail": "0,38 € · fill simulato 1,00 € · SIM-3794695",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1774,24 +1824,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-09-29T23:03:18.275Z"
+  "updatedAt": "2026-09-30T02:03:15.027Z"
 }
