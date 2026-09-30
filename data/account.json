@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.28660499491225,
+    "cash": 49.43513940042796,
     "highWater": 50.017265718199006,
     "positions": {
-      "NVDA": {
-        "quantity": 0.0014653843575710061,
-        "averagePrice": 197.85615972,
-        "stopLoss": 191.78687609834822,
-        "takeProfit": 208.47740605789062,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 197.85615972,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-24T01:26:07.329Z"
-      },
       "ETHUSD": {
         "quantity": 0.00014662755346446767,
         "averagePrice": 2364.43929787,
@@ -78,10 +61,10 @@
       "NVDA": 200.2901592,
       "SPY": 673.657584,
       "QQQ": 650.5000535999999,
-      "BTCUSD": 72943.59184200001,
+      "BTCUSD": 73514.36039999999,
       "TSLA": 311.0355168,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2336.56537268,
+      "ETHUSD": 2358.5155752,
       "WTI": 72.8,
       "TLT": 68.9613096,
       "EURUSD": 1.134404210908431,
@@ -122,11 +105,28 @@
       "MCD": 206.2580496
     },
     "model": {
-      "calibration": 58,
-      "outcomes": 44,
-      "wins": 19
+      "calibration": 59,
+      "outcomes": 45,
+      "wins": 20
     },
     "trades": [
+      {
+        "id": "SIM-6512093",
+        "symbol": "NVDA",
+        "side": "sell",
+        "quantity": 0.0014653843575710061,
+        "price": 200.2901592,
+        "notional": 0.2935020662670865,
+        "realizedPnl": 0.0035667447643279795,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-09-30T05:35:12.093Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-6989825",
         "symbol": "TLT",
@@ -1695,6 +1695,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude NVDA per limite di detenzione (6g)",
+      "detail": "chiude NVDA per limite di detenzione (6g)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.001465 NVDA",
+      "detail": "0,29 € · fill simulato 200,29 € · SIM-6512093",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: apre TLT forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre TLT forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1978,24 +1993,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000552 SPY",
-      "detail": "0,37 € · fill simulato 675,32 € · SIM-6717247",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-09-30T00:09:50.444Z"
+  "updatedAt": "2026-09-30T05:35:12.520Z"
 }
