@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.40281485429394,
+    "cash": 50.59040437294035,
     "highWater": 50.5927324896691,
-    "positions": {
-      "SCP.LS": {
-        "quantity": 0.3766242679845759,
-        "averagePrice": 0.9956872986616933,
-        "stopLoss": 0.9906873034300648,
-        "takeProfit": 1.004437290317043,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 0.9956872986616933,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-01T00:00:21.790Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.864579679704035,
-      "SSL.MI": 1.6769047677036693,
-      "BVB.DE": 3.1688756367368778,
-      "MANU": 18.46112169754009,
-      "AJAX.AS": 8.310202762012127,
-      "CCP.L": 1.9937357783132892,
-      "FENER.IS": 0.041303298968470493,
-      "GSRAY.IS": 0.014394115158475955,
-      "BJKAS.IS": 0.02789443757772966,
-      "TSPOR.IS": 0.01455638777325894,
-      "SCP.LS": 0.9956872986616933,
-      "SLBEN.LS": 6.485523987133552,
-      "FCP.LS": 2.757764753149165
+      "JUVE.MI": 1.8669942184886963,
+      "SSL.MI": 1.6754384160842122,
+      "BVB.DE": 3.168833639768281,
+      "MANU": 18.480083085803173,
+      "AJAX.AS": 8.30091278884674,
+      "CCP.L": 1.9980549148019775,
+      "FENER.IS": 0.041361938101436124,
+      "GSRAY.IS": 0.014390637511914243,
+      "BJKAS.IS": 0.027845140331158473,
+      "TSPOR.IS": 0.01456318891426676,
+      "SCP.LS": 0.9959249855396194,
+      "SLBEN.LS": 6.476098866080356,
+      "FCP.LS": 2.757034011465888
     },
     "model": {
       "calibration": 62,
-      "outcomes": 44,
-      "wins": 24
+      "outcomes": 45,
+      "wins": 25
     },
     "trades": [
+      {
+        "id": "SIM-3184718",
+        "symbol": "SCP.LS",
+        "side": "sell",
+        "quantity": 0.3766242679845759,
+        "price": 0.9959249855396194,
+        "notional": 0.3750895186464085,
+        "realizedPnl": 0.00008951864640847,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-10-01T05:39:44.718Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-2821790",
         "symbol": "SCP.LS",
@@ -1560,6 +1559,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
+      "detail": "chiude SCP.LS per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.376624 SCP.LS",
+      "detail": "0,38 € · fill simulato 1,00 € · SIM-3184718",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -1838,29 +1857,9 @@
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.384497 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-4097132",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
-      "detail": "chiude SCP.LS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-01T00:00:22.195Z"
+  "updatedAt": "2026-10-01T05:39:45.158Z"
 }
