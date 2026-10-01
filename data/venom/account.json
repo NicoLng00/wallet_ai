@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.8669942184886963,
-      "SSL.MI": 1.6754384160842122,
-      "BVB.DE": 3.168833639768281,
-      "MANU": 18.480083085803173,
-      "AJAX.AS": 8.30091278884674,
-      "CCP.L": 1.9980549148019775,
-      "FENER.IS": 0.041361938101436124,
-      "GSRAY.IS": 0.014390637511914243,
-      "BJKAS.IS": 0.027845140331158473,
-      "TSPOR.IS": 0.01456318891426676,
-      "SCP.LS": 0.9959249855396194,
-      "SLBEN.LS": 6.476098866080356,
-      "FCP.LS": 2.757034011465888
+      "JUVE.MI": 1.7144032016265238,
+      "SSL.MI": 1.6788802661252429,
+      "BVB.DE": 3.1405216808346075,
+      "MANU": 18.48796065294081,
+      "AJAX.AS": 8.287035263072799,
+      "CCP.L": 2.0437813818228614,
+      "FENER.IS": 0.04315863699355864,
+      "GSRAY.IS": 0.014751871534371809,
+      "BJKAS.IS": 0.02910267790087837,
+      "TSPOR.IS": 0.01472738913342445,
+      "SCP.LS": 0.9961100945168823,
+      "SLBEN.LS": 6.620169224605317,
+      "FCP.LS": 2.619810450362982
     },
     "model": {
       "calibration": 62,
@@ -1559,6 +1559,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1847,19 +1857,9 @@
       "title": "Autopilot (Gemini): vendita demo 0.384497 SCP.LS",
       "detail": "0,38 € · fill simulato 0,98 € · SIM-2732340",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-01T05:39:45.158Z"
+  "updatedAt": "2026-10-01T11:49:58.393Z"
 }
