@@ -5,19 +5,19 @@
     "highWater": 50.5927324896691,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7144032016265238,
-      "SSL.MI": 1.6788802661252429,
-      "BVB.DE": 3.1405216808346075,
-      "MANU": 18.48796065294081,
-      "AJAX.AS": 8.287035263072799,
-      "CCP.L": 2.0437813818228614,
-      "FENER.IS": 0.04315863699355864,
-      "GSRAY.IS": 0.014751871534371809,
-      "BJKAS.IS": 0.02910267790087837,
-      "TSPOR.IS": 0.01472738913342445,
-      "SCP.LS": 0.9961100945168823,
-      "SLBEN.LS": 6.620169224605317,
-      "FCP.LS": 2.619810450362982
+      "JUVE.MI": 1.778370375323992,
+      "SSL.MI": 1.646345143911532,
+      "BVB.DE": 3.1176002633186073,
+      "MANU": 18.34813914018551,
+      "AJAX.AS": 8.200984499737354,
+      "CCP.L": 2.0197643076169873,
+      "FENER.IS": 0.04330260002359154,
+      "GSRAY.IS": 0.01492621145345417,
+      "BJKAS.IS": 0.028990044657047385,
+      "TSPOR.IS": 0.014919450136768889,
+      "SCP.LS": 0.994182993727307,
+      "SLBEN.LS": 6.641515595063626,
+      "FCP.LS": 2.6195171928159664
     },
     "model": {
       "calibration": 62,
@@ -1564,6 +1564,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -1852,14 +1857,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.384497 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-2732340",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-01T11:49:58.393Z"
+  "updatedAt": "2026-10-01T18:23:05.673Z"
 }
