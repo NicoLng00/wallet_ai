@@ -44,10 +44,10 @@
       "NVDA": 207.5861745,
       "SPY": 682.9092684,
       "QQQ": 665.1098298,
-      "BTCUSD": 74881.86552,
+      "BTCUSD": 75018.51126,
       "TSLA": 328.8282129,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2366.9704098,
+      "ETHUSD": 2368.3723596,
       "WTI": 72.8,
       "TLT": 68.74877880000001,
       "EURUSD": 1.1270018370129942,
@@ -1768,6 +1768,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2056,14 +2061,9 @@
       "title": "Autopilot: apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000147 ETHUSD",
-      "detail": "0,35 € · fill simulato 2364 € · SIM-0942383",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-02T20:09:03.183Z"
+  "updatedAt": "2026-10-02T23:48:16.773Z"
 }
