@@ -61,10 +61,10 @@
       "NVDA": 204.84438660000004,
       "SPY": 677.8959669000001,
       "QQQ": 658.4106393,
-      "BTCUSD": 75347.70327,
+      "BTCUSD": 76534.03674000001,
       "TSLA": 314.20534410000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2405.8168416000003,
+      "ETHUSD": 2444.2462377,
       "WTI": 72.8,
       "TLT": 68.9528601,
       "EURUSD": 1.1270018370129942,
@@ -1763,6 +1763,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude ETHUSD per limite di detenzione (6g) · apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "detail": "chiude ETHUSD per limite di detenzione (6g); apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2056,14 +2061,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre QQQ forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre QQQ forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-02T02:29:37.476Z"
+  "updatedAt": "2026-10-02T08:55:48.318Z"
 }
