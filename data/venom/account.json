@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.59791314651186,
+    "cash": 50.41041314651186,
     "highWater": 50.598107420644034,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.3772255512741263,
+        "averagePrice": 0.9941002106919606,
+        "stopLoss": 0.9862430753279732,
+        "takeProfit": 1.0078501975789387,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9941002106919606,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-03T02:21:54.281Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.7780278352454033,
-      "SSL.MI": 1.6429681681713149,
-      "BVB.DE": 3.1166317974078197,
-      "MANU": 17.826950565543527,
-      "AJAX.AS": 8.196858993070915,
-      "CCP.L": 2.024228781077791,
-      "FENER.IS": 0.043620091082128346,
-      "GSRAY.IS": 0.014994474681462677,
-      "BJKAS.IS": 0.02908836469019734,
-      "TSPOR.IS": 0.015013402169574927,
-      "SCP.LS": 0.9954250191175485,
-      "SLBEN.LS": 6.635734732682416,
-      "FCP.LS": 2.6216566953732885
+      "JUVE.MI": 1.7802391574313823,
+      "SSL.MI": 1.643146742077954,
+      "BVB.DE": 3.1153163812521645,
+      "MANU": 17.845721973558806,
+      "AJAX.AS": 8.188791559748303,
+      "CCP.L": 2.028550497340645,
+      "FENER.IS": 0.043652254515297535,
+      "GSRAY.IS": 0.015011140717522475,
+      "BJKAS.IS": 0.029116163566780845,
+      "TSPOR.IS": 0.015018933532359642,
+      "SCP.LS": 0.9941002106919606,
+      "SLBEN.LS": 6.633257571228895,
+      "FCP.LS": 2.6217541943875857
     },
     "model": {
       "calibration": 63,
@@ -25,6 +43,23 @@
       "wins": 26
     },
     "trades": [
+      {
+        "id": "SIM-4114281",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.3772255512741263,
+        "price": 0.9941002106919606,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-03T02:21:54.281Z",
+        "stopLoss": 0.9862430753279732,
+        "takeProfit": 1.0078501975789387,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-0504610",
         "symbol": "SCP.LS",
@@ -1593,6 +1628,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.377226 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,99 € · SIM-4114281",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1876,24 +1926,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.384594 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-5811368",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-02T23:43:25.854Z"
+  "updatedAt": "2026-10-03T02:21:54.613Z"
 }
