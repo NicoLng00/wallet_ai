@@ -5,19 +5,19 @@
     "highWater": 50.5989053513377,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7441268795578104,
-      "SSL.MI": 1.6700607905448726,
-      "BVB.DE": 3.118606312867751,
-      "MANU": 17.841308036593066,
-      "AJAX.AS": 8.196074381845843,
-      "CCP.L": 2.0291472238295256,
-      "FENER.IS": 0.04336081648300749,
-      "GSRAY.IS": 0.014633153435129234,
-      "BJKAS.IS": 0.02895103504078467,
-      "TSPOR.IS": 0.014656947910664896,
-      "SCP.LS": 0.9796017194673456,
-      "SLBEN.LS": 6.665265703480641,
-      "FCP.LS": 2.6212259844768995
+      "JUVE.MI": 1.7477886830295928,
+      "SSL.MI": 1.66936409136679,
+      "BVB.DE": 3.112854996184832,
+      "MANU": 17.84735348782036,
+      "AJAX.AS": 8.198403340405044,
+      "CCP.L": 2.026910206208402,
+      "FENER.IS": 0.043447464344768164,
+      "GSRAY.IS": 0.014663673297000211,
+      "BJKAS.IS": 0.028919523758285156,
+      "TSPOR.IS": 0.014649938392874646,
+      "SCP.LS": 0.9802826264395299,
+      "SLBEN.LS": 6.652092828805487,
+      "FCP.LS": 2.6196106824113414
     },
     "model": {
       "calibration": 63,
@@ -1661,6 +1661,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1949,19 +1959,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.384598 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,99 € · SIM-0360580",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-04T14:59:48.648Z"
+  "updatedAt": "2026-10-04T18:36:37.737Z"
 }
