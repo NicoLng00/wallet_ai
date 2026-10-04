@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.59845142028339,
+    "cash": 50.41095142028339,
     "highWater": 50.59845142028339,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.38285291097833574,
+        "averagePrice": 0.9794884386322973,
+        "stopLoss": 0.9716313032683099,
+        "takeProfit": 0.9932384255192755,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.9794884386322974,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-04T02:46:25.918Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.7449850838267933,
-      "SSL.MI": 1.6709023201169517,
-      "BVB.DE": 3.1146575034414123,
-      "MANU": 17.826051975150797,
-      "AJAX.AS": 8.20293921366459,
-      "CCP.L": 2.0295451668885502,
-      "FENER.IS": 0.0434124768655932,
-      "GSRAY.IS": 0.01465301134874048,
-      "BJKAS.IS": 0.02895800707952441,
-      "TSPOR.IS": 0.014633032840842344,
-      "SCP.LS": 0.9788753393299682,
-      "SLBEN.LS": 6.663733716092045,
-      "FCP.LS": 2.6197323607633236
+      "JUVE.MI": 1.744553455535926,
+      "SSL.MI": 1.6698801577654196,
+      "BVB.DE": 3.1154275090008268,
+      "MANU": 17.83101111289938,
+      "AJAX.AS": 8.207738670201765,
+      "CCP.L": 2.028994271851949,
+      "FENER.IS": 0.04336357727413086,
+      "GSRAY.IS": 0.014640574056962497,
+      "BJKAS.IS": 0.02894385744289908,
+      "TSPOR.IS": 0.014641539038782951,
+      "SCP.LS": 0.9794884386322974,
+      "SLBEN.LS": 6.66643696187876,
+      "FCP.LS": 2.621960755068507
     },
     "model": {
       "calibration": 63,
@@ -25,6 +43,23 @@
       "wins": 27
     },
     "trades": [
+      {
+        "id": "SIM-1985918",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.38285291097833574,
+        "price": 0.9794884386322974,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-04T02:46:25.918Z",
+        "stopLoss": 0.9716313032683099,
+        "takeProfit": 0.9932384255192755,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-5765932",
         "symbol": "SCP.LS",
@@ -1627,6 +1662,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.382853 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,98 € · SIM-1985918",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -1910,24 +1960,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
-      "detail": "chiude SCP.LS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.384565 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-7694151",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-03T23:11:56.024Z"
+  "updatedAt": "2026-10-04T02:46:26.225Z"
 }
