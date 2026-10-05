@@ -5,19 +5,19 @@
     "highWater": 50.5989053513377,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7451785066143766,
-      "SSL.MI": 1.6677711248103917,
-      "BVB.DE": 3.115987013573909,
-      "MANU": 17.85680479202096,
-      "AJAX.AS": 8.199609250879366,
-      "CCP.L": 2.030901007580444,
-      "FENER.IS": 0.04342469783238446,
-      "GSRAY.IS": 0.014632537665092184,
-      "BJKAS.IS": 0.028901355387006104,
-      "TSPOR.IS": 0.014655679542102059,
-      "SCP.LS": 0.9795282434060305,
-      "SLBEN.LS": 6.65836504071652,
-      "FCP.LS": 2.624294984907819
+      "JUVE.MI": 1.7612783231448252,
+      "SSL.MI": 1.6347586330461827,
+      "BVB.DE": 3.095182277405628,
+      "MANU": 17.875119938348465,
+      "AJAX.AS": 8.036035504617578,
+      "CCP.L": 2.029409227673572,
+      "FENER.IS": 0.04392896385399639,
+      "GSRAY.IS": 0.014450786622193573,
+      "BJKAS.IS": 0.028578179215827608,
+      "TSPOR.IS": 0.014837935052699694,
+      "SCP.LS": 0.9799270879021013,
+      "SLBEN.LS": 6.616801027813546,
+      "FCP.LS": 2.6218537039384002
     },
     "model": {
       "calibration": 63,
@@ -1695,6 +1695,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -1983,19 +1993,9 @@
       "title": "Autopilot: chiude SCP.LS per segnale difensivo",
       "detail": "chiude SCP.LS per segnale difensivo",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.376604 SCP.LS",
-      "detail": "0,37 € · fill simulato 1,00 € · SIM-6685847",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-05T06:53:50.251Z"
+  "updatedAt": "2026-10-05T15:54:13.589Z"
 }
