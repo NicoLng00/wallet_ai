@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.08103518400627,
+    "cash": 49.27262966242173,
     "highWater": 50.017265718199006,
     "positions": {
-      "SPY": {
-        "quantity": 0.0005512757443336281,
-        "averagePrice": 673.15570201,
-        "stopLoss": 666.2964098434263,
-        "takeProfit": 685.1594633015039,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 673.15570201,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-09-29T02:45:30.071Z"
-      },
       "TSLA": {
         "quantity": 0.0009920525332142256,
         "averagePrice": 312.87607053,
@@ -95,10 +78,10 @@
       "NVDA": 207.95581549999997,
       "SPY": 684.1252996,
       "QQQ": 666.2941662,
-      "BTCUSD": 77090.76303,
+      "BTCUSD": 76700.54032,
       "TSLA": 329.41374509999997,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2423.5230294,
+      "ETHUSD": 2419.9408027,
       "WTI": 72.8,
       "TLT": 68.8711972,
       "EURUSD": 1.124998593751758,
@@ -140,10 +123,27 @@
     },
     "model": {
       "calibration": 59,
-      "outcomes": 48,
-      "wins": 21
+      "outcomes": 49,
+      "wins": 22
     },
     "trades": [
+      {
+        "id": "SIM-9623161",
+        "symbol": "SPY",
+        "side": "sell",
+        "quantity": 0.0005512757443336281,
+        "price": 684.1252996,
+        "notional": 0.3771416837544563,
+        "realizedPnl": 0.006047273076467579,
+        "origin": "Autopilot chiusura per limite di tempo",
+        "at": "2026-10-05T08:40:23.161Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-5039956",
         "symbol": "ES",
@@ -1865,6 +1865,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude SPY per limite di detenzione (6g)",
+      "detail": "chiude SPY per limite di detenzione (6g)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000551 SPY",
+      "detail": "0,38 € · fill simulato 684,13 € · SIM-9623161",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: apre ES forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre ES forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2148,24 +2163,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre TLT forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre TLT forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.005289 TLT",
-      "detail": "0,37 € · fill simulato 69,67 € · SIM-9988861",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-05T01:50:40.701Z"
+  "updatedAt": "2026-10-05T08:40:23.458Z"
 }
