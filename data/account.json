@@ -78,10 +78,10 @@
       "NVDA": 213.1253179,
       "SPY": 691.23436613,
       "QQQ": 674.6143382,
-      "BTCUSD": 76284.41161,
+      "BTCUSD": 76781.317437,
       "TSLA": 337.86919903,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2408.90488553,
+      "ETHUSD": 2421.46580841,
       "WTI": 72.8,
       "TLT": 68.79067921,
       "EURUSD": 1.1209367444185758,
@@ -1899,6 +1899,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2192,14 +2197,9 @@
       "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000552 SPY",
       "detail": "0,37 € · fill simulato 673,16 € · SIM-9930047",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-06T03:14:24.790Z"
+  "updatedAt": "2026-10-06T10:30:47.278Z"
 }
