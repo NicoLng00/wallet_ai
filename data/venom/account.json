@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.7653377655879436,
-      "SSL.MI": 1.6344149343834307,
-      "BVB.DE": 3.0901339620647525,
-      "MANU": 18.14503700779127,
-      "AJAX.AS": 8.029861833769713,
-      "CCP.L": 2.0326035558464635,
-      "FENER.IS": 0.04394703144340602,
-      "GSRAY.IS": 0.01444741782598133,
-      "BJKAS.IS": 0.028528136999040173,
-      "TSPOR.IS": 0.014819118097825216,
-      "SCP.LS": 0.9799625603223445,
-      "SLBEN.LS": 6.610550812075161,
-      "FCP.LS": 2.620621830538947
+      "JUVE.MI": 1.7689124920559745,
+      "SSL.MI": 1.6442640888436226,
+      "BVB.DE": 3.07570282119504,
+      "MANU": 18.067912455835838,
+      "AJAX.AS": 8.054690296034998,
+      "CCP.L": 2.052958867547938,
+      "FENER.IS": 0.04300369831258768,
+      "GSRAY.IS": 0.014261231907327358,
+      "BJKAS.IS": 0.028198017777810242,
+      "TSPOR.IS": 0.014635899514115869,
+      "SCP.LS": 0.9785515078846911,
+      "SLBEN.LS": 6.597236826174725,
+      "FCP.LS": 2.6231198803389852
     },
     "model": {
       "calibration": 63,
@@ -1769,6 +1769,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2057,14 +2062,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-07T06:30:59.204Z"
+  "updatedAt": "2026-10-07T13:58:04.150Z"
 }
