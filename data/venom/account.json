@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.7644358406522864,
-      "SSL.MI": 1.6344450532570356,
-      "BVB.DE": 3.0848582754259706,
-      "MANU": 17.82151967939178,
-      "AJAX.AS": 8.045008303019106,
-      "CCP.L": 2.0329742955097085,
-      "FENER.IS": 0.04389881012657936,
-      "GSRAY.IS": 0.014455835622251875,
-      "BJKAS.IS": 0.028511456361349257,
-      "TSPOR.IS": 0.014786413239006507,
-      "SCP.LS": 0.9803685139106922,
-      "SLBEN.LS": 6.620435265624519,
-      "FCP.LS": 2.6178876576322727
+      "JUVE.MI": 1.7653377655879436,
+      "SSL.MI": 1.6344149343834307,
+      "BVB.DE": 3.0901339620647525,
+      "MANU": 18.14503700779127,
+      "AJAX.AS": 8.029861833769713,
+      "CCP.L": 2.0326035558464635,
+      "FENER.IS": 0.04394703144340602,
+      "GSRAY.IS": 0.01444741782598133,
+      "BJKAS.IS": 0.028528136999040173,
+      "TSPOR.IS": 0.014819118097825216,
+      "SCP.LS": 0.9799625603223445,
+      "SLBEN.LS": 6.610550812075161,
+      "FCP.LS": 2.620621830538947
     },
     "model": {
       "calibration": 63,
@@ -1764,6 +1764,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2057,14 +2062,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-07T00:39:09.847Z"
+  "updatedAt": "2026-10-07T06:30:59.204Z"
 }
