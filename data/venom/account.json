@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.60212022146764,
+    "cash": 50.41462022146764,
     "highWater": 50.60242979430946,
-    "positions": {},
+    "positions": {
+      "SCP.LS": {
+        "quantity": 0.3770109425547044,
+        "averagePrice": 0.99466608968674,
+        "stopLoss": 0.9871660968392973,
+        "takeProfit": 1.0077910771697645,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 0.99466608968674,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-10T02:27:59.738Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.7293295924019068,
-      "SSL.MI": 1.6651662781106624,
-      "BVB.DE": 3.0794639213643364,
-      "MANU": 18.300928002933645,
-      "AJAX.AS": 7.827464052103427,
-      "CCP.L": 2.0356305581148395,
-      "FENER.IS": 0.043094183111593444,
-      "GSRAY.IS": 0.014473459895616755,
-      "BJKAS.IS": 0.02789673796682524,
-      "TSPOR.IS": 0.014687772109515539,
-      "SCP.LS": 0.9946373392483333,
-      "SLBEN.LS": 6.654387888018366,
-      "FCP.LS": 2.6007348620318487
+      "JUVE.MI": 1.7284113225459459,
+      "SSL.MI": 1.6657107123595136,
+      "BVB.DE": 3.0782545126329794,
+      "MANU": 18.302251635994,
+      "AJAX.AS": 7.831838162162222,
+      "CCP.L": 2.0371046177398866,
+      "FENER.IS": 0.04306204889157906,
+      "GSRAY.IS": 0.014470437631290778,
+      "BJKAS.IS": 0.027909608229725217,
+      "TSPOR.IS": 0.014669199780952408,
+      "SCP.LS": 0.99466608968674,
+      "SLBEN.LS": 6.65928708610483,
+      "FCP.LS": 2.600076864515596
     },
     "model": {
       "calibration": 63,
@@ -25,6 +43,23 @@
       "wins": 31
     },
     "trades": [
+      {
+        "id": "SIM-9279738",
+        "symbol": "SCP.LS",
+        "side": "buy",
+        "quantity": 0.3770109425547044,
+        "price": 0.99466608968674,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-10T02:27:59.738Z",
+        "stopLoss": 0.9871660968392973,
+        "takeProfit": 1.0077910771697645,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-6992634",
         "symbol": "SCP.LS",
@@ -1831,6 +1866,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.377011 SCP.LS",
+      "detail": "0,38 € · fill simulato 0,99 € · SIM-9279738",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2114,24 +2164,9 @@
       "title": "Autopilot (Gemini): vendita demo 0.382853 SCP.LS",
       "detail": "0,38 € · fill simulato 0,98 € · SIM-5988310",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-09T23:11:11.325Z"
+  "updatedAt": "2026-10-10T02:28:00.039Z"
 }
