@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7473756355109626,
-      "SSL.MI": 1.6717389744401323,
-      "BVB.DE": 3.0843941909916626,
-      "MANU": 18.317406601746015,
-      "AJAX.AS": 7.8452319299811375,
-      "CCP.L": 2.0334402713523003,
-      "FENER.IS": 0.04377401704211878,
-      "GSRAY.IS": 0.014676750003996134,
-      "BJKAS.IS": 0.028778731773829697,
-      "TSPOR.IS": 0.015206145299087703,
-      "SCP.LS": 0.996358918827149,
-      "SLBEN.LS": 6.5019067757547075,
-      "FCP.LS": 2.59634767895477
+      "JUVE.MI": 1.7463960062414354,
+      "SSL.MI": 1.6691100175773477,
+      "BVB.DE": 3.086181495015052,
+      "MANU": 18.329981997824255,
+      "AJAX.AS": 7.8399174465373305,
+      "CCP.L": 2.035397024224951,
+      "FENER.IS": 0.043828988981643835,
+      "GSRAY.IS": 0.014660875439832882,
+      "BJKAS.IS": 0.028755112937144434,
+      "TSPOR.IS": 0.015211988423413318,
+      "SCP.LS": 0.9956473956751495,
+      "SLBEN.LS": 6.494037982970093,
+      "FCP.LS": 2.599357470763385
     },
     "model": {
       "calibration": 63,
@@ -1904,6 +1904,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2187,19 +2197,9 @@
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.383099 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-3895986",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-11T19:37:34.530Z"
+  "updatedAt": "2026-10-11T23:11:24.388Z"
 }
