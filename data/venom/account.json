@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7601262306236687,
-      "SSL.MI": 1.6797351558434548,
-      "BVB.DE": 3.0657400689008956,
-      "MANU": 18.312296758073288,
-      "AJAX.AS": 7.841623982478313,
-      "CCP.L": 2.0535854594351024,
-      "FENER.IS": 0.04254497616882862,
-      "GSRAY.IS": 0.014312072136238233,
-      "BJKAS.IS": 0.02747956007460915,
-      "TSPOR.IS": 0.014999722959009046,
-      "SCP.LS": 0.9755125091217459,
-      "SLBEN.LS": 6.497146803258816,
-      "FCP.LS": 2.5981754746977406
+      "JUVE.MI": 1.734832902291656,
+      "SSL.MI": 1.6712664481064816,
+      "BVB.DE": 3.0929145335919364,
+      "MANU": 18.625711063870842,
+      "AJAX.AS": 7.758910854554683,
+      "CCP.L": 2.0382128962985666,
+      "FENER.IS": 0.04248551136339894,
+      "GSRAY.IS": 0.014283669829912273,
+      "BJKAS.IS": 0.027527431146582206,
+      "TSPOR.IS": 0.014844574754419396,
+      "SCP.LS": 0.9743383677969285,
+      "SLBEN.LS": 6.52553470606126,
+      "FCP.LS": 2.5992103618901448
     },
     "model": {
       "calibration": 62,
@@ -1938,6 +1938,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2226,14 +2231,9 @@
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.382509 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,98 € · SIM-3549538",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-12T09:46:47.408Z"
+  "updatedAt": "2026-10-12T19:46:24.596Z"
 }
