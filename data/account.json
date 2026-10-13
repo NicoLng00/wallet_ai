@@ -95,10 +95,10 @@
       "NVDA": 202.59170591999998,
       "SPY": 696.5208835999999,
       "QQQ": 667.82218224,
-      "BTCUSD": 73485.146352,
+      "BTCUSD": 75077.628876,
       "TSLA": 338.39582268,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2197.6527378,
+      "ETHUSD": 2265.2638704799997,
       "WTI": 72.8,
       "TLT": 69.86692579999999,
       "EURUSD": 1.117123719217656,
@@ -2137,6 +2137,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude TSLA per limite di detenzione (6g) · apre AAPL forzato (nessun trade ancora oggi, score 90)",
       "detail": "chiude TSLA per limite di detenzione (6g); apre AAPL forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2430,14 +2435,9 @@
       "title": "Autopilot: apre ES forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre ES forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000048 ES",
-      "detail": "0,37 € · fill simulato 7730 € · SIM-5039956",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-13T01:35:34.789Z"
+  "updatedAt": "2026-10-13T08:29:23.048Z"
 }
