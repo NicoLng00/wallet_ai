@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.721217617142795,
-      "SSL.MI": 1.659453433573679,
-      "BVB.DE": 3.0561204232394896,
-      "MANU": 18.41500702475569,
-      "AJAX.AS": 7.893492880771609,
-      "CCP.L": 2.0392618238828306,
-      "FENER.IS": 0.043045327998947364,
-      "GSRAY.IS": 0.014113545487853594,
-      "BJKAS.IS": 0.025660480981683973,
-      "TSPOR.IS": 0.014847870672508031,
-      "SCP.LS": 0.97622975855325,
-      "SLBEN.LS": 6.511784422129078,
-      "FCP.LS": 2.7994642274601915
+      "JUVE.MI": 1.7181578391022516,
+      "SSL.MI": 1.656062577322187,
+      "BVB.DE": 3.069792557231992,
+      "MANU": 18.383703389079102,
+      "AJAX.AS": 7.872222961628214,
+      "CCP.L": 2.041818656619192,
+      "FENER.IS": 0.042986748947768966,
+      "GSRAY.IS": 0.014472073145774303,
+      "BJKAS.IS": 0.02694275363185164,
+      "TSPOR.IS": 0.014817379725341391,
+      "SCP.LS": 0.9954502726022654,
+      "SLBEN.LS": 6.528382416603977,
+      "FCP.LS": 2.5988278763804167
     },
     "model": {
       "calibration": 62,
@@ -2016,6 +2016,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2294,14 +2299,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude SCP.LS per segnale difensivo",
-      "detail": "chiude SCP.LS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-14T20:51:22.982Z"
+  "updatedAt": "2026-10-14T23:52:36.771Z"
 }
