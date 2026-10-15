@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.7172622249179659,
-      "SSL.MI": 1.6495756097332068,
-      "BVB.DE": 3.0263228415904178,
-      "MANU": 18.424716158300253,
-      "AJAX.AS": 7.875849986488277,
-      "CCP.L": 2.067720981358869,
-      "FENER.IS": 0.042511122999574484,
-      "GSRAY.IS": 0.014302451388387491,
-      "BJKAS.IS": 0.026372064549769716,
-      "TSPOR.IS": 0.014823179384810068,
-      "SCP.LS": 0.9752688840184481,
-      "SLBEN.LS": 6.591284848592722,
-      "FCP.LS": 2.798457743520109
+      "JUVE.MI": 1.681633300756953,
+      "SSL.MI": 1.6901765353322715,
+      "BVB.DE": 3.0158723918101664,
+      "MANU": 18.509535992045,
+      "AJAX.AS": 7.859378580097555,
+      "CCP.L": 2.03779749450628,
+      "FENER.IS": 0.04303997265566926,
+      "GSRAY.IS": 0.014121085938514728,
+      "BJKAS.IS": 0.02620988426358217,
+      "TSPOR.IS": 0.014994271551782018,
+      "SCP.LS": 0.9504410880703215,
+      "SLBEN.LS": 6.51789138311657,
+      "FCP.LS": 2.798043119144913
     },
     "model": {
       "calibration": 62,
@@ -2040,6 +2040,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2323,19 +2333,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.378388 SCP.LS",
-      "detail": "0,38 € · fill simulato 0,99 € · SIM-4943942",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-15T09:18:07.238Z"
+  "updatedAt": "2026-10-15T18:25:26.822Z"
 }
