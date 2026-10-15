@@ -1,26 +1,9 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.061676283324644,
+    "cash": 49.26091309497306,
     "highWater": 50.017265718199006,
     "positions": {
-      "PEP": {
-        "quantity": 0.0032860012821259205,
-        "averagePrice": 112.41348651,
-        "stopLoss": 109.91134319509347,
-        "takeProfit": 116.79223731108642,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 112.41348651,
-          "confidence": 75,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-10T02:21:37.801Z"
-      },
       "DIS": {
         "quantity": 0.003816380386048566,
         "averagePrice": 96.42792589999999,
@@ -91,59 +74,76 @@
       }
     },
     "market": {
-      "AAPL": 306.751998,
-      "NVDA": 197.93625250000002,
-      "SPY": 688.3494800000001,
-      "QQQ": 651.9911037500001,
-      "BTCUSD": 72522.662275,
-      "TSLA": 328.397083,
+      "AAPL": 307.717977,
+      "NVDA": 194.08128075000002,
+      "SPY": 689.30651475,
+      "QQQ": 648.73539675,
+      "BTCUSD": 73522.629425,
+      "TSLA": 324.4079475,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2115.98594375,
+      "ETHUSD": 2165.8143605,
       "WTI": 72.8,
-      "TLT": 70.56118825,
+      "TLT": 71.661331,
       "EURUSD": 1.1180367275064986,
       "ES": 7730,
-      "MSFT": 477.34567825000005,
-      "GOOGL": 310.937907,
-      "AMZN": 227.25550400000003,
-      "META": 659.6742145,
-      "JPM": 299.882814,
-      "V": 350.10477775000004,
-      "MA": 539.552937,
-      "UNH": 353.8524185,
-      "HD": 264.31153175,
-      "PG": 140.00434525,
-      "JNJ": 227.10345175,
-      "KO": 82.0903265,
-      "PEP": 115.62231975000002,
-      "DIS": 97.48338075,
-      "NFLX": 63.11957225,
-      "ADBE": 215.27020900000002,
-      "CRM": 211.03957875,
-      "ORCL": 116.76718375000002,
-      "INTC": 87.760981,
-      "AMD": 510.55567850000006,
-      "COST": 878.3253500000001,
-      "WMT": 103.896408,
-      "BAC": 45.96450075,
-      "XOM": 158.32216925,
-      "CVX": 198.598127,
-      "PFE": 26.126154250000003,
-      "ABBV": 253.551599,
-      "MRK": 131.81141225000002,
-      "T": 20.61649625,
-      "VZ": 39.7303585,
-      "CSCO": 101.64245700000001,
-      "IBM": 203.821569,
-      "NKE": 31.573202499999997,
-      "MCD": 213.15042175000002
+      "MSFT": 482.19346175000004,
+      "GOOGL": 313.299189,
+      "AMZN": 227.16606149999998,
+      "META": 656.4542845000001,
+      "JPM": 299.1493855,
+      "V": 355.82909775,
+      "MA": 548.14836125,
+      "UNH": 367.02729875000006,
+      "HD": 275.05357599999996,
+      "PG": 141.91841474999998,
+      "JNJ": 231.02103325000002,
+      "KO": 83.07419399999999,
+      "PEP": 116.83873774999999,
+      "DIS": 99.50478125000001,
+      "NFLX": 64.8815895,
+      "ADBE": 226.72779325000002,
+      "CRM": 220.86036525,
+      "ORCL": 118.99430199999999,
+      "INTC": 84.19222524999999,
+      "AMD": 490.76205325000006,
+      "COST": 881.75099775,
+      "WMT": 106.64229275000001,
+      "BAC": 45.82139275,
+      "XOM": 156.17554925000002,
+      "CVX": 197.596371,
+      "PFE": 26.55547825,
+      "ABBV": 258.06844524999997,
+      "MRK": 134.79879175000002,
+      "T": 21.09948575,
+      "VZ": 40.249125,
+      "CSCO": 97.420771,
+      "IBM": 207.99853375,
+      "NKE": 33.31733125,
+      "MCD": 217.953484
     },
     "model": {
       "calibration": 59,
-      "outcomes": 58,
-      "wins": 26
+      "outcomes": 59,
+      "wins": 27
     },
     "trades": [
+      {
+        "id": "SIM-7380509",
+        "symbol": "PEP",
+        "side": "sell",
+        "quantity": 0.0032860012821259205,
+        "price": 116.83873774999999,
+        "notional": 0.38393224204847415,
+        "realizedPnl": 0.014541381248369302,
+        "origin": "Take Profit",
+        "at": "2026-10-15T15:16:20.509Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-5777863",
         "symbol": "SPY",
@@ -2210,6 +2210,21 @@
       "tag": "HOLD"
     },
     {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Take Profit: vendita demo 0.003286 PEP",
+      "detail": "0,38 € · fill simulato 116,84 € · SIM-7380509",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2488,24 +2503,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000137 ETHUSD",
       "detail": "0,31 € · fill simulato 2284 € · SIM-8430547",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-15T10:22:29.136Z"
+  "updatedAt": "2026-10-15T15:16:20.872Z"
 }
