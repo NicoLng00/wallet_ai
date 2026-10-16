@@ -78,10 +78,10 @@
       "NVDA": 190.9290145,
       "SPY": 680.5518625000001,
       "QQQ": 632.8931699999999,
-      "BTCUSD": 72791.63105000001,
+      "BTCUSD": 72697.11615,
       "TSLA": 316.28608800000006,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2153.2188355,
+      "ETHUSD": 2158.345823,
       "WTI": 72.8,
       "TLT": 71.3765825,
       "EURUSD": 1.1215162900241125,
@@ -2249,6 +2249,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2532,14 +2537,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude AAPL per limite di detenzione (6g) · apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "detail": "chiude AAPL per limite di detenzione (6g); apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-16T21:44:35.601Z"
+  "updatedAt": "2026-10-16T23:57:29.933Z"
 }
