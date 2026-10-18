@@ -61,10 +61,10 @@
       "NVDA": 190.49304582,
       "SPY": 678.9978855,
       "QQQ": 631.4480172,
-      "BTCUSD": 72094.31856,
+      "BTCUSD": 72996.387156,
       "TSLA": 315.56387808000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2100.69891504,
+      "ETHUSD": 2140.4023878599996,
       "WTI": 72.8,
       "TLT": 71.2136007,
       "EURUSD": 1.124083029268874,
@@ -2322,6 +2322,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2600,14 +2605,9 @@
       "title": "Autopilot chiusura per limite di tempo: vendita demo 0.001092 TSLA",
       "detail": "0,37 € · fill simulato 338,40 € · SIM-5334291",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-18T21:44:42.553Z"
+  "updatedAt": "2026-10-18T23:43:34.783Z"
 }
