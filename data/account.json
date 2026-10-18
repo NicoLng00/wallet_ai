@@ -78,10 +78,10 @@
       "NVDA": 190.49304582,
       "SPY": 678.9978855,
       "QQQ": 631.4480172,
-      "BTCUSD": 73061.328978,
+      "BTCUSD": 72446.605704,
       "TSLA": 315.56387808000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2156.49550512,
+      "ETHUSD": 2129.70033144,
       "WTI": 72.8,
       "TLT": 71.2136007,
       "EURUSD": 1.124083029268874,
@@ -2312,6 +2312,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude ES per limite di detenzione (6g)",
       "detail": "chiude ES per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -2600,14 +2605,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000048 ES",
       "detail": "0,37 € · fill simulato 7730 € · SIM-1968471",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-18T09:54:39.562Z"
+  "updatedAt": "2026-10-18T13:50:23.454Z"
 }
