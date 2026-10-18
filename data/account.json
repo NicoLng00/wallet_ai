@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.261570088045346,
+    "cash": 49.438980456344495,
     "highWater": 50.017265718199006,
     "positions": {
       "AAPL": {
@@ -38,23 +38,6 @@
         },
         "openedAt": "2026-10-16T00:47:37.067Z"
       },
-      "ETHUSD": {
-        "quantity": 0.00017202887938939007,
-        "averagePrice": 2155.78892535,
-        "stopLoss": 2121.2963025444,
-        "takeProfit": 2216.1510152598003,
-        "strategyKey": "hybrid_confluence@1D",
-        "decisionSnapshot": {
-          "strategyKey": "hybrid_confluence@1D",
-          "entryPrice": 2155.78892535,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": null,
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-17T04:09:35.406Z"
-      },
       "WTI": {
         "quantity": 0.0050750993915407005,
         "averagePrice": 72.8,
@@ -78,10 +61,10 @@
       "NVDA": 190.49304582,
       "SPY": 678.9978855,
       "QQQ": 631.4480172,
-      "BTCUSD": 72446.605704,
+      "BTCUSD": 72144.136944,
       "TSLA": 315.56387808000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2129.70033144,
+      "ETHUSD": 2109.17693646,
       "WTI": 72.8,
       "TLT": 71.2136007,
       "EURUSD": 1.124083029268874,
@@ -123,10 +106,27 @@
     },
     "model": {
       "calibration": 59,
-      "outcomes": 62,
+      "outcomes": 63,
       "wins": 29
     },
     "trades": [
+      {
+        "id": "SIM-3399738",
+        "symbol": "ETHUSD",
+        "side": "sell",
+        "quantity": 0.00017202887938939007,
+        "price": 2109.17693646,
+        "notional": 0.3628393448131606,
+        "realizedPnl": -0.008018608214857443,
+        "origin": "Stop Loss",
+        "at": "2026-10-18T17:09:59.738Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "hybrid_confluence@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-1612079",
         "symbol": "ES",
@@ -2312,6 +2312,21 @@
       "tag": "HOLD"
     },
     {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Stop Loss: vendita demo 0.000172 ETHUSD",
+      "detail": "0,36 € · fill simulato 2109 € · SIM-3399738",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2590,24 +2605,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000537 SPY",
-      "detail": "0,37 € · fill simulato 694,97 € · SIM-7891957",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre ES forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre ES forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000048 ES",
-      "detail": "0,37 € · fill simulato 7730 € · SIM-1968471",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-18T13:50:23.454Z"
+  "updatedAt": "2026-10-18T17:10:00.265Z"
 }
