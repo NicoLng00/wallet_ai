@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.6920416982653521,
-      "SSL.MI": 1.6472560154539522,
-      "BVB.DE": 3.085434990662764,
-      "MANU": 18.08107402678667,
-      "AJAX.AS": 7.695308492093746,
-      "CCP.L": 2.045369066135578,
-      "FENER.IS": 0.04225250466413536,
-      "GSRAY.IS": 0.013642667691573976,
-      "BJKAS.IS": 0.025833989360333705,
-      "TSPOR.IS": 0.014550139420927376,
-      "SCP.LS": 0.9895518366380047,
-      "SLBEN.LS": 6.6777445664486486,
-      "FCP.LS": 2.502674198958476
+      "JUVE.MI": 1.6912243924207002,
+      "SSL.MI": 1.6501836061597015,
+      "BVB.DE": 3.0862403873506707,
+      "MANU": 18.04500156531661,
+      "AJAX.AS": 7.70031080560721,
+      "CCP.L": 2.0464627805901414,
+      "FENER.IS": 0.04220291998252284,
+      "GSRAY.IS": 0.013639751865206245,
+      "BJKAS.IS": 0.025881762023872587,
+      "TSPOR.IS": 0.014538900509629325,
+      "SCP.LS": 0.9887308864222724,
+      "SLBEN.LS": 6.681657403639066,
+      "FCP.LS": 2.5018020757468955
     },
     "model": {
       "calibration": 62,
@@ -2147,6 +2147,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -2430,14 +2435,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.361642 SCP.LS",
-      "detail": "0,36 € · fill simulato 0,99 € · SIM-9810627",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-18T20:32:47.356Z"
+  "updatedAt": "2026-10-18T22:37:36.031Z"
 }
