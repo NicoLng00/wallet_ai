@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.694415113927642,
-      "SSL.MI": 1.6483296961060931,
-      "BVB.DE": 3.0811883315385344,
-      "MANU": 18.087237332800434,
-      "AJAX.AS": 7.702104293601321,
-      "CCP.L": 2.0432780042337737,
-      "FENER.IS": 0.042247249016982714,
-      "GSRAY.IS": 0.013655773046195686,
-      "BJKAS.IS": 0.025827844795655426,
-      "TSPOR.IS": 0.014538355840956836,
-      "SCP.LS": 0.9908579555593644,
-      "SLBEN.LS": 6.676497496033682,
-      "FCP.LS": 2.50061918453543
+      "JUVE.MI": 1.6920416982653521,
+      "SSL.MI": 1.6472560154539522,
+      "BVB.DE": 3.085434990662764,
+      "MANU": 18.08107402678667,
+      "AJAX.AS": 7.695308492093746,
+      "CCP.L": 2.045369066135578,
+      "FENER.IS": 0.04225250466413536,
+      "GSRAY.IS": 0.013642667691573976,
+      "BJKAS.IS": 0.025833989360333705,
+      "TSPOR.IS": 0.014550139420927376,
+      "SCP.LS": 0.9895518366380047,
+      "SLBEN.LS": 6.6777445664486486,
+      "FCP.LS": 2.502674198958476
     },
     "model": {
       "calibration": 62,
@@ -2142,6 +2142,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -2430,14 +2435,9 @@
       "title": "Take Profit: vendita demo 0.361642 SCP.LS",
       "detail": "0,36 € · fill simulato 0,99 € · SIM-9810627",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-18T18:01:15.632Z"
+  "updatedAt": "2026-10-18T20:32:47.356Z"
 }
