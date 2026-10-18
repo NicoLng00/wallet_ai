@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.6940030285109284,
-      "SSL.MI": 1.6524619546752513,
-      "BVB.DE": 3.084046562225841,
-      "MANU": 18.052047967107868,
-      "AJAX.AS": 7.705642693299316,
-      "CCP.L": 2.0439017142641656,
-      "FENER.IS": 0.04217427977822706,
-      "GSRAY.IS": 0.01366623454970636,
-      "BJKAS.IS": 0.025873866029356665,
-      "TSPOR.IS": 0.014527450495227063,
-      "SCP.LS": 0.9895810901358858,
-      "SLBEN.LS": 6.68260666165404,
-      "FCP.LS": 2.49775837770728
+      "JUVE.MI": 1.694415113927642,
+      "SSL.MI": 1.6483296961060931,
+      "BVB.DE": 3.0811883315385344,
+      "MANU": 18.087237332800434,
+      "AJAX.AS": 7.702104293601321,
+      "CCP.L": 2.0432780042337737,
+      "FENER.IS": 0.042247249016982714,
+      "GSRAY.IS": 0.013655773046195686,
+      "BJKAS.IS": 0.025827844795655426,
+      "TSPOR.IS": 0.014538355840956836,
+      "SCP.LS": 0.9908579555593644,
+      "SLBEN.LS": 6.676497496033682,
+      "FCP.LS": 2.50061918453543
     },
     "model": {
       "calibration": 62,
@@ -2152,6 +2152,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SLBEN.LS per segnale difensivo",
       "detail": "chiude SLBEN.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2425,19 +2435,9 @@
       "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.361642 SCP.LS",
-      "detail": "0,35 € · fill simulato 0,98 € · SIM-0086252",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-18T14:53:11.809Z"
+  "updatedAt": "2026-10-18T18:01:15.632Z"
 }
