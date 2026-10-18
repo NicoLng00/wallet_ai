@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.6936286345102693,
-      "SSL.MI": 1.647811987533881,
-      "BVB.DE": 3.0864729048852984,
-      "MANU": 18.085585890658102,
-      "AJAX.AS": 7.697400675751967,
-      "CCP.L": 2.0428507571021477,
-      "FENER.IS": 0.04222766106145202,
-      "GSRAY.IS": 0.01364471540486596,
-      "BJKAS.IS": 0.02583250819219964,
-      "TSPOR.IS": 0.014556969426193183,
-      "SCP.LS": 0.9910919830353323,
-      "SLBEN.LS": 6.6780386109035055,
-      "FCP.LS": 2.5006971952431236
+      "JUVE.MI": 1.6940030285109284,
+      "SSL.MI": 1.6524619546752513,
+      "BVB.DE": 3.084046562225841,
+      "MANU": 18.052047967107868,
+      "AJAX.AS": 7.705642693299316,
+      "CCP.L": 2.0439017142641656,
+      "FENER.IS": 0.04217427977822706,
+      "GSRAY.IS": 0.01366623454970636,
+      "BJKAS.IS": 0.025873866029356665,
+      "TSPOR.IS": 0.014527450495227063,
+      "SCP.LS": 0.9895810901358858,
+      "SLBEN.LS": 6.68260666165404,
+      "FCP.LS": 2.49775837770728
     },
     "model": {
       "calibration": 62,
@@ -2142,6 +2142,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SLBEN.LS per segnale difensivo",
       "detail": "chiude SLBEN.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2425,19 +2435,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.368548 SCP.LS",
-      "detail": "0,36 € · fill simulato 0,98 € · SIM-0086237",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-18T11:44:50.980Z"
+  "updatedAt": "2026-10-18T14:53:11.809Z"
 }
