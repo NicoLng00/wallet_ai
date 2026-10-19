@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.5829169776441,
+    "cash": 50.3954169776441,
     "highWater": 50.60242979430946,
-    "positions": {},
+    "positions": {
+      "SLBEN.LS": {
+        "quantity": 0.05615481792862371,
+        "averagePrice": 6.6779666257069605,
+        "stopLoss": 6.5322524789566465,
+        "takeProfit": 6.93296638252001,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 6.6779666257069605,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-19T00:31:21.336Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.6912243924207002,
-      "SSL.MI": 1.6501836061597015,
-      "BVB.DE": 3.0862403873506707,
-      "MANU": 18.04500156531661,
-      "AJAX.AS": 7.70031080560721,
-      "CCP.L": 2.0464627805901414,
-      "FENER.IS": 0.04220291998252284,
-      "GSRAY.IS": 0.013639751865206245,
-      "BJKAS.IS": 0.025881762023872587,
-      "TSPOR.IS": 0.014538900509629325,
-      "SCP.LS": 0.9887308864222724,
-      "SLBEN.LS": 6.681657403639066,
-      "FCP.LS": 2.5018020757468955
+      "JUVE.MI": 1.6931503267329342,
+      "SSL.MI": 1.6474915189004966,
+      "BVB.DE": 3.086710684116108,
+      "MANU": 18.104072292839167,
+      "AJAX.AS": 7.697633656637425,
+      "CCP.L": 2.0499581733960386,
+      "FENER.IS": 0.04230545867944159,
+      "GSRAY.IS": 0.013658198025468525,
+      "BJKAS.IS": 0.02587363178964136,
+      "TSPOR.IS": 0.014573989808706877,
+      "SCP.LS": 0.9896193112373198,
+      "SLBEN.LS": 6.6779666257069605,
+      "FCP.LS": 2.5039461485020005
     },
     "model": {
       "calibration": 62,
@@ -25,6 +43,23 @@
       "wins": 33
     },
     "trades": [
+      {
+        "id": "SIM-9881336",
+        "symbol": "SLBEN.LS",
+        "side": "buy",
+        "quantity": 0.05615481792862371,
+        "price": 6.6779666257069605,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-19T00:31:21.336Z",
+        "stopLoss": 6.5322524789566465,
+        "takeProfit": 6.93296638252001,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-5437250",
         "symbol": "SLBEN.LS",
@@ -2137,6 +2172,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.056155 SLBEN.LS",
+      "detail": "0,38 € · fill simulato 6,68 € · SIM-9881336",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2420,24 +2470,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-18T22:37:36.031Z"
+  "updatedAt": "2026-10-19T00:31:21.767Z"
 }
