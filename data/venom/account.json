@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.3954169776441,
+    "cash": 50.583037647574066,
     "highWater": 50.60242979430946,
-    "positions": {
-      "SLBEN.LS": {
-        "quantity": 0.05615481792862371,
-        "averagePrice": 6.6779666257069605,
-        "stopLoss": 6.5322524789566465,
-        "takeProfit": 6.93296638252001,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 6.6779666257069605,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-19T00:31:21.336Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.6931503267329342,
-      "SSL.MI": 1.6474915189004966,
-      "BVB.DE": 3.086710684116108,
-      "MANU": 18.104072292839167,
-      "AJAX.AS": 7.697633656637425,
-      "CCP.L": 2.0499581733960386,
-      "FENER.IS": 0.04230545867944159,
-      "GSRAY.IS": 0.013658198025468525,
-      "BJKAS.IS": 0.02587363178964136,
-      "TSPOR.IS": 0.014573989808706877,
-      "SCP.LS": 0.9896193112373198,
-      "SLBEN.LS": 6.6779666257069605,
-      "FCP.LS": 2.5039461485020005
+      "JUVE.MI": 1.6915601591615912,
+      "SSL.MI": 1.649389292560749,
+      "BVB.DE": 3.0893659605159773,
+      "MANU": 18.088260868162834,
+      "AJAX.AS": 7.695957574562729,
+      "CCP.L": 2.050420185260663,
+      "FENER.IS": 0.0422272929673923,
+      "GSRAY.IS": 0.01364798679521915,
+      "BJKAS.IS": 0.025911082271355974,
+      "TSPOR.IS": 0.014573627759845147,
+      "SCP.LS": 0.9892880557882967,
+      "SLBEN.LS": 6.6801155050803045,
+      "FCP.LS": 2.502029519116069
     },
     "model": {
       "calibration": 62,
-      "outcomes": 62,
-      "wins": 33
+      "outcomes": 63,
+      "wins": 34
     },
     "trades": [
+      {
+        "id": "SIM-7300192",
+        "symbol": "SLBEN.LS",
+        "side": "sell",
+        "quantity": 0.05615481792862371,
+        "price": 6.6801155050803045,
+        "notional": 0.3751206699299607,
+        "realizedPnl": 0.00012066992996070505,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-10-19T05:21:40.192Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-9881336",
         "symbol": "SLBEN.LS",
@@ -2172,6 +2171,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude SLBEN.LS per segnale difensivo",
+      "detail": "chiude SLBEN.LS per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.056155 SLBEN.LS",
+      "detail": "0,38 € · fill simulato 6,68 € · SIM-7300192",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2450,29 +2469,9 @@
       "title": "Stop Loss: vendita demo 0.367998 SCP.LS",
       "detail": "0,36 € · fill simulato 0,98 € · SIM-5886966",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SCP.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.367998 SCP.LS",
-      "detail": "0,37 € · fill simulato 1,00 € · SIM-8321281",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-19T00:31:21.767Z"
+  "updatedAt": "2026-10-19T05:21:40.570Z"
 }
