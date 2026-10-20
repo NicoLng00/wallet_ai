@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.6937677919280167,
-      "SSL.MI": 1.6483050051127193,
-      "BVB.DE": 3.0830368614001555,
-      "MANU": 18.219244324895044,
-      "AJAX.AS": 7.704296135661137,
-      "CCP.L": 2.046736351840573,
-      "FENER.IS": 0.042287741647512055,
-      "GSRAY.IS": 0.01366963353765296,
-      "BJKAS.IS": 0.025868485077379662,
-      "TSPOR.IS": 0.014555819027908022,
-      "SCP.LS": 0.9903106893525738,
-      "SLBEN.LS": 6.675630814297092,
-      "FCP.LS": 2.4998231571068747
+      "JUVE.MI": 1.6499170511964412,
+      "SSL.MI": 1.6797895670970922,
+      "BVB.DE": 3.0209827240939253,
+      "MANU": 18.215579922620904,
+      "AJAX.AS": 8.006903353536046,
+      "CCP.L": 2.0639095484160097,
+      "FENER.IS": 0.0419042026080861,
+      "GSRAY.IS": 0.012773382073377809,
+      "BJKAS.IS": 0.02353616136327052,
+      "TSPOR.IS": 0.014193730579010529,
+      "SCP.LS": 0.9908664145882116,
+      "SLBEN.LS": 6.542871591941574,
+      "FCP.LS": 2.7997686840751324
     },
     "model": {
       "calibration": 62,
@@ -2211,6 +2211,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2499,14 +2504,9 @@
       "title": "Autopilot: apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre AJAX.AS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.047034 AJAX.AS",
-      "detail": "0,37 € · fill simulato 7,91 € · SIM-4442441",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-20T05:24:12.855Z"
+  "updatedAt": "2026-10-20T10:16:02.032Z"
 }
