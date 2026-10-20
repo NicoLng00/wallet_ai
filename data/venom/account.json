@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.395537647574066,
+    "cash": 50.57950519623054,
     "highWater": 50.60242979430946,
-    "positions": {
-      "SLBEN.LS": {
-        "quantity": 0.05614819307618863,
-        "averagePrice": 6.678754550322837,
-        "stopLoss": 6.524468983175446,
-        "takeProfit": 6.948754292830771,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 6.678754550322837,
-          "confidence": 85,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-20T00:44:05.521Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.6307894035369987,
-      "SSL.MI": 1.6902106133387664,
-      "BVB.DE": 3.02970766600611,
-      "MANU": 18.765065435067335,
-      "AJAX.AS": 7.841696308729749,
-      "CCP.L": 2.05057637299114,
-      "FENER.IS": 0.04260706851852687,
-      "GSRAY.IS": 0.012759837202853733,
-      "BJKAS.IS": 0.024460836464059735,
-      "TSPOR.IS": 0.01455207811939726,
-      "SCP.LS": 0.9890036051465891,
-      "SLBEN.LS": 6.625715146379231,
-      "FCP.LS": 2.8028586082852596
+      "JUVE.MI": 1.649851594731649,
+      "SSL.MI": 1.699242229128069,
+      "BVB.DE": 3.036724629796185,
+      "MANU": 18.752177016219875,
+      "AJAX.AS": 7.99690462630628,
+      "CCP.L": 2.0458929379047373,
+      "FENER.IS": 0.04156621176209557,
+      "GSRAY.IS": 0.012954742960109535,
+      "BJKAS.IS": 0.024776964798171753,
+      "TSPOR.IS": 0.014560859848774761,
+      "SCP.LS": 0.9902713603673993,
+      "SLBEN.LS": 6.615841549031273,
+      "FCP.LS": 2.800013430650123
     },
     "model": {
       "calibration": 62,
-      "outcomes": 63,
+      "outcomes": 64,
       "wins": 34
     },
     "trades": [
+      {
+        "id": "SIM-5430706",
+        "symbol": "SLBEN.LS",
+        "side": "sell",
+        "quantity": 0.05614819307618863,
+        "price": 6.615841549031273,
+        "notional": 0.3714675486564788,
+        "realizedPnl": -0.003532451343521201,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-10-20T22:30:30.706Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-7045521",
         "symbol": "SLBEN.LS",
@@ -2206,6 +2205,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude SLBEN.LS per segnale difensivo",
+      "detail": "chiude SLBEN.LS per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.056148 SLBEN.LS",
+      "detail": "0,37 € · fill simulato 6,62 € · SIM-5430706",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2484,29 +2503,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude AJAX.AS per segnale difensivo",
-      "detail": "chiude AJAX.AS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.047034 AJAX.AS",
-      "detail": "0,37 € · fill simulato 7,82 € · SIM-1717373",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-20T19:24:55.252Z"
+  "updatedAt": "2026-10-20T22:30:31.027Z"
 }
