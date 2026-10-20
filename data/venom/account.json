@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.6247768801212965,
-      "SSL.MI": 1.6931146340887069,
-      "BVB.DE": 3.0508270350883198,
-      "MANU": 18.69554689878679,
-      "AJAX.AS": 7.855234666499221,
-      "CCP.L": 2.0740699928889152,
-      "FENER.IS": 0.042636963898829684,
-      "GSRAY.IS": 0.012756009173415227,
-      "BJKAS.IS": 0.024429500455502233,
-      "TSPOR.IS": 0.014582195328125781,
-      "SCP.LS": 0.9904841302773124,
-      "SLBEN.LS": 6.618829232162558,
-      "FCP.LS": 2.802672688550453
+      "JUVE.MI": 1.6307894035369987,
+      "SSL.MI": 1.6902106133387664,
+      "BVB.DE": 3.02970766600611,
+      "MANU": 18.765065435067335,
+      "AJAX.AS": 7.841696308729749,
+      "CCP.L": 2.05057637299114,
+      "FENER.IS": 0.04260706851852687,
+      "GSRAY.IS": 0.012759837202853733,
+      "BJKAS.IS": 0.024460836464059735,
+      "TSPOR.IS": 0.01455207811939726,
+      "SCP.LS": 0.9890036051465891,
+      "SLBEN.LS": 6.625715146379231,
+      "FCP.LS": 2.8028586082852596
     },
     "model": {
       "calibration": 62,
@@ -2221,6 +2221,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2499,14 +2504,9 @@
       "title": "Autopilot (Gemini): vendita demo 0.047034 AJAX.AS",
       "detail": "0,37 € · fill simulato 7,82 € · SIM-1717373",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-20T15:13:36.886Z"
+  "updatedAt": "2026-10-20T19:24:55.252Z"
 }
