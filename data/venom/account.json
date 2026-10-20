@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.583037647574066,
+    "cash": 50.395537647574066,
     "highWater": 50.60242979430946,
-    "positions": {},
+    "positions": {
+      "SLBEN.LS": {
+        "quantity": 0.05614819307618863,
+        "averagePrice": 6.678754550322837,
+        "stopLoss": 6.524468983175446,
+        "takeProfit": 6.948754292830771,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 6.678754550322837,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-20T00:44:05.521Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.647806823750488,
-      "SSL.MI": 1.7014980835850873,
-      "BVB.DE": 3.0433494325852464,
-      "MANU": 18.186554632688853,
-      "AJAX.AS": 7.996989729114628,
-      "CCP.L": 2.048788177243177,
-      "FENER.IS": 0.04224995727305857,
-      "GSRAY.IS": 0.013663976333508326,
-      "BJKAS.IS": 0.025913543035080422,
-      "TSPOR.IS": 0.014567187816062787,
-      "SCP.LS": 0.9887719552927092,
-      "SLBEN.LS": 6.6015778316493625,
-      "FCP.LS": 2.6200383924591097
+      "JUVE.MI": 1.6912511155437446,
+      "SSL.MI": 1.6485437224463761,
+      "BVB.DE": 3.086787484010033,
+      "MANU": 18.112531082654215,
+      "AJAX.AS": 7.695432555338724,
+      "CCP.L": 2.0502369302905255,
+      "FENER.IS": 0.042282545578407355,
+      "GSRAY.IS": 0.01364336458521052,
+      "BJKAS.IS": 0.025877474783767535,
+      "TSPOR.IS": 0.014568977976615285,
+      "SCP.LS": 0.989480822072453,
+      "SLBEN.LS": 6.678754550322837,
+      "FCP.LS": 2.503966860395745
     },
     "model": {
       "calibration": 62,
@@ -25,6 +43,23 @@
       "wins": 34
     },
     "trades": [
+      {
+        "id": "SIM-7045521",
+        "symbol": "SLBEN.LS",
+        "side": "buy",
+        "quantity": 0.05614819307618863,
+        "price": 6.678754550322837,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-20T00:44:05.521Z",
+        "stopLoss": 6.524468983175446,
+        "takeProfit": 6.948754292830771,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-7300192",
         "symbol": "SLBEN.LS",
@@ -2171,6 +2206,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.056148 SLBEN.LS",
+      "detail": "0,38 € · fill simulato 6,68 € · SIM-7045521",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2454,24 +2504,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-19T21:45:18.622Z"
+  "updatedAt": "2026-10-20T00:44:05.739Z"
 }
