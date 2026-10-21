@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.613562992447591,
-      "SSL.MI": 1.6739236557226795,
-      "BVB.DE": 3.04094536947257,
-      "MANU": 18.700278881888412,
-      "AJAX.AS": 7.839499242593019,
-      "CCP.L": 2.056935106599909,
-      "FENER.IS": 0.04024439994442293,
-      "GSRAY.IS": 0.012381939282544219,
-      "BJKAS.IS": 0.02370556926510794,
-      "TSPOR.IS": 0.01382847696638655,
-      "SCP.LS": 0.9885662230031749,
-      "SLBEN.LS": 6.62418362838082,
-      "FCP.LS": 2.784226932660077
+      "JUVE.MI": 1.6145134018661813,
+      "SSL.MI": 1.6732634426338342,
+      "BVB.DE": 3.0409418122813126,
+      "MANU": 18.589998283596007,
+      "AJAX.AS": 7.836805008829711,
+      "CCP.L": 2.0552087321032055,
+      "FENER.IS": 0.040266227046625934,
+      "GSRAY.IS": 0.012378306181080927,
+      "BJKAS.IS": 0.023692043206671693,
+      "TSPOR.IS": 0.013833476550826833,
+      "SCP.LS": 0.9896552214014726,
+      "SLBEN.LS": 6.621306497542486,
+      "FCP.LS": 2.7840552307276365
     },
     "model": {
       "calibration": 62,
@@ -2249,6 +2249,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -2532,14 +2537,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-21T16:07:27.485Z"
+  "updatedAt": "2026-10-21T20:15:39.357Z"
 }
