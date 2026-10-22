@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.6157849689987798,
-      "SSL.MI": 1.6842688297048947,
-      "BVB.DE": 3.0383066162432786,
-      "MANU": 18.588232627550195,
-      "AJAX.AS": 7.798467156379488,
-      "CCP.L": 2.14810016424755,
-      "FENER.IS": 0.039094241244415726,
-      "GSRAY.IS": 0.012540668797535525,
-      "BJKAS.IS": 0.023130761201432776,
-      "TSPOR.IS": 0.01346096199294632,
-      "SCP.LS": 0.9899091523360969,
-      "SLBEN.LS": 6.477479033021685,
-      "FCP.LS": 2.782030990839132
+      "JUVE.MI": 1.6162642378050565,
+      "SSL.MI": 1.6801957553935878,
+      "BVB.DE": 3.0019390057306623,
+      "MANU": 18.71448989102227,
+      "AJAX.AS": 7.838359623551383,
+      "CCP.L": 2.097025960209707,
+      "FENER.IS": 0.03803657873808956,
+      "GSRAY.IS": 0.012025710044443179,
+      "BJKAS.IS": 0.023120458894479553,
+      "TSPOR.IS": 0.013443390878805342,
+      "SCP.LS": 0.9903408388716879,
+      "SLBEN.LS": 6.55512326572148,
+      "FCP.LS": 2.778628023214123
     },
     "model": {
       "calibration": 61,
@@ -2278,6 +2278,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2561,19 +2571,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-22T13:13:05.661Z"
+  "updatedAt": "2026-10-22T18:03:52.040Z"
 }
