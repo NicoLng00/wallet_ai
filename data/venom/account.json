@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.6162642378050565,
-      "SSL.MI": 1.6801957553935878,
-      "BVB.DE": 3.0019390057306623,
-      "MANU": 18.71448989102227,
-      "AJAX.AS": 7.838359623551383,
-      "CCP.L": 2.097025960209707,
-      "FENER.IS": 0.03803657873808956,
-      "GSRAY.IS": 0.012025710044443179,
-      "BJKAS.IS": 0.023120458894479553,
-      "TSPOR.IS": 0.013443390878805342,
-      "SCP.LS": 0.9903408388716879,
-      "SLBEN.LS": 6.55512326572148,
-      "FCP.LS": 2.778628023214123
+      "JUVE.MI": 1.6128262098422912,
+      "SSL.MI": 1.6798307897741431,
+      "BVB.DE": 3.007981612904156,
+      "MANU": 18.496643890905485,
+      "AJAX.AS": 7.829861443377712,
+      "CCP.L": 2.0985791417897963,
+      "FENER.IS": 0.04017166694344409,
+      "GSRAY.IS": 0.012367331374770994,
+      "BJKAS.IS": 0.02368472928403709,
+      "TSPOR.IS": 0.013822982520366716,
+      "SCP.LS": 0.9890775641734582,
+      "SLBEN.LS": 6.553813256753994,
+      "FCP.LS": 2.780918678754218
     },
     "model": {
       "calibration": 61,
@@ -2278,6 +2278,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -2566,14 +2571,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-22T18:03:52.040Z"
+  "updatedAt": "2026-10-22T21:29:48.484Z"
 }
