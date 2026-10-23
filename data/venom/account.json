@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.6147216992842282,
-      "SSL.MI": 1.676452336077034,
-      "BVB.DE": 3.0411216941491266,
-      "MANU": 18.57988901040249,
-      "AJAX.AS": 7.835317931267814,
-      "CCP.L": 2.061418418120747,
-      "FENER.IS": 0.04016983508149959,
-      "GSRAY.IS": 0.012371660559769746,
-      "BJKAS.IS": 0.02369961039287671,
-      "TSPOR.IS": 0.013807178765908245,
-      "SCP.LS": 0.9884387713224796,
-      "SLBEN.LS": 6.619912740628283,
-      "FCP.LS": 2.780477862395037
+      "JUVE.MI": 1.6131886483060196,
+      "SSL.MI": 1.6741544479404713,
+      "BVB.DE": 3.0435354589516934,
+      "MANU": 18.53374037233019,
+      "AJAX.AS": 7.838543105528256,
+      "CCP.L": 2.061111517789244,
+      "FENER.IS": 0.04016971794179517,
+      "GSRAY.IS": 0.012359470929916454,
+      "BJKAS.IS": 0.02367953357771432,
+      "TSPOR.IS": 0.013820086336065714,
+      "SCP.LS": 0.9894084896629084,
+      "SLBEN.LS": 6.621979531159981,
+      "FCP.LS": 2.782637006433455
     },
     "model": {
       "calibration": 61,
@@ -2308,6 +2308,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2601,14 +2606,9 @@
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.056204 SLBEN.LS",
-      "detail": "0,38 € · fill simulato 6,67 € · SIM-7202700",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-23T00:11:03.087Z"
+  "updatedAt": "2026-10-23T05:05:35.041Z"
 }
