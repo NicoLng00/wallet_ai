@@ -78,10 +78,10 @@
       "NVDA": 188.34171264000003,
       "SPY": 678.48905648,
       "QQQ": 628.8770496,
-      "BTCUSD": 71807.509904,
+      "BTCUSD": 71687.876848,
       "TSLA": 332.31206048,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2084.48101104,
+      "ETHUSD": 2086.04338304,
       "WTI": 72.8,
       "TLT": 72.61905056,
       "EURUSD": 1.1200917579168086,
@@ -2531,6 +2531,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude WTI per limite di detenzione (6g)",
       "detail": "chiude WTI per limite di detenzione (6g)",
       "tag": "AUTO"
@@ -2804,14 +2809,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot chiusura per limite di tempo: vendita demo 0.000048 ES",
-      "detail": "0,37 € · fill simulato 7730 € · SIM-1612079",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-24T19:19:32.338Z"
+  "updatedAt": "2026-10-24T21:46:59.102Z"
 }
