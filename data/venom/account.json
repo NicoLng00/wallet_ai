@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5705527114435849,
-      "SSL.MI": 1.6823348419828066,
-      "BVB.DE": 3.0409058432571903,
-      "MANU": 18.368776173646648,
-      "AJAX.AS": 7.703113148473753,
-      "CCP.L": 2.1017733102305702,
-      "FENER.IS": 0.03695077939847959,
-      "GSRAY.IS": 0.012220543889408514,
-      "BJKAS.IS": 0.02300231254804625,
-      "TSPOR.IS": 0.013276269813625695,
-      "SCP.LS": 0.9497178572857641,
-      "SLBEN.LS": 6.501129453318807,
-      "FCP.LS": 2.7780401920243074
+      "JUVE.MI": 1.5702231185133106,
+      "SSL.MI": 1.6789716288182153,
+      "BVB.DE": 3.037673778853291,
+      "MANU": 18.401101664218384,
+      "AJAX.AS": 7.707475195804258,
+      "CCP.L": 2.1010059627994977,
+      "FENER.IS": 0.03697720341640975,
+      "GSRAY.IS": 0.012211757188852323,
+      "BJKAS.IS": 0.022959088253685634,
+      "TSPOR.IS": 0.01328019748259657,
+      "SCP.LS": 0.9508687556117663,
+      "SLBEN.LS": 6.501414255767911,
+      "FCP.LS": 2.779278114065896
     },
     "model": {
       "calibration": 61,
@@ -2391,6 +2391,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2629,19 +2639,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-24T21:45:39.583Z"
+  "updatedAt": "2026-10-24T23:47:48.515Z"
 }
