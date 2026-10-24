@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.27356973762173,
+    "cash": 49.08879385110565,
     "highWater": 50.031408513051154,
     "positions": {
       "WTI": {
@@ -71,6 +71,23 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-10-23T04:00:52.720Z"
+      },
+      "TSLA": {
+        "quantity": 0.0011136279203986992,
+        "averagePrice": 331.84492438,
+        "stopLoss": 319.81278065092636,
+        "takeProfit": 352.9011759058789,
+        "strategyKey": "engulfing@1D",
+        "decisionSnapshot": {
+          "strategyKey": "engulfing@1D",
+          "entryPrice": 331.84492438,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-24T00:04:10.416Z"
       }
     },
     "market": {
@@ -78,10 +95,10 @@
       "NVDA": 188.07695784,
       "SPY": 677.53529413,
       "QQQ": 627.9930276,
-      "BTCUSD": 72489.331461,
+      "BTCUSD": 72294.978139,
       "TSLA": 331.84492438,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2137.91328787,
+      "ETHUSD": 2125.95788398,
       "WTI": 72.8,
       "TLT": 72.51696886,
       "EURUSD": 1.1216685043335664,
@@ -127,6 +144,23 @@
       "wins": 32
     },
     "trades": [
+      {
+        "id": "SIM-0250416",
+        "symbol": "TSLA",
+        "side": "buy",
+        "quantity": 0.0011136279203986992,
+        "price": 331.84492438,
+        "notional": 0.36955177303216297,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-24T00:04:10.416Z",
+        "stopLoss": 319.81278065092636,
+        "takeProfit": 352.9011759058789,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "engulfing@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-5261893",
         "symbol": "TSLA",
@@ -2477,6 +2511,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre TSLA forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre TSLA forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.001114 TSLA",
+      "detail": "0,37 € · fill simulato 331,84 € · SIM-0250416",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2765,19 +2809,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude DIS per limite di detenzione (6g) · apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "detail": "chiude DIS per limite di detenzione (6g); apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-23T21:42:01.458Z"
+  "updatedAt": "2026-10-24T00:04:10.854Z"
 }
