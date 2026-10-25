@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.27352746895773,
+    "cash": 49.10553291753568,
     "highWater": 50.031408513051154,
     "positions": {
       "ES": {
@@ -71,6 +71,23 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-10-24T00:04:10.416Z"
+      },
+      "ETHUSD": {
+        "quantity": 0.00015986789837367784,
+        "averagePrice": 2101.66710304,
+        "stopLoss": 2068.04042939136,
+        "takeProfit": 2160.51378192512,
+        "strategyKey": "hybrid_confluence@1D",
+        "decisionSnapshot": {
+          "strategyKey": "hybrid_confluence@1D",
+          "entryPrice": 2101.66710304,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": null,
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-10-25T00:06:20.768Z"
       }
     },
     "market": {
@@ -78,10 +95,10 @@
       "NVDA": 188.34171264000003,
       "SPY": 678.48905648,
       "QQQ": 628.8770496,
-      "BTCUSD": 71687.876848,
+      "BTCUSD": 72072.666752,
       "TSLA": 332.31206048,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2086.04338304,
+      "ETHUSD": 2101.66710304,
       "WTI": 72.8,
       "TLT": 72.61905056,
       "EURUSD": 1.1200917579168086,
@@ -127,6 +144,23 @@
       "wins": 32
     },
     "trades": [
+      {
+        "id": "SIM-6780768",
+        "symbol": "ETHUSD",
+        "side": "buy",
+        "quantity": 0.00015986789837367784,
+        "price": 2101.66710304,
+        "notional": 0.3359891028441006,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-10-25T00:06:20.768Z",
+        "stopLoss": 2068.04042939136,
+        "takeProfit": 2160.51378192512,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "hybrid_confluence@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-6776106",
         "symbol": "WTI",
@@ -2511,6 +2545,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000160 ETHUSD",
+      "detail": "0,34 € · fill simulato 2102 € · SIM-6780768",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2799,19 +2843,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude ES per limite di detenzione (6g)",
-      "detail": "chiude ES per limite di detenzione (6g)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-24T21:46:59.102Z"
+  "updatedAt": "2026-10-25T00:06:21.175Z"
 }
