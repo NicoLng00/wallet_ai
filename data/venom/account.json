@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5690573995031136,
-      "SSL.MI": 1.6779201487879394,
-      "BVB.DE": 3.0433338252235482,
-      "MANU": 18.390852775495752,
-      "AJAX.AS": 7.697540003730114,
-      "CCP.L": 2.1029879198144386,
-      "FENER.IS": 0.036974206645699885,
-      "GSRAY.IS": 0.012191578509760303,
-      "BJKAS.IS": 0.022956833930306227,
-      "TSPOR.IS": 0.013288928745670042,
-      "SCP.LS": 0.9496136860101617,
-      "SLBEN.LS": 6.500587888775323,
-      "FCP.LS": 2.7831829629590037
+      "JUVE.MI": 1.5685605944100205,
+      "SSL.MI": 1.6792683900232357,
+      "BVB.DE": 3.042775418727428,
+      "MANU": 18.40529403975711,
+      "AJAX.AS": 7.693482056677481,
+      "CCP.L": 2.1013101992642422,
+      "FENER.IS": 0.036961587097383806,
+      "GSRAY.IS": 0.012192979350778049,
+      "BJKAS.IS": 0.022967300872655385,
+      "TSPOR.IS": 0.013294076730269914,
+      "SCP.LS": 0.9497228305802016,
+      "SLBEN.LS": 6.4982874293767505,
+      "FCP.LS": 2.782625575517075
     },
     "model": {
       "calibration": 61,
@@ -2380,6 +2380,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2668,14 +2673,9 @@
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.056842 SLBEN.LS",
-      "detail": "0,38 € · fill simulato 6,60 € · SIM-4392882",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-25T13:56:26.183Z"
+  "updatedAt": "2026-10-25T17:36:18.621Z"
 }
