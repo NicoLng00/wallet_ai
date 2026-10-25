@@ -3544,6 +3544,10 @@
             {
               "returnPct": -0.05136948653750163,
               "at": "2026-10-24T05:03:27.490Z"
+            },
+            {
+              "returnPct": -0.02128782146932458,
+              "at": "2026-10-25T09:26:05.850Z"
             }
           ]
         }
@@ -3551,22 +3555,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-5854891",
-          "symbol": "SLBEN.LS",
-          "returnPct": 1.8454171241799218,
-          "outcomeTag": "signal_flip_profit",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 6.258993722064907,
-            "confidence": 60,
-            "score": 71,
-            "tier": "validated",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-03T11:44:14.891Z"
-        },
         {
           "tradeId": "SIM-6572081",
           "symbol": "AJAX.AS",
@@ -4350,6 +4338,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-10-24T05:03:27.491Z"
+        },
+        {
+          "tradeId": "SIM-0365851",
+          "symbol": "FCP.LS",
+          "returnPct": -0.02128782146932458,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2.7796407727326926,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-10-25T09:26:05.851Z"
         }
       ],
       "engulfing@1D": [
@@ -4526,18 +4530,18 @@
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 5,
-          "avgReturn": -0.669,
+          "avgReturn": -0.667,
           "supportingTradeIds": [
-            "SIM-7658822",
             "SIM-5430706",
             "SIM-4785314",
             "SIM-9599664",
-            "SIM-8207491"
+            "SIM-8207491",
+            "SIM-0365851"
           ],
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-10-24T05:03:27.491Z"
+          "updatedAt": "2026-10-25T09:26:05.851Z"
         }
       ],
       "engulfing@1D": [
@@ -24212,5 +24216,5 @@
       }
     }
   },
-  "updatedAt": "2026-10-25T04:29:12.749Z"
+  "updatedAt": "2026-10-25T09:26:06.300Z"
 }
