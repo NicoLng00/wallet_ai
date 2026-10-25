@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5685605944100205,
-      "SSL.MI": 1.6792683900232357,
-      "BVB.DE": 3.042775418727428,
-      "MANU": 18.40529403975711,
-      "AJAX.AS": 7.693482056677481,
-      "CCP.L": 2.1013101992642422,
-      "FENER.IS": 0.036961587097383806,
-      "GSRAY.IS": 0.012192979350778049,
-      "BJKAS.IS": 0.022967300872655385,
-      "TSPOR.IS": 0.013294076730269914,
-      "SCP.LS": 0.9497228305802016,
-      "SLBEN.LS": 6.4982874293767505,
-      "FCP.LS": 2.782625575517075
+      "JUVE.MI": 1.568716946844976,
+      "SSL.MI": 1.6810503288191274,
+      "BVB.DE": 3.042788805628066,
+      "MANU": 18.36699545125235,
+      "AJAX.AS": 7.694439463474836,
+      "CCP.L": 2.101764068330304,
+      "FENER.IS": 0.03694378058845101,
+      "GSRAY.IS": 0.012199944738705002,
+      "BJKAS.IS": 0.02301133898350622,
+      "TSPOR.IS": 0.013291465187694248,
+      "SCP.LS": 0.949430120270903,
+      "SLBEN.LS": 6.5003896913244175,
+      "FCP.LS": 2.7808968101327745
     },
     "model": {
       "calibration": 61,
@@ -2380,6 +2380,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2663,19 +2673,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.056842 SLBEN.LS",
-      "detail": "0,38 € · fill simulato 6,60 € · SIM-2184290",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-25T17:36:18.621Z"
+  "updatedAt": "2026-10-25T19:58:52.131Z"
 }
