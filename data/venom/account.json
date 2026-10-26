@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5830557262989204,
-      "SSL.MI": 1.6899596801193182,
-      "BVB.DE": 3.0802042539257335,
-      "MANU": 18.45293825995821,
-      "AJAX.AS": 7.672895621032479,
-      "CCP.L": 2.1446237765612732,
-      "FENER.IS": 0.036910129293015535,
-      "GSRAY.IS": 0.01237088744529609,
-      "BJKAS.IS": 0.022383624118646913,
-      "TSPOR.IS": 0.013088658151690576,
-      "SCP.LS": 0.9505297420198282,
-      "SLBEN.LS": 6.492748831297297,
-      "FCP.LS": 2.777585544040141
+      "JUVE.MI": 1.5800217476423164,
+      "SSL.MI": 1.6916503073234566,
+      "BVB.DE": 3.0824559750450327,
+      "MANU": 18.455471996547892,
+      "AJAX.AS": 7.673540688643968,
+      "CCP.L": 2.1486720622645965,
+      "FENER.IS": 0.036882332975963286,
+      "GSRAY.IS": 0.01218483546044963,
+      "BJKAS.IS": 0.02295556567389292,
+      "TSPOR.IS": 0.013254158789199383,
+      "SCP.LS": 0.9491300935008843,
+      "SLBEN.LS": 6.499762827112983,
+      "FCP.LS": 2.781410839547295
     },
     "model": {
       "calibration": 61,
@@ -2414,6 +2414,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2697,19 +2707,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.056579 SLBEN.LS",
-      "detail": "0,38 € · fill simulato 6,63 € · SIM-3999565",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-26T17:39:51.853Z"
+  "updatedAt": "2026-10-26T21:53:58.437Z"
 }
