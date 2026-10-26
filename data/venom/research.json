@@ -3548,6 +3548,10 @@
             {
               "returnPct": -0.02128782146932458,
               "at": "2026-10-25T09:26:05.850Z"
+            },
+            {
+              "returnPct": 0.16361381056102423,
+              "at": "2026-10-26T05:25:45.320Z"
             }
           ]
         }
@@ -3555,22 +3559,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-6572081",
-          "symbol": "AJAX.AS",
-          "returnPct": -0.15734329956758178,
-          "outcomeTag": "forced_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 9.001309958546809,
-            "confidence": 80,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-05T05:36:12.081Z"
-        },
         {
           "tradeId": "SIM-8829428",
           "symbol": "AJAX.AS",
@@ -4354,6 +4342,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-10-25T09:26:05.851Z"
+        },
+        {
+          "tradeId": "SIM-2345322",
+          "symbol": "FCP.LS",
+          "returnPct": 0.16361381056102423,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2.779377327275699,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-10-26T05:25:45.322Z"
         }
       ],
       "engulfing@1D": [
@@ -4541,7 +4545,7 @@
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-10-25T09:26:05.851Z"
+          "updatedAt": "2026-10-26T05:25:45.322Z"
         }
       ],
       "engulfing@1D": [
@@ -24216,5 +24220,5 @@
       }
     }
   },
-  "updatedAt": "2026-10-26T00:44:16.914Z"
+  "updatedAt": "2026-10-26T05:25:45.635Z"
 }
