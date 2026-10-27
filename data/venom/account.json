@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.38384484907555,
+    "cash": 50.54090292573467,
     "highWater": 50.60242979430946,
-    "positions": {
-      "FCP.LS": {
-        "quantity": 0.13475025367240862,
-        "averagePrice": 2.7829261153872302,
-        "stopLoss": 2.7229261215179936,
-        "takeProfit": 2.887926104658394,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 2.7829261153872302,
-          "confidence": 80,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-10-27T01:24:54.280Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.5686472493295485,
-      "SSL.MI": 1.6797493491443714,
-      "BVB.DE": 3.0405971784176082,
-      "MANU": 18.49984164916952,
-      "AJAX.AS": 7.699992796661816,
-      "CCP.L": 2.1038351677148146,
-      "FENER.IS": 0.03698882267208949,
-      "GSRAY.IS": 0.012202921239527062,
-      "BJKAS.IS": 0.022995633245353076,
-      "TSPOR.IS": 0.013288541981009783,
-      "SCP.LS": 0.9492628699872345,
-      "SLBEN.LS": 6.50609908170542,
-      "FCP.LS": 2.783563822309789
+      "JUVE.MI": 1.554722642538425,
+      "SSL.MI": 1.7052605081619392,
+      "BVB.DE": 3.103515051466777,
+      "MANU": 18.54280078729027,
+      "AJAX.AS": 7.655837268579965,
+      "CCP.L": 2.097655451439804,
+      "FENER.IS": 0.0355751972570178,
+      "GSRAY.IS": 0.01240354767514433,
+      "BJKAS.IS": 0.022258548360898384,
+      "TSPOR.IS": 0.013121826174309159,
+      "SCP.LS": 0.985635204077456,
+      "SLBEN.LS": 6.495067727881785,
+      "FCP.LS": 2.557012452806008
     },
     "model": {
       "calibration": 61,
-      "outcomes": 70,
+      "outcomes": 71,
       "wins": 36
     },
     "trades": [
+      {
+        "id": "SIM-4910454",
+        "symbol": "FCP.LS",
+        "side": "sell",
+        "quantity": 0.13475025367240862,
+        "price": 2.557012452806008,
+        "notional": 0.34455807665911736,
+        "realizedPnl": -0.03044192334088261,
+        "origin": "Stop Loss",
+        "at": "2026-10-27T12:41:50.454Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-4294280",
         "symbol": "FCP.LS",
@@ -2449,6 +2448,26 @@
       "tag": "HOLD"
     },
     {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,03 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Stop Loss: vendita demo 0.134750 FCP.LS",
+      "detail": "0,34 € · fill simulato 2,56 € · SIM-4910454",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2722,29 +2741,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-27T06:37:18.430Z"
+  "updatedAt": "2026-10-27T12:41:50.672Z"
 }
