@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5525135885531476,
-      "SSL.MI": 1.6986917347005925,
-      "BVB.DE": 3.092070538858806,
-      "MANU": 18.539625676735373,
-      "AJAX.AS": 7.700238470970188,
-      "CCP.L": 2.146429487853451,
-      "FENER.IS": 0.0357737776684341,
-      "GSRAY.IS": 0.012032213026920018,
-      "BJKAS.IS": 0.02206879400202032,
-      "TSPOR.IS": 0.013115039292074552,
-      "SCP.LS": 0.985725302799881,
-      "SLBEN.LS": 6.501008922884324,
-      "FCP.LS": 2.5600458119364267
+      "JUVE.MI": 1.5507351290952718,
+      "SSL.MI": 1.7012870025381297,
+      "BVB.DE": 3.097411620420971,
+      "MANU": 18.479485982124594,
+      "AJAX.AS": 7.697416900233078,
+      "CCP.L": 2.148280501750692,
+      "FENER.IS": 0.036974251282904456,
+      "GSRAY.IS": 0.012391751370641487,
+      "BJKAS.IS": 0.022483511388617244,
+      "TSPOR.IS": 0.01311533153237981,
+      "SCP.LS": 0.9840515542203451,
+      "SLBEN.LS": 6.501808457408726,
+      "FCP.LS": 2.5596492507525417
     },
     "model": {
       "calibration": 61,
@@ -2453,6 +2453,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,03 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2736,14 +2741,9 @@
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.134869 FCP.LS",
-      "detail": "0,38 € · fill simulato 2,78 € · SIM-4262740",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-27T18:20:05.952Z"
+  "updatedAt": "2026-10-27T22:27:05.469Z"
 }
