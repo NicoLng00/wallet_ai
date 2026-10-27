@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.554722642538425,
-      "SSL.MI": 1.7052605081619392,
-      "BVB.DE": 3.103515051466777,
-      "MANU": 18.54280078729027,
-      "AJAX.AS": 7.655837268579965,
-      "CCP.L": 2.097655451439804,
-      "FENER.IS": 0.0355751972570178,
-      "GSRAY.IS": 0.01240354767514433,
-      "BJKAS.IS": 0.022258548360898384,
-      "TSPOR.IS": 0.013121826174309159,
-      "SCP.LS": 0.985635204077456,
-      "SLBEN.LS": 6.495067727881785,
-      "FCP.LS": 2.557012452806008
+      "JUVE.MI": 1.5525135885531476,
+      "SSL.MI": 1.6986917347005925,
+      "BVB.DE": 3.092070538858806,
+      "MANU": 18.539625676735373,
+      "AJAX.AS": 7.700238470970188,
+      "CCP.L": 2.146429487853451,
+      "FENER.IS": 0.0357737776684341,
+      "GSRAY.IS": 0.012032213026920018,
+      "BJKAS.IS": 0.02206879400202032,
+      "TSPOR.IS": 0.013115039292074552,
+      "SCP.LS": 0.985725302799881,
+      "SLBEN.LS": 6.501008922884324,
+      "FCP.LS": 2.5600458119364267
     },
     "model": {
       "calibration": 61,
@@ -2448,6 +2448,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,03 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
@@ -2736,14 +2741,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.134869 FCP.LS",
       "detail": "0,38 € · fill simulato 2,78 € · SIM-4262740",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-27T12:41:50.672Z"
+  "updatedAt": "2026-10-27T18:20:05.952Z"
 }
