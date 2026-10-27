@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.567663834771257,
-      "SSL.MI": 1.6800123655634787,
-      "BVB.DE": 3.0405815429419274,
-      "MANU": 18.39988521841779,
-      "AJAX.AS": 7.704759306916751,
-      "CCP.L": 2.102740062419062,
-      "FENER.IS": 0.03698278266832518,
-      "GSRAY.IS": 0.012202515350296959,
-      "BJKAS.IS": 0.023010017978091442,
-      "TSPOR.IS": 0.013286913085217133,
-      "SCP.LS": 0.9494989670547631,
-      "SLBEN.LS": 6.506965774693431,
-      "FCP.LS": 2.7829261153872302
+      "JUVE.MI": 1.5686472493295485,
+      "SSL.MI": 1.6797493491443714,
+      "BVB.DE": 3.0405971784176082,
+      "MANU": 18.49984164916952,
+      "AJAX.AS": 7.699992796661816,
+      "CCP.L": 2.1038351677148146,
+      "FENER.IS": 0.03698882267208949,
+      "GSRAY.IS": 0.012202921239527062,
+      "BJKAS.IS": 0.022995633245353076,
+      "TSPOR.IS": 0.013288541981009783,
+      "SCP.LS": 0.9492628699872345,
+      "SLBEN.LS": 6.50609908170542,
+      "FCP.LS": 2.783563822309789
     },
     "model": {
       "calibration": 61,
@@ -2444,6 +2444,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2737,14 +2742,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.056579 SLBEN.LS",
-      "detail": "0,37 € · fill simulato 6,48 € · SIM-4785314",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-27T01:24:54.666Z"
+  "updatedAt": "2026-10-27T06:37:18.430Z"
 }
