@@ -2,7 +2,7 @@
   "demoAccount": {
     "version": 2,
     "cash": 49.330540582557255,
-    "highWater": 50.07587348255119,
+    "highWater": 50.076200488545716,
     "positions": {
       "SPY": {
         "quantity": 0.0005427287343571458,
@@ -78,10 +78,10 @@
       "NVDA": 195.59090682,
       "SPY": 690.7336759799999,
       "QQQ": 647.2879762499999,
-      "BTCUSD": 72453.175596,
+      "BTCUSD": 72542.920896,
       "TSLA": 365.67619937999996,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2107.68631956,
+      "ETHUSD": 2109.78635958,
       "WTI": 72.8,
       "TLT": 73.25908838999999,
       "EURUSD": 1.1142644795883463,
@@ -2647,6 +2647,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -2940,14 +2945,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.000124 ETHUSD",
-      "detail": "0,28 € · fill simulato 2228 € · SIM-6621343",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-28T01:38:32.152Z"
+  "updatedAt": "2026-10-28T07:29:26.167Z"
 }
