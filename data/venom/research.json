@@ -3556,6 +3556,10 @@
             {
               "returnPct": -8.117846224235363,
               "at": "2026-10-27T12:41:50.454Z"
+            },
+            {
+              "returnPct": -0.0695760462936084,
+              "at": "2026-10-28T07:31:10.785Z"
             }
           ]
         }
@@ -3563,22 +3567,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-3578400",
-          "symbol": "AJAX.AS",
-          "returnPct": 0.14249116418283472,
-          "outcomeTag": "forced_win",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 8.89655946715931,
-            "confidence": 80,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-07T12:19:38.400Z"
-        },
         {
           "tradeId": "SIM-4139774",
           "symbol": "BVB.DE",
@@ -4362,6 +4350,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-10-27T12:41:50.454Z"
+        },
+        {
+          "tradeId": "SIM-2670786",
+          "symbol": "FCP.LS",
+          "returnPct": -0.0695760462936084,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2.780928513136832,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "elevated",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-10-28T07:31:10.786Z"
         }
       ],
       "engulfing@1D": [
@@ -4534,23 +4538,23 @@
           "version": 1,
           "strategyKey": "bollinger_reversion@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 6 (75%) hanno chiuso in perdita (rendimento medio -1.91%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 6 (75%) hanno chiuso in perdita (rendimento medio -1.76%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 6,
-          "avgReturn": -1.909,
+          "avgReturn": -1.764,
           "supportingTradeIds": [
-            "SIM-5430706",
             "SIM-4785314",
             "SIM-9599664",
             "SIM-8207491",
             "SIM-0365851",
-            "SIM-4910454"
+            "SIM-4910454",
+            "SIM-2670786"
           ],
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-10-27T12:41:50.455Z"
+          "updatedAt": "2026-10-28T07:31:10.787Z"
         }
       ],
       "engulfing@1D": [
@@ -24225,5 +24229,5 @@
       }
     }
   },
-  "updatedAt": "2026-10-28T01:44:24.054Z"
+  "updatedAt": "2026-10-28T07:31:11.118Z"
 }
