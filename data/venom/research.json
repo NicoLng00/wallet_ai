@@ -27,16 +27,16 @@
               "maxDrawdown": 11.384366470996186
             },
             "inSampleBaseline": {
-              "winRate": 27.157928576602,
-              "avgReturn": 0.14298344064992016,
-              "count": 31.711111111111112
+              "winRate": 27.10277392164093,
+              "avgReturn": 0.11698032337749316,
+              "count": 31.755555555555556
             },
             "outOfSampleBaseline": {
-              "winRate": 32.72522982722315,
-              "avgReturn": 0.20180288738065957,
-              "count": 14.966666666666667
+              "winRate": 35.49763788747278,
+              "avgReturn": 0.30459949336813236,
+              "count": 14.688888888888888
             },
-            "checkedAt": "2026-10-27T12:06:33.044Z"
+            "checkedAt": "2026-10-28T12:48:18.821Z"
           },
           "macd_cross@1D": {
             "validated": true,
@@ -62,16 +62,16 @@
               "maxDrawdown": 13.014709260126967
             },
             "inSampleBaseline": {
-              "winRate": 26.465745670455366,
-              "avgReturn": 0.06859728395357183,
-              "count": 42.422222222222224
+              "winRate": 27.50424323803859,
+              "avgReturn": 0.12081788754680489,
+              "count": 41.86666666666667
             },
             "outOfSampleBaseline": {
-              "winRate": 32.114668640900675,
-              "avgReturn": 0.24011606188337786,
-              "count": 19.22222222222222
+              "winRate": 33.93382037526941,
+              "avgReturn": 0.26277295618589924,
+              "count": 19.133333333333333
             },
-            "checkedAt": "2026-10-27T12:06:33.062Z"
+            "checkedAt": "2026-10-28T12:48:18.844Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -97,16 +97,16 @@
               "maxDrawdown": 1.823529411764706
             },
             "inSampleBaseline": {
-              "winRate": 27.214993320859257,
-              "avgReturn": 0.07061553928853284,
-              "count": 26.511111111111113
+              "winRate": 27.4201798475216,
+              "avgReturn": 0.164028506627754,
+              "count": 25.57777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 34.21107994650308,
-              "avgReturn": 0.28730515223649944,
-              "count": 11.61111111111111
+              "winRate": 33.546635434664324,
+              "avgReturn": 0.20005979440625876,
+              "count": 11.911111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.064Z"
+            "checkedAt": "2026-10-28T12:48:18.846Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -114,9 +114,9 @@
             "strategyId": "donchian_breakout",
             "label": "Donchian breakout (20)",
             "timeframe": "1D",
-            "count": 62,
-            "winRate": 27.27272727272727,
-            "avgReturn": 0.4269375671699161,
+            "count": 63,
+            "winRate": 26.08695652173913,
+            "avgReturn": 0.408375064249485,
             "inSample": {
               "count": 40,
               "winRate": 27.500000000000004,
@@ -125,23 +125,23 @@
               "maxDrawdown": 5.923076923076923
             },
             "outOfSample": {
-              "count": 22,
-              "winRate": 27.27272727272727,
-              "avgReturn": 0.4269375671699161,
+              "count": 23,
+              "winRate": 26.08695652173913,
+              "avgReturn": 0.408375064249485,
               "totalReturn": 9.392626477738155,
               "maxDrawdown": 5.600781691134953
             },
             "inSampleBaseline": {
-              "winRate": 27.225689354940673,
-              "avgReturn": 0.10859659557327873,
-              "count": 32.833333333333336
+              "winRate": 27.39288205735709,
+              "avgReturn": 0.17291006546262183,
+              "count": 33.333333333333336
             },
             "outOfSampleBaseline": {
-              "winRate": 35.05235473733926,
-              "avgReturn": 0.2609046896457512,
-              "count": 15.311111111111112
+              "winRate": 32.205142035594385,
+              "avgReturn": 0.26753672191819383,
+              "count": 15.588888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.066Z"
+            "checkedAt": "2026-10-28T12:48:18.848Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -167,16 +167,16 @@
               "maxDrawdown": 2.8594482828180947
             },
             "inSampleBaseline": {
-              "winRate": 27.76704033076582,
-              "avgReturn": 0.12683304202805903,
-              "count": 10.966666666666667
+              "winRate": 24.084072761317344,
+              "avgReturn": -0.016967475184602544,
+              "count": 11.311111111111112
             },
             "outOfSampleBaseline": {
-              "winRate": 34.33791208791208,
-              "avgReturn": 0.29657775254578833,
-              "count": 5.4222222222222225
+              "winRate": 41.65123456790123,
+              "avgReturn": 0.628759915627408,
+              "count": 5.088888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.083Z"
+            "checkedAt": "2026-10-28T12:48:18.867Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -202,16 +202,16 @@
               "maxDrawdown": 2.8571428571428577
             },
             "inSampleBaseline": {
-              "winRate": 25.968674069684848,
-              "avgReturn": 0.02809753159379968,
-              "count": 21.2
+              "winRate": 26.91030439999865,
+              "avgReturn": 0.07205042551076273,
+              "count": 22.11111111111111
             },
             "outOfSampleBaseline": {
-              "winRate": 33.82874369639075,
-              "avgReturn": 0.27291525418667817,
-              "count": 10.11111111111111
+              "winRate": 32.57240444740445,
+              "avgReturn": 0.27790538654188995,
+              "count": 10.1
             },
-            "checkedAt": "2026-10-27T12:06:33.087Z"
+            "checkedAt": "2026-10-28T12:48:18.869Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -237,16 +237,16 @@
               "maxDrawdown": 1.953125
             },
             "inSampleBaseline": {
-              "winRate": 27.967661967661964,
-              "avgReturn": 0.17123068219612297,
-              "count": 8.244444444444444
+              "winRate": 27.877960002960005,
+              "avgReturn": 0.19908541245871633,
+              "count": 7.7555555555555555
             },
             "outOfSampleBaseline": {
-              "winRate": 34.7063492063492,
-              "avgReturn": 0.2891656782187393,
-              "count": 3.5555555555555554
+              "winRate": 36.0352733686067,
+              "avgReturn": 0.4559350333457025,
+              "count": 3.4555555555555557
             },
-            "checkedAt": "2026-10-27T12:06:33.088Z"
+            "checkedAt": "2026-10-28T12:48:18.871Z"
           }
         }
       },
@@ -276,16 +276,16 @@
               "maxDrawdown": 22.432117367368285
             },
             "inSampleBaseline": {
-              "winRate": 42.69412433310199,
-              "avgReturn": -0.004968844828615511,
-              "count": 63.13333333333333
+              "winRate": 42.75828036796823,
+              "avgReturn": 0.04593231174676867,
+              "count": 63.9
             },
             "outOfSampleBaseline": {
-              "winRate": 49.5013048259851,
-              "avgReturn": 0.5111380388384654,
-              "count": 27.955555555555556
+              "winRate": 47.51001353053617,
+              "avgReturn": 0.5056720120004917,
+              "count": 27.81111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.216Z"
+            "checkedAt": "2026-10-28T12:48:18.628Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -299,8 +299,8 @@
             "inSample": {
               "count": 114,
               "winRate": 39.473684210526315,
-              "avgReturn": -0.05076147075313843,
-              "totalReturn": -5.786807665857781,
+              "avgReturn": -0.060754809403799855,
+              "totalReturn": -6.926048272033183,
               "maxDrawdown": 37.48637688096419
             },
             "outOfSample": {
@@ -311,16 +311,16 @@
               "maxDrawdown": 18.669684105275607
             },
             "inSampleBaseline": {
-              "winRate": 42.23614285605344,
-              "avgReturn": 0.004972402181504872,
-              "count": 84.32222222222222
+              "winRate": 43.01503508803392,
+              "avgReturn": 0.06514831734342467,
+              "count": 84.58888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 49.42823400295304,
-              "avgReturn": 0.5331962515525602,
-              "count": 37.58888888888889
+              "winRate": 46.79544565382885,
+              "avgReturn": 0.42852237130846355,
+              "count": 37.21111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.236Z"
+            "checkedAt": "2026-10-28T12:48:18.650Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -346,16 +346,16 @@
               "maxDrawdown": 8.858864871482986
             },
             "inSampleBaseline": {
-              "winRate": 40.301901604151496,
-              "avgReturn": -0.1561057565260163,
-              "count": 23.666666666666668
+              "winRate": 42.33464324401384,
+              "avgReturn": 0.0048721700280415,
+              "count": 24.333333333333332
             },
             "outOfSampleBaseline": {
-              "winRate": 47.228986599342655,
-              "avgReturn": 0.5503053204406767,
-              "count": 10.911111111111111
+              "winRate": 48.014736524798444,
+              "avgReturn": 0.48828346522754157,
+              "count": 10.266666666666667
             },
-            "checkedAt": "2026-10-27T12:06:33.238Z"
+            "checkedAt": "2026-10-28T12:48:18.653Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -381,16 +381,16 @@
               "maxDrawdown": 30.917612722223954
             },
             "inSampleBaseline": {
-              "winRate": 42.09746396812919,
-              "avgReturn": 0.07258296383561878,
-              "count": 43.46666666666667
+              "winRate": 42.32727183227016,
+              "avgReturn": -0.012757069346592867,
+              "count": 43.72222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 48.04233519979145,
-              "avgReturn": 0.40207181271494513,
-              "count": 19.57777777777778
+              "winRate": 48.64552276974092,
+              "avgReturn": 0.5425196206427586,
+              "count": 19.288888888888888
             },
-            "checkedAt": "2026-10-27T12:06:33.240Z"
+            "checkedAt": "2026-10-28T12:48:18.655Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -416,16 +416,16 @@
               "maxDrawdown": 4.885550301145782
             },
             "inSampleBaseline": {
-              "winRate": 40.67068842125458,
-              "avgReturn": -0.0581134543155389,
-              "count": 37.644444444444446
+              "winRate": 39.841962382453694,
+              "avgReturn": -0.11727571967593177,
+              "count": 37.77777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 48.53827945414408,
-              "avgReturn": 0.5251456152017423,
-              "count": 16.08888888888889
+              "winRate": 48.03856342448908,
+              "avgReturn": 0.397619761429756,
+              "count": 16.9
             },
-            "checkedAt": "2026-10-27T12:06:33.258Z"
+            "checkedAt": "2026-10-28T12:48:18.680Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -451,16 +451,16 @@
               "maxDrawdown": 32.201128476780156
             },
             "inSampleBaseline": {
-              "winRate": 42.656591855863034,
-              "avgReturn": -0.0076101598197715805,
-              "count": 33.355555555555554
+              "winRate": 43.18853042133636,
+              "avgReturn": 0.1271246513351789,
+              "count": 32.78888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 46.91541250333033,
-              "avgReturn": 0.31450964504357165,
-              "count": 15.011111111111111
+              "winRate": 47.765486424671145,
+              "avgReturn": 0.38715207378467426,
+              "count": 14.077777777777778
             },
-            "checkedAt": "2026-10-27T12:06:33.261Z"
+            "checkedAt": "2026-10-28T12:48:18.683Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -486,16 +486,16 @@
               "maxDrawdown": 3.728037127729249
             },
             "inSampleBaseline": {
-              "winRate": 42.44193226859306,
-              "avgReturn": -0.04686811261903415,
-              "count": 38.477777777777774
+              "winRate": 41.034982547639565,
+              "avgReturn": -0.06436669051850774,
+              "count": 37.43333333333333
             },
             "outOfSampleBaseline": {
-              "winRate": 45.600870057526215,
-              "avgReturn": 0.27023991655126123,
-              "count": 17.1
+              "winRate": 49.89499865393736,
+              "avgReturn": 0.4994756444372661,
+              "count": 17.2
             },
-            "checkedAt": "2026-10-27T12:06:33.263Z"
+            "checkedAt": "2026-10-28T12:48:18.685Z"
           }
         }
       },
@@ -507,9 +507,9 @@
             "strategyId": "sma_rsi",
             "label": "SMA50/RSI14 (trend)",
             "timeframe": "1D",
-            "count": 144,
-            "winRate": 44.26229508196721,
-            "avgReturn": 0.7580461087098418,
+            "count": 145,
+            "winRate": 45.16129032258064,
+            "avgReturn": 0.8078542367621309,
             "inSample": {
               "count": 83,
               "winRate": 25.301204819277107,
@@ -518,23 +518,23 @@
               "maxDrawdown": 47.01302380098522
             },
             "outOfSample": {
-              "count": 61,
-              "winRate": 44.26229508196721,
-              "avgReturn": 0.7580461087098418,
-              "totalReturn": 46.24081263130035,
+              "count": 62,
+              "winRate": 45.16129032258064,
+              "avgReturn": 0.8078542367621309,
+              "totalReturn": 50.08696267925211,
               "maxDrawdown": 18.914861541595542
             },
             "inSampleBaseline": {
-              "winRate": 39.95757147255964,
-              "avgReturn": -0.02587330619751374,
-              "count": 61.32222222222222
+              "winRate": 39.42038027457438,
+              "avgReturn": -0.06461356739310173,
+              "count": 61.855555555555554
             },
             "outOfSampleBaseline": {
-              "winRate": 46.82418435663935,
-              "avgReturn": 0.4276187239056973,
-              "count": 29.644444444444446
+              "winRate": 49.13285720921829,
+              "avgReturn": 0.5784695673129067,
+              "count": 28.633333333333333
             },
-            "checkedAt": "2026-10-27T12:06:32.824Z"
+            "checkedAt": "2026-10-28T12:48:18.558Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -542,34 +542,34 @@
             "strategyId": "macd_cross",
             "label": "MACD crossover (12/26/9)",
             "timeframe": "1D",
-            "count": 139,
-            "winRate": 29.629629629629626,
-            "avgReturn": 0.09684426443809409,
+            "count": 140,
+            "winRate": 30.909090909090907,
+            "avgReturn": 0.1539069312934503,
             "inSample": {
               "count": 85,
               "winRate": 25.882352941176475,
-              "avgReturn": -0.5309895962983991,
-              "totalReturn": -45.13411568536392,
-              "maxDrawdown": 59.78433111724674
+              "avgReturn": -0.5353696189332013,
+              "totalReturn": -45.50641760932211,
+              "maxDrawdown": 59.78433111724675
             },
             "outOfSample": {
-              "count": 54,
-              "winRate": 29.629629629629626,
-              "avgReturn": 0.09684426443809409,
-              "totalReturn": 5.229590279657081,
+              "count": 55,
+              "winRate": 30.909090909090907,
+              "avgReturn": 0.1539069312934503,
+              "totalReturn": 8.464881221139766,
               "maxDrawdown": 17.151118228173686
             },
             "inSampleBaseline": {
-              "winRate": 40.3863366133336,
-              "avgReturn": -0.0043384374403396915,
-              "count": 62.833333333333336
+              "winRate": 38.66202763163422,
+              "avgReturn": -0.0917106033049119,
+              "count": 62.77777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 47.18505435492725,
-              "avgReturn": 0.5530051585786208,
-              "count": 29.555555555555557
+              "winRate": 49.24770016711308,
+              "avgReturn": 0.5769357625715928,
+              "count": 30.1
             },
-            "checkedAt": "2026-10-27T12:06:32.885Z"
+            "checkedAt": "2026-10-28T12:48:18.577Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -595,16 +595,16 @@
               "maxDrawdown": 7.012917983761968
             },
             "inSampleBaseline": {
-              "winRate": 39.790761549632194,
-              "avgReturn": -0.01908300613638863,
-              "count": 25.5
+              "winRate": 41.57164324239757,
+              "avgReturn": 0.07589021497661246,
+              "count": 25.633333333333333
             },
             "outOfSampleBaseline": {
-              "winRate": 49.58419693958909,
-              "avgReturn": 0.7186983061636592,
-              "count": 11.477777777777778
+              "winRate": 48.122346593321836,
+              "avgReturn": 0.4986197667302961,
+              "count": 11.633333333333333
             },
-            "checkedAt": "2026-10-27T12:06:32.896Z"
+            "checkedAt": "2026-10-28T12:48:18.580Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -613,33 +613,33 @@
             "label": "Donchian breakout (20)",
             "timeframe": "1D",
             "count": 59,
-            "winRate": 25.925925925925924,
-            "avgReturn": -0.23635890760322845,
+            "winRate": 26.923076923076923,
+            "avgReturn": -0.11433087803408488,
             "inSample": {
-              "count": 32,
-              "winRate": 31.25,
-              "avgReturn": -0.18548832932591022,
-              "totalReturn": -5.935626538429127,
+              "count": 33,
+              "winRate": 30.303030303030305,
+              "avgReturn": -0.2831731580251543,
+              "totalReturn": -9.344714214830091,
               "maxDrawdown": 14.663076222471897
             },
             "outOfSample": {
-              "count": 27,
-              "winRate": 25.925925925925924,
-              "avgReturn": -0.23635890760322845,
-              "totalReturn": -6.381690505287168,
-              "maxDrawdown": 13.081376973950373
+              "count": 26,
+              "winRate": 26.923076923076923,
+              "avgReturn": -0.11433087803408488,
+              "totalReturn": -2.972602828886207,
+              "maxDrawdown": 12.484268456749234
             },
             "inSampleBaseline": {
-              "winRate": 37.48783971124919,
-              "avgReturn": -0.06055016943208935,
-              "count": 28.455555555555556
+              "winRate": 39.35269991496815,
+              "avgReturn": -0.07268139988449877,
+              "count": 29.211111111111112
             },
             "outOfSampleBaseline": {
-              "winRate": 48.467585962942,
-              "avgReturn": 0.5900171093283079,
-              "count": 13.033333333333333
+              "winRate": 50.6202968197853,
+              "avgReturn": 0.7428976136790847,
+              "count": 13.566666666666666
             },
-            "checkedAt": "2026-10-27T12:06:32.901Z"
+            "checkedAt": "2026-10-28T12:48:18.582Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -665,16 +665,16 @@
               "maxDrawdown": 10.892420819770628
             },
             "inSampleBaseline": {
-              "winRate": 40.460807992491084,
-              "avgReturn": -0.016362706320699107,
-              "count": 43.1
+              "winRate": 37.66832596641389,
+              "avgReturn": -0.15570315119406156,
+              "count": 42.17777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 46.667126396697576,
-              "avgReturn": 0.5371308681884025,
-              "count": 19.72222222222222
+              "winRate": 49.438155425658685,
+              "avgReturn": 0.6443206947633826,
+              "count": 19.92222222222222
             },
-            "checkedAt": "2026-10-27T12:06:32.935Z"
+            "checkedAt": "2026-10-28T12:48:18.606Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -700,16 +700,16 @@
               "maxDrawdown": 12.484268456749232
             },
             "inSampleBaseline": {
-              "winRate": 39.924265706269,
-              "avgReturn": -0.011855829312958237,
-              "count": 23.8
+              "winRate": 41.45984933904778,
+              "avgReturn": -0.052387243923224414,
+              "count": 23.488888888888887
             },
             "outOfSampleBaseline": {
-              "winRate": 50.211129466031416,
-              "avgReturn": 0.6652510927411442,
-              "count": 10.8
+              "winRate": 51.906177585744175,
+              "avgReturn": 0.7996032598581143,
+              "count": 11.144444444444444
             },
-            "checkedAt": "2026-10-27T12:06:32.940Z"
+            "checkedAt": "2026-10-28T12:48:18.609Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -718,33 +718,33 @@
             "label": "Pattern Engulfing (candela)",
             "timeframe": "1D",
             "count": 52,
-            "winRate": 41.66666666666667,
-            "avgReturn": -0.4555413745182073,
+            "winRate": 45.45454545454545,
+            "avgReturn": -0.18703716525613834,
             "inSample": {
-              "count": 40,
-              "winRate": 25,
-              "avgReturn": -0.48907504144824765,
-              "totalReturn": -19.563001657929906,
-              "maxDrawdown": 21.051430966214394
+              "count": 41,
+              "winRate": 24.390243902439025,
+              "avgReturn": -0.560294861812948,
+              "totalReturn": -22.972089334330867,
+              "maxDrawdown": 22.972089334330867
             },
             "outOfSample": {
-              "count": 12,
-              "winRate": 41.66666666666667,
-              "avgReturn": -0.4555413745182073,
-              "totalReturn": -5.466496494218488,
-              "maxDrawdown": 9.563928186293127
+              "count": 11,
+              "winRate": 45.45454545454545,
+              "avgReturn": -0.18703716525613834,
+              "totalReturn": -2.057408817817522,
+              "maxDrawdown": 6.154840509892162
             },
             "inSampleBaseline": {
-              "winRate": 41.83803822751622,
-              "avgReturn": 0.061537435678906356,
-              "count": 33.74444444444445
+              "winRate": 39.78546954210023,
+              "avgReturn": -0.017351756865186935,
+              "count": 34.977777777777774
             },
             "outOfSampleBaseline": {
-              "winRate": 47.18887154138273,
-              "avgReturn": 0.4370649255810069,
-              "count": 15.433333333333334
+              "winRate": 50.28480870765048,
+              "avgReturn": 0.6720532042118176,
+              "count": 16.355555555555554
             },
-            "checkedAt": "2026-10-27T12:06:32.943Z"
+            "checkedAt": "2026-10-28T12:48:18.612Z"
           }
         }
       },
@@ -774,16 +774,16 @@
               "maxDrawdown": 27.98507860764766
             },
             "inSampleBaseline": {
-              "winRate": 46.02011828157869,
-              "avgReturn": 0.16519133926669946,
-              "count": 68.33333333333333
+              "winRate": 45.27618513285065,
+              "avgReturn": 0.10681534076690781,
+              "count": 66.02222222222223
             },
             "outOfSampleBaseline": {
-              "winRate": 33.72867235192196,
-              "avgReturn": -0.4199966483145144,
-              "count": 29.8
+              "winRate": 32.21712589442033,
+              "avgReturn": -0.5862430194073371,
+              "count": 29.666666666666668
             },
-            "checkedAt": "2026-10-27T12:06:33.098Z"
+            "checkedAt": "2026-10-28T12:48:18.427Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -791,15 +791,15 @@
             "strategyId": "macd_cross",
             "label": "MACD crossover (12/26/9)",
             "timeframe": "1D",
-            "count": 160,
+            "count": 159,
             "winRate": 20.454545454545457,
             "avgReturn": -1.3283098511871698,
             "inSample": {
-              "count": 116,
-              "winRate": 49.137931034482754,
-              "avgReturn": 0.49993804512828904,
-              "totalReturn": 57.99281323488153,
-              "maxDrawdown": 29.42509423744139
+              "count": 115,
+              "winRate": 49.56521739130435,
+              "avgReturn": 0.5413115376406461,
+              "totalReturn": 62.2508268286743,
+              "maxDrawdown": 29.425094237441385
             },
             "outOfSample": {
               "count": 44,
@@ -809,16 +809,16 @@
               "maxDrawdown": 61.48393482858304
             },
             "inSampleBaseline": {
-              "winRate": 46.20579919663207,
-              "avgReturn": 0.1601569894947921,
-              "count": 87.11111111111111
+              "winRate": 45.42469571838702,
+              "avgReturn": 0.14743214497696397,
+              "count": 87.68888888888888
             },
             "outOfSampleBaseline": {
-              "winRate": 33.66139691817341,
-              "avgReturn": -0.45820553075361026,
-              "count": 37.94444444444444
+              "winRate": 34.7840223837784,
+              "avgReturn": -0.3986301161004677,
+              "count": 38.03333333333333
             },
-            "checkedAt": "2026-10-27T12:06:33.117Z"
+            "checkedAt": "2026-10-28T12:48:18.469Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -844,16 +844,16 @@
               "maxDrawdown": 7.538311174577534
             },
             "inSampleBaseline": {
-              "winRate": 45.01053326959052,
-              "avgReturn": 0.13013393600172649,
-              "count": 26.144444444444446
+              "winRate": 46.14779093894303,
+              "avgReturn": 0.09961021860400252,
+              "count": 25.633333333333333
             },
             "outOfSampleBaseline": {
-              "winRate": 33.23031924025214,
-              "avgReturn": -0.3575708330468398,
-              "count": 11.555555555555555
+              "winRate": 33.415361599185125,
+              "avgReturn": -0.6204314222897523,
+              "count": 11.522222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.119Z"
+            "checkedAt": "2026-10-28T12:48:18.480Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -879,16 +879,16 @@
               "maxDrawdown": 12.260186674960865
             },
             "inSampleBaseline": {
-              "winRate": 45.744622108780256,
-              "avgReturn": 0.13028494730237697,
-              "count": 43.166666666666664
+              "winRate": 47.67778373512728,
+              "avgReturn": 0.2503696289118881,
+              "count": 42.644444444444446
             },
             "outOfSampleBaseline": {
-              "winRate": 34.39736383067309,
-              "avgReturn": -0.4206051158967029,
-              "count": 18.866666666666667
+              "winRate": 32.47260855896272,
+              "avgReturn": -0.586597968465513,
+              "count": 18.833333333333332
             },
-            "checkedAt": "2026-10-27T12:06:33.121Z"
+            "checkedAt": "2026-10-28T12:48:18.492Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -914,16 +914,16 @@
               "maxDrawdown": 32.21597132464421
             },
             "inSampleBaseline": {
-              "winRate": 45.26193361706478,
-              "avgReturn": 0.14196721265612147,
-              "count": 34.733333333333334
+              "winRate": 46.399329642993294,
+              "avgReturn": 0.17318646094683254,
+              "count": 34.03333333333333
             },
             "outOfSampleBaseline": {
-              "winRate": 31.458121986704796,
-              "avgReturn": -0.6205709643642673,
-              "count": 15.933333333333334
+              "winRate": 35.38987486446206,
+              "avgReturn": -0.21493674979896638,
+              "count": 15.266666666666667
             },
-            "checkedAt": "2026-10-27T12:06:33.140Z"
+            "checkedAt": "2026-10-28T12:48:18.532Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -949,16 +949,16 @@
               "maxDrawdown": 13.043099002932523
             },
             "inSampleBaseline": {
-              "winRate": 45.63250024673337,
-              "avgReturn": 0.10879683360861894,
-              "count": 33.27777777777778
+              "winRate": 46.49996198488679,
+              "avgReturn": 0.2420959710960383,
+              "count": 34.08888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 34.31362660705627,
-              "avgReturn": -0.4940286208972986,
-              "count": 14.988888888888889
+              "winRate": 32.85422677820339,
+              "avgReturn": -0.5612163133225748,
+              "count": 15.6
             },
-            "checkedAt": "2026-10-27T12:06:33.143Z"
+            "checkedAt": "2026-10-28T12:48:18.536Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -984,16 +984,16 @@
               "maxDrawdown": 3.204753516197327
             },
             "inSampleBaseline": {
-              "winRate": 45.4730423923101,
-              "avgReturn": 0.10958020760156695,
-              "count": 29.92222222222222
+              "winRate": 47.97430055362433,
+              "avgReturn": 0.2882322092149905,
+              "count": 29.42222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 34.83889950969414,
-              "avgReturn": -0.29042810380860595,
-              "count": 13.977777777777778
+              "winRate": 31.463597862978663,
+              "avgReturn": -0.5119430580438645,
+              "count": 12.866666666666667
             },
-            "checkedAt": "2026-10-27T12:06:33.145Z"
+            "checkedAt": "2026-10-28T12:48:18.539Z"
           }
         }
       },
@@ -1023,16 +1023,16 @@
               "maxDrawdown": 18.964640955669616
             },
             "inSampleBaseline": {
-              "winRate": 33.2355918289591,
-              "avgReturn": -0.41236726286418013,
-              "count": 46.766666666666666
+              "winRate": 34.46001603204498,
+              "avgReturn": -0.36232812257097735,
+              "count": 45.422222222222224
             },
             "outOfSampleBaseline": {
-              "winRate": 33.656439682799046,
-              "avgReturn": -0.3192427416353743,
-              "count": 21.31111111111111
+              "winRate": 33.50156687992284,
+              "avgReturn": -0.34554042553434045,
+              "count": 20.6
             },
-            "checkedAt": "2026-10-27T12:06:33.156Z"
+            "checkedAt": "2026-10-28T12:48:18.760Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -1041,33 +1041,33 @@
             "label": "MACD crossover (12/26/9)",
             "timeframe": "1D",
             "count": 114,
-            "winRate": 19.444444444444446,
-            "avgReturn": -0.5245944413674924,
+            "winRate": 20,
+            "avgReturn": -0.5281083956590518,
             "inSample": {
-              "count": 78,
-              "winRate": 20.51282051282051,
-              "avgReturn": -0.6409692100796158,
-              "totalReturn": -49.995598386210034,
-              "maxDrawdown": 51.38194719160644
+              "count": 79,
+              "winRate": 20.253164556962027,
+              "avgReturn": -0.6533045133186081,
+              "totalReturn": -51.61105655217004,
+              "maxDrawdown": 52.59579931640353
             },
             "outOfSample": {
-              "count": 36,
-              "winRate": 19.444444444444446,
-              "avgReturn": -0.5245944413674924,
-              "totalReturn": -18.885399889229728,
-              "maxDrawdown": 18.990549359277654
+              "count": 35,
+              "winRate": 20,
+              "avgReturn": -0.5281083956590518,
+              "totalReturn": -18.48379384806681,
+              "maxDrawdown": 18.588943318114737
             },
             "inSampleBaseline": {
-              "winRate": 34.44322513365526,
-              "avgReturn": -0.3523572896480428,
-              "count": 56.611111111111114
+              "winRate": 35.40429415090294,
+              "avgReturn": -0.31049386257968764,
+              "count": 56.67777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 32.968940126554884,
-              "avgReturn": -0.36625961915027677,
-              "count": 24.92222222222222
+              "winRate": 33.72953084788613,
+              "avgReturn": -0.3525338177454065,
+              "count": 24.677777777777777
             },
-            "checkedAt": "2026-10-27T12:06:33.175Z"
+            "checkedAt": "2026-10-28T12:48:18.780Z"
           },
           "bollinger_reversion@1D": {
             "validated": true,
@@ -1093,16 +1093,16 @@
               "maxDrawdown": 2.073736161834571
             },
             "inSampleBaseline": {
-              "winRate": 35.01568049800832,
-              "avgReturn": -0.2955266183032042,
-              "count": 37.3
+              "winRate": 33.37851302239873,
+              "avgReturn": -0.3614976851260538,
+              "count": 37.21111111111111
             },
             "outOfSampleBaseline": {
-              "winRate": 34.84933480779155,
-              "avgReturn": -0.330102782595583,
-              "count": 16.58888888888889
+              "winRate": 33.264019968040245,
+              "avgReturn": -0.35758437168872853,
+              "count": 16.822222222222223
             },
-            "checkedAt": "2026-10-27T12:06:33.177Z"
+            "checkedAt": "2026-10-28T12:48:18.783Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -1128,16 +1128,16 @@
               "maxDrawdown": 9.026449365454797
             },
             "inSampleBaseline": {
-              "winRate": 34.78978651799878,
-              "avgReturn": -0.3132658999066664,
-              "count": 21.677777777777777
+              "winRate": 36.032687261431114,
+              "avgReturn": -0.3319103471944542,
+              "count": 22.666666666666668
             },
             "outOfSampleBaseline": {
-              "winRate": 32.15066179281865,
-              "avgReturn": -0.3347785973428687,
-              "count": 10.277777777777779
+              "winRate": 34.639861681528345,
+              "avgReturn": -0.2463333073964229,
+              "count": 10.188888888888888
             },
-            "checkedAt": "2026-10-27T12:06:33.179Z"
+            "checkedAt": "2026-10-28T12:48:18.785Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -1163,16 +1163,16 @@
               "maxDrawdown": 10.336079754023048
             },
             "inSampleBaseline": {
-              "winRate": 34.86467465232143,
-              "avgReturn": -0.31325572119595796,
-              "count": 42.7
+              "winRate": 36.70967194810208,
+              "avgReturn": -0.24768476387085048,
+              "count": 41.62222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 31.549133647296255,
-              "avgReturn": -0.42828327312508024,
-              "count": 18.488888888888887
+              "winRate": 32.85593673677273,
+              "avgReturn": -0.3325156079026177,
+              "count": 18.233333333333334
             },
-            "checkedAt": "2026-10-27T12:06:33.198Z"
+            "checkedAt": "2026-10-28T12:48:18.804Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -1198,16 +1198,16 @@
               "maxDrawdown": 7.199465282174994
             },
             "inSampleBaseline": {
-              "winRate": 34.60534759316784,
-              "avgReturn": -0.3622232586843015,
-              "count": 16.044444444444444
+              "winRate": 34.20972237158842,
+              "avgReturn": -0.35535103561186127,
+              "count": 16.833333333333332
             },
             "outOfSampleBaseline": {
-              "winRate": 32.97010705344038,
-              "avgReturn": -0.23192718136865698,
-              "count": 7.222222222222222
+              "winRate": 33.900294150294144,
+              "avgReturn": -0.30646618049286717,
+              "count": 7.522222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.201Z"
+            "checkedAt": "2026-10-28T12:48:18.807Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -1216,33 +1216,33 @@
             "label": "Pattern Engulfing (candela)",
             "timeframe": "1D",
             "count": 70,
-            "winRate": 12.5,
-            "avgReturn": -0.6196711732680792,
+            "winRate": 8.695652173913043,
+            "avgReturn": -0.664074530417253,
             "inSample": {
-              "count": 46,
-              "winRate": 21.73913043478261,
-              "avgReturn": -0.4705129064613605,
-              "totalReturn": -21.643593697222585,
+              "count": 47,
+              "winRate": 23.404255319148938,
+              "avgReturn": -0.4519571841714822,
+              "totalReturn": -21.241987656059663,
               "maxDrawdown": 22.25454404851561
             },
             "outOfSample": {
-              "count": 24,
-              "winRate": 12.5,
-              "avgReturn": -0.6196711732680792,
-              "totalReturn": -14.8721081584339,
+              "count": 23,
+              "winRate": 8.695652173913043,
+              "avgReturn": -0.664074530417253,
+              "totalReturn": -15.273714199596819,
               "maxDrawdown": 15.782619558039126
             },
             "inSampleBaseline": {
-              "winRate": 34.65307748624513,
-              "avgReturn": -0.3143681657371397,
-              "count": 37.78888888888889
+              "winRate": 35.676252277553544,
+              "avgReturn": -0.2700832902081286,
+              "count": 38.62222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 32.79741374115896,
-              "avgReturn": -0.31845858572812263,
-              "count": 17.066666666666666
+              "winRate": 33.886469751239574,
+              "avgReturn": -0.3433189033594971,
+              "count": 16.644444444444446
             },
-            "checkedAt": "2026-10-27T12:06:33.203Z"
+            "checkedAt": "2026-10-28T12:48:18.808Z"
           }
         }
       },
@@ -1272,16 +1272,16 @@
               "maxDrawdown": 25.941643608573916
             },
             "inSampleBaseline": {
-              "winRate": 46.47658915075318,
-              "avgReturn": -0.07216618539242094,
-              "count": 51.6
+              "winRate": 46.06914260524124,
+              "avgReturn": -0.0765760558547375,
+              "count": 51.24444444444445
             },
             "outOfSampleBaseline": {
-              "winRate": 39.23535395762489,
-              "avgReturn": -0.15410844347868416,
-              "count": 21.6
+              "winRate": 39.05252839373215,
+              "avgReturn": -0.21004284886727137,
+              "count": 22.011111111111113
             },
-            "checkedAt": "2026-10-27T12:06:32.977Z"
+            "checkedAt": "2026-10-28T12:48:18.695Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -1295,9 +1295,9 @@
             "inSample": {
               "count": 103,
               "winRate": 37.86407766990291,
-              "avgReturn": -0.23269483887860792,
-              "totalReturn": -23.967568404496618,
-              "maxDrawdown": 44.056390490626825
+              "avgReturn": -0.2359387272898985,
+              "totalReturn": -24.301688910859546,
+              "maxDrawdown": 44.05639049062684
             },
             "outOfSample": {
               "count": 28,
@@ -1307,16 +1307,16 @@
               "maxDrawdown": 22.178575368363173
             },
             "inSampleBaseline": {
-              "winRate": 46.330500268619524,
-              "avgReturn": -0.06563784660298816,
-              "count": 76.6
+              "winRate": 47.567859042922436,
+              "avgReturn": 0.04398126703048931,
+              "count": 76.57777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 41.2639993624661,
-              "avgReturn": -0.14425359231117466,
-              "count": 30.155555555555555
+              "winRate": 39.16352053509112,
+              "avgReturn": -0.1832355136094287,
+              "count": 30.944444444444443
             },
-            "checkedAt": "2026-10-27T12:06:33.000Z"
+            "checkedAt": "2026-10-28T12:48:18.720Z"
           },
           "bollinger_reversion@1D": {
             "validated": true,
@@ -1324,14 +1324,14 @@
             "strategyId": "bollinger_reversion",
             "label": "Bollinger mean-reversion (20,2σ)",
             "timeframe": "1D",
-            "count": 44,
+            "count": 43,
             "winRate": 57.14285714285714,
             "avgReturn": 0.3056243152095135,
             "inSample": {
-              "count": 30,
-              "winRate": 63.33333333333333,
-              "avgReturn": 0.2562913646704364,
-              "totalReturn": 7.688740940113092,
+              "count": 29,
+              "winRate": 62.06896551724138,
+              "avgReturn": 0.24063823091322836,
+              "totalReturn": 6.9785086964836225,
               "maxDrawdown": 19.53554719859399
             },
             "outOfSample": {
@@ -1342,16 +1342,16 @@
               "maxDrawdown": 2.205883693530035
             },
             "inSampleBaseline": {
-              "winRate": 46.74779775523123,
-              "avgReturn": -0.09255557445114854,
-              "count": 26.92222222222222
+              "winRate": 45.441847008381195,
+              "avgReturn": -0.14193594890639483,
+              "count": 25.844444444444445
             },
             "outOfSampleBaseline": {
-              "winRate": 41.77646289230397,
-              "avgReturn": -0.16951534937220625,
-              "count": 11.8
+              "winRate": 43.2186090960601,
+              "avgReturn": -0.07426491560038875,
+              "count": 11.022222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.004Z"
+            "checkedAt": "2026-10-28T12:48:18.723Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -1377,16 +1377,16 @@
               "maxDrawdown": 4.60445657514326
             },
             "inSampleBaseline": {
-              "winRate": 47.215788946788415,
-              "avgReturn": -0.03781329566538527,
-              "count": 42.955555555555556
+              "winRate": 46.98411232111823,
+              "avgReturn": -0.04820272387767515,
+              "count": 43.87777777777778
             },
             "outOfSampleBaseline": {
-              "winRate": 39.74376467887483,
-              "avgReturn": -0.1997798978785087,
-              "count": 17.666666666666668
+              "winRate": 41.91325215579114,
+              "avgReturn": -0.12220425889944997,
+              "count": 18.233333333333334
             },
-            "checkedAt": "2026-10-27T12:06:33.006Z"
+            "checkedAt": "2026-10-28T12:48:18.725Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -1412,16 +1412,16 @@
               "maxDrawdown": 14.971392334831718
             },
             "inSampleBaseline": {
-              "winRate": 46.88164626210268,
-              "avgReturn": -0.06083439328196311,
-              "count": 37.977777777777774
+              "winRate": 46.32751766024507,
+              "avgReturn": -0.12546740127207096,
+              "count": 37.36666666666667
             },
             "outOfSampleBaseline": {
-              "winRate": 40.080885722033024,
-              "avgReturn": -0.13094502918603618,
-              "count": 15.8
+              "winRate": 40.505415207427596,
+              "avgReturn": -0.1130724578780965,
+              "count": 16.011111111111113
             },
-            "checkedAt": "2026-10-27T12:06:33.029Z"
+            "checkedAt": "2026-10-28T12:48:18.744Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -1447,16 +1447,16 @@
               "maxDrawdown": 3.6949995031875082
             },
             "inSampleBaseline": {
-              "winRate": 45.485029114084085,
-              "avgReturn": -0.1058715579927312,
-              "count": 34.3
+              "winRate": 46.05564555316627,
+              "avgReturn": -0.09330566790941737,
+              "count": 35.077777777777776
             },
             "outOfSampleBaseline": {
-              "winRate": 41.55188343075339,
-              "avgReturn": -0.08577813623445997,
-              "count": 14.633333333333333
+              "winRate": 39.57515397332892,
+              "avgReturn": -0.2119375257733391,
+              "count": 14.9
             },
-            "checkedAt": "2026-10-27T12:06:33.033Z"
+            "checkedAt": "2026-10-28T12:48:18.747Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -1482,16 +1482,16 @@
               "maxDrawdown": 2.2365774030969607
             },
             "inSampleBaseline": {
-              "winRate": 45.94534627036718,
-              "avgReturn": -0.1557115662884421,
-              "count": 24.2
+              "winRate": 46.500919410835465,
+              "avgReturn": -0.10418017746201816,
+              "count": 23.744444444444444
             },
             "outOfSampleBaseline": {
-              "winRate": 40.98907628319393,
-              "avgReturn": -0.0628532066951126,
-              "count": 10.188888888888888
+              "winRate": 39.28887316387317,
+              "avgReturn": -0.24648726445507155,
+              "count": 10.38888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.035Z"
+            "checkedAt": "2026-10-28T12:48:18.748Z"
           }
         }
       },
@@ -1521,16 +1521,16 @@
               "maxDrawdown": 34.18975931262815
             },
             "inSampleBaseline": {
-              "winRate": 49.78473627716489,
-              "avgReturn": 0.338778434684146,
-              "count": 86.4
+              "winRate": 48.4028373827816,
+              "avgReturn": 0.10893228816819515,
+              "count": 86.22222222222223
             },
             "outOfSampleBaseline": {
-              "winRate": 38.5511434173748,
-              "avgReturn": -0.8275188148924388,
-              "count": 38.611111111111114
+              "winRate": 36.88131949328144,
+              "avgReturn": -1.1884601300746358,
+              "count": 38.2
             },
-            "checkedAt": "2026-10-27T12:06:33.277Z"
+            "checkedAt": "2026-10-28T12:48:18.977Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -1543,10 +1543,10 @@
             "avgReturn": -0.8004084574114071,
             "inSample": {
               "count": 158,
-              "winRate": 48.10126582278481,
-              "avgReturn": -0.10576993235271456,
-              "totalReturn": -16.711649311728902,
-              "maxDrawdown": 87.37862840653077
+              "winRate": 48.734177215189874,
+              "avgReturn": -0.04888751697316205,
+              "totalReturn": -7.724227681759604,
+              "maxDrawdown": 87.37862840653075
             },
             "outOfSample": {
               "count": 78,
@@ -1556,16 +1556,16 @@
               "maxDrawdown": 76.04119350910865
             },
             "inSampleBaseline": {
-              "winRate": 48.732082606892625,
-              "avgReturn": 0.20122190660384828,
-              "count": 116.27777777777777
+              "winRate": 48.20903846154632,
+              "avgReturn": 0.1687697089800747,
+              "count": 116.31111111111112
             },
             "outOfSampleBaseline": {
-              "winRate": 39.643048891669984,
-              "avgReturn": -0.9142365012631756,
-              "count": 53.06666666666667
+              "winRate": 37.560519223622435,
+              "avgReturn": -1.1554352568640063,
+              "count": 52.34444444444444
             },
-            "checkedAt": "2026-10-27T12:06:33.298Z"
+            "checkedAt": "2026-10-28T12:48:18.999Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -1575,7 +1575,7 @@
             "timeframe": "1D",
             "count": 29,
             "winRate": 25,
-            "avgReturn": -1.7351904576926434,
+            "avgReturn": -1.6947374207143835,
             "inSample": {
               "count": 17,
               "winRate": 64.70588235294117,
@@ -1586,21 +1586,21 @@
             "outOfSample": {
               "count": 12,
               "winRate": 25,
-              "avgReturn": -1.7351904576926434,
-              "totalReturn": -20.82228549231172,
-              "maxDrawdown": 20.82228549231172
+              "avgReturn": -1.6947374207143835,
+              "totalReturn": -20.336849048572603,
+              "maxDrawdown": 20.336849048572603
             },
             "inSampleBaseline": {
-              "winRate": 49.42172471952051,
-              "avgReturn": 0.36789871021038584,
-              "count": 16.744444444444444
+              "winRate": 48.15487510272026,
+              "avgReturn": 0.26271377080514163,
+              "count": 16.155555555555555
             },
             "outOfSampleBaseline": {
-              "winRate": 37.08670650337318,
-              "avgReturn": -0.9321549533685126,
-              "count": 7.155555555555556
+              "winRate": 36.19667832167832,
+              "avgReturn": -1.011570499188919,
+              "count": 7.766666666666667
             },
-            "checkedAt": "2026-10-27T12:06:33.300Z"
+            "checkedAt": "2026-10-28T12:48:19.001Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -1626,16 +1626,16 @@
               "maxDrawdown": 45.30546672033991
             },
             "inSampleBaseline": {
-              "winRate": 49.403727790791166,
-              "avgReturn": 0.3189918523269231,
-              "count": 54.96666666666667
+              "winRate": 49.289261093169735,
+              "avgReturn": 0.2304760035151558,
+              "count": 53.855555555555554
             },
             "outOfSampleBaseline": {
-              "winRate": 37.42279937189095,
-              "avgReturn": -1.257957128397562,
-              "count": 23.61111111111111
+              "winRate": 38.833829881860524,
+              "avgReturn": -0.5875044164806922,
+              "count": 25.522222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.303Z"
+            "checkedAt": "2026-10-28T12:48:19.003Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -1661,16 +1661,16 @@
               "maxDrawdown": 23.616549781883094
             },
             "inSampleBaseline": {
-              "winRate": 48.30406959132388,
-              "avgReturn": 0.26507765977501757,
-              "count": 38.27777777777778
+              "winRate": 48.00440040360381,
+              "avgReturn": 0.20309880910590802,
+              "count": 38.855555555555554
             },
             "outOfSampleBaseline": {
-              "winRate": 38.0062754262882,
-              "avgReturn": -1.4464164265047328,
+              "winRate": 37.78916950803028,
+              "avgReturn": -1.1891486642365707,
               "count": 17.622222222222224
             },
-            "checkedAt": "2026-10-27T12:06:33.320Z"
+            "checkedAt": "2026-10-28T12:48:19.021Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -1696,16 +1696,16 @@
               "maxDrawdown": 29.474457169223616
             },
             "inSampleBaseline": {
-              "winRate": 47.67833079307284,
-              "avgReturn": 0.1101333954485016,
-              "count": 55.4
+              "winRate": 48.27175640045698,
+              "avgReturn": 0.23253385501433058,
+              "count": 54.5
             },
             "outOfSampleBaseline": {
-              "winRate": 37.93922583388374,
-              "avgReturn": -1.1022635732696489,
-              "count": 24.511111111111113
+              "winRate": 36.72308044118613,
+              "avgReturn": -1.3437962997259092,
+              "count": 23.711111111111112
             },
-            "checkedAt": "2026-10-27T12:06:33.324Z"
+            "checkedAt": "2026-10-28T12:48:19.025Z"
           },
           "engulfing@1D": {
             "validated": true,
@@ -1713,14 +1713,14 @@
             "strategyId": "engulfing",
             "label": "Pattern Engulfing (candela)",
             "timeframe": "1D",
-            "count": 39,
+            "count": 38,
             "winRate": 46.15384615384615,
             "avgReturn": 0.21081144995471565,
             "inSample": {
-              "count": 26,
-              "winRate": 65.38461538461539,
-              "avgReturn": 1.4817339306677448,
-              "totalReturn": 38.525082197361364,
+              "count": 25,
+              "winRate": 68,
+              "avgReturn": 1.5832196068977618,
+              "totalReturn": 39.580490172444044,
               "maxDrawdown": 4.914528364434663
             },
             "outOfSample": {
@@ -1731,16 +1731,16 @@
               "maxDrawdown": 8.023133867147966
             },
             "inSampleBaseline": {
-              "winRate": 47.879416139182155,
-              "avgReturn": 0.15887875132821258,
-              "count": 23.72222222222222
+              "winRate": 49.11555818552874,
+              "avgReturn": 0.3262248389262083,
+              "count": 22.633333333333333
             },
             "outOfSampleBaseline": {
-              "winRate": 36.830371788705115,
-              "avgReturn": -1.6252211758982358,
-              "count": 11.11111111111111
+              "winRate": 38.401999960823495,
+              "avgReturn": -1.5868878715236523,
+              "count": 10.733333333333333
             },
-            "checkedAt": "2026-10-27T12:06:33.326Z"
+            "checkedAt": "2026-10-28T12:48:19.027Z"
           }
         }
       },
@@ -1770,16 +1770,16 @@
               "maxDrawdown": 23.79358781275631
             },
             "inSampleBaseline": {
-              "winRate": 47.068719393214764,
-              "avgReturn": 0.29302157700746445,
-              "count": 75.21111111111111
+              "winRate": 46.31525972860143,
+              "avgReturn": 0.14080192780591225,
+              "count": 74.42222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 39.04221642514771,
-              "avgReturn": -0.1073249629086465,
-              "count": 33.37777777777778
+              "winRate": 38.41065357811774,
+              "avgReturn": -0.15760573811447268,
+              "count": 33.67777777777778
             },
-            "checkedAt": "2026-10-27T12:06:33.339Z"
+            "checkedAt": "2026-10-28T12:48:18.914Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -1788,33 +1788,33 @@
             "label": "MACD crossover (12/26/9)",
             "timeframe": "1D",
             "count": 241,
-            "winRate": 35.61643835616438,
-            "avgReturn": -0.5564123083656198,
+            "winRate": 36.11111111111111,
+            "avgReturn": -0.5365007034425517,
             "inSample": {
-              "count": 168,
-              "winRate": 48.80952380952381,
-              "avgReturn": 0.6883423387642613,
-              "totalReturn": 115.64151291239591,
+              "count": 169,
+              "winRate": 48.5207100591716,
+              "avgReturn": 0.6580351751550562,
+              "totalReturn": 111.20794460120449,
               "maxDrawdown": 120.16433328576507
             },
             "outOfSample": {
-              "count": 73,
-              "winRate": 35.61643835616438,
-              "avgReturn": -0.5564123083656198,
-              "totalReturn": -40.618098510690245,
+              "count": 72,
+              "winRate": 36.11111111111111,
+              "avgReturn": -0.5365007034425517,
+              "totalReturn": -38.628050647863724,
               "maxDrawdown": 46.33762883497876
             },
             "inSampleBaseline": {
-              "winRate": 46.52171855228294,
-              "avgReturn": 0.2419495311474787,
-              "count": 120.22222222222223
+              "winRate": 46.88417660281986,
+              "avgReturn": 0.22971869773269663,
+              "count": 121.14444444444445
             },
             "outOfSampleBaseline": {
-              "winRate": 37.917305272691834,
-              "avgReturn": -0.20921680883738256,
-              "count": 52.74444444444445
+              "winRate": 38.17288135578307,
+              "avgReturn": -0.17723871486049902,
+              "count": 54.077777777777776
             },
-            "checkedAt": "2026-10-27T12:06:33.361Z"
+            "checkedAt": "2026-10-28T12:48:18.933Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -1840,16 +1840,16 @@
               "maxDrawdown": 4.139377075135399
             },
             "inSampleBaseline": {
-              "winRate": 47.338163537971475,
-              "avgReturn": 0.35236727509045,
-              "count": 21.288888888888888
+              "winRate": 46.58150873831034,
+              "avgReturn": 0.3870395755800021,
+              "count": 20.177777777777777
             },
             "outOfSampleBaseline": {
-              "winRate": 34.04084133005702,
-              "avgReturn": -0.34308776006352826,
-              "count": 8.977777777777778
+              "winRate": 38.775942829864405,
+              "avgReturn": -0.1840855115721454,
+              "count": 9.088888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.364Z"
+            "checkedAt": "2026-10-28T12:48:18.936Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -1875,16 +1875,16 @@
               "maxDrawdown": 32.055786045946405
             },
             "inSampleBaseline": {
-              "winRate": 46.20502712397159,
-              "avgReturn": 0.1918666500974436,
-              "count": 69.03333333333333
+              "winRate": 46.62488934043624,
+              "avgReturn": 0.27221731696690515,
+              "count": 67.68888888888888
             },
             "outOfSampleBaseline": {
-              "winRate": 37.32014557768688,
-              "avgReturn": -0.2058960991174611,
-              "count": 29.366666666666667
+              "winRate": 39.119537629148304,
+              "avgReturn": -0.09131034606648696,
+              "count": 29.8
             },
-            "checkedAt": "2026-10-27T12:06:33.366Z"
+            "checkedAt": "2026-10-28T12:48:18.938Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -1910,16 +1910,16 @@
               "maxDrawdown": 51.74733818897587
             },
             "inSampleBaseline": {
-              "winRate": 47.4138614713261,
-              "avgReturn": 0.3766743908671805,
-              "count": 29.966666666666665
+              "winRate": 46.42699580329542,
+              "avgReturn": 0.16266582435066693,
+              "count": 30.58888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 38.563417896364236,
-              "avgReturn": -0.14822537787991097,
-              "count": 13.755555555555556
+              "winRate": 35.0686185398518,
+              "avgReturn": -0.585905349271339,
+              "count": 13.822222222222223
             },
-            "checkedAt": "2026-10-27T12:06:33.384Z"
+            "checkedAt": "2026-10-28T12:48:18.956Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -1945,16 +1945,16 @@
               "maxDrawdown": 32.055786045946405
             },
             "inSampleBaseline": {
-              "winRate": 46.383921338928765,
-              "avgReturn": 0.2183644692098732,
-              "count": 58.05555555555556
+              "winRate": 47.094200399055275,
+              "avgReturn": 0.25446935004830273,
+              "count": 57.611111111111114
             },
             "outOfSampleBaseline": {
-              "winRate": 37.28334078707945,
-              "avgReturn": -0.16130340080148636,
-              "count": 25.677777777777777
+              "winRate": 39.00366907175333,
+              "avgReturn": -0.10531799455918248,
+              "count": 26.07777777777778
             },
-            "checkedAt": "2026-10-27T12:06:33.387Z"
+            "checkedAt": "2026-10-28T12:48:18.960Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -1980,16 +1980,16 @@
               "maxDrawdown": 8.2046067908936
             },
             "inSampleBaseline": {
-              "winRate": 46.275609337200905,
-              "avgReturn": 0.32801649465472826,
-              "count": 34.67777777777778
+              "winRate": 48.616321857228016,
+              "avgReturn": 0.13044970029199043,
+              "count": 36.34444444444444
             },
             "outOfSampleBaseline": {
-              "winRate": 37.80476357720939,
-              "avgReturn": -0.24074040695777377,
-              "count": 15.311111111111112
+              "winRate": 35.90052548581624,
+              "avgReturn": -0.33650199535511716,
+              "count": 15.8
             },
-            "checkedAt": "2026-10-27T12:06:33.389Z"
+            "checkedAt": "2026-10-28T12:48:18.962Z"
           }
         }
       },
@@ -2019,16 +2019,16 @@
               "maxDrawdown": 33.200722559676564
             },
             "inSampleBaseline": {
-              "winRate": 43.17036107758658,
-              "avgReturn": 0.12948128678351198,
-              "count": 96.91111111111111
+              "winRate": 43.266821433818805,
+              "avgReturn": 0.19551506426340906,
+              "count": 97.13333333333334
             },
             "outOfSampleBaseline": {
-              "winRate": 33.044718733319776,
-              "avgReturn": -0.6958099770256115,
-              "count": 42.58888888888889
+              "winRate": 32.942118540891144,
+              "avgReturn": -0.6200925006824892,
+              "count": 42.4
             },
-            "checkedAt": "2026-10-27T12:06:33.405Z"
+            "checkedAt": "2026-10-28T12:48:19.116Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -2054,16 +2054,16 @@
               "maxDrawdown": 47.419306569388446
             },
             "inSampleBaseline": {
-              "winRate": 42.87900353381877,
-              "avgReturn": 0.17457748290107727,
-              "count": 108.73333333333333
+              "winRate": 43.56666387497153,
+              "avgReturn": 0.24167309702010747,
+              "count": 107.56666666666666
             },
             "outOfSampleBaseline": {
-              "winRate": 32.840230863542175,
-              "avgReturn": -0.6117151714012061,
-              "count": 46.077777777777776
+              "winRate": 32.101104696060425,
+              "avgReturn": -0.6690052544978706,
+              "count": 47.18888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.427Z"
+            "checkedAt": "2026-10-28T12:48:19.141Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -2089,16 +2089,16 @@
               "maxDrawdown": 16.118849294915886
             },
             "inSampleBaseline": {
-              "winRate": 43.13486622731703,
-              "avgReturn": 0.21949093203428005,
-              "count": 24.855555555555554
+              "winRate": 45.79709674485257,
+              "avgReturn": 0.3524184776641697,
+              "count": 25.488888888888887
             },
             "outOfSampleBaseline": {
-              "winRate": 33.22942661913251,
-              "avgReturn": -0.6286962528012842,
-              "count": 10.955555555555556
+              "winRate": 31.738136681764125,
+              "avgReturn": -0.7375934972530673,
+              "count": 10.755555555555556
             },
-            "checkedAt": "2026-10-27T12:06:33.429Z"
+            "checkedAt": "2026-10-28T12:48:19.144Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -2124,16 +2124,16 @@
               "maxDrawdown": 9.90087698877532
             },
             "inSampleBaseline": {
-              "winRate": 41.936181653667354,
-              "avgReturn": 0.2240049747494358,
-              "count": 46.08888888888889
+              "winRate": 43.21180678605133,
+              "avgReturn": 0.16412945133355925,
+              "count": 45.68888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 31.00758129019634,
-              "avgReturn": -0.689519279614709,
-              "count": 20.41111111111111
+              "winRate": 31.75624197511526,
+              "avgReturn": -0.7060961358073647,
+              "count": 19.344444444444445
             },
-            "checkedAt": "2026-10-27T12:06:33.431Z"
+            "checkedAt": "2026-10-28T12:48:19.146Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -2142,33 +2142,33 @@
             "label": "Ibrido custom: trend + momentum + filtro esaurimento",
             "timeframe": "1D",
             "count": 57,
-            "winRate": 36.36363636363637,
-            "avgReturn": -0.6950132234347093,
+            "winRate": 30,
+            "avgReturn": -1.2100586795361976,
             "inSample": {
-              "count": 46,
-              "winRate": 30.434782608695656,
-              "avgReturn": -1.6414540185904023,
-              "totalReturn": -75.5068848551585,
+              "count": 47,
+              "winRate": 31.914893617021278,
+              "avgReturn": -1.511732840799539,
+              "totalReturn": -71.05144351757833,
               "maxDrawdown": 83.77831328105563
             },
             "outOfSample": {
-              "count": 11,
-              "winRate": 36.36363636363637,
-              "avgReturn": -0.6950132234347093,
-              "totalReturn": -7.645145457781802,
+              "count": 10,
+              "winRate": 30,
+              "avgReturn": -1.2100586795361976,
+              "totalReturn": -12.100586795361977,
               "maxDrawdown": 12.100586795361977
             },
             "inSampleBaseline": {
-              "winRate": 42.58054334781149,
-              "avgReturn": 0.13148569224511855,
-              "count": 41.266666666666666
+              "winRate": 43.539499209350936,
+              "avgReturn": 0.21076421401194326,
+              "count": 42.5
             },
             "outOfSampleBaseline": {
-              "winRate": 32.07827138565575,
-              "avgReturn": -0.7130567548025368,
-              "count": 18.11111111111111
+              "winRate": 32.32685475864385,
+              "avgReturn": -0.6859873055837865,
+              "count": 18.4
             },
-            "checkedAt": "2026-10-27T12:06:33.449Z"
+            "checkedAt": "2026-10-28T12:48:19.164Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -2194,16 +2194,16 @@
               "maxDrawdown": 10.643332729702617
             },
             "inSampleBaseline": {
-              "winRate": 42.73352486458387,
-              "avgReturn": 0.09626460839134848,
-              "count": 40.17777777777778
+              "winRate": 44.602150719170865,
+              "avgReturn": 0.3280129961171389,
+              "count": 40.6
             },
             "outOfSampleBaseline": {
-              "winRate": 33.32160373577456,
-              "avgReturn": -0.6072110852736303,
-              "count": 17.344444444444445
+              "winRate": 31.290570303042816,
+              "avgReturn": -0.6656709487598579,
+              "count": 18.855555555555554
             },
-            "checkedAt": "2026-10-27T12:06:33.452Z"
+            "checkedAt": "2026-10-28T12:48:19.167Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -2229,16 +2229,16 @@
               "maxDrawdown": 26.921242399423765
             },
             "inSampleBaseline": {
-              "winRate": 41.475016517328186,
-              "avgReturn": -0.04252277817871482,
-              "count": 14.555555555555555
+              "winRate": 43.07362340164534,
+              "avgReturn": 0.24434197970960128,
+              "count": 14.933333333333334
             },
             "outOfSampleBaseline": {
-              "winRate": 32.04052429052428,
-              "avgReturn": -0.6806946597477409,
-              "count": 6.366666666666666
+              "winRate": 31.600174516841182,
+              "avgReturn": -0.526491682926692,
+              "count": 6.911111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.454Z"
+            "checkedAt": "2026-10-28T12:48:19.169Z"
           }
         }
       },
@@ -2268,16 +2268,16 @@
               "maxDrawdown": 26.88508413900263
             },
             "inSampleBaseline": {
-              "winRate": 38.627943689088305,
-              "avgReturn": -0.12280223562431883,
-              "count": 79.34444444444445
+              "winRate": 38.31091190961543,
+              "avgReturn": -0.045705021173549396,
+              "count": 79.94444444444444
             },
             "outOfSampleBaseline": {
-              "winRate": 41.139901284550845,
-              "avgReturn": 0.1731002967817697,
-              "count": 36.28888888888889
+              "winRate": 42.31028392300476,
+              "avgReturn": 0.2548873036495311,
+              "count": 36.044444444444444
             },
-            "checkedAt": "2026-10-27T12:06:33.651Z"
+            "checkedAt": "2026-10-28T12:48:19.256Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -2291,9 +2291,9 @@
             "inSample": {
               "count": 125,
               "winRate": 27.200000000000003,
-              "avgReturn": -0.8344953571501483,
-              "totalReturn": -104.31191964376855,
-              "maxDrawdown": 126.74149525024922
+              "avgReturn": -0.8327644046940044,
+              "totalReturn": -104.09555058675055,
+              "maxDrawdown": 126.52512619323122
             },
             "outOfSample": {
               "count": 40,
@@ -2303,16 +2303,16 @@
               "maxDrawdown": 18.97403665131069
             },
             "inSampleBaseline": {
-              "winRate": 38.67400503067633,
-              "avgReturn": -0.08551751463384015,
-              "count": 85.95555555555555
+              "winRate": 39.497365464125345,
+              "avgReturn": -0.06572598704312996,
+              "count": 87.93333333333334
             },
             "outOfSampleBaseline": {
-              "winRate": 41.538816873529086,
-              "avgReturn": 0.2199438073369483,
-              "count": 39.77777777777778
+              "winRate": 41.683819023695975,
+              "avgReturn": 0.1676208802401103,
+              "count": 40.05555555555556
             },
-            "checkedAt": "2026-10-27T12:06:33.670Z"
+            "checkedAt": "2026-10-28T12:48:19.279Z"
           },
           "bollinger_reversion@1D": {
             "validated": true,
@@ -2338,16 +2338,16 @@
               "maxDrawdown": 6.006000415836379
             },
             "inSampleBaseline": {
-              "winRate": 40.31286873918667,
-              "avgReturn": -0.07248309443337123,
-              "count": 25.255555555555556
+              "winRate": 36.87338641691132,
+              "avgReturn": -0.24243171872464503,
+              "count": 24.92222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 44.36031719016756,
-              "avgReturn": 0.49788707068621274,
-              "count": 11.71111111111111
+              "winRate": 39.35930735930734,
+              "avgReturn": 0.1523704787219232,
+              "count": 11.511111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.672Z"
+            "checkedAt": "2026-10-28T12:48:19.282Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -2373,16 +2373,16 @@
               "maxDrawdown": 10.198957841773787
             },
             "inSampleBaseline": {
-              "winRate": 38.196220547256075,
-              "avgReturn": -0.13596994860045622,
-              "count": 28.066666666666666
+              "winRate": 38.3879579400122,
+              "avgReturn": -0.14694266147785023,
+              "count": 28.233333333333334
             },
             "outOfSampleBaseline": {
-              "winRate": 43.90796525742346,
-              "avgReturn": 0.3306690713559286,
-              "count": 12.811111111111112
+              "winRate": 41.72660164817027,
+              "avgReturn": 0.09255902979831979,
+              "count": 12.488888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.674Z"
+            "checkedAt": "2026-10-28T12:48:19.284Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -2408,16 +2408,16 @@
               "maxDrawdown": 6.192746921273169
             },
             "inSampleBaseline": {
-              "winRate": 38.362034280928675,
-              "avgReturn": -0.12564016429622282,
-              "count": 54.78888888888889
+              "winRate": 39.57357930915816,
+              "avgReturn": -0.07678408517701887,
+              "count": 53.86666666666667
             },
             "outOfSampleBaseline": {
-              "winRate": 43.32404801491158,
-              "avgReturn": 0.33800434760493026,
-              "count": 24.955555555555556
+              "winRate": 42.3839965768484,
+              "avgReturn": 0.24874318466002454,
+              "count": 24.466666666666665
             },
-            "checkedAt": "2026-10-27T12:06:33.693Z"
+            "checkedAt": "2026-10-28T12:48:19.303Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -2443,16 +2443,16 @@
               "maxDrawdown": 7.698887474037175
             },
             "inSampleBaseline": {
-              "winRate": 38.28699376456332,
-              "avgReturn": -0.17523792716230338,
-              "count": 23.622222222222224
+              "winRate": 36.93569538227634,
+              "avgReturn": -0.25838196833618005,
+              "count": 24.177777777777777
             },
             "outOfSampleBaseline": {
-              "winRate": 38.99218165639733,
-              "avgReturn": -0.04417289742373632,
-              "count": 10.744444444444444
+              "winRate": 41.057462727999365,
+              "avgReturn": 0.14225474334430685,
+              "count": 11.066666666666666
             },
-            "checkedAt": "2026-10-27T12:06:33.695Z"
+            "checkedAt": "2026-10-28T12:48:19.305Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -2478,16 +2478,16 @@
               "maxDrawdown": 9.528292243143616
             },
             "inSampleBaseline": {
-              "winRate": 37.97164168865013,
-              "avgReturn": -0.12300752844967786,
-              "count": 35.544444444444444
+              "winRate": 39.397328385065826,
+              "avgReturn": 0.0038236504448401097,
+              "count": 35.8
             },
             "outOfSampleBaseline": {
-              "winRate": 42.57823655914472,
-              "avgReturn": 0.23000857967809274,
-              "count": 16.333333333333332
+              "winRate": 40.284669115809486,
+              "avgReturn": 0.2047615865917333,
+              "count": 15.988888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.697Z"
+            "checkedAt": "2026-10-28T12:48:19.307Z"
           }
         }
       },
@@ -2517,16 +2517,16 @@
               "maxDrawdown": 50.44024883946504
             },
             "inSampleBaseline": {
-              "winRate": 43.62613011084574,
-              "avgReturn": 0.4011117699532221,
-              "count": 99
+              "winRate": 43.82988213450325,
+              "avgReturn": 0.35112383563636074,
+              "count": 99.22222222222223
             },
             "outOfSampleBaseline": {
-              "winRate": 42.90495981168617,
-              "avgReturn": 0.15116449440385357,
-              "count": 44.96666666666667
+              "winRate": 42.663362612566935,
+              "avgReturn": 0.10995336321834953,
+              "count": 45.71111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.571Z"
+            "checkedAt": "2026-10-28T12:48:19.327Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -2539,10 +2539,10 @@
             "avgReturn": -1.1639597188169881,
             "inSample": {
               "count": 129,
-              "winRate": 25.581395348837212,
-              "avgReturn": -1.9616762444819937,
-              "totalReturn": -253.0562355381772,
-              "maxDrawdown": 289.72711503750463
+              "winRate": 24.031007751937985,
+              "avgReturn": -2.3166813253623433,
+              "totalReturn": -298.8518909717423,
+              "maxDrawdown": 298.8518909717423
             },
             "outOfSample": {
               "count": 68,
@@ -2552,16 +2552,16 @@
               "maxDrawdown": 112.90939304993557
             },
             "inSampleBaseline": {
-              "winRate": 43.921967254574014,
-              "avgReturn": 0.42995035339115734,
-              "count": 96.92222222222222
+              "winRate": 43.275461867259224,
+              "avgReturn": 0.34432697388936667,
+              "count": 96.08888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 44.84570152802198,
-              "avgReturn": 0.42752489998538,
-              "count": 43.94444444444444
+              "winRate": 43.031228201364684,
+              "avgReturn": 0.20600816815233536,
+              "count": 44.87777777777778
             },
-            "checkedAt": "2026-10-27T12:06:33.589Z"
+            "checkedAt": "2026-10-28T12:48:19.354Z"
           },
           "bollinger_reversion@1D": {
             "validated": true,
@@ -2587,16 +2587,16 @@
               "maxDrawdown": 0
             },
             "inSampleBaseline": {
-              "winRate": 41.124233790900455,
-              "avgReturn": 0.19979607001019978,
-              "count": 8.266666666666667
+              "winRate": 41.658616075282744,
+              "avgReturn": 0.12698232924682015,
+              "count": 8.411111111111111
             },
             "outOfSampleBaseline": {
-              "winRate": 41.38051146384479,
-              "avgReturn": -0.040531567072120356,
-              "count": 3.8
+              "winRate": 41.63191438191439,
+              "avgReturn": 0.15798803888418086,
+              "count": 4.188888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.591Z"
+            "checkedAt": "2026-10-28T12:48:19.359Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -2622,16 +2622,16 @@
               "maxDrawdown": 18.232150621691858
             },
             "inSampleBaseline": {
-              "winRate": 44.48314110324476,
-              "avgReturn": 0.5118057358389863,
-              "count": 30.366666666666667
+              "winRate": 43.12996306788782,
+              "avgReturn": 0.23068278165187495,
+              "count": 30.666666666666668
             },
             "outOfSampleBaseline": {
-              "winRate": 42.09882700909533,
-              "avgReturn": -0.19860138489054174,
-              "count": 14.033333333333333
+              "winRate": 45.03966145748911,
+              "avgReturn": 0.43578362176839464,
+              "count": 14.244444444444444
             },
-            "checkedAt": "2026-10-27T12:06:33.593Z"
+            "checkedAt": "2026-10-28T12:48:19.362Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -2657,16 +2657,16 @@
               "maxDrawdown": 30.37806216648671
             },
             "inSampleBaseline": {
-              "winRate": 42.49507717342788,
-              "avgReturn": 0.2675738766736438,
-              "count": 68.33333333333333
+              "winRate": 43.02370683835253,
+              "avgReturn": 0.32983899961775454,
+              "count": 67.82222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 43.81111215614775,
-              "avgReturn": 0.2550063647389534,
-              "count": 31.644444444444446
+              "winRate": 42.93971534203023,
+              "avgReturn": 0.0272551343841781,
+              "count": 30.6
             },
-            "checkedAt": "2026-10-27T12:06:33.612Z"
+            "checkedAt": "2026-10-28T12:48:19.384Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -2692,16 +2692,16 @@
               "maxDrawdown": 10.616764536755435
             },
             "inSampleBaseline": {
-              "winRate": 44.24971653159303,
-              "avgReturn": 0.3710007961553504,
-              "count": 17.58888888888889
+              "winRate": 43.97834387938149,
+              "avgReturn": 0.46869223454833814,
+              "count": 17.711111111111112
             },
             "outOfSampleBaseline": {
-              "winRate": 45.48918982252315,
-              "avgReturn": 0.45361146398659785,
-              "count": 8.311111111111112
+              "winRate": 43.67767109433776,
+              "avgReturn": 0.19204516205019265,
+              "count": 8.066666666666666
             },
-            "checkedAt": "2026-10-27T12:06:33.615Z"
+            "checkedAt": "2026-10-28T12:48:19.387Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -2727,16 +2727,16 @@
               "maxDrawdown": 0
             },
             "inSampleBaseline": {
-              "winRate": 43.04922601001033,
-              "avgReturn": 0.45135019682483957,
-              "count": 8.255555555555556
+              "winRate": 45.21769751671713,
+              "avgReturn": 0.5923192334155204,
+              "count": 8.2
             },
             "outOfSampleBaseline": {
-              "winRate": 47.928691678691685,
-              "avgReturn": 0.8718919036737833,
-              "count": 3.7444444444444445
+              "winRate": 41.11243386243387,
+              "avgReturn": -0.1693602562928291,
+              "count": 3.8777777777777778
             },
-            "checkedAt": "2026-10-27T12:06:33.617Z"
+            "checkedAt": "2026-10-28T12:48:19.389Z"
           }
         }
       },
@@ -2754,8 +2754,8 @@
             "inSample": {
               "count": 87,
               "winRate": 44.827586206896555,
-              "avgReturn": 0.6037807437025231,
-              "totalReturn": 52.52892470211951,
+              "avgReturn": 0.5912938047606923,
+              "totalReturn": 51.44256101418023,
               "maxDrawdown": 25.571604541316475
             },
             "outOfSample": {
@@ -2766,16 +2766,16 @@
               "maxDrawdown": 24.98272222937452
             },
             "inSampleBaseline": {
-              "winRate": 40.388757291632515,
-              "avgReturn": 0.06311271154116443,
-              "count": 71.78888888888889
+              "winRate": 40.84483233712529,
+              "avgReturn": 0.12168106619384295,
+              "count": 71.75555555555556
             },
             "outOfSampleBaseline": {
-              "winRate": 35.983911213843754,
-              "avgReturn": -0.06815001788817955,
-              "count": 32.333333333333336
+              "winRate": 36.60923020957194,
+              "avgReturn": 0.22365034109944829,
+              "count": 31.22222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.470Z"
+            "checkedAt": "2026-10-28T12:48:19.187Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -2789,9 +2789,9 @@
             "inSample": {
               "count": 149,
               "winRate": 33.557046979865774,
-              "avgReturn": -0.3509298960581818,
-              "totalReturn": -52.28855451266909,
-              "maxDrawdown": 90.88750013161868
+              "avgReturn": -0.35822092752086154,
+              "totalReturn": -53.37491820060837,
+              "maxDrawdown": 90.88750013161867
             },
             "outOfSample": {
               "count": 54,
@@ -2801,16 +2801,16 @@
               "maxDrawdown": 71.8321906487694
             },
             "inSampleBaseline": {
-              "winRate": 39.46152285998889,
-              "avgReturn": 0.0077166586030038365,
-              "count": 110.63333333333334
+              "winRate": 40.88821225239154,
+              "avgReturn": 0.15655741324081376,
+              "count": 111.56666666666666
             },
             "outOfSampleBaseline": {
-              "winRate": 38.03030408081042,
-              "avgReturn": -0.10208996919464715,
-              "count": 47.65555555555556
+              "winRate": 35.24087026240999,
+              "avgReturn": -0.20446566306475972,
+              "count": 47.98888888888889
             },
-            "checkedAt": "2026-10-27T12:06:33.492Z"
+            "checkedAt": "2026-10-28T12:48:19.211Z"
           },
           "bollinger_reversion@1D": {
             "validated": false,
@@ -2818,9 +2818,9 @@
             "strategyId": "bollinger_reversion",
             "label": "Bollinger mean-reversion (20,2σ)",
             "timeframe": "1D",
-            "count": 38,
-            "winRate": 40,
-            "avgReturn": -0.3016473064459147,
+            "count": 39,
+            "winRate": 36.36363636363637,
+            "avgReturn": -0.39875770326934284,
             "inSample": {
               "count": 28,
               "winRate": 50,
@@ -2829,23 +2829,23 @@
               "maxDrawdown": 22.247035079977355
             },
             "outOfSample": {
-              "count": 10,
-              "winRate": 40,
-              "avgReturn": -0.3016473064459147,
-              "totalReturn": -3.016473064459147,
+              "count": 11,
+              "winRate": 36.36363636363637,
+              "avgReturn": -0.39875770326934284,
+              "totalReturn": -4.386334735962771,
               "maxDrawdown": 8.46768955160833
             },
             "inSampleBaseline": {
-              "winRate": 40.33527414264478,
-              "avgReturn": 0.07859498092366513,
-              "count": 26.18888888888889
+              "winRate": 38.80798171860825,
+              "avgReturn": 0.05551119768668251,
+              "count": 25.988888888888887
             },
             "outOfSampleBaseline": {
-              "winRate": 35.85997236242334,
-              "avgReturn": 0.007140501534545666,
-              "count": 11.511111111111111
+              "winRate": 34.615266422412965,
+              "avgReturn": -0.23019250042331915,
+              "count": 11.844444444444445
             },
-            "checkedAt": "2026-10-27T12:06:33.494Z"
+            "checkedAt": "2026-10-28T12:48:19.213Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -2871,16 +2871,16 @@
               "maxDrawdown": 29.408199751948228
             },
             "inSampleBaseline": {
-              "winRate": 40.01169342476116,
-              "avgReturn": 0.05383785859265959,
-              "count": 40.12222222222222
+              "winRate": 40.722680034879396,
+              "avgReturn": 0.10538305515628583,
+              "count": 39.6
             },
             "outOfSampleBaseline": {
-              "winRate": 35.3157821344595,
-              "avgReturn": -0.36233391078509963,
-              "count": 18.333333333333332
+              "winRate": 36.56415571556798,
+              "avgReturn": 0.20937667397237306,
+              "count": 17.92222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.496Z"
+            "checkedAt": "2026-10-28T12:48:19.215Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -2894,9 +2894,9 @@
             "inSample": {
               "count": 36,
               "winRate": 44.44444444444444,
-              "avgReturn": 0.2896253129287078,
-              "totalReturn": 10.426511265433481,
-              "maxDrawdown": 24.09777509737843
+              "avgReturn": 0.25944854381928306,
+              "totalReturn": 9.340147577494191,
+              "maxDrawdown": 24.097775097378427
             },
             "outOfSample": {
               "count": 16,
@@ -2906,16 +2906,16 @@
               "maxDrawdown": 13.676861343587898
             },
             "inSampleBaseline": {
-              "winRate": 42.06177133075385,
-              "avgReturn": 0.16511874753560968,
-              "count": 32.9
+              "winRate": 40.05022845259594,
+              "avgReturn": 0.09285928134104686,
+              "count": 32.62222222222222
             },
             "outOfSampleBaseline": {
-              "winRate": 35.86509836466837,
-              "avgReturn": 0.07059179798958315,
-              "count": 14.866666666666667
+              "winRate": 33.66292524482276,
+              "avgReturn": -0.32928634769244364,
+              "count": 15.333333333333334
             },
-            "checkedAt": "2026-10-27T12:06:33.514Z"
+            "checkedAt": "2026-10-28T12:48:19.233Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -2941,16 +2941,16 @@
               "maxDrawdown": 11.833091822558277
             },
             "inSampleBaseline": {
-              "winRate": 39.876375769885335,
-              "avgReturn": 0.04806145748981894,
-              "count": 37.077777777777776
+              "winRate": 41.5116443635188,
+              "avgReturn": 0.22336139319155263,
+              "count": 36.577777777777776
             },
             "outOfSampleBaseline": {
-              "winRate": 36.1083517265204,
-              "avgReturn": 0.04311731156244905,
-              "count": 17.266666666666666
+              "winRate": 34.53611546704494,
+              "avgReturn": -0.2595492226427872,
+              "count": 16.91111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.517Z"
+            "checkedAt": "2026-10-28T12:48:19.236Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -2976,16 +2976,16 @@
               "maxDrawdown": 10.867118086371324
             },
             "inSampleBaseline": {
-              "winRate": 41.03520021293052,
-              "avgReturn": 0.237250396996235,
-              "count": 21.533333333333335
+              "winRate": 41.75804269360453,
+              "avgReturn": 0.20174969061666118,
+              "count": 22.033333333333335
             },
             "outOfSampleBaseline": {
-              "winRate": 34.19007064105103,
-              "avgReturn": -0.15778980427904596,
-              "count": 10.033333333333333
+              "winRate": 32.431013431013426,
+              "avgReturn": -0.33417047110582315,
+              "count": 9.666666666666666
             },
-            "checkedAt": "2026-10-27T12:06:33.519Z"
+            "checkedAt": "2026-10-28T12:48:19.238Z"
           }
         }
       },
@@ -2997,15 +2997,15 @@
             "strategyId": "sma_rsi",
             "label": "SMA50/RSI14 (trend)",
             "timeframe": "1D",
-            "count": 203,
+            "count": 202,
             "winRate": 5.714285714285714,
             "avgReturn": -2.4018353258131597,
             "inSample": {
-              "count": 133,
-              "winRate": 24.06015037593985,
-              "avgReturn": -1.748406094426346,
-              "totalReturn": -232.538010558704,
-              "maxDrawdown": 246.47240353704828
+              "count": 132,
+              "winRate": 24.242424242424242,
+              "avgReturn": -1.7408390451564404,
+              "totalReturn": -229.79075396065014,
+              "maxDrawdown": 243.7251469389944
             },
             "outOfSample": {
               "count": 70,
@@ -3015,16 +3015,16 @@
               "maxDrawdown": 182.06744478486488
             },
             "inSampleBaseline": {
-              "winRate": 44.741763589054436,
-              "avgReturn": 0.2541501201427392,
-              "count": 94.32222222222222
+              "winRate": 44.58134985006437,
+              "avgReturn": 0.2883528091427825,
+              "count": 93.2
             },
             "outOfSampleBaseline": {
-              "winRate": 40.642720532472474,
-              "avgReturn": -0.036897470047098674,
-              "count": 40.855555555555554
+              "winRate": 41.01346215940438,
+              "avgReturn": -0.03728422995403708,
+              "count": 40.3
             },
-            "checkedAt": "2026-10-27T12:06:33.718Z"
+            "checkedAt": "2026-10-28T12:48:19.048Z"
           },
           "macd_cross@1D": {
             "validated": false,
@@ -3032,15 +3032,15 @@
             "strategyId": "macd_cross",
             "label": "MACD crossover (12/26/9)",
             "timeframe": "1D",
-            "count": 183,
+            "count": 182,
             "winRate": 3.9215686274509802,
             "avgReturn": -2.440273293174108,
             "inSample": {
-              "count": 132,
-              "winRate": 24.242424242424242,
-              "avgReturn": -2.179112813957127,
-              "totalReturn": -287.6428914423408,
-              "maxDrawdown": 293.7034916647203
+              "count": 131,
+              "winRate": 24.427480916030532,
+              "avgReturn": -2.170705370914273,
+              "totalReturn": -284.36240358976977,
+              "maxDrawdown": 290.42300381214926
             },
             "outOfSample": {
               "count": 51,
@@ -3050,16 +3050,16 @@
               "maxDrawdown": 124.45393795187951
             },
             "inSampleBaseline": {
-              "winRate": 45.436593041718865,
-              "avgReturn": 0.2598141057191208,
-              "count": 93.9
+              "winRate": 44.326510399822105,
+              "avgReturn": 0.2571123951937002,
+              "count": 94.2
             },
             "outOfSampleBaseline": {
-              "winRate": 39.38120290736086,
-              "avgReturn": -0.07570361267800467,
-              "count": 38.96666666666667
+              "winRate": 39.22754680204363,
+              "avgReturn": -0.09190148914502344,
+              "count": 39.43333333333333
             },
-            "checkedAt": "2026-10-27T12:06:33.740Z"
+            "checkedAt": "2026-10-28T12:48:19.070Z"
           },
           "bollinger_reversion@1D": {
             "validated": true,
@@ -3085,16 +3085,16 @@
               "maxDrawdown": 0
             },
             "inSampleBaseline": {
-              "winRate": 44.88183704163536,
-              "avgReturn": 0.46186965703565763,
-              "count": 15.1
+              "winRate": 44.8993456352455,
+              "avgReturn": 0.30021130337408575,
+              "count": 15.011111111111111
             },
             "outOfSampleBaseline": {
-              "winRate": 43.04518321184989,
-              "avgReturn": 0.1274414809177638,
-              "count": 6.655555555555556
+              "winRate": 39.09207150873818,
+              "avgReturn": -0.017084592469287674,
+              "count": 6.644444444444445
             },
-            "checkedAt": "2026-10-27T12:06:33.742Z"
+            "checkedAt": "2026-10-28T12:48:19.073Z"
           },
           "donchian_breakout@1D": {
             "validated": false,
@@ -3104,32 +3104,32 @@
             "timeframe": "1D",
             "count": 39,
             "winRate": 0,
-            "avgReturn": -3.165399075807393,
+            "avgReturn": -2.2570551508748715,
             "inSample": {
-              "count": 31,
-              "winRate": 16.129032258064516,
-              "avgReturn": -1.3622257908493862,
-              "totalReturn": -42.22899951633097,
-              "maxDrawdown": 44.07082045653591
+              "count": 32,
+              "winRate": 15.625,
+              "avgReturn": -1.617275189583313,
+              "totalReturn": -51.75280606666602,
+              "maxDrawdown": 51.75280606666602
             },
             "outOfSample": {
-              "count": 8,
+              "count": 7,
               "winRate": 0,
-              "avgReturn": -3.165399075807393,
-              "totalReturn": -25.323192606459145,
-              "maxDrawdown": 25.323192606459145
+              "avgReturn": -2.2570551508748715,
+              "totalReturn": -15.7993860561241,
+              "maxDrawdown": 15.7993860561241
             },
             "inSampleBaseline": {
-              "winRate": 43.80315817617007,
-              "avgReturn": 0.12628301925798668,
-              "count": 28.377777777777776
+              "winRate": 45.79533142044284,
+              "avgReturn": 0.4038711482212924,
+              "count": 29.288888888888888
             },
             "outOfSampleBaseline": {
-              "winRate": 37.327540875399485,
-              "avgReturn": -0.30617750084168993,
-              "count": 12.722222222222221
+              "winRate": 40.597904365061225,
+              "avgReturn": 0.028990222092541176,
+              "count": 12.71111111111111
             },
-            "checkedAt": "2026-10-27T12:06:33.744Z"
+            "checkedAt": "2026-10-28T12:48:19.075Z"
           },
           "hybrid_confluence@1D": {
             "validated": false,
@@ -3137,15 +3137,15 @@
             "strategyId": "hybrid_confluence",
             "label": "Ibrido custom: trend + momentum + filtro esaurimento",
             "timeframe": "1D",
-            "count": 143,
+            "count": 142,
             "winRate": 12,
             "avgReturn": -2.0076363685864798,
             "inSample": {
-              "count": 93,
-              "winRate": 19.35483870967742,
-              "avgReturn": -2.5638404121181377,
-              "totalReturn": -238.4371583269868,
-              "maxDrawdown": 245.76700687938344
+              "count": 92,
+              "winRate": 19.565217391304348,
+              "avgReturn": -2.5618467579231843,
+              "totalReturn": -235.68990172893294,
+              "maxDrawdown": 243.01975028132958
             },
             "outOfSample": {
               "count": 50,
@@ -3155,16 +3155,16 @@
               "maxDrawdown": 107.17794021538937
             },
             "inSampleBaseline": {
-              "winRate": 45.113128085276486,
-              "avgReturn": 0.3401847187949508,
-              "count": 72.3
+              "winRate": 44.83646852333797,
+              "avgReturn": 0.23725421583468811,
+              "count": 70.58888888888889
             },
             "outOfSampleBaseline": {
-              "winRate": 40.919519308844734,
-              "avgReturn": -0.06910637975832315,
-              "count": 30.6
+              "winRate": 40.789474141175454,
+              "avgReturn": -0.05663433838090446,
+              "count": 30.533333333333335
             },
-            "checkedAt": "2026-10-27T12:06:33.763Z"
+            "checkedAt": "2026-10-28T12:48:19.094Z"
           },
           "volume_breakout@1D": {
             "validated": false,
@@ -3174,32 +3174,32 @@
             "timeframe": "1D",
             "count": 29,
             "winRate": 0,
-            "avgReturn": -2.9831916743098317,
+            "avgReturn": -1.348037955303528,
             "inSample": {
-              "count": 24,
-              "winRate": 16.666666666666664,
-              "avgReturn": -1.2162921462796155,
-              "totalReturn": -29.19101151071077,
-              "maxDrawdown": 29.19101151071077
+              "count": 25,
+              "winRate": 16,
+              "avgReturn": -1.5485927224418328,
+              "totalReturn": -38.71481806104582,
+              "maxDrawdown": 38.71481806104582
             },
             "outOfSample": {
-              "count": 5,
+              "count": 4,
               "winRate": 0,
-              "avgReturn": -2.9831916743098317,
-              "totalReturn": -14.91595837154916,
-              "maxDrawdown": 14.91595837154916
+              "avgReturn": -1.348037955303528,
+              "totalReturn": -5.392151821214112,
+              "maxDrawdown": 5.392151821214112
             },
             "inSampleBaseline": {
-              "winRate": 44.68476479325161,
-              "avgReturn": 0.1899151919893654,
-              "count": 22.38888888888889
+              "winRate": 44.1045497835883,
+              "avgReturn": 0.27229194328112555,
+              "count": 23.81111111111111
             },
             "outOfSampleBaseline": {
-              "winRate": 38.423962112687605,
-              "avgReturn": -0.22392951760841664,
-              "count": 9.988888888888889
+              "winRate": 39.62961131098386,
+              "avgReturn": -0.20365840891067807,
+              "count": 9.922222222222222
             },
-            "checkedAt": "2026-10-27T12:06:33.766Z"
+            "checkedAt": "2026-10-28T12:48:19.097Z"
           },
           "engulfing@1D": {
             "validated": false,
@@ -3225,16 +3225,16 @@
               "maxDrawdown": 5.921563053534357
             },
             "inSampleBaseline": {
-              "winRate": 45.44965682465682,
-              "avgReturn": 0.23317336316612464,
-              "count": 8.322222222222223
+              "winRate": 44.83146864029218,
+              "avgReturn": 0.5091423227025969,
+              "count": 8.066666666666666
             },
             "outOfSampleBaseline": {
-              "winRate": 43.22883597883598,
-              "avgReturn": 0.13655544654315172,
-              "count": 3.688888888888889
+              "winRate": 37.38095238095239,
+              "avgReturn": -0.02704092579567745,
+              "count": 3.8555555555555556
             },
-            "checkedAt": "2026-10-27T12:06:33.768Z"
+            "checkedAt": "2026-10-28T12:48:19.099Z"
           }
         }
       }
@@ -4596,7 +4596,6 @@
           195,
           195,
           195,
-          195,
           191,
           190,
           192,
@@ -4737,10 +4736,10 @@
           176,
           176,
           180,
+          180,
           185
         ],
         "dates": [
-          "2026-03-25",
           "2026-03-26",
           "2026-03-27",
           "2026-03-30",
@@ -4889,17 +4888,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-25",
-            "open": 195,
-            "high": 200,
-            "low": 190,
-            "close": 195,
-            "volume": 862
-          },
           {
             "date": "2026-03-26",
             "open": 195,
@@ -6086,20 +6078,27 @@
           },
           {
             "date": "2026-10-27",
-            "open": 179.6999969482422,
+            "open": 177.5,
             "high": 185,
             "low": 175,
+            "close": 180,
+            "volume": 9784
+          },
+          {
+            "date": "2026-10-28",
+            "open": 182,
+            "high": 185,
+            "low": 176.5500030517578,
             "close": 185,
-            "volume": 4107
+            "volume": 194
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.087Z"
+        "fetchedAt": "2026-10-28T12:48:18.869Z"
       }
     },
     "MANU": {
       "1D": {
         "closes": [
-          16.56999969482422,
           16.639999389648438,
           16.479999542236328,
           16.350000381469727,
@@ -6248,10 +6247,10 @@
           20.860000610351562,
           20.780000686645508,
           20.600000381469727,
-          20.719999313354492
+          20.719999313354492,
+          20.690000534057617
         ],
         "dates": [
-          "2026-03-24",
           "2026-03-25",
           "2026-03-26",
           "2026-03-27",
@@ -6400,17 +6399,10 @@
           "2026-10-21",
           "2026-10-22",
           "2026-10-23",
-          "2026-10-26"
+          "2026-10-26",
+          "2026-10-27"
         ],
         "candles": [
-          {
-            "date": "2026-03-24",
-            "open": 16.520000457763672,
-            "high": 16.700000762939453,
-            "low": 16.440000534057617,
-            "close": 16.56999969482422,
-            "volume": 265800
-          },
           {
             "date": "2026-03-25",
             "open": 16.760000228881836,
@@ -7602,15 +7594,22 @@
             "low": 20.459999084472656,
             "close": 20.719999313354492,
             "volume": 447700
+          },
+          {
+            "date": "2026-10-27",
+            "open": 20.770000457763672,
+            "high": 20.84000015258789,
+            "low": 20.540000915527344,
+            "close": 20.690000534057617,
+            "volume": 195200
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.261Z"
+        "fetchedAt": "2026-10-28T12:48:18.683Z"
       }
     },
     "SSL.MI": {
       "1D": {
         "closes": [
-          1.2000000476837158,
           1.1749999523162842,
           1.2000000476837158,
           1.2000000476837158,
@@ -7759,10 +7758,10 @@
           1.6799999475479126,
           1.6799999475479126,
           1.690000057220459,
-          1.7050000429153442
+          1.7000000476837158,
+          1.7549999952316284
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -7911,17 +7910,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 1.2350000143051147,
-            "high": 1.2350000143051147,
-            "low": 1.2000000476837158,
-            "close": 1.2000000476837158,
-            "volume": 22246
-          },
           {
             "date": "2026-03-30",
             "open": 1.225000023841858,
@@ -9109,19 +9101,26 @@
           {
             "date": "2026-10-27",
             "open": 1.7000000476837158,
-            "high": 1.7050000429153442,
+            "high": 1.7100000381469727,
             "low": 1.690000057220459,
-            "close": 1.7050000429153442,
-            "volume": 3453
+            "close": 1.7000000476837158,
+            "volume": 18460
+          },
+          {
+            "date": "2026-10-28",
+            "open": 1.7200000286102295,
+            "high": 1.7549999952316284,
+            "low": 1.7050000429153442,
+            "close": 1.7549999952316284,
+            "volume": 133303
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:32.940Z"
+        "fetchedAt": "2026-10-28T12:48:18.609Z"
       }
     },
     "JUVE.MI": {
       "1D": {
         "closes": [
-          1.9830000400543213,
           2,
           2.007999897003174,
           2.0299999713897705,
@@ -9270,10 +9269,10 @@
           1.6139999628067017,
           1.5700000524520874,
           1.5809999704360962,
-          1.5700000524520874
+          1.5520000457763672,
+          1.559000015258789
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -9422,17 +9421,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 1.9930000305175781,
-            "high": 2.009999990463257,
-            "low": 1.9639999866485596,
-            "close": 1.9830000400543213,
-            "volume": 640288
-          },
           {
             "date": "2026-03-30",
             "open": 1.9830000400543213,
@@ -10621,18 +10613,25 @@
             "date": "2026-10-27",
             "open": 1.5850000381469727,
             "high": 1.5850000381469727,
-            "low": 1.559999942779541,
-            "close": 1.5700000524520874,
-            "volume": 159249
+            "low": 1.5390000343322754,
+            "close": 1.5520000457763672,
+            "volume": 533396
+          },
+          {
+            "date": "2026-10-28",
+            "open": 1.5700000524520874,
+            "high": 1.5789999961853027,
+            "low": 1.5499999523162842,
+            "close": 1.559000015258789,
+            "volume": 244722
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.143Z"
+        "fetchedAt": "2026-10-28T12:48:18.536Z"
       }
     },
     "AJAX.AS": {
       "1D": {
         "closes": [
-          8.5,
           8.479999542236328,
           8.460000038146973,
           8.520000457763672,
@@ -10781,10 +10780,10 @@
           7.840000152587891,
           7.699999809265137,
           7.679999828338623,
-          7.659999847412109
+          7.699999809265137,
+          7.800000190734863
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -10933,17 +10932,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 8.600000381469727,
-            "high": 8.600000381469727,
-            "low": 8.5,
-            "close": 8.5,
-            "volume": 4096
-          },
           {
             "date": "2026-03-30",
             "open": 8.5600004196167,
@@ -12131,19 +12123,26 @@
           {
             "date": "2026-10-27",
             "open": 7.679999828338623,
-            "high": 7.699999809265137,
+            "high": 7.760000228881836,
             "low": 7.659999847412109,
-            "close": 7.659999847412109,
-            "volume": 1740
+            "close": 7.699999809265137,
+            "volume": 2553
+          },
+          {
+            "date": "2026-10-28",
+            "open": 7.699999809265137,
+            "high": 7.800000190734863,
+            "low": 7.619999885559082,
+            "close": 7.800000190734863,
+            "volume": 3510
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.201Z"
+        "fetchedAt": "2026-10-28T12:48:18.807Z"
       }
     },
     "BVB.DE": {
       "1D": {
         "closes": [
-          2.9700000286102295,
           3.0350000858306885,
           3.0350000858306885,
           3.0450000762939453,
@@ -12292,10 +12291,10 @@
           3.005000114440918,
           3.0399999618530273,
           3.0799999237060547,
-          3.0950000286102295
+          3.0950000286102295,
+          3.059999942779541
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -12444,17 +12443,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 3.0250000953674316,
-            "high": 3.0250000953674316,
-            "low": 2.9649999141693115,
-            "close": 2.9700000286102295,
-            "volume": 130631
-          },
           {
             "date": "2026-03-30",
             "open": 3,
@@ -13642,19 +13634,26 @@
           {
             "date": "2026-10-27",
             "open": 3.0999999046325684,
-            "high": 3.0999999046325684,
+            "high": 3.115000009536743,
             "low": 3.0799999237060547,
             "close": 3.0950000286102295,
-            "volume": 24450
+            "volume": 63609
+          },
+          {
+            "date": "2026-10-28",
+            "open": 3.0999999046325684,
+            "high": 3.0999999046325684,
+            "low": 3.0450000762939453,
+            "close": 3.059999942779541,
+            "volume": 23721
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.033Z"
+        "fetchedAt": "2026-10-28T12:48:18.747Z"
       }
     },
     "FENER.IS": {
       "1D": {
         "closes": [
-          2.7200000286102295,
           2.6500000953674316,
           2.6600000858306885,
           2.7300000190734863,
@@ -13803,10 +13802,10 @@
           2.119999885559082,
           2.059999942779541,
           2.059999942779541,
-          1.9800000190734863
+          1.9900000095367432,
+          2.0399999618530273
         ],
         "dates": [
-          "2026-03-23",
           "2026-03-24",
           "2026-03-25",
           "2026-03-26",
@@ -13955,17 +13954,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-23",
-            "open": 2.7899999618530273,
-            "high": 2.7899999618530273,
-            "low": 2.680000066757202,
-            "close": 2.7200000286102295,
-            "volume": 153671570
-          },
           {
             "date": "2026-03-24",
             "open": 2.7200000286102295,
@@ -15154,18 +15146,25 @@
             "date": "2026-10-27",
             "open": 1.9900000095367432,
             "high": 2,
+            "low": 1.9600000381469727,
+            "close": 1.9900000095367432,
+            "volume": 48610020
+          },
+          {
+            "date": "2026-10-28",
+            "open": 1.9900000095367432,
+            "high": 2.069999933242798,
             "low": 1.9700000286102295,
-            "close": 1.9800000190734863,
-            "volume": 29502473
+            "close": 2.0399999618530273,
+            "volume": 30014293
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.324Z"
+        "fetchedAt": "2026-10-28T12:48:19.025Z"
       }
     },
     "BJKAS.IS": {
       "1D": {
         "closes": [
-          1.4900000095367432,
           1.4700000286102295,
           1.4600000381469727,
           1.4500000476837158,
@@ -15314,10 +15313,10 @@
           1.2899999618530273,
           1.2799999713897705,
           1.25,
-          1.25
+          1.2300000190734863,
+          1.2100000381469727
         ],
         "dates": [
-          "2026-03-23",
           "2026-03-24",
           "2026-03-25",
           "2026-03-26",
@@ -15466,17 +15465,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-23",
-            "open": 1.5,
-            "high": 1.5099999904632568,
-            "low": 1.440000057220459,
-            "close": 1.4900000095367432,
-            "volume": 28128619
-          },
           {
             "date": "2026-03-24",
             "open": 1.4900000095367432,
@@ -16666,17 +16658,24 @@
             "open": 1.25,
             "high": 1.25,
             "low": 1.2200000286102295,
-            "close": 1.25,
-            "volume": 37469286
+            "close": 1.2300000190734863,
+            "volume": 58503413
+          },
+          {
+            "date": "2026-10-28",
+            "open": 1.2200000286102295,
+            "high": 1.2300000190734863,
+            "low": 1.2000000476837158,
+            "close": 1.2100000381469727,
+            "volume": 21642901
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.387Z"
+        "fetchedAt": "2026-10-28T12:48:18.960Z"
       }
     },
     "GSRAY.IS": {
       "1D": {
         "closes": [
-          1.0800000429153442,
           1.059999942779541,
           1.0700000524520874,
           1.059999942779541,
@@ -16825,10 +16824,10 @@
           0.6700000166893005,
           0.6800000071525574,
           0.6899999976158142,
-          0.6899999976158142
+          0.6700000166893005,
+          0.6800000071525574
         ],
         "dates": [
-          "2026-03-23",
           "2026-03-24",
           "2026-03-25",
           "2026-03-26",
@@ -16977,17 +16976,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-23",
-            "open": 1.1100000143051147,
-            "high": 1.1200000047683716,
-            "low": 1.059999942779541,
-            "close": 1.0800000429153442,
-            "volume": 403837968
-          },
           {
             "date": "2026-03-24",
             "open": 1.0800000429153442,
@@ -18177,17 +18169,24 @@
             "open": 0.6899999976158142,
             "high": 0.699999988079071,
             "low": 0.6600000262260437,
-            "close": 0.6899999976158142,
-            "volume": 51177689
+            "close": 0.6700000166893005,
+            "volume": 69406674
+          },
+          {
+            "date": "2026-10-28",
+            "open": 0.6700000166893005,
+            "high": 0.6899999976158142,
+            "low": 0.6700000166893005,
+            "close": 0.6800000071525574,
+            "volume": 16715023
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.452Z"
+        "fetchedAt": "2026-10-28T12:48:19.167Z"
       }
     },
     "SLBEN.LS": {
       "1D": {
         "closes": [
-          6.5,
           6.400000095367432,
           6.320000171661377,
           6.340000152587891,
@@ -18336,10 +18335,10 @@
           6.559999942779541,
           6.5,
           6.5,
+          6.5,
           6.5
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -18488,17 +18487,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 6.420000076293945,
-            "high": 6.5,
-            "low": 6.420000076293945,
-            "close": 6.5,
-            "volume": 581
-          },
           {
             "date": "2026-03-30",
             "open": 6.420000076293945,
@@ -19685,20 +19677,27 @@
           },
           {
             "date": "2026-10-27",
+            "open": 6.5,
+            "high": 6.599999904632568,
+            "low": 6.5,
+            "close": 6.5,
+            "volume": 2496
+          },
+          {
+            "date": "2026-10-28",
             "open": 6.659999847412109,
             "high": 6.599999904632568,
             "low": 6.5,
             "close": 6.5,
-            "volume": 2374
+            "volume": 227
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.695Z"
+        "fetchedAt": "2026-10-28T12:48:19.305Z"
       }
     },
     "FCP.LS": {
       "1D": {
         "closes": [
-          2.880000114440918,
           2.880000114440918,
           2.880000114440918,
           2.880000114440918,
@@ -19847,10 +19846,10 @@
           2.7799999713897705,
           2.7799999713897705,
           2.7799999713897705,
-          2.559999942779541
+          2.559999942779541,
+          2.7799999713897705
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -19999,17 +19998,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 2.880000114440918,
-            "high": 2.880000114440918,
-            "low": 2.880000114440918,
-            "close": 2.880000114440918,
-            "volume": 21
-          },
           {
             "date": "2026-03-30",
             "open": 2.880000114440918,
@@ -21200,16 +21192,23 @@
             "high": 2.559999942779541,
             "low": 2.559999942779541,
             "close": 2.559999942779541,
-            "volume": 50
+            "volume": 173
+          },
+          {
+            "date": "2026-10-28",
+            "open": 2.7799999713897705,
+            "high": 2.7799999713897705,
+            "low": 2.7799999713897705,
+            "close": 2.7799999713897705,
+            "volume": 21
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.615Z"
+        "fetchedAt": "2026-10-28T12:48:19.387Z"
       }
     },
     "TSPOR.IS": {
       "1D": {
         "closes": [
-          0.9399999976158142,
           0.9399999976158142,
           0.9300000071525574,
           0.9200000166893005,
@@ -21358,10 +21357,10 @@
           0.75,
           0.7400000095367432,
           0.7300000190734863,
-          0.7400000095367432
+          0.7300000190734863,
+          0.7200000286102295
         ],
         "dates": [
-          "2026-03-23",
           "2026-03-24",
           "2026-03-25",
           "2026-03-26",
@@ -21510,17 +21509,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-23",
-            "open": 0.9399999976158142,
-            "high": 0.949999988079071,
-            "low": 0.9100000262260437,
-            "close": 0.9399999976158142,
-            "volume": 349226563
-          },
           {
             "date": "2026-03-24",
             "open": 0.9399999976158142,
@@ -22710,18 +22702,25 @@
             "open": 0.7300000190734863,
             "high": 0.7400000095367432,
             "low": 0.7099999785423279,
-            "close": 0.7400000095367432,
-            "volume": 66253874
+            "close": 0.7300000190734863,
+            "volume": 112616506
+          },
+          {
+            "date": "2026-10-28",
+            "open": 0.7200000286102295,
+            "high": 0.7300000190734863,
+            "low": 0.7099999785423279,
+            "close": 0.7200000286102295,
+            "volume": 26540086
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.517Z"
+        "fetchedAt": "2026-10-28T12:48:19.236Z"
       }
     },
     "SCP.LS": {
       "1D": {
         "closes": [
           1,
-          1,
           0.9750000238418579,
           0.9750000238418579,
           0.9750000238418579,
@@ -22869,10 +22868,10 @@
           0.9900000095367432,
           0.949999988079071,
           0.949999988079071,
+          0.9850000143051147,
           0.9850000143051147
         ],
         "dates": [
-          "2026-03-27",
           "2026-03-30",
           "2026-03-31",
           "2026-04-01",
@@ -23021,17 +23020,10 @@
           "2026-10-22",
           "2026-10-23",
           "2026-10-26",
-          "2026-10-27"
+          "2026-10-27",
+          "2026-10-28"
         ],
         "candles": [
-          {
-            "date": "2026-03-27",
-            "open": 0.9800000190734863,
-            "high": 1,
-            "low": 0.9800000190734863,
-            "close": 1,
-            "volume": 185
-          },
           {
             "date": "2026-03-30",
             "open": 0.9750000238418579,
@@ -24222,12 +24214,20 @@
             "high": 0.9850000143051147,
             "low": 0.9850000143051147,
             "close": 0.9850000143051147,
-            "volume": 42
+            "volume": 44
+          },
+          {
+            "date": "2026-10-28",
+            "open": 0.9850000143051147,
+            "high": 0.9850000143051147,
+            "low": 0.9850000143051147,
+            "close": 0.9850000143051147,
+            "volume": 264
           }
         ],
-        "fetchedAt": "2026-10-27T12:06:33.766Z"
+        "fetchedAt": "2026-10-28T12:48:19.097Z"
       }
     }
   },
-  "updatedAt": "2026-10-28T07:31:11.118Z"
+  "updatedAt": "2026-10-28T12:48:20.073Z"
 }
