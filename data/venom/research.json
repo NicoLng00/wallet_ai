@@ -3560,6 +3560,10 @@
             {
               "returnPct": -0.0695760462936084,
               "at": "2026-10-28T07:31:10.785Z"
+            },
+            {
+              "returnPct": 8.557566728619632,
+              "at": "2026-10-29T11:47:42.374Z"
             }
           ]
         }
@@ -3567,22 +3571,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-4139774",
-          "symbol": "BVB.DE",
-          "returnPct": 0.10971496384837004,
-          "outcomeTag": "forced_win",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 3.235418343291613,
-            "confidence": 67,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-09T06:08:59.774Z"
-        },
         {
           "tradeId": "SIM-6494660",
           "symbol": "BVB.DE",
@@ -4366,6 +4354,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-10-28T07:31:10.786Z"
+        },
+        {
+          "tradeId": "SIM-4462375",
+          "symbol": "FCP.LS",
+          "returnPct": 8.557566728619632,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2.5584071442947187,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "elevated",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-10-29T11:47:42.375Z"
         }
       ],
       "engulfing@1D": [
@@ -4554,7 +4558,7 @@
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-10-28T07:31:10.787Z"
+          "updatedAt": "2026-10-29T11:47:42.376Z"
         }
       ],
       "engulfing@1D": [
@@ -24229,5 +24233,5 @@
       }
     }
   },
-  "updatedAt": "2026-10-29T05:35:48.218Z"
+  "updatedAt": "2026-10-29T11:47:42.677Z"
 }
