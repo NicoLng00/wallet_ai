@@ -78,10 +78,10 @@
       "NVDA": 191.42525844,
       "SPY": 689.29578224,
       "QQQ": 640.89742756,
-      "BTCUSD": 68786.228784,
+      "BTCUSD": 69841.63903600001,
       "TSLA": 361.3301822,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1966.19883772,
+      "ETHUSD": 1993.6323367999998,
       "WTI": 72.8,
       "TLT": 73.00966165999999,
       "EURUSD": 1.11615364524619,
@@ -2715,6 +2715,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3008,14 +3013,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.001078 TSLA",
-      "detail": "0,36 € · fill simulato 331,47 € · SIM-5261893",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-10-30T01:58:18.681Z"
+  "updatedAt": "2026-10-30T08:29:53.091Z"
 }
