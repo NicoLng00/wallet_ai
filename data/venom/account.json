@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5815084031595086,
-      "SSL.MI": 1.8944279610550234,
-      "BVB.DE": 3.0811608407773576,
-      "MANU": 18.850912481593042,
-      "AJAX.AS": 7.754677608178167,
-      "CCP.L": 2.186476890568956,
-      "FENER.IS": 0.03607685192612132,
-      "GSRAY.IS": 0.012013153476621047,
-      "BJKAS.IS": 0.020996841900890413,
-      "TSPOR.IS": 0.012554358800224241,
-      "SCP.LS": 0.953675328264835,
-      "SLBEN.LS": 6.640794918947632,
-      "FCP.LS": 2.8044128110461055
+      "JUVE.MI": 1.5545324333397748,
+      "SSL.MI": 1.9406764140778596,
+      "BVB.DE": 3.059821221411551,
+      "MANU": 18.79032556812513,
+      "AJAX.AS": 7.693186286672627,
+      "CCP.L": 2.1881296387715583,
+      "FENER.IS": 0.036574459572992365,
+      "GSRAY.IS": 0.012185500499570935,
+      "BJKAS.IS": 0.021720416990748892,
+      "TSPOR.IS": 0.012929402530139652,
+      "SCP.LS": 0.9546719082871209,
+      "SLBEN.LS": 6.496998802319242,
+      "FCP.LS": 2.7820950205138226
     },
     "model": {
       "calibration": 61,
@@ -2565,6 +2565,16 @@
       "tag": "JOB"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -2833,19 +2843,9 @@
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude FCP.LS per segnale difensivo",
-      "detail": "chiude FCP.LS per segnale difensivo",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-10-30T20:41:42.866Z"
+  "updatedAt": "2026-10-31T00:07:16.325Z"
 }
