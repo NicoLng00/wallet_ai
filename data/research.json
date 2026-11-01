@@ -12812,6 +12812,10 @@
             {
               "returnPct": -2.059697063824253,
               "at": "2026-10-29T22:01:44.741Z"
+            },
+            {
+              "returnPct": 3.254543274687502,
+              "at": "2026-11-01T02:16:16.849Z"
             }
           ]
         }
@@ -13122,6 +13126,16 @@
             {
               "returnPct": 2.015763703157716,
               "at": "2026-10-17T04:09:35.393Z"
+            }
+          ]
+        }
+      },
+      "CSCO": {
+        "hybrid_confluence@1D": {
+          "trades": [
+            {
+              "returnPct": -1.491695524910585,
+              "at": "2026-11-01T02:16:16.860Z"
             }
           ]
         }
@@ -14308,6 +14322,38 @@
             "aiEngine": "gemini"
           },
           "at": "2026-10-29T22:01:44.746Z"
+        },
+        {
+          "tradeId": "SIM-9376852",
+          "symbol": "ETHUSD",
+          "returnPct": 3.254543274687502,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "hybrid_confluence@1D",
+            "entryPrice": 1966.19883772,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": null,
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-01T02:16:16.852Z"
+        },
+        {
+          "tradeId": "SIM-9376864",
+          "symbol": "CSCO",
+          "returnPct": -1.491695524910585,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "hybrid_confluence@1D",
+            "entryPrice": 95.011845,
+            "confidence": 75,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-01T02:16:16.864Z"
         }
       ],
       "bollinger_reversion@30m": [
@@ -14570,22 +14616,22 @@
           "version": 1,
           "strategyKey": "hybrid_confluence@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di hybrid_confluence@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -1.91%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.",
-          "dominantRegime": null,
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di hybrid_confluence@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -1.88%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 5,
-          "avgReturn": -1.908,
+          "avgReturn": -1.883,
           "supportingTradeIds": [
-            "SIM-1742413",
             "SIM-1866872",
             "SIM-3399738",
             "SIM-1622315",
-            "SIM-1304746"
+            "SIM-1304746",
+            "SIM-9376864"
           ],
           "createdAt": "2026-10-14T15:31:06.873Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-10-29T22:01:44.747Z"
+          "updatedAt": "2026-11-01T02:16:16.864Z"
         }
       ],
       "bollinger_reversion@30m": [
@@ -20500,7 +20546,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-10-31T23:11:40.481Z"
+        "fetchedAt": "2026-11-01T02:16:16.567Z"
       }
     },
     "QQQ": {
@@ -23369,7 +23415,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-10-31T23:11:40.607Z"
+        "fetchedAt": "2026-11-01T02:16:16.684Z"
       }
     },
     "BTCUSD": {
@@ -35020,7 +35066,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-10-31T23:11:40.709Z"
+        "fetchedAt": "2026-11-01T02:16:16.848Z"
       }
     },
     "ES": {
@@ -36380,7 +36426,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-10-31T23:11:40.343Z"
+        "fetchedAt": "2026-11-01T02:16:16.414Z"
       },
       "1D": {
         "closes": [
@@ -89267,5 +89313,5 @@
       }
     }
   },
-  "updatedAt": "2026-10-31T23:11:41.268Z"
+  "updatedAt": "2026-11-01T02:16:18.063Z"
 }
