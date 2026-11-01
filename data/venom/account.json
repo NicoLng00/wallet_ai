@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5821464881092155,
-      "SSL.MI": 1.8936351969742566,
-      "BVB.DE": 3.082382919580372,
-      "MANU": 18.877451478975814,
-      "AJAX.AS": 7.753434259474894,
-      "CCP.L": 2.186969520331694,
-      "FENER.IS": 0.03605568160428518,
-      "GSRAY.IS": 0.012010145850760282,
-      "BJKAS.IS": 0.020984999291496328,
-      "TSPOR.IS": 0.012576537707885915,
-      "SCP.LS": 0.9554636998695092,
-      "SLBEN.LS": 6.632948854258046,
-      "FCP.LS": 2.8005498272168543
+      "JUVE.MI": 1.5819938396792672,
+      "SSL.MI": 1.8944947407062795,
+      "BVB.DE": 3.0776218882291917,
+      "MANU": 18.863036615917324,
+      "AJAX.AS": 7.772112456704686,
+      "CCP.L": 2.1866122508461507,
+      "FENER.IS": 0.03606182394003219,
+      "GSRAY.IS": 0.012023542066061965,
+      "BJKAS.IS": 0.02096937715988467,
+      "TSPOR.IS": 0.012540325973934984,
+      "SCP.LS": 0.9556166136236026,
+      "SLBEN.LS": 6.641271619033798,
+      "FCP.LS": 2.7990828796512117
     },
     "model": {
       "calibration": 61,
@@ -2560,6 +2560,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2833,19 +2843,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude FCP.LS per segnale difensivo",
-      "detail": "chiude FCP.LS per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-01T13:10:39.549Z"
+  "updatedAt": "2026-11-01T18:28:07.936Z"
 }
