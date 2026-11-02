@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5815015128874428,
-      "SSL.MI": 1.8921225091484497,
-      "BVB.DE": 3.0823468704618637,
-      "MANU": 18.878729814922384,
-      "AJAX.AS": 7.756191207614171,
-      "CCP.L": 2.189508406761189,
-      "FENER.IS": 0.036075859354399394,
-      "GSRAY.IS": 0.011999316878281452,
-      "BJKAS.IS": 0.020966863055246553,
-      "TSPOR.IS": 0.012566936186217455,
-      "SCP.LS": 0.9554923794737761,
-      "SLBEN.LS": 6.639717387452619,
-      "FCP.LS": 2.8016309253539458
+      "JUVE.MI": 1.581735712082228,
+      "SSL.MI": 1.8952271441996054,
+      "BVB.DE": 3.0777430491721023,
+      "MANU": 18.868290634950064,
+      "AJAX.AS": 7.767638383977354,
+      "CCP.L": 2.1909687307193275,
+      "FENER.IS": 0.03603899463805859,
+      "GSRAY.IS": 0.012024914475894204,
+      "BJKAS.IS": 0.0209965481862318,
+      "TSPOR.IS": 0.012547586212653861,
+      "SCP.LS": 0.955106219840066,
+      "SLBEN.LS": 6.646212859921688,
+      "FCP.LS": 2.798988675619789
     },
     "model": {
       "calibration": 61,
@@ -2550,6 +2550,16 @@
       "tag": "HOLD"
     },
     {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -2833,19 +2843,9 @@
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.134750 FCP.LS",
-      "detail": "0,37 € · fill simulato 2,78 € · SIM-4294280",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-01T22:27:00.426Z"
+  "updatedAt": "2026-11-02T01:51:15.222Z"
 }
