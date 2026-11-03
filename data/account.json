@@ -95,10 +95,10 @@
       "NVDA": 180.49393414,
       "SPY": 671.8276149,
       "QQQ": 608.39658321,
-      "BTCUSD": 68452.096739,
+      "BTCUSD": 68829.056257,
       "TSLA": 360.71988758,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2003.89714577,
+      "ETHUSD": 2023.6115926,
       "WTI": 72.8,
       "TLT": 73.00687537,
       "EURUSD": 1.1194836046028689,
@@ -2851,6 +2851,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude TSLA per limite di detenzione (6g) · apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "detail": "chiude TSLA per limite di detenzione (6g); apre TSLA forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3144,14 +3149,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-03T03:44:06.088Z"
+  "updatedAt": "2026-11-03T11:24:06.091Z"
 }
