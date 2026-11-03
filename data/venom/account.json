@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.587206315189691,
-      "SSL.MI": 1.9157820595689077,
-      "BVB.DE": 3.0804215785630507,
-      "MANU": 18.931197679269893,
-      "AJAX.AS": 7.601346405539076,
-      "CCP.L": 2.192611195703473,
-      "FENER.IS": 0.034611550262961095,
-      "GSRAY.IS": 0.012375448457556476,
-      "BJKAS.IS": 0.020111145919929574,
-      "TSPOR.IS": 0.012732628349425446,
-      "SCP.LS": 0.9490117108384444,
-      "SLBEN.LS": 6.628095240548221,
-      "FCP.LS": 2.8030585738820406
+      "JUVE.MI": 1.5824576773251549,
+      "SSL.MI": 1.8951835886003767,
+      "BVB.DE": 3.076831701305617,
+      "MANU": 18.824496512559172,
+      "AJAX.AS": 7.770593934618468,
+      "CCP.L": 2.1845900044090825,
+      "FENER.IS": 0.035903608326368935,
+      "GSRAY.IS": 0.011980366671852231,
+      "BJKAS.IS": 0.020890602736338814,
+      "TSPOR.IS": 0.012507983370074523,
+      "SCP.LS": 0.956566768695166,
+      "SLBEN.LS": 6.64108017456282,
+      "FCP.LS": 2.7990696952040777
     },
     "model": {
       "calibration": 61,
@@ -2560,6 +2560,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
@@ -2838,14 +2843,9 @@
       "title": "Stop Loss: vendita demo 0.134750 FCP.LS",
       "detail": "0,34 € · fill simulato 2,56 € · SIM-4910454",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-02T19:39:15.502Z"
+  "updatedAt": "2026-11-03T01:48:59.158Z"
 }
