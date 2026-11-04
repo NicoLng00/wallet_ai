@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.13239120903146,
+    "cash": 48.948144741997595,
     "highWater": 50.076200488545716,
     "positions": {
       "ES": {
@@ -88,55 +88,72 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-11-03T03:44:05.337Z"
+      },
+      "CSCO": {
+        "quantity": 0.004005528857470491,
+        "averagePrice": 91.99607522000001,
+        "stopLoss": 88.72679029045202,
+        "takeProfit": 97.717323846709,
+        "strategyKey": "hybrid_confluence@1D",
+        "decisionSnapshot": {
+          "strategyKey": "hybrid_confluence@1D",
+          "entryPrice": 91.99607522000001,
+          "confidence": 83,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-04T03:20:56.901Z"
       }
     },
     "market": {
-      "AAPL": 296.47598109999996,
-      "NVDA": 184.62976960999998,
-      "SPY": 673.8374701500001,
-      "QQQ": 612.13938032,
-      "BTCUSD": 69484.715703,
-      "TSLA": 355.9676965,
+      "AAPL": 296.5280894,
+      "NVDA": 184.66221994,
+      "SPY": 673.9559031000001,
+      "QQQ": 612.24696928,
+      "BTCUSD": 67861.95868200001,
+      "TSLA": 356.030261,
       "XAUUSD": 2612.4,
-      "ETHUSD": 2041.6109629500002,
+      "ETHUSD": 1997.73627304,
       "WTI": 72.8,
-      "TLT": 72.45304859,
-      "EURUSD": 1.1194836046028689,
+      "TLT": 72.46578286,
+      "EURUSD": 1.1192868799430506,
       "ES": 7730,
-      "MSFT": 465.38421631,
-      "GOOGL": 250.14211806999998,
-      "AMZN": 223.93360561,
-      "META": 554.74684707,
-      "JPM": 301.90705662,
-      "V": 375.54815298,
-      "MA": 578.10583142,
-      "UNH": 361.27371436,
-      "HD": 298.04813454000004,
-      "PG": 144.76317414,
-      "JNJ": 237.76140973,
-      "KO": 84.6819012,
-      "PEP": 122.61903563000001,
-      "DIS": 101.99345442,
-      "NFLX": 56.65111998,
-      "ADBE": 219.86923166,
-      "CRM": 198.4843718,
-      "ORCL": 112.72161511,
-      "INTC": 54.087437949999995,
-      "AMD": 432.2528691,
-      "COST": 910.47336094,
-      "WMT": 111.53356733999999,
-      "BAC": 44.359738539999995,
-      "XOM": 158.51951674,
-      "CVX": 201.22670763,
-      "PFE": 26.79807,
-      "ABBV": 255.474934,
-      "MRK": 129.22922623,
-      "T": 19.10702391,
-      "VZ": 40.41148956,
-      "CSCO": 91.97990893,
-      "IBM": 223.35298075999998,
-      "NKE": 34.372991119999995,
-      "MCD": 234.96547776
+      "MSFT": 465.46601174000006,
+      "GOOGL": 250.18608278,
+      "AMZN": 223.97296394,
+      "META": 554.84434878,
+      "JPM": 301.96011948000006,
+      "V": 375.61415892,
+      "MA": 578.20743868,
+      "UNH": 361.33721144000003,
+      "HD": 298.10051916000003,
+      "PG": 144.78861756,
+      "JNJ": 237.80319842000003,
+      "KO": 84.6967848,
+      "PEP": 122.64058702000001,
+      "DIS": 102.01138068000002,
+      "NFLX": 56.661076920000006,
+      "ADBE": 219.90787564000001,
+      "CRM": 198.5192572,
+      "ORCL": 112.74142694000001,
+      "INTC": 54.096944300000004,
+      "AMD": 432.3288414,
+      "COST": 910.63338476,
+      "WMT": 111.55317036000001,
+      "BAC": 44.36753516,
+      "XOM": 158.54737796,
+      "CVX": 201.26207502000003,
+      "PFE": 26.802780000000002,
+      "ABBV": 255.51983600000003,
+      "MRK": 129.25193941999999,
+      "T": 19.110382140000002,
+      "VZ": 40.41859224,
+      "CSCO": 91.99607522000001,
+      "IBM": 223.39223704,
+      "NKE": 34.37903248,
+      "MCD": 235.00677504000004
     },
     "model": {
       "calibration": 59,
@@ -144,6 +161,23 @@
       "wins": 36
     },
     "trades": [
+      {
+        "id": "SIM-2456901",
+        "symbol": "CSCO",
+        "side": "buy",
+        "quantity": 0.004005528857470491,
+        "price": 91.99607522000001,
+        "notional": 0.368492934067736,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-04T03:20:56.901Z",
+        "stopLoss": 88.72679029045202,
+        "takeProfit": 97.717323846709,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "hybrid_confluence@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-7445337",
         "symbol": "TSLA",
@@ -2851,6 +2885,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre CSCO forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre CSCO forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.004006 CSCO",
+      "detail": "0,37 € · fill simulato 92,00 € · SIM-2456901",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -3139,19 +3183,9 @@
       "title": "Autopilot chiusura per limite di tempo: vendita demo 0.003098 PEP",
       "detail": "0,38 € · fill simulato 121,09 € · SIM-3877794",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-03T23:42:47.982Z"
+  "updatedAt": "2026-11-04T03:20:57.430Z"
 }
