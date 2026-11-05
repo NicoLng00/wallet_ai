@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.404141841741165,
+    "cash": 50.58823553425858,
     "highWater": 50.60242979430946,
-    "positions": {
-      "CCP.L": {
-        "quantity": 0.1698114036124786,
-        "averagePrice": 2.208332255799357,
-        "stopLoss": 2.1729989397065674,
-        "takeProfit": 2.270165558961739,
-        "strategyKey": "macd_cross@1D",
-        "decisionSnapshot": {
-          "strategyKey": "macd_cross@1D",
-          "entryPrice": 2.208332255799357,
-          "confidence": 52,
-          "score": 80,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-11-05T11:38:12.291Z"
-      }
-    },
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.6359582372346726,
-      "SSL.MI": 1.9187276347829705,
-      "BVB.DE": 3.1060035245379294,
-      "MANU": 20.328130523968547,
-      "AJAX.AS": 7.716909959776305,
-      "CCP.L": 2.208332255799357,
-      "FENER.IS": 0.03772227347845286,
-      "GSRAY.IS": 0.013501878740797413,
-      "BJKAS.IS": 0.022058136961664088,
-      "TSPOR.IS": 0.013701131379338174,
-      "SCP.LS": 0.984111826655613,
-      "SLBEN.LS": 6.502493738810371,
-      "FCP.LS": 2.603665097308041
+      "JUVE.MI": 1.5887062701974561,
+      "SSL.MI": 1.932175257889329,
+      "BVB.DE": 3.0751725726880434,
+      "MANU": 19.476523498717324,
+      "AJAX.AS": 7.705442941295127,
+      "CCP.L": 2.1882728993007907,
+      "FENER.IS": 0.036958005196261315,
+      "GSRAY.IS": 0.013515030341827782,
+      "BJKAS.IS": 0.021895105361343734,
+      "TSPOR.IS": 0.013688372961576281,
+      "SCP.LS": 0.9857034183908397,
+      "SLBEN.LS": 6.489085666805156,
+      "FCP.LS": 2.638401143613332
     },
     "model": {
       "calibration": 61,
-      "outcomes": 76,
+      "outcomes": 77,
       "wins": 39
     },
     "trades": [
+      {
+        "id": "SIM-5196279",
+        "symbol": "CCP.L",
+        "side": "sell",
+        "quantity": 0.1698114036124786,
+        "price": 2.1882728993007907,
+        "notional": 0.3715936925174153,
+        "realizedPnl": -0.0034063074825846705,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-11-05T18:59:56.279Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "macd_cross@1D",
+        "outcomeTag": "forced_loss"
+      },
       {
         "id": "SIM-8692291",
         "symbol": "CCP.L",
@@ -2648,6 +2647,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude CCP.L per segnale difensivo",
+      "detail": "chiude CCP.L per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato -0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.169811 CCP.L",
+      "detail": "0,37 € · fill simulato 2,19 € · SIM-5196279",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 80)",
       "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 80)",
       "tag": "AUTO"
@@ -2926,29 +2945,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,03 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.116717 FCP.LS",
-      "detail": "0,32 € · fill simulato 2,78 € · SIM-4462375",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-05T11:38:12.571Z"
+  "updatedAt": "2026-11-05T18:59:56.556Z"
 }
