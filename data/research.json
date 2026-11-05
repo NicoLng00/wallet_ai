@@ -13071,6 +13071,10 @@
             {
               "returnPct": -4.596676593364329,
               "at": "2026-11-05T00:13:32.093Z"
+            },
+            {
+              "returnPct": -9.557783857347774,
+              "at": "2026-11-05T15:21:18.254Z"
             }
           ]
         }
@@ -13157,6 +13161,10 @@
             {
               "returnPct": -1.491695524910585,
               "at": "2026-11-01T02:16:16.860Z"
+            },
+            {
+              "returnPct": -5.046207991915257,
+              "at": "2026-11-05T15:21:18.243Z"
             }
           ]
         }
@@ -14197,6 +14205,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-05T00:13:32.096Z"
+        },
+        {
+          "tradeId": "SIM-2078258",
+          "symbol": "TSLA",
+          "returnPct": -9.557783857347774,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "engulfing@1D",
+            "entryPrice": 344.13876094,
+            "confidence": 85,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-05T15:21:18.258Z"
         }
       ],
       "hybrid_confluence@1D": [
@@ -14423,6 +14447,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-04T18:46:47.577Z"
+        },
+        {
+          "tradeId": "SIM-2078247",
+          "symbol": "CSCO",
+          "returnPct": -5.046207991915257,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "hybrid_confluence@1D",
+            "entryPrice": 91.99607522000001,
+            "confidence": 83,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-05T15:21:18.247Z"
         }
       ],
       "bollinger_reversion@30m": [
@@ -14684,20 +14724,21 @@
           "version": 1,
           "strategyKey": "engulfing@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di engulfing@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -3.37%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di engulfing@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -4.79%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 4,
-          "avgReturn": -3.365,
+          "avgReturn": -4.793,
           "supportingTradeIds": [
-            "SIM-8312111",
             "SIM-5261893",
             "SIM-7445321",
-            "SIM-7612096"
+            "SIM-7612096",
+            "SIM-2078258"
           ],
           "createdAt": "2026-11-05T00:13:32.096Z",
           "supersedes": null,
-          "active": true
+          "active": true,
+          "updatedAt": "2026-11-05T15:21:18.258Z"
         }
       ],
       "hybrid_confluence@1D": [
@@ -14706,21 +14747,21 @@
           "version": 1,
           "strategyKey": "hybrid_confluence@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di hybrid_confluence@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -1.88%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di hybrid_confluence@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -2.60%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 4,
-          "avgReturn": -1.881,
+          "avgReturn": -2.602,
           "supportingTradeIds": [
-            "SIM-3399738",
             "SIM-1622315",
             "SIM-1304746",
-            "SIM-9376864"
+            "SIM-9376864",
+            "SIM-2078247"
           ],
           "createdAt": "2026-10-14T15:31:06.873Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-04T18:46:47.577Z"
+          "updatedAt": "2026-11-05T15:21:18.247Z"
         }
       ],
       "bollinger_reversion@30m": [
@@ -19281,8 +19322,6 @@
       },
       "30m": {
         "closes": [
-          769.5700073242188,
-          769.5999755859375,
           769.239990234375,
           768.7919921875,
           768.1300048828125,
@@ -19430,26 +19469,12 @@
           767.280029296875,
           767.9000244140625,
           766.72998046875,
-          766.8099975585938
+          754.1300048828125,
+          749.0250244140625,
+          748.8499755859375
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1792515600000,
-            "open": 768.6799926757812,
-            "high": 769.6199951171875,
-            "low": 768.260009765625,
-            "close": 769.5700073242188,
-            "volume": 1263189
-          },
-          {
-            "time": 1792517400000,
-            "open": 769.5800170898438,
-            "high": 770.030029296875,
-            "low": 769.2999877929688,
-            "close": 769.5999755859375,
-            "volume": 1050103
-          },
           {
             "time": 1792519200000,
             "open": 769.6099853515625,
@@ -20627,15 +20652,31 @@
             "volume": 11299879
           },
           {
-            "time": 1793826000000,
-            "open": 766.8099975585938,
-            "high": 766.8099975585938,
-            "low": 766.8099975585938,
-            "close": 766.8099975585938,
+            "time": 1793889000000,
+            "open": 765.469970703125,
+            "high": 765.969970703125,
+            "low": 752.8300170898438,
+            "close": 754.1300048828125,
+            "volume": 13287630
+          },
+          {
+            "time": 1793890800000,
+            "open": 754.1400146484375,
+            "high": 755.02001953125,
+            "low": 748.780029296875,
+            "close": 749.0250244140625,
+            "volume": 7195782
+          },
+          {
+            "time": 1793892076000,
+            "open": 748.8499755859375,
+            "high": 748.8499755859375,
+            "low": 748.8499755859375,
+            "close": 748.8499755859375,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-05T14:08:46.924Z"
+        "fetchedAt": "2026-11-05T15:21:17.951Z"
       }
     },
     "QQQ": {
@@ -22150,8 +22191,6 @@
       },
       "30m": {
         "closes": [
-          719.3635864257812,
-          719.4500122070312,
           718.97998046875,
           718.3400268554688,
           717.123779296875,
@@ -22299,26 +22338,12 @@
           692.3699951171875,
           692.8800048828125,
           691.8200073242188,
-          691.9500122070312
+          666.8300170898438,
+          661.5800170898438,
+          661.0700073242188
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1792515600000,
-            "open": 718.1599731445312,
-            "high": 719.5598754882812,
-            "low": 717.739990234375,
-            "close": 719.3635864257812,
-            "volume": 747116
-          },
-          {
-            "time": 1792517400000,
-            "open": 719.3599853515625,
-            "high": 719.968505859375,
-            "low": 718.989990234375,
-            "close": 719.4500122070312,
-            "volume": 601715
-          },
           {
             "time": 1792519200000,
             "open": 719.47998046875,
@@ -23496,15 +23521,31 @@
             "volume": 6686294
           },
           {
-            "time": 1793826000000,
-            "open": 691.9500122070312,
-            "high": 691.9500122070312,
-            "low": 691.9500122070312,
-            "close": 691.9500122070312,
+            "time": 1793889000000,
+            "open": 681.2550048828125,
+            "high": 683.6400146484375,
+            "low": 665.010009765625,
+            "close": 666.8300170898438,
+            "volume": 14895265
+          },
+          {
+            "time": 1793890800000,
+            "open": 666.8099975585938,
+            "high": 668.1699829101562,
+            "low": 660.8499755859375,
+            "close": 661.5800170898438,
+            "volume": 8854895
+          },
+          {
+            "time": 1793892077000,
+            "open": 661.0700073242188,
+            "high": 661.0700073242188,
+            "low": 661.0700073242188,
+            "close": 661.0700073242188,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-05T14:08:48.470Z"
+        "fetchedAt": "2026-11-05T15:21:18.100Z"
       }
     },
     "BTCUSD": {
@@ -33801,8 +33842,6 @@
       },
       "30m": {
         "closes": [
-          1.1218308210372925,
-          1.1214534044265747,
           1.1217050552368164,
           1.1218308210372925,
           1.1220825910568237,
@@ -33949,27 +33988,13 @@
           1.1228384971618652,
           1.1222084760665894,
           1.1222084760665894,
-          1.1223344802856445,
-          1.1222084760665894
+          1.1217050552368164,
+          1.121956706047058,
+          1.1222084760665894,
+          1.1223344802856445
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1793620800000,
-            "open": 1.1209505796432495,
-            "high": 1.1218308210372925,
-            "low": 1.1209505796432495,
-            "close": 1.1218308210372925,
-            "volume": 0
-          },
-          {
-            "time": 1793622600000,
-            "open": 1.121956706047058,
-            "high": 1.1222084760665894,
-            "low": 1.1214534044265747,
-            "close": 1.1214534044265747,
-            "volume": 0
-          },
           {
             "time": 1793624400000,
             "open": 1.1217050552368164,
@@ -35142,28 +35167,41 @@
             "time": 1793887200000,
             "open": 1.1222084760665894,
             "high": 1.1224603652954102,
-            "low": 1.1220825910568237,
-            "close": 1.1223344802856445,
+            "low": 1.1214534044265747,
+            "close": 1.1217050552368164,
             "volume": 0
           },
           {
-            "time": 1793887709000,
-            "open": 1.1222084760665894,
-            "high": 1.1222084760665894,
-            "low": 1.1222084760665894,
+            "time": 1793889000000,
+            "open": 1.1217050552368164,
+            "high": 1.12271249294281,
+            "low": 1.1206992864608765,
+            "close": 1.121956706047058,
+            "volume": 0
+          },
+          {
+            "time": 1793890800000,
+            "open": 1.1215791702270508,
+            "high": 1.1223344802856445,
+            "low": 1.1214534044265747,
             "close": 1.1222084760665894,
+            "volume": 0
+          },
+          {
+            "time": 1793892026000,
+            "open": 1.1223344802856445,
+            "high": 1.1223344802856445,
+            "low": 1.1223344802856445,
+            "close": 1.1223344802856445,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-05T14:09:02.665Z"
+        "fetchedAt": "2026-11-05T15:21:18.243Z"
       }
     },
     "ES": {
       "30m": {
         "closes": [
-          7639.75,
-          7650.75,
-          7652.5,
           7651.25,
           7654.25,
           7654,
@@ -35309,35 +35347,14 @@
           7727.25,
           7728.5,
           7730.25,
-          7724,
-          7724
+          7724.5,
+          7707,
+          7593.75,
+          7562.25,
+          7564.25
         ],
         "dates": null,
         "candles": [
-          {
-            "time": 1793608200000,
-            "open": 7641.5,
-            "high": 7647,
-            "low": 7638.5,
-            "close": 7639.75,
-            "volume": 12438
-          },
-          {
-            "time": 1793610000000,
-            "open": 7640,
-            "high": 7652.5,
-            "low": 7639.75,
-            "close": 7650.75,
-            "volume": 10611
-          },
-          {
-            "time": 1793611800000,
-            "open": 7650.5,
-            "high": 7659.25,
-            "low": 7647.25,
-            "close": 7652.5,
-            "volume": 8722
-          },
           {
             "time": 1793613600000,
             "open": 7652.5,
@@ -36503,19 +36520,43 @@
             "open": 7730.5,
             "high": 7734,
             "low": 7722.5,
-            "close": 7724,
-            "volume": 15016
+            "close": 7724.5,
+            "volume": 15402
           },
           {
-            "time": 1793887139000,
-            "open": 7724,
-            "high": 7724,
-            "low": 7724,
-            "close": 7724,
+            "time": 1793887200000,
+            "open": 7724.5,
+            "high": 7724.75,
+            "low": 7706.5,
+            "close": 7707,
+            "volume": 43013
+          },
+          {
+            "time": 1793889000000,
+            "open": 7707.5,
+            "high": 7712.5,
+            "low": 7580.5,
+            "close": 7593.75,
+            "volume": 433218
+          },
+          {
+            "time": 1793890800000,
+            "open": 7593.75,
+            "high": 7602.75,
+            "low": 7562,
+            "close": 7562.25,
+            "volume": 145947
+          },
+          {
+            "time": 1793891440000,
+            "open": 7564.25,
+            "high": 7564.25,
+            "low": 7564.25,
+            "close": 7564.25,
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-05T14:09:10.050Z"
+        "fetchedAt": "2026-11-05T15:21:17.824Z"
       },
       "1D": {
         "closes": [
@@ -89402,5 +89443,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-05T14:09:18.731Z"
+  "updatedAt": "2026-11-05T15:21:19.866Z"
 }
