@@ -5,19 +5,19 @@
     "highWater": 50.60242979430946,
     "positions": {},
     "market": {
-      "JUVE.MI": 1.5850719658505676,
-      "SSL.MI": 1.9108262328611407,
-      "BVB.DE": 3.0782136616679687,
-      "MANU": 19.432198625353337,
-      "AJAX.AS": 7.805534571438567,
-      "CCP.L": 2.201189175056649,
-      "FENER.IS": 0.0385640721561334,
-      "GSRAY.IS": 0.013515398774224387,
-      "BJKAS.IS": 0.022239997306157253,
-      "TSPOR.IS": 0.013321774986526655,
-      "SCP.LS": 0.9493186492796378,
-      "SLBEN.LS": 6.328109815810612,
-      "FCP.LS": 2.7791870432707064
+      "JUVE.MI": 1.5798057837929413,
+      "SSL.MI": 1.900343849863468,
+      "BVB.DE": 3.097391327268288,
+      "MANU": 20.098214093088437,
+      "AJAX.AS": 7.738446189503808,
+      "CCP.L": 2.1858918854606904,
+      "FENER.IS": 0.038254509889527506,
+      "GSRAY.IS": 0.013344759653322538,
+      "BJKAS.IS": 0.022201891835868178,
+      "TSPOR.IS": 0.01351242037706277,
+      "SCP.LS": 0.9506952594572159,
+      "SLBEN.LS": 6.435243260663327,
+      "FCP.LS": 2.7779458636156646
     },
     "model": {
       "calibration": 61,
@@ -2681,6 +2681,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude CCP.L per segnale difensivo",
       "detail": "chiude CCP.L per segnale difensivo",
       "tag": "AUTO"
@@ -2969,19 +2979,9 @@
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,03 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 0.144288 FCP.LS",
-      "detail": "0,40 € · fill simulato 2,78 € · SIM-0898649",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-06T14:58:01.449Z"
+  "updatedAt": "2026-11-06T20:49:56.296Z"
 }
