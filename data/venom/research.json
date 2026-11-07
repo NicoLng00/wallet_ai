@@ -3590,6 +3590,10 @@
             {
               "returnPct": 0.5343883206899303,
               "at": "2026-11-06T14:58:01.077Z"
+            },
+            {
+              "returnPct": -0.03601018313845633,
+              "at": "2026-11-07T07:01:31.784Z"
             }
           ]
         }
@@ -4592,6 +4596,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-06T14:58:01.078Z"
+        },
+        {
+          "tradeId": "SIM-4891785",
+          "symbol": "CCP.L",
+          "returnPct": -0.03601018313845633,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "macd_cross@1D",
+            "entryPrice": 2.1865001631038696,
+            "confidence": 52,
+            "score": 77,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-07T07:01:31.785Z"
         }
       ]
     },
@@ -4643,7 +4663,8 @@
           "active": true,
           "updatedAt": "2026-09-10T11:33:30.942Z"
         }
-      ]
+      ],
+      "macd_cross@1D": []
     }
   },
   "historyCache": {
@@ -24291,5 +24312,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-07T00:51:09.673Z"
+  "updatedAt": "2026-11-07T07:01:32.060Z"
 }
