@@ -3598,6 +3598,10 @@
             {
               "returnPct": -0.058413227196129645,
               "at": "2026-11-08T07:59:30.196Z"
+            },
+            {
+              "returnPct": -0.05786832665906155,
+              "at": "2026-11-09T21:30:54.411Z"
             }
           ]
         }
@@ -4632,6 +4636,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-08T07:59:30.197Z"
+        },
+        {
+          "tradeId": "SIM-9854412",
+          "symbol": "CCP.L",
+          "returnPct": -0.05786832665906155,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "macd_cross@1D",
+            "entryPrice": 2.1883544685354974,
+            "confidence": 52,
+            "score": 77,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-09T21:30:54.412Z"
         }
       ]
     },
@@ -4690,19 +4710,21 @@
           "version": 1,
           "strategyKey": "macd_cross@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 4 trade forzati (fallback giornaliero) di macd_cross@1D, 3 (75%) hanno chiuso in perdita (rendimento medio -0.33%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 5 trade forzati (fallback giornaliero) di macd_cross@1D, 4 (80%) hanno chiuso in perdita (rendimento medio -0.27%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
-          "sampleSize": 4,
-          "occurrences": 3,
-          "avgReturn": -0.334,
+          "sampleSize": 5,
+          "occurrences": 4,
+          "avgReturn": -0.265,
           "supportingTradeIds": [
             "SIM-5196279",
             "SIM-4891785",
-            "SIM-4770197"
+            "SIM-4770197",
+            "SIM-9854412"
           ],
           "createdAt": "2026-11-08T07:59:30.198Z",
           "supersedes": null,
-          "active": true
+          "active": true,
+          "updatedAt": "2026-11-09T21:30:54.412Z"
         }
       ]
     }
@@ -24352,5 +24374,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-09T16:11:02.962Z"
+  "updatedAt": "2026-11-09T21:30:54.661Z"
 }
