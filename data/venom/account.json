@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.5773026664336975,
-      "SSL.MI": 1.897079841019059,
-      "BVB.DE": 3.1007020697833747,
-      "MANU": 20.294117305840984,
-      "AJAX.AS": 7.734916184154258,
-      "CCP.L": 2.1883544685354974,
-      "FENER.IS": 0.038458187640673505,
-      "GSRAY.IS": 0.01339065542626083,
-      "BJKAS.IS": 0.022314862311813254,
-      "TSPOR.IS": 0.013594472089051016,
-      "SCP.LS": 0.9499932259047608,
-      "SLBEN.LS": 6.440137196903969,
-      "FCP.LS": 2.78113661289308
+      "JUVE.MI": 1.5793063832107543,
+      "SSL.MI": 1.864699990429481,
+      "BVB.DE": 3.10465699233744,
+      "MANU": 20.31010295891479,
+      "AJAX.AS": 7.867039502148941,
+      "CCP.L": 2.158564665715649,
+      "FENER.IS": 0.0385824008598301,
+      "GSRAY.IS": 0.013586896191024097,
+      "BJKAS.IS": 0.02195953211607706,
+      "TSPOR.IS": 0.013767021221617382,
+      "SCP.LS": 0.9514969067529518,
+      "SLBEN.LS": 6.4365213069248135,
+      "FCP.LS": 2.777633283435846
     },
     "model": {
       "calibration": 61,
@@ -2784,6 +2784,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 77)",
       "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 77)",
       "tag": "AUTO"
@@ -3077,14 +3082,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-09T02:47:28.452Z"
+  "updatedAt": "2026-11-09T11:19:04.332Z"
 }
