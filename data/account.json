@@ -78,10 +78,10 @@
       "NVDA": 167.40096216,
       "SPY": 659.49557151,
       "QQQ": 588.4685559000001,
-      "BTCUSD": 66702.072192,
+      "BTCUSD": 66886.837506,
       "TSLA": 321.29432418000005,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1910.02488726,
+      "ETHUSD": 1901.20817349,
       "WTI": 72.8,
       "TLT": 73.47560448,
       "EURUSD": 1.1149278808900247,
@@ -89,7 +89,7 @@
       "MSFT": 475.91419059000003,
       "GOOGL": 255.42459282,
       "AMZN": 232.57109670000003,
-      "META": 547.25512785,
+      "META": 547.20131271,
       "JPM": 300.01043631,
       "V": 379.08281535,
       "MA": 585.4190313,
@@ -100,7 +100,7 @@
       "KO": 85.80824073000001,
       "PEP": 126.77053146,
       "DIS": 104.71529325,
-      "NFLX": 56.87363379,
+      "NFLX": 54.191845980000004,
       "ADBE": 214.6327167,
       "CRM": 191.62674435,
       "ORCL": 104.1322959,
@@ -3055,6 +3055,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre CSCO forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre CSCO forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3348,14 +3353,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000171 ETHUSD",
       "detail": "0,35 € · fill simulato 2030 € · SIM-9376875",
       "tag": "PAPER"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-09T05:34:31.705Z"
+  "updatedAt": "2026-11-09T14:22:57.196Z"
 }
