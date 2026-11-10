@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.5796606593402072,
-      "SSL.MI": 1.9004885851888529,
-      "BVB.DE": 3.095426885352652,
-      "MANU": 20.76367360268558,
-      "AJAX.AS": 7.747165189232374,
-      "CCP.L": 2.1853834932853697,
-      "FENER.IS": 0.03822297621394796,
-      "GSRAY.IS": 0.0133437878550949,
-      "BJKAS.IS": 0.022214448479392086,
-      "TSPOR.IS": 0.013486064269224211,
-      "SCP.LS": 0.9502433238931366,
-      "SLBEN.LS": 6.440034559757567,
-      "FCP.LS": 2.7791772823079004
+      "JUVE.MI": 1.5671037370477818,
+      "SSL.MI": 1.8405388697157108,
+      "BVB.DE": 3.116423223313673,
+      "MANU": 20.750825895279927,
+      "AJAX.AS": 7.794732300654245,
+      "CCP.L": 2.218075309155426,
+      "FENER.IS": 0.03714598727753133,
+      "GSRAY.IS": 0.0131491256323483,
+      "BJKAS.IS": 0.021357818410237383,
+      "TSPOR.IS": 0.013509478650347281,
+      "SCP.LS": 0.9084753296014465,
+      "SLBEN.LS": 6.302541689877286,
+      "FCP.LS": 2.781512264274097
     },
     "model": {
       "calibration": 60,
@@ -2818,6 +2818,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 82)",
       "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 82)",
       "tag": "AUTO"
@@ -3111,14 +3116,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.133884 FCP.LS",
       "detail": "0,38 € · fill simulato 2,80 € · SIM-9527701",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-10T03:50:33.538Z"
+  "updatedAt": "2026-11-10T12:29:11.405Z"
 }
