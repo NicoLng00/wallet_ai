@@ -3270,6 +3270,10 @@
             {
               "returnPct": 0.5197775281142809,
               "at": "2026-09-21T07:14:39.828Z"
+            },
+            {
+              "returnPct": 1.208705968868317,
+              "at": "2026-11-10T20:01:36.916Z"
             }
           ]
         }
@@ -3609,22 +3613,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-0523691",
-          "symbol": "AJAX.AS",
-          "returnPct": -0.06226182072120613,
-          "outcomeTag": "forced_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 8.68655546804263,
-            "confidence": 79,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-13T06:22:03.691Z"
-        },
         {
           "tradeId": "SIM-4757165",
           "symbol": "AJAX.AS",
@@ -4408,6 +4396,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-04T23:33:58.051Z"
+        },
+        {
+          "tradeId": "SIM-0896917",
+          "symbol": "BVB.DE",
+          "returnPct": 1.208705968868317,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 3.095426885352652,
+            "confidence": 57,
+            "score": 82,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-10T20:01:36.917Z"
         }
       ],
       "engulfing@1D": [
@@ -24374,5 +24378,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-10T14:49:01.084Z"
+  "updatedAt": "2026-11-10T20:01:37.170Z"
 }
