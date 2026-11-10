@@ -1,7 +1,7 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 49.29460821489502,
+    "cash": 49.109753434089164,
     "highWater": 50.0981138915,
     "positions": {
       "ES": {
@@ -71,55 +71,72 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-11-09T05:34:30.842Z"
+      },
+      "SPY": {
+        "quantity": 0.0005503780804848999,
+        "averagePrice": 671.7374378100001,
+        "stopLoss": 660.1877857103907,
+        "takeProfit": 691.9493289843165,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 671.7374378100001,
+          "confidence": 80,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "elevated",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-10T04:47:47.571Z"
       }
     },
     "market": {
-      "AAPL": 314.54052411,
-      "NVDA": 160.25251773,
-      "SPY": 675.10196211,
-      "QQQ": 609.32192265,
-      "BTCUSD": 67446.514962,
-      "TSLA": 339.08022795,
+      "AAPL": 312.97293981,
+      "NVDA": 159.45386283,
+      "SPY": 671.7374378100001,
+      "QQQ": 606.2852281500001,
+      "BTCUSD": 66574.018053,
+      "TSLA": 337.39034445000004,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1912.99368915,
+      "ETHUSD": 1888.9664778900003,
       "WTI": 72.8,
-      "TLT": 73.51148124,
-      "EURUSD": 1.1149278808900247,
+      "TLT": 73.14512004,
+      "EURUSD": 1.1205122085407682,
       "ES": 7730,
-      "MSFT": 488.98230041999994,
-      "GOOGL": 258.44720985,
-      "AMZN": 239.41458867,
-      "META": 575.25693903,
-      "JPM": 306.81805152,
-      "V": 378.64332504000004,
-      "MA": 588.2084493899999,
-      "UNH": 356.63293278000003,
-      "HD": 316.98911298,
-      "PG": 150.96940608,
-      "JNJ": 253.02981909000002,
-      "KO": 86.13113157000001,
-      "PEP": 127.25486772,
-      "DIS": 106.84099128000001,
-      "NFLX": 57.357970050000006,
-      "ADBE": 212.85681708,
-      "CRM": 192.78376986,
-      "ORCL": 107.44192701000001,
-      "INTC": 53.25008103,
-      "AMD": 456.15506502,
-      "COST": 956.2770994200001,
-      "WMT": 112.70684154,
-      "BAC": 45.339255449999996,
-      "XOM": 147.74946687,
-      "CVX": 189.05258682000002,
-      "PFE": 26.21694237,
-      "ABBV": 263.0663427,
-      "MRK": 133.42567044,
-      "T": 19.5528342,
-      "VZ": 41.312089140000005,
-      "CSCO": 88.48105935000001,
-      "IBM": 220.74073509000002,
-      "NKE": 35.76912972,
-      "MCD": 252.42888336000001
+      "MSFT": 486.54534581999997,
+      "GOOGL": 257.15917935,
+      "AMZN": 238.22141157000001,
+      "META": 572.39001513,
+      "JPM": 305.28895392,
+      "V": 376.75626984,
+      "MA": 585.27697869,
+      "UNH": 354.85557138,
+      "HD": 315.40932558000003,
+      "PG": 150.21701568,
+      "JNJ": 251.76878739000003,
+      "KO": 85.70187747,
+      "PEP": 126.62066412,
+      "DIS": 106.30852488000001,
+      "NFLX": 57.072113550000005,
+      "ADBE": 211.79599668,
+      "CRM": 191.82298806,
+      "ORCL": 106.90646571,
+      "INTC": 52.98469713,
+      "AMD": 453.88171242,
+      "COST": 951.5112748200002,
+      "WMT": 112.14514134000001,
+      "BAC": 45.11329695,
+      "XOM": 147.01312377,
+      "CVX": 188.11040022,
+      "PFE": 26.08628427,
+      "ABBV": 261.75529170000004,
+      "MRK": 132.76071324,
+      "T": 19.4553882,
+      "VZ": 41.10620094,
+      "CSCO": 88.04009385,
+      "IBM": 219.64062339000003,
+      "NKE": 35.59086612,
+      "MCD": 251.17084656
     },
     "model": {
       "calibration": 59,
@@ -127,6 +144,23 @@
       "wins": 39
     },
     "trades": [
+      {
+        "id": "SIM-6067571",
+        "symbol": "SPY",
+        "side": "buy",
+        "quantity": 0.0005503780804848999,
+        "price": 671.7374378100001,
+        "notional": 0.36970956161171264,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-10T04:47:47.571Z",
+        "stopLoss": 660.1877857103907,
+        "takeProfit": 691.9493289843165,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-2470842",
         "symbol": "CSCO",
@@ -3055,6 +3089,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SPY forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.000550 SPY",
+      "detail": "0,37 € · fill simulato 671,74 € · SIM-6067571",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -3343,19 +3387,9 @@
       "title": "Autopilot: monitora",
       "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: chiude CSCO per limite di detenzione (6g) · apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "detail": "chiude CSCO per limite di detenzione (6g); apre ETHUSD forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-09T23:31:25.742Z"
+  "updatedAt": "2026-11-10T04:47:47.959Z"
 }
