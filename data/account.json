@@ -95,10 +95,10 @@
       "NVDA": 156.33354645,
       "SPY": 683.72642565,
       "QQQ": 621.2487987000001,
-      "BTCUSD": 66283.156035,
+      "BTCUSD": 65632.55364,
       "TSLA": 351.70323659999997,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1845.5781217499998,
+      "ETHUSD": 1824.7642443,
       "WTI": 72.8,
       "TLT": 72.8170758,
       "EURUSD": 1.1112778027815282,
@@ -3157,6 +3157,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude ES per limite di detenzione (6g) · apre ES forzato (nessun trade ancora oggi, score 90)",
       "detail": "chiude ES per limite di detenzione (6g); apre ES forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3450,14 +3455,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.004006 CSCO",
       "detail": "0,37 € · fill simulato 92,00 € · SIM-2456901",
       "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-12T03:15:52.554Z"
+  "updatedAt": "2026-11-12T11:42:35.301Z"
 }
