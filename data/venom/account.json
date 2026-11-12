@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.577386135876193,
-      "SSL.MI": 1.8190156810200713,
-      "BVB.DE": 3.1330726271467118,
-      "MANU": 21.363937911824134,
-      "AJAX.AS": 7.727292327871135,
-      "CCP.L": 2.1817422574070156,
-      "FENER.IS": 0.03709713402222844,
-      "GSRAY.IS": 0.013081237396540544,
-      "BJKAS.IS": 0.021305346874734725,
-      "TSPOR.IS": 0.013441170639893448,
-      "SCP.LS": 0.951575279538407,
-      "SLBEN.LS": 6.478010945430355,
-      "FCP.LS": 2.7582558649623463
+      "JUVE.MI": 1.531826844419785,
+      "SSL.MI": 1.8359317504466883,
+      "BVB.DE": 3.13594452645564,
+      "MANU": 20.679769632822378,
+      "AJAX.AS": 7.780929205469783,
+      "CCP.L": 2.182582897988247,
+      "FENER.IS": 0.037460254540358826,
+      "GSRAY.IS": 0.013096345593809885,
+      "BJKAS.IS": 0.020958634083162484,
+      "TSPOR.IS": 0.013247709656295268,
+      "SCP.LS": 0.9805208503341422,
+      "SLBEN.LS": 6.420089884128169,
+      "FCP.LS": 2.7773054139665945
     },
     "model": {
       "calibration": 60,
@@ -2886,6 +2886,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 79)",
       "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 79)",
       "tag": "AUTO"
@@ -3179,14 +3184,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-12T03:10:11.485Z"
+  "updatedAt": "2026-11-12T19:09:38.702Z"
 }
