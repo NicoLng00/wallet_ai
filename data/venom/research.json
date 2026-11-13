@@ -3424,6 +3424,10 @@
             {
               "returnPct": -2.269560953291092,
               "at": "2026-10-22T13:13:05.312Z"
+            },
+            {
+              "returnPct": -0.13195203706954886,
+              "at": "2026-11-13T07:21:36.904Z"
             }
           ]
         }
@@ -3610,6 +3614,10 @@
             {
               "returnPct": -0.03026994960905384,
               "at": "2026-11-11T07:11:14.311Z"
+            },
+            {
+              "returnPct": 0.07969444759038731,
+              "at": "2026-11-13T07:21:36.898Z"
             }
           ]
         }
@@ -3617,22 +3625,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-4757165",
-          "symbol": "AJAX.AS",
-          "returnPct": -0.06838074281545889,
-          "outcomeTag": "signal_flip_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 8.684912451438008,
-            "confidence": 60,
-            "score": 71,
-            "tier": "validated",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-14T22:25:57.165Z"
-        },
         {
           "tradeId": "SIM-2328427",
           "symbol": "AJAX.AS",
@@ -4416,6 +4408,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-10T20:01:36.917Z"
+        },
+        {
+          "tradeId": "SIM-4496905",
+          "symbol": "SLBEN.LS",
+          "returnPct": -0.13195203706954886,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 6.204641274035888,
+            "confidence": 85,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-13T07:21:36.905Z"
         }
       ],
       "engulfing@1D": [
@@ -4676,6 +4684,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-11T07:11:14.313Z"
+        },
+        {
+          "tradeId": "SIM-4496899",
+          "symbol": "CCP.L",
+          "returnPct": 0.07969444759038731,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "macd_cross@1D",
+            "entryPrice": 2.1817422574070156,
+            "confidence": 52,
+            "score": 79,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-13T07:21:36.899Z"
         }
       ]
     },
@@ -4686,21 +4710,21 @@
           "version": 1,
           "strategyKey": "bollinger_reversion@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -2.08%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 4 (50%) hanno chiuso in perdita (rendimento medio -2.11%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.",
           "dominantRegime": "mixed",
           "sampleSize": 8,
           "occurrences": 4,
-          "avgReturn": -2.079,
+          "avgReturn": -2.107,
           "supportingTradeIds": [
-            "SIM-0365851",
             "SIM-4910454",
             "SIM-2670786",
-            "SIM-5238051"
+            "SIM-5238051",
+            "SIM-4496905"
           ],
           "createdAt": "2026-09-13T06:22:03.691Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-04T23:33:58.052Z"
+          "updatedAt": "2026-11-13T07:21:36.905Z"
         }
       ],
       "engulfing@1D": [
@@ -4734,9 +4758,9 @@
           "version": 1,
           "strategyKey": "macd_cross@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 6 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (83%) hanno chiuso in perdita (rendimento medio -0.22%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 7 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (71%) hanno chiuso in perdita (rendimento medio -0.22%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
-          "sampleSize": 6,
+          "sampleSize": 7,
           "occurrences": 5,
           "avgReturn": -0.218,
           "supportingTradeIds": [
@@ -4749,7 +4773,7 @@
           "createdAt": "2026-11-08T07:59:30.198Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-11T07:11:14.313Z"
+          "updatedAt": "2026-11-13T07:21:36.899Z"
         }
       ]
     }
@@ -24399,5 +24423,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-13T00:35:12.583Z"
+  "updatedAt": "2026-11-13T07:21:37.188Z"
 }
