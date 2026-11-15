@@ -3436,6 +3436,10 @@
             {
               "returnPct": -0.22143429360351238,
               "at": "2026-11-14T15:44:17.099Z"
+            },
+            {
+              "returnPct": 0.2805506360195261,
+              "at": "2026-11-15T14:09:10.925Z"
             }
           ]
         }
@@ -3633,22 +3637,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-1677462",
-          "symbol": "SCP.LS",
-          "returnPct": -0.007784489204909342,
-          "outcomeTag": "forced_loss",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 0.9891369502370847,
-            "confidence": 80,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-17T05:07:57.462Z"
-        },
         {
           "tradeId": "SIM-8450440",
           "symbol": "SCP.LS",
@@ -4432,6 +4420,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-14T15:44:17.100Z"
+        },
+        {
+          "tradeId": "SIM-1750926",
+          "symbol": "SLBEN.LS",
+          "returnPct": 0.2805506360195261,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 6.3924669706178285,
+            "confidence": 85,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-15T14:09:10.926Z"
         }
       ],
       "engulfing@1D": [
@@ -24431,5 +24435,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-15T06:12:28.509Z"
+  "updatedAt": "2026-11-15T14:09:11.131Z"
 }
