@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.9212956370126,
+    "cash": 50.7337956370126,
     "highWater": 50.9212956370126,
-    "positions": {},
+    "positions": {
+      "SLBEN.LS": {
+        "quantity": 0.05862203109309705,
+        "averagePrice": 6.3969124407249955,
+        "stopLoss": 6.235483955127113,
+        "takeProfit": 6.679412290521291,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 6.3969124407249955,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-16T06:11:03.303Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.3632773353453107,
-      "SSL.MI": 1.8245348479461623,
-      "BVB.DE": 3.123888162877887,
-      "MANU": 20.322164533434364,
-      "AJAX.AS": 7.696091747532955,
-      "CCP.L": 2.188068786693042,
-      "FENER.IS": 0.03776604468194773,
-      "GSRAY.IS": 0.012935076162462351,
-      "BJKAS.IS": 0.021237457860587516,
-      "TSPOR.IS": 0.013501059086510272,
-      "SCP.LS": 0.9797539150460156,
-      "SLBEN.LS": 6.401350552588346,
-      "FCP.LS": 2.701458158780608
+      "JUVE.MI": 1.363678135602945,
+      "SSL.MI": 1.8225562460636637,
+      "BVB.DE": 3.1204508760925718,
+      "MANU": 20.34647793541077,
+      "AJAX.AS": 7.697510290626657,
+      "CCP.L": 2.1891153132713916,
+      "FENER.IS": 0.037821700909977,
+      "GSRAY.IS": 0.012940879372537328,
+      "BJKAS.IS": 0.021229430435907814,
+      "TSPOR.IS": 0.013507969588940722,
+      "SCP.LS": 0.9800707049718914,
+      "SLBEN.LS": 6.3969124407249955,
+      "FCP.LS": 2.7028463814729586
     },
     "model": {
       "calibration": 61,
@@ -25,6 +43,23 @@
       "wins": 44
     },
     "trades": [
+      {
+        "id": "SIM-9463303",
+        "symbol": "SLBEN.LS",
+        "side": "buy",
+        "quantity": 0.05862203109309705,
+        "price": 6.3969124407249955,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-16T06:11:03.303Z",
+        "stopLoss": 6.235483955127113,
+        "takeProfit": 6.679412290521291,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-1750926",
         "symbol": "SLBEN.LS",
@@ -3021,6 +3056,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.058622 SLBEN.LS",
+      "detail": "0,38 € · fill simulato 6,40 € · SIM-9463303",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -3304,24 +3354,9 @@
       "title": "Autopilot: apre BVB.DE forzato (nessun trade ancora oggi, score 82)",
       "detail": "apre BVB.DE forzato (nessun trade ancora oggi, score 82)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.121146 BVB.DE",
-      "detail": "0,38 € · fill simulato 3,10 € · SIM-2633185",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: chiude CCP.L per segnale difensivo",
-      "detail": "chiude CCP.L per segnale difensivo",
-      "tag": "AUTO"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-15T23:56:27.155Z"
+  "updatedAt": "2026-11-16T06:11:03.705Z"
 }
