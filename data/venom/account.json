@@ -23,19 +23,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.2297533712108544,
-      "SSL.MI": 1.8231125864471736,
-      "BVB.DE": 3.1216092415879926,
-      "MANU": 20.192820734248695,
-      "AJAX.AS": 7.696727941810586,
-      "CCP.L": 2.1889692578369697,
-      "FENER.IS": 0.038430089882046985,
-      "GSRAY.IS": 0.012958563948165063,
-      "BJKAS.IS": 0.021784198503078687,
-      "TSPOR.IS": 0.013347308490902548,
-      "SCP.LS": 0.9799804875675653,
-      "SLBEN.LS": 6.3962184596509415,
-      "FCP.LS": 2.702628495417125
+      "JUVE.MI": 1.1507543658471857,
+      "SSL.MI": 1.764554530321759,
+      "BVB.DE": 3.070806109462485,
+      "MANU": 19.710732508273505,
+      "AJAX.AS": 7.700072916422911,
+      "CCP.L": 2.1836773168546526,
+      "FENER.IS": 0.03839260154986459,
+      "GSRAY.IS": 0.012984475072924186,
+      "BJKAS.IS": 0.022158343987327554,
+      "TSPOR.IS": 0.013348278960585585,
+      "SCP.LS": 0.9805977288525881,
+      "SLBEN.LS": 6.375322206142521,
+      "FCP.LS": 2.578199023386523
     },
     "model": {
       "calibration": 61,
@@ -3095,6 +3095,11 @@
       "tag": "HOLD"
     },
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude SLBEN.LS per segnale difensivo · apre CCP.L forzato (nessun trade ancora oggi, score 81)",
       "detail": "chiude SLBEN.LS per segnale difensivo; apre CCP.L forzato (nessun trade ancora oggi, score 81)",
       "tag": "AUTO"
@@ -3383,14 +3388,9 @@
       "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.169177 CCP.L",
       "detail": "0,37 € · fill simulato 2,18 € · SIM-7341257",
       "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-17T08:11:26.191Z"
+  "updatedAt": "2026-11-17T23:59:12.088Z"
 }
