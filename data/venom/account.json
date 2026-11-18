@@ -1,8 +1,8 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.7358143062152,
-    "highWater": 50.92206722627647,
+    "cash": 50.5483143062152,
+    "highWater": 50.92246481805217,
     "positions": {
       "CCP.L": {
         "quantity": 0.16986857793019192,
@@ -20,22 +20,39 @@
           "aiEngine": "gemini"
         },
         "openedAt": "2026-11-17T00:20:16.372Z"
+      },
+      "SLBEN.LS": {
+        "quantity": 0.05852401124756267,
+        "averagePrice": 6.407626408478921,
+        "stopLoss": 6.224769303768751,
+        "takeProfit": 6.727626341721719,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 6.407626408478921,
+          "confidence": 85,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "elevated",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-18T07:10:37.771Z"
       }
     },
     "market": {
-      "JUVE.MI": 1.1507543658471857,
-      "SSL.MI": 1.764554530321759,
-      "BVB.DE": 3.070806109462485,
-      "MANU": 19.710732508273505,
-      "AJAX.AS": 7.700072916422911,
-      "CCP.L": 2.1836773168546526,
-      "FENER.IS": 0.03839260154986459,
-      "GSRAY.IS": 0.012984475072924186,
-      "BJKAS.IS": 0.022158343987327554,
-      "TSPOR.IS": 0.013348278960585585,
-      "SCP.LS": 0.9805977288525881,
-      "SLBEN.LS": 6.375322206142521,
-      "FCP.LS": 2.578199023386523
+      "JUVE.MI": 1.1492326474041863,
+      "SSL.MI": 1.766860708055692,
+      "BVB.DE": 3.069257996644095,
+      "MANU": 19.706498327469994,
+      "AJAX.AS": 7.709472242175031,
+      "CCP.L": 2.1913098424262025,
+      "FENER.IS": 0.0387075270320779,
+      "GSRAY.IS": 0.0129837565846913,
+      "BJKAS.IS": 0.022004749268107707,
+      "TSPOR.IS": 0.013331710435892978,
+      "SCP.LS": 0.9157355356107767,
+      "SLBEN.LS": 6.407626408478921,
+      "FCP.LS": 2.6980234717674665
     },
     "model": {
       "calibration": 61,
@@ -43,6 +60,23 @@
       "wins": 45
     },
     "trades": [
+      {
+        "id": "SIM-5837771",
+        "symbol": "SLBEN.LS",
+        "side": "buy",
+        "quantity": 0.05852401124756267,
+        "price": 6.407626408478921,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-18T07:10:37.771Z",
+        "stopLoss": 6.224769303768751,
+        "takeProfit": 6.727626341721719,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-4816372",
         "symbol": "CCP.L",
@@ -3090,6 +3124,16 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.058524 SLBEN.LS",
+      "detail": "0,38 € · fill simulato 6,41 € · SIM-5837771",
+      "tag": "PAPER"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -3378,19 +3422,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 80)",
-      "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 80)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.169177 CCP.L",
-      "detail": "0,37 € · fill simulato 2,18 € · SIM-7341257",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-17T23:59:12.088Z"
+  "updatedAt": "2026-11-18T07:10:38.282Z"
 }
