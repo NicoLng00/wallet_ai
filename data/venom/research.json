@@ -3638,6 +3638,10 @@
             {
               "returnPct": 0.07969444759038731,
               "at": "2026-11-13T07:21:36.898Z"
+            },
+            {
+              "returnPct": 4.275981982946442,
+              "at": "2026-11-18T23:09:35.796Z"
             }
           ]
         }
@@ -4720,6 +4724,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-13T07:21:36.899Z"
+        },
+        {
+          "tradeId": "SIM-3375797",
+          "symbol": "CCP.L",
+          "returnPct": 4.275981982946442,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "macd_cross@1D",
+            "entryPrice": 2.1850324193173165,
+            "confidence": 52,
+            "score": 81,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-18T23:09:35.797Z"
         }
       ]
     },
@@ -4778,9 +4798,9 @@
           "version": 1,
           "strategyKey": "macd_cross@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 7 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (71%) hanno chiuso in perdita (rendimento medio -0.22%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -0.22%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
-          "sampleSize": 7,
+          "sampleSize": 8,
           "occurrences": 5,
           "avgReturn": -0.218,
           "supportingTradeIds": [
@@ -4793,7 +4813,7 @@
           "createdAt": "2026-11-08T07:59:30.198Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-13T07:21:36.899Z"
+          "updatedAt": "2026-11-18T23:09:35.797Z"
         }
       ]
     }
@@ -24443,5 +24463,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-18T16:36:46.119Z"
+  "updatedAt": "2026-11-18T23:09:36.115Z"
 }
