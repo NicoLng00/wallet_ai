@@ -1,48 +1,47 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 50.7356113475485,
-    "highWater": 50.923507711222165,
-    "positions": {
-      "FCP.LS": {
-        "quantity": 0.14524102783872145,
-        "averagePrice": 2.581915079920858,
-        "stopLoss": 2.491915080602054,
-        "takeProfit": 2.739415078728765,
-        "strategyKey": "bollinger_reversion@1D",
-        "decisionSnapshot": {
-          "strategyKey": "bollinger_reversion@1D",
-          "entryPrice": 2.581915079920858,
-          "confidence": 78,
-          "score": 90,
-          "tier": "forced",
-          "volatilityRegime": "normal",
-          "aiEngine": "gemini"
-        },
-        "openedAt": "2026-11-19T04:17:08.896Z"
-      }
-    },
+    "cash": 50.92540600756315,
+    "highWater": 50.925738006077914,
+    "positions": {},
     "market": {
-      "JUVE.MI": 1.109244734559163,
-      "SSL.MI": 1.760483011759747,
-      "BVB.DE": 3.0537410996359813,
-      "MANU": 19.941452923004984,
-      "AJAX.AS": 7.745979775022083,
-      "CCP.L": 2.191482970651062,
-      "FENER.IS": 0.038782678319309184,
-      "GSRAY.IS": 0.012988964646565354,
-      "BJKAS.IS": 0.022037732902393574,
-      "TSPOR.IS": 0.013346894420695886,
-      "SCP.LS": 0.9791963989511326,
-      "SLBEN.LS": 6.390097601824319,
-      "FCP.LS": 2.581915079920858
+      "JUVE.MI": 1.1125087330598302,
+      "SSL.MI": 1.7912092992408062,
+      "BVB.DE": 3.0415091452397296,
+      "MANU": 18.058796997318527,
+      "AJAX.AS": 7.712558233089768,
+      "CCP.L": 2.248202330088558,
+      "FENER.IS": 0.037536068689386075,
+      "GSRAY.IS": 0.012824341499324966,
+      "BJKAS.IS": 0.0211081611890429,
+      "TSPOR.IS": 0.012981352155130448,
+      "SCP.LS": 0.920795437746305,
+      "SLBEN.LS": 6.269013663641317,
+      "FCP.LS": 2.597714059374504
     },
     "model": {
       "calibration": 61,
-      "outcomes": 91,
-      "wins": 46
+      "outcomes": 92,
+      "wins": 47
     },
     "trades": [
+      {
+        "id": "SIM-5019793",
+        "symbol": "FCP.LS",
+        "side": "sell",
+        "quantity": 0.14524102783872145,
+        "price": 2.597714059374504,
+        "notional": 0.3772946600146504,
+        "realizedPnl": 0.002294660014650379,
+        "origin": "Autopilot (Gemini)",
+        "at": "2026-11-19T21:50:19.793Z",
+        "stopLoss": null,
+        "takeProfit": null,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": "forced_win"
+      },
       {
         "id": "SIM-1828896",
         "symbol": "FCP.LS",
@@ -3158,6 +3157,26 @@
   },
   "activity": [
     {
+      "title": "Autopilot: chiude FCP.LS per segnale difensivo",
+      "detail": "chiude FCP.LS per segnale difensivo",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Feedback salvato nel calibratore",
+      "detail": "P&L realizzato 0,00 €. Il modello adatta solo il peso di confidenza locale.",
+      "tag": "LEARN"
+    },
+    {
+      "title": "Autopilot (Gemini): vendita demo 0.145241 FCP.LS",
+      "detail": "0,38 € · fill simulato 2,60 € · SIM-5019793",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3436,29 +3455,9 @@
       "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.057825 SLBEN.LS",
-      "detail": "0,36 € · fill simulato 6,20 € · SIM-0112235",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 79)",
-      "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 79)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.169490 CCP.L",
-      "detail": "0,37 € · fill simulato 2,18 € · SIM-3010097",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-19T04:17:09.198Z"
+  "updatedAt": "2026-11-19T21:50:20.148Z"
 }
