@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 51.24216622412204,
+    "cash": 51.05466622412204,
     "highWater": 51.24216622412204,
-    "positions": {},
+    "positions": {
+      "FCP.LS": {
+        "quantity": 0.14114938439677313,
+        "averagePrice": 2.656759727310387,
+        "stopLoss": 2.569616868123942,
+        "takeProfit": 2.809259730886666,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 2.656759727310387,
+          "confidence": 78,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-22T01:40:22.402Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.1726217986376835,
-      "SSL.MI": 1.782752603294382,
-      "BVB.DE": 3.037813967752793,
-      "MANU": 17.910459878698205,
-      "AJAX.AS": 7.659910848205751,
-      "CCP.L": 2.239501458868931,
-      "FENER.IS": 0.0372932321597238,
-      "GSRAY.IS": 0.012810565979665234,
-      "BJKAS.IS": 0.020753173722814666,
-      "TSPOR.IS": 0.01350264085260858,
-      "SCP.LS": 0.9197477092664693,
-      "SLBEN.LS": 6.34126434982333,
-      "FCP.LS": 2.658899716747558
+      "JUVE.MI": 1.172033448794378,
+      "SSL.MI": 1.7814740775208164,
+      "BVB.DE": 3.0401979608201506,
+      "MANU": 17.94794155791487,
+      "AJAX.AS": 7.66916867553453,
+      "CCP.L": 2.236112513034925,
+      "FENER.IS": 0.03723351533327318,
+      "GSRAY.IS": 0.012784863249888461,
+      "BJKAS.IS": 0.020708457386366577,
+      "TSPOR.IS": 0.01349568255039516,
+      "SCP.LS": 0.920590827872478,
+      "SLBEN.LS": 6.343754009060294,
+      "FCP.LS": 2.656759727310387
     },
     "model": {
       "calibration": 61,
@@ -25,6 +43,23 @@
       "wins": 49
     },
     "trades": [
+      {
+        "id": "SIM-1622402",
+        "symbol": "FCP.LS",
+        "side": "buy",
+        "quantity": 0.14114938439677313,
+        "price": 2.656759727310387,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-22T01:40:22.402Z",
+        "stopLoss": 2.569616868123942,
+        "takeProfit": 2.809259730886666,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-7791651",
         "symbol": "FCP.LS",
@@ -3259,6 +3294,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.141149 FCP.LS",
+      "detail": "0,38 € · fill simulato 2,66 € · SIM-1622402",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: monitora",
       "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
       "tag": "HOLD"
@@ -3542,24 +3592,9 @@
       "title": "Contesto Gemini venom troncato per budget",
       "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
       "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
-      "tag": "JOB"
-    },
-    {
-      "title": "Autopilot: monitora",
-      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
-      "tag": "HOLD"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-21T21:44:27.002Z"
+  "updatedAt": "2026-11-22T01:40:22.606Z"
 }
