@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 51.23430380632461,
+    "cash": 51.04680380632461,
     "highWater": 51.24276645347761,
-    "positions": {},
+    "positions": {
+      "FCP.LS": {
+        "quantity": 0.14095476425404665,
+        "averagePrice": 2.660427988969051,
+        "stopLoss": 2.5647136753257316,
+        "takeProfit": 2.8279280378448597,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 2.660427988969051,
+          "confidence": 78,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-25T04:08:35.839Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.2676790448294688,
-      "SSL.MI": 1.8152478616916263,
-      "BVB.DE": 3.0825219304477356,
-      "MANU": 19.244329843958845,
-      "AJAX.AS": 7.737331205747102,
-      "CCP.L": 2.271773105648237,
-      "FENER.IS": 0.035479944873246995,
-      "GSRAY.IS": 0.012652443349332196,
-      "BJKAS.IS": 0.020834775212159998,
-      "TSPOR.IS": 0.013403206030112568,
-      "SCP.LS": 0.934564248385312,
-      "SLBEN.LS": 6.322625615884412,
-      "FCP.LS": 2.6024146822252314
+      "JUVE.MI": 1.3070657973722164,
+      "SSL.MI": 1.7922768519978645,
+      "BVB.DE": 3.0867457353089596,
+      "MANU": 19.14454028789351,
+      "AJAX.AS": 7.696690291584653,
+      "CCP.L": 2.2424149691515782,
+      "FENER.IS": 0.03524953875197275,
+      "GSRAY.IS": 0.012596354391932983,
+      "BJKAS.IS": 0.02072603379328276,
+      "TSPOR.IS": 0.013313043627916098,
+      "SCP.LS": 0.9338057371221101,
+      "SLBEN.LS": 6.183081637548961,
+      "FCP.LS": 2.660427988969051
     },
     "model": {
       "calibration": 61,
@@ -25,6 +43,23 @@
       "wins": 51
     },
     "trades": [
+      {
+        "id": "SIM-9715839",
+        "symbol": "FCP.LS",
+        "side": "buy",
+        "quantity": 0.14095476425404665,
+        "price": 2.660427988969051,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-25T04:08:35.839Z",
+        "stopLoss": 2.5647136753257316,
+        "takeProfit": 2.8279280378448597,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-4339261",
         "symbol": "FCP.LS",
@@ -3361,6 +3396,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.140955 FCP.LS",
+      "detail": "0,38 € · fill simulato 2,66 € · SIM-9715839",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -3644,24 +3694,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.058524 SLBEN.LS",
-      "detail": "0,36 € · fill simulato 6,17 € · SIM-9805739",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Autopilot: apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "detail": "apre SLBEN.LS forzato (nessun trade ancora oggi, score 90)",
-      "tag": "AUTO"
-    },
-    {
-      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.058524 SLBEN.LS",
-      "detail": "0,38 € · fill simulato 6,41 € · SIM-5837771",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-24T21:05:39.887Z"
+  "updatedAt": "2026-11-25T04:08:36.466Z"
 }
