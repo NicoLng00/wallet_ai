@@ -78,10 +78,10 @@
       "NVDA": 141.776481,
       "SPY": 655.8508109999999,
       "QQQ": 582.234345,
-      "BTCUSD": 53979.62955,
+      "BTCUSD": 53617.3869,
       "TSLA": 351.001266,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1511.1905655,
+      "ETHUSD": 1502.5040415,
       "WTI": 72.8,
       "TLT": 74.35555049999999,
       "EURUSD": 1.0959504630390706,
@@ -3599,6 +3599,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: chiude ES per limite di detenzione (6g) · apre NKE forzato (nessun trade ancora oggi, score 90)",
       "detail": "chiude ES per limite di detenzione (6g); apre NKE forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3892,14 +3897,9 @@
       "title": "Autopilot: chiude SPY per limite di detenzione (6g)",
       "detail": "chiude SPY per limite di detenzione (6g)",
       "tag": "AUTO"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato 0,01 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-25T02:02:12.640Z"
+  "updatedAt": "2026-11-25T11:19:49.615Z"
 }
