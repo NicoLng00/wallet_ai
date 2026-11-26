@@ -2,7 +2,7 @@
   "demoAccount": {
     "version": 2,
     "cash": 50.85930380632461,
-    "highWater": 51.24276645347761,
+    "highWater": 51.243797346080015,
     "positions": {
       "FCP.LS": {
         "quantity": 0.14095476425404665,
@@ -40,19 +40,19 @@
       }
     },
     "market": {
-      "JUVE.MI": 1.2697995505481854,
-      "SSL.MI": 1.813692889183861,
-      "BVB.DE": 3.080578443426639,
-      "MANU": 19.606679918544206,
-      "AJAX.AS": 7.731488622449107,
-      "CCP.L": 2.269830323975857,
-      "FENER.IS": 0.03512788436085495,
-      "GSRAY.IS": 0.012420546663504978,
-      "BJKAS.IS": 0.020697160853771386,
-      "TSPOR.IS": 0.012974473975077882,
-      "SCP.LS": 0.935011526474839,
-      "SLBEN.LS": 6.3106428878319,
-      "FCP.LS": 2.599755087762243
+      "JUVE.MI": 1.3584274531016551,
+      "SSL.MI": 1.8562037529684825,
+      "BVB.DE": 3.195630678437142,
+      "MANU": 19.582897908419593,
+      "AJAX.AS": 7.744067079645414,
+      "CCP.L": 2.2914553699888143,
+      "FENER.IS": 0.03434837856230356,
+      "GSRAY.IS": 0.012237535356095909,
+      "BJKAS.IS": 0.020853575482984162,
+      "TSPOR.IS": 0.012928354643938014,
+      "SCP.LS": 0.9805223791658901,
+      "SLBEN.LS": 6.280704840772317,
+      "FCP.LS": 2.6975047487558976
     },
     "model": {
       "calibration": 61,
@@ -3430,6 +3430,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "13 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre CCP.L forzato (nessun trade ancora oggi, score 80)",
       "detail": "apre CCP.L forzato (nessun trade ancora oggi, score 80)",
       "tag": "AUTO"
@@ -3723,14 +3728,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato 0,02 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Take Profit: vendita demo 0.169869 CCP.L",
-      "detail": "0,39 € · fill simulato 2,28 € · SIM-3375797",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-26T05:14:19.171Z"
+  "updatedAt": "2026-11-26T15:30:00.314Z"
 }
