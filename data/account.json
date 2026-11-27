@@ -95,10 +95,10 @@
       "NVDA": 136.0590309,
       "SPY": 653.1380271,
       "QQQ": 577.70865009,
-      "BTCUSD": 55933.658001,
+      "BTCUSD": 56031.168492000004,
       "TSLA": 346.42652382,
       "XAUUSD": 2612.4,
-      "ETHUSD": 1574.70329835,
+      "ETHUSD": 1572.26097951,
       "WTI": 72.8,
       "TLT": 74.94638112,
       "EURUSD": 1.0973178260378158,
@@ -3667,6 +3667,11 @@
   },
   "activity": [
     {
+      "title": "Autopilot: monitora",
+      "detail": "46 titoli scansionati, nessun segnale sopra soglia confidenza 60%.",
+      "tag": "HOLD"
+    },
+    {
       "title": "Autopilot: apre DIS forzato (nessun trade ancora oggi, score 90)",
       "detail": "apre DIS forzato (nessun trade ancora oggi, score 90)",
       "tag": "AUTO"
@@ -3960,14 +3965,9 @@
       "title": "Feedback salvato nel calibratore",
       "detail": "P&L realizzato -0,01 €. Il modello adatta solo il peso di confidenza locale.",
       "tag": "LEARN"
-    },
-    {
-      "title": "Stop Loss: vendita demo 0.000596 QQQ",
-      "detail": "0,36 € · fill simulato 596,89 € · SIM-0501546",
-      "tag": "PAPER"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": true,
-  "updatedAt": "2026-11-27T04:03:24.407Z"
+  "updatedAt": "2026-11-27T13:54:07.028Z"
 }
