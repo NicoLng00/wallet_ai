@@ -3628,6 +3628,10 @@
             {
               "returnPct": 0.038295314184472025,
               "at": "2026-11-24T21:05:39.259Z"
+            },
+            {
+              "returnPct": 3.726939927611113,
+              "at": "2026-11-27T00:01:43.290Z"
             }
           ]
         }
@@ -3666,6 +3670,10 @@
             {
               "returnPct": 4.275981982946442,
               "at": "2026-11-18T23:09:35.796Z"
+            },
+            {
+              "returnPct": -1.3085537452001463,
+              "at": "2026-11-27T00:01:43.296Z"
             }
           ]
         }
@@ -3673,22 +3681,6 @@
     },
     "tradeEpisodes": {
       "bollinger_reversion@1D": [
-        {
-          "tradeId": "SIM-2732340",
-          "symbol": "SCP.LS",
-          "returnPct": 0.003618664181339698,
-          "outcomeTag": "forced_win",
-          "snapshot": {
-            "strategyKey": "bollinger_reversion@1D",
-            "entryPrice": 0.975299150111735,
-            "confidence": 80,
-            "score": 90,
-            "tier": "forced",
-            "volatilityRegime": "normal",
-            "aiEngine": "gemini"
-          },
-          "at": "2026-09-26T06:05:32.340Z"
-        },
         {
           "tradeId": "SIM-5983604",
           "symbol": "SCP.LS",
@@ -4472,6 +4464,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-24T21:05:39.261Z"
+        },
+        {
+          "tradeId": "SIM-7703292",
+          "symbol": "FCP.LS",
+          "returnPct": 3.726939927611113,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 2.660427988969051,
+            "confidence": 78,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-27T00:01:43.292Z"
         }
       ],
       "engulfing@1D": [
@@ -4764,6 +4772,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-18T23:09:35.797Z"
+        },
+        {
+          "tradeId": "SIM-7703296",
+          "symbol": "CCP.L",
+          "returnPct": -1.3085537452001463,
+          "outcomeTag": "forced_loss",
+          "snapshot": {
+            "strategyKey": "macd_cross@1D",
+            "entryPrice": 2.269830323975857,
+            "confidence": 52,
+            "score": 80,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-27T00:01:43.296Z"
         }
       ]
     },
@@ -4822,22 +4846,22 @@
           "version": 1,
           "strategyKey": "macd_cross@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -0.22%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di macd_cross@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -0.30%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop. Concentrato in volatilità normale.",
           "dominantRegime": "normal",
           "sampleSize": 8,
           "occurrences": 5,
-          "avgReturn": -0.218,
+          "avgReturn": -0.298,
           "supportingTradeIds": [
-            "SIM-5196279",
             "SIM-4891785",
             "SIM-4770197",
             "SIM-9854412",
-            "SIM-1074313"
+            "SIM-1074313",
+            "SIM-7703296"
           ],
           "createdAt": "2026-11-08T07:59:30.198Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-18T23:09:35.797Z"
+          "updatedAt": "2026-11-27T00:01:43.297Z"
         }
       ]
     }
@@ -24487,5 +24511,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-26T16:50:00.986Z"
+  "updatedAt": "2026-11-27T00:01:43.480Z"
 }
