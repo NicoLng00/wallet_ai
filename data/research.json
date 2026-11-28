@@ -13196,6 +13196,10 @@
             {
               "returnPct": -3.7444476413613064,
               "at": "2026-11-19T18:59:43.560Z"
+            },
+            {
+              "returnPct": 3.2122952245250995,
+              "at": "2026-11-28T04:17:03.360Z"
             }
           ]
         }
@@ -14080,6 +14084,22 @@
             "aiEngine": "gemini"
           },
           "at": "2026-11-25T20:35:26.033Z"
+        },
+        {
+          "tradeId": "SIM-9423364",
+          "symbol": "PEP",
+          "returnPct": 3.2122952245250995,
+          "outcomeTag": "forced_win",
+          "snapshot": {
+            "strategyKey": "bollinger_reversion@1D",
+            "entryPrice": 127.99666445999999,
+            "confidence": 80,
+            "score": 90,
+            "tier": "forced",
+            "volatilityRegime": "normal",
+            "aiEngine": "gemini"
+          },
+          "at": "2026-11-28T04:17:03.364Z"
         }
       ],
       "engulfing@1D": [
@@ -14834,13 +14854,12 @@
           "version": 1,
           "strategyKey": "bollinger_reversion@1D",
           "failureMode": "forced_loss",
-          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 6 (75%) hanno chiuso in perdita (rendimento medio -1.67%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.",
+          "statement": "Negli ultimi 8 trade forzati (fallback giornaliero) di bollinger_reversion@1D, 5 (63%) hanno chiuso in perdita (rendimento medio -2.01%) — atteso: qui non c'è nemmeno una direzione tecnica letta il giorno dell'ingresso, solo la garanzia di un episodio quotidiano per il Learning Loop.",
           "dominantRegime": "mixed",
           "sampleSize": 8,
-          "occurrences": 6,
-          "avgReturn": -1.675,
+          "occurrences": 5,
+          "avgReturn": -2.01,
           "supportingTradeIds": [
-            "SIM-2335523",
             "SIM-4783563",
             "SIM-4783589",
             "SIM-6641946",
@@ -14850,7 +14869,7 @@
           "createdAt": "2026-08-28T21:21:08.388Z",
           "supersedes": null,
           "active": true,
-          "updatedAt": "2026-11-25T20:35:26.034Z"
+          "updatedAt": "2026-11-28T04:17:03.365Z"
         }
       ],
       "engulfing@1D": [
@@ -20754,7 +20773,7 @@
             "high": 726.0900268554688,
             "low": 720,
             "close": 720.0850219726562,
-            "volume": 7430320
+            "volume": 7430300
           },
           {
             "time": 1795791600000,
@@ -20762,7 +20781,7 @@
             "high": 723.6900024414062,
             "low": 719.6099853515625,
             "close": 723.0599975585938,
-            "volume": 13507628
+            "volume": 3552151
           },
           {
             "time": 1795793400000,
@@ -20770,7 +20789,7 @@
             "high": 726.6199951171875,
             "low": 722.7100219726562,
             "close": 725.0399780273438,
-            "volume": 28379661
+            "volume": 3242929
           },
           {
             "time": 1795795200000,
@@ -20778,7 +20797,7 @@
             "high": 725.7000122070312,
             "low": 724.1099853515625,
             "close": 725.3099975585938,
-            "volume": 32354472
+            "volume": 17071497
           },
           {
             "time": 1795797000000,
@@ -20786,7 +20805,7 @@
             "high": 728,
             "low": 725.219970703125,
             "close": 726.4199829101562,
-            "volume": 20316362
+            "volume": 19946610
           },
           {
             "time": 1795798800000,
@@ -20794,7 +20813,7 @@
             "high": 727.3200073242188,
             "low": 725.75,
             "close": 726.9190063476562,
-            "volume": 3100497
+            "volume": 3100397
           },
           {
             "time": 1795800600000,
@@ -20802,7 +20821,7 @@
             "high": 727.1901245117188,
             "low": 725.760009765625,
             "close": 725.9199829101562,
-            "volume": 1702483
+            "volume": 1702127
           },
           {
             "time": 1795802400000,
@@ -20813,7 +20832,7 @@
             "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-27T22:33:18.109Z"
+        "fetchedAt": "2026-11-28T04:17:03.113Z"
       }
     },
     "QQQ": {
@@ -23631,7 +23650,7 @@
             "high": 642.4600219726562,
             "low": 636.719970703125,
             "close": 641.5700073242188,
-            "volume": 4157047
+            "volume": 4157026
           },
           {
             "time": 1795793400000,
@@ -23639,7 +23658,7 @@
             "high": 646.6099853515625,
             "low": 641.25,
             "close": 644.77001953125,
-            "volume": 34501202
+            "volume": 3848788
           },
           {
             "time": 1795795200000,
@@ -23647,7 +23666,7 @@
             "high": 645.719970703125,
             "low": 643.8300170898438,
             "close": 645.3200073242188,
-            "volume": 134414088
+            "volume": 2371797
           },
           {
             "time": 1795797000000,
@@ -23655,7 +23674,7 @@
             "high": 648.4600219726562,
             "low": 645.2000122070312,
             "close": 646.3099975585938,
-            "volume": 26473459
+            "volume": 3637267
           },
           {
             "time": 1795798800000,
@@ -23663,7 +23682,7 @@
             "high": 647.5933227539062,
             "low": 645.4400024414062,
             "close": 646.9099731445312,
-            "volume": 26891762
+            "volume": 2900652
           },
           {
             "time": 1795800600000,
@@ -23671,7 +23690,7 @@
             "high": 651.3400268554688,
             "low": 645.52001953125,
             "close": 650.760009765625,
-            "volume": 5229105
+            "volume": 5228573
           },
           {
             "time": 1795802400000,
@@ -23679,10 +23698,10 @@
             "high": 651.5999755859375,
             "low": 649.5,
             "close": 649.555908203125,
-            "volume": 1487226
+            "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-27T22:33:18.190Z"
+        "fetchedAt": "2026-11-28T04:17:03.251Z"
       }
     },
     "BTCUSD": {
@@ -33979,6 +33998,7 @@
       },
       "30m": {
         "closes": [
+          1.0968520641326904,
           1.0969723463058472,
           1.0968520641326904,
           1.0968520641326904,
@@ -34127,11 +34147,18 @@
           1.0937328338623047,
           1.0936132669448853,
           1.0937328338623047,
-          1.0938525199890137,
           1.0938525199890137
         ],
         "dates": null,
         "candles": [
+          {
+            "time": 1795548600000,
+            "open": 1.0969723463058472,
+            "high": 1.0970927476882935,
+            "low": 1.0967316627502441,
+            "close": 1.0968520641326904,
+            "volume": 0
+          },
           {
             "time": 1795550400000,
             "open": 1.0969723463058472,
@@ -35323,17 +35350,9 @@
             "low": 1.0938525199890137,
             "close": 1.0938525199890137,
             "volume": 0
-          },
-          {
-            "time": 1795818586000,
-            "open": 1.0938525199890137,
-            "high": 1.0938525199890137,
-            "low": 1.0938525199890137,
-            "close": 1.0938525199890137,
-            "volume": 0
           }
         ],
-        "fetchedAt": "2026-11-27T22:33:18.296Z"
+        "fetchedAt": "2026-11-28T04:17:03.359Z"
       }
     },
     "ES": {
@@ -36690,10 +36709,10 @@
             "high": 7320.75,
             "low": 7291.25,
             "close": 7308.25,
-            "volume": 39037
+            "volume": 36654
           }
         ],
-        "fetchedAt": "2026-11-27T22:33:18.032Z"
+        "fetchedAt": "2026-11-28T04:17:03.040Z"
       },
       "1D": {
         "closes": [
@@ -89580,5 +89599,5 @@
       }
     }
   },
-  "updatedAt": "2026-11-27T22:33:19.054Z"
+  "updatedAt": "2026-11-28T04:17:04.058Z"
 }
