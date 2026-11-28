@@ -1,23 +1,41 @@
 {
   "demoAccount": {
     "version": 2,
-    "cash": 51.243699743291806,
+    "cash": 51.056199743291806,
     "highWater": 51.243797346080015,
-    "positions": {},
+    "positions": {
+      "FCP.LS": {
+        "quantity": 0.1388822965724863,
+        "averagePrice": 2.7001281607139735,
+        "stopLoss": 2.61869954773245,
+        "takeProfit": 2.84262823343164,
+        "strategyKey": "bollinger_reversion@1D",
+        "decisionSnapshot": {
+          "strategyKey": "bollinger_reversion@1D",
+          "entryPrice": 2.7001281607139735,
+          "confidence": 78,
+          "score": 90,
+          "tier": "forced",
+          "volatilityRegime": "normal",
+          "aiEngine": "gemini"
+        },
+        "openedAt": "2026-11-28T01:32:07.323Z"
+      }
+    },
     "market": {
-      "JUVE.MI": 1.374193672777745,
-      "SSL.MI": 1.8481453144558526,
-      "BVB.DE": 3.121732779943086,
-      "MANU": 19.593722969404986,
-      "AJAX.AS": 7.738906767846224,
-      "CCP.L": 2.239941976064168,
-      "FENER.IS": 0.03360644488575696,
-      "GSRAY.IS": 0.012021796749717257,
-      "BJKAS.IS": 0.02011174846358358,
-      "TSPOR.IS": 0.012949586200393976,
-      "SCP.LS": 0.980200624444647,
-      "SLBEN.LS": 6.11645136070188,
-      "FCP.LS": 2.761986813624394
+      "JUVE.MI": 1.3492730908547836,
+      "SSL.MI": 1.8433691238448082,
+      "BVB.DE": 3.206496376866818,
+      "MANU": 19.640747087037127,
+      "AJAX.AS": 7.744390758270865,
+      "CCP.L": 2.3033327131106653,
+      "FENER.IS": 0.03438390893562072,
+      "GSRAY.IS": 0.012232933405478891,
+      "BJKAS.IS": 0.020838007669784848,
+      "TSPOR.IS": 0.012946769043329972,
+      "SCP.LS": 0.9158523788577151,
+      "SLBEN.LS": 6.2764089806560595,
+      "FCP.LS": 2.7001281607139735
     },
     "model": {
       "calibration": 61,
@@ -25,6 +43,23 @@
       "wins": 53
     },
     "trades": [
+      {
+        "id": "SIM-9527323",
+        "symbol": "FCP.LS",
+        "side": "buy",
+        "quantity": 0.1388822965724863,
+        "price": 2.7001281607139735,
+        "notional": 0.375,
+        "realizedPnl": 0,
+        "origin": "Autopilot (Gemini) sonda forzata (giornaliera)",
+        "at": "2026-11-28T01:32:07.323Z",
+        "stopLoss": 2.61869954773245,
+        "takeProfit": 2.84262823343164,
+        "accountMode": "demo",
+        "tier": "forced",
+        "strategyKey": "bollinger_reversion@1D",
+        "outcomeTag": null
+      },
       {
         "id": "SIM-7051529",
         "symbol": "FCP.LS",
@@ -3463,6 +3498,21 @@
   },
   "activity": [
     {
+      "title": "Autopilot: apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "detail": "apre FCP.LS forzato (nessun trade ancora oggi, score 90)",
+      "tag": "AUTO"
+    },
+    {
+      "title": "Autopilot (Gemini) sonda forzata (giornaliera): acquisto demo 0.138882 FCP.LS",
+      "detail": "0,38 € · fill simulato 2,70 € · SIM-9527323",
+      "tag": "PAPER"
+    },
+    {
+      "title": "Contesto Gemini venom troncato per budget",
+      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SCP.LS, SLBEN.LS, FCP.LS.",
+      "tag": "JOB"
+    },
+    {
       "title": "Autopilot: chiude FCP.LS per segnale difensivo",
       "detail": "chiude FCP.LS per segnale difensivo",
       "tag": "AUTO"
@@ -3746,24 +3796,9 @@
       "title": "Autopilot (Gemini): acquisto demo 1.657255 SLBEN.LS",
       "detail": "10,00 € · fill simulato 6,03 € · SIM-3741633",
       "tag": "PAPER"
-    },
-    {
-      "title": "Feedback salvato nel calibratore",
-      "detail": "P&L realizzato -0,19 €. Il modello adatta solo il peso di confidenza locale.",
-      "tag": "LEARN"
-    },
-    {
-      "title": "Autopilot (Gemini): vendita demo 1.542192 SLBEN.LS",
-      "detail": "9,31 € · fill simulato 6,03 € · SIM-3741629",
-      "tag": "PAPER"
-    },
-    {
-      "title": "Contesto Gemini venom troncato per budget",
-      "detail": "Notizie ridotte per: JUVE.MI, SSL.MI, BVB.DE, MANU, AJAX.AS, CCP.L, FENER.IS, GSRAY.IS, BJKAS.IS, TSPOR.IS, SLBEN.LS, FCP.LS, SCP.LS.",
-      "tag": "JOB"
     }
   ],
   "autopilotMode": "coverage",
   "liveDataEnabled": false,
-  "updatedAt": "2026-11-27T08:10:51.821Z"
+  "updatedAt": "2026-11-28T01:32:07.559Z"
 }
